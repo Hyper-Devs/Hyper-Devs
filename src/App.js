@@ -3,8 +3,8 @@ import React, { useState } from 'react';
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import Landing from './Pages/Landing';
-import Calculator from './Pages/Calculator';
+import Landing from './Pages/Landing/Landing';
+import Calculator from './Pages/Calculator/Calculator';
 
 function App() {
   return (
