@@ -1,2 +1,3 @@
-# Building-Basic-ReactJS
-Building Basic React JS
+Github Repository for Gate Access Notification System
+
+About the Developer:
