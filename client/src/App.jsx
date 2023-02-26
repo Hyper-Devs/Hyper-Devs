@@ -12,7 +12,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route
-            path='/'
+            exact path='/'
             element={<Landing/>}
           />
           <Route

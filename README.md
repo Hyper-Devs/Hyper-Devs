@@ -31,4 +31,3 @@ Overriding Feature - overrides the system functionalities should there be a need
 - [ ] The website can only be accessed by the faculty and staff of the school.
 - [ ] An option that can batch enroll a student.
 - [ ] Faculty can override the system for emergency cases.
-
