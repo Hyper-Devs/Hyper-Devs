@@ -2,7 +2,9 @@ import React from 'react'
 
 function Calculator() {
   return (
-    <div>Calculator</div>
+    <div>
+      Calculator kjdhflkzsjhfl
+    </div>
   )
 }
 
