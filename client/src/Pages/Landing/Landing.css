@@ -1,0 +1,25 @@
+.bg {
+  background-image: url(../../../assets/background.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 100vh;
+}
+
+.container {
+  position: absolute;
+  width: 499px;
+  height: 625px;
+  left: 481px;
+  top: 77px;
+  background: #92B8B2;
+  border-radius: 10px;
+}
+
+h1 {
+  font-family: 'Alegreya Sans';
+  font-size: 74px;
+  text-align: center;
+  color: #000000;
+}
+
