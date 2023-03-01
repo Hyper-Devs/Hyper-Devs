@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import Landing from './Pages/Landing/Landing';
-import Calculator from './Pages/Calculator/Calculator';
+import Dashboard from './Pages/Dashboard/Dashboard';
 
 function App() {
   return (
@@ -17,7 +17,7 @@ function App() {
           />
           <Route
             path='/calc'
-            element={<Calculator/>}
+            element={<Dashboard/>}
           />
         </Routes>
       </BrowserRouter>
