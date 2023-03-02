@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import Landing from './Pages/Landing/Landing';
+import Login from './Pages/Login/Login';
 import Dashboard from './Pages/Dashboard/Dashboard';
 
 function App() {
@@ -13,7 +13,7 @@ function App() {
         <Routes>
           <Route
             exact path='/'
-            element={<Landing/>}
+            element={<Login/>}
           />
           <Route
             path='/calc'

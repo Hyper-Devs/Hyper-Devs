@@ -1,7 +1,7 @@
 import React from 'react'
-import './Landing.css'
+import './Login.css'
 
-function Landing() {
+function Login() {
   return (
     <div className='bg'>
       <div className='container'>
@@ -11,4 +11,4 @@ function Landing() {
   );
 }
 
-export default Landing
+export default Login
