@@ -1,25 +1,31 @@
-.bg {
-  background-image: url(../../../assets/UP_ADMIN-1.png);
-  background-size: 100% 100%;
+.backgroundImage {
+  background-image: url(../../Assets/UP_ADMIN-1.png);
+  background-size: cover;
   background-repeat: no-repeat;
-  background-position: center;
   height: 100vh;
 }
 
-.container {
+.formContainer {
   position: absolute;
-  width: 499px;
-  height: 625px;
-  left: 481px;
-  top: 77px;
-  background: #92B8B2;
-  border-radius: 10px;
+  width: 360px;
+  height: 680px;
+  left: 1225px;
+  top: 20px;
+  background: white;
+  border-radius: 8px;
 }
 
-h1 {
-  font-family: 'Alegreya Sans';
-  font-size: 74px;
+.formContainer h3 {
+  font-family: 'Playfair Display';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
   text-align: center;
-  color: #000000;
+
 }
 
+.formInner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
