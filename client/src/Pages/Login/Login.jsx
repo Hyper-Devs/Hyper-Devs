@@ -1,24 +1,36 @@
-import React, { useState } from 'react'
-import './Login.css'
+import React, { useState } from "react";
+import "./Login.css";
 
 function Login() {
   return (
-    <div className='backgroundImage'>
-    <form>
-      <div className='formContainer'>
-        <h3>UNIVERSITY OF THE PHILIPPINES CEBU HIGH SCHOOL</h3>
-        <div className='formInner'>
-          <label>ID Number</label>
-          <input type="text" name='idNumber' id='idNumber'/>
-          <label>Password:</label>
-          <input type="password" name="password" id="password" />
-          <button>Login</button>
+    <div>
+      <div className="container">
+        <div className="upcLogo"></div>
+        <div className="formTitle">
+          <h3>UNIVERSITY OF THE PHILIPPINES</h3>
+        </div>
+        <div>
+          <h3>CEBU HIGH SCHOOL</h3>
+        </div>
+        <form className="loginForm">
+          <div className="inputField">
+            <label>ID Number</label>
+            <input type="text" />
           </div>
+          <div className="inputField">
+            <label>Password</label>
+            <input type="password" />
+          </div>
+          <button>Login</button>
+          <a href="#">Forgot Password?</a>
+        </form>
       </div>
-    </form>
+      <div className="title">
+        <h1>Gate Access System</h1>
+        <h2>Access • Track • Notify • Alert • Override</h2>
+      </div>
     </div>
-
   );
 }
 
-export default Login
+export default Login;
