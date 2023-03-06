@@ -1,0 +1,48 @@
+.Header {
+    position: absolute;
+    width: 1340px;
+    height: 75px;
+    /*left: 100px;*/
+    top: 0px;
+    display: flex;
+    flex-direction: row;
+    background: #FFFFFF;
+}
+
+.Header .Header-left img {
+    position: absolute;
+    width: 75px;
+    height: 75px;
+    left: 39px;
+    top: 1px;
+}
+
+.Header .Header-left {
+    flex: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding-left: 130px;
+    font-weight: 400px;
+    font-size: 24px;
+    font-family: 'Playfair Display', serif;
+    line-height: 31.99px;
+}
+
+.Header .Header-bottom{
+    position: absolute;
+    width: 1340px;
+    height: 220px;
+    /*left: 100px;*/
+    top: 76px;
+
+    background: #8E1437;
+}
+
+.Header .Header-bottom img{
+    position: absolute;
+    width: 1340px;
+    height: 200px;
+    left: -1px;
+    top: 10px;
+}
