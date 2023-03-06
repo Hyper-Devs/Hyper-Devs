@@ -1,9 +1,13 @@
-import React from 'react'
+import React from 'react';
+import Header from '../../Components/header';
 
-function Calculator() {
+
+function Dashboard() {
   return (
-    <div>Calculator</div>
+    <div className='Dashboard'>
+      <Header/>
+    </div>
   )
 }
 
-export default Calculator
+export default Dashboard;
