@@ -32,11 +32,11 @@
 .Header .Header-bottom{
     position: absolute;
     width: 1340px;
-    height: 220px;
+    height: 520px;
     /*left: 100px;*/
     top: 76px;
 
-    background: #8E1437;
+    background: #00573F;
 }
 
 .Header .Header-bottom img{
