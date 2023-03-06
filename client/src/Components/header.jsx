@@ -1,6 +1,6 @@
 import React from 'react'
 import logo from '../Assets/upc_logo.png';
-import structure from '../Assets/UP_ADMIN-2.png'
+import rfid from '../Assets/rfid.png'
 import './header.css';
 
 <style>
@@ -17,7 +17,7 @@ function Header() {
             </div>
 
             <div className='Header-bottom'>
-                <img src={structure}/>
+                <img src={rfid}/>
             </div>
         </div>
     )
