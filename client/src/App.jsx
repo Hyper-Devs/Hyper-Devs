@@ -16,7 +16,7 @@ function App() {
             element={<Login/>}
           />
           <Route
-            path='/calc'
+            path='/dashboard'
             element={<Dashboard/>}
           />
         </Routes>
