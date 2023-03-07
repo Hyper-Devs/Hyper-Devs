@@ -1,5 +1,10 @@
 import Clocks from '../Clocks'
 import './Box.css'
+import circle1 from '../../Assets/Ellipse 14.png'
+import circle2 from '../../Assets/Ellipse 15.png'
+import bell from '../../Assets/Vector.png'
+
+
 
 function Box() {
     return (
@@ -15,12 +20,23 @@ function Box() {
                     <div className='rectangle3'>
                         <div className='clock'><Clocks/></div>
                         <div className='entrance-exit'>
-                            ENTRANCE
-                            <div></div>EXIT
+                            <div className='icon-boxes'>
+                                <img src={circle1}/>
+                                <img src={circle2}/>
+                            </div>
+                            <div className='icon-boxes'>
+                                <img src={bell}/>
+                                <img src={bell}/>
+                            </div>
+                           
+                            
+                            <div className='text'>
+                                ENTRANCE
+                                <div/>
+                                EXIT
+                            </div>
                         </div>
-                        <div className='Icon-boxes'>
-
-                        </div>
+                        
                     </div>
                 </div>
             </div>
