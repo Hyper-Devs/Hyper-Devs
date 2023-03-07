@@ -1,28 +1,20 @@
 import React from 'react';
-import SideBar from '../../Components/Sidebar';
-
+import Header from '../../Components/header';
+import Greeting from '../../Components/Greeting';
+import Box from '../../Components/Dashboard/Box';
+import DashFoot from '../../Components/Dashboard/Dashboard-Footer';
+import './Dashboard.css'
 
 function Dashboard() {
-  const styles = {
-    contentDiv: {
-      display: "flex",
-    },
-    contentMargin: {
-      marginLeft: "10px",
-      width: "90%",
-    },
-  };
-  
   return (
-    <>
-    <div style={styles.contentDiv}>
-      <SideBar></SideBar>
-      <div style={styles.contentMargin}>
-        <h1 style={{ padding: "0%" }}>This is Content Area</h1>
-      </div>
+    <div className='Dashboard'>
+      <Header/>
+      <Greeting />
+      <div className='dashboard-title'>Dashboard</div>
+      <Box/>
+      <DashFoot/>
     </div>
-    </>
-  );
+  )
 }
 
-export default Dashboard
+export default Dashboard;
