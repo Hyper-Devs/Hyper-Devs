@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Arvo:wght@700&family=Montserrat:wght@500;600&family=Playfair+Display:wght@400;700&display=swap');
+
+.Clocks {
+    overflow: hidden;
+    text-align: center;
+    color: white;
+}
+
+.Clocks p{
+    font-family: 'Arvo', serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 49px;
+    text-align: center;
+    color: white;
+    
+}
