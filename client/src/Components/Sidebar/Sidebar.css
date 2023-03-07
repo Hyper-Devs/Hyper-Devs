@@ -10,7 +10,7 @@
 	background-color: #8E1437;
 	width: 300px;
 	height: 1024px;
-	position: sticky;
+	position: fixed;
 	
 	transition: 0.4s;
 }
