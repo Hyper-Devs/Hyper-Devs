@@ -1,8 +1,7 @@
-import React from 'react';
-import SideBar from '../../Components/Sidebar';
+import React from 'react'
+import SideNavBar from '../../Components/Sidebar'
 
-
-function Dashboard() {
+function Database() {
   const styles = {
     contentDiv: {
       display: "flex",
@@ -12,11 +11,10 @@ function Dashboard() {
       width: "90%",
     },
   };
-  
   return (
     <>
     <div style={styles.contentDiv}>
-      <SideBar></SideBar>
+      <SideNavBar></SideNavBar>
       <div style={styles.contentMargin}>
         <h1 style={{ padding: "0%" }}>This is Content Area</h1>
       </div>
@@ -25,4 +23,4 @@ function Dashboard() {
   );
 }
 
-export default Dashboard
+export default Database
