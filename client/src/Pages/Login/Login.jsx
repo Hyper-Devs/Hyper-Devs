@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./Login.css";
+import Footer from '../../Components/footer'
 
 function Login() {
   return (
@@ -29,6 +30,7 @@ function Login() {
         <h1>Gate Access System</h1>
         <h2>Access • Track • Notify • Alert • Override</h2>
       </div>
+      <Footer/>
     </div>
   );
 }
