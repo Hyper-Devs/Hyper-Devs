@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600&family=Playfair+Display:wght@400;700&display=swap');
+
+.Header {
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    width: 100%;
+    height: 350px;
+    top:-11px;
+    background: url("../Assets/UP ADMIN3 1.png");
+    color:white;
+    padding: 44px;
+}
+
+
+.Header .Header-text {
+    font-family: 'Playfair Display', serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 48px;
+    line-height: 64px;
+    color: rgb(255 255 255);
+}
+
+.Header .program-functions {
+    padding-bottom: 10px;
+    font-family: 'Playfair Display', serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 20px;
+    letter-spacing: 0.25em;
+    color: #FFFFFF
+}
+
+.Header .description {
+    font-family: 'Playfair Display', serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 27px;
+    
+    color: #FFFFFF
+}

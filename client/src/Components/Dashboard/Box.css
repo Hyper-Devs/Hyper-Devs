@@ -1,0 +1,134 @@
+@import url('https://fonts.googleapis.com/css2?family=Arvo:wght@700&family=Montserrat:wght@500;600&family=Playfair+Display:wght@400;700&display=swap');
+
+.LiveBox {
+    width: 100%;
+    min-height: 100px;
+    height: fit-content;
+    padding: 25px;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 39px;
+    }
+.LiveBox .rectangle{
+    width: 75%;
+    text-align: center;
+    background: #FFFFFF;
+    border: 1px solid #00573F;
+    border-radius: 10px;
+}
+
+.LiveBox .rectangle2 {
+    position: relative;
+    display: flex;
+    height: 200px;
+    background: #FFFFFF;
+    border: 1px solid #00573F;
+    border-radius: 10px;
+}
+
+.LiveBox .rectangle3{
+    padding: 24px;
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    gap: 10px;
+    background: #FFFFFF;
+
+}
+
+.clock {
+    width: 50%;
+    border-radius: 10px;
+    background: #00573F;
+}
+
+.Date{
+    position:absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 200px;
+    max-height: 200px;
+    height: fit-content;
+
+    background: #00573F;
+    border: 1px solid #000000;
+    border-radius: 10px;
+}
+
+.Date .Month{
+    height: 50px;
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 48px;
+    line-height: 90px;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+.Date .Year{
+    height: 50px;
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 48px;
+    line-height: 35px;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+.Date .Day{
+
+    height: 100px;
+
+    font-family: 'Arvo';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 96px;
+    line-height: 119px;
+    text-align: center;
+    color: #FFFFFF;
+
+}
+
+/*
+.border-green {
+    border: 1px solid #00573F;
+}*/
+
+.entrance-exit {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    color:  #00573F;
+    border-radius: 10px;
+    border: 1px solid #00573F;
+
+    padding-top: 15px;
+    padding-bottom: 14px;
+    font-style: normal;
+    
+    font-weight: 900;
+    font-size: 32px;
+    font-family: 'Monsterrat', sans-serif;
+    line-height: 39px;
+    text-align: left;
+    padding-left: 175px;
+}
+
+.Icon-boxes {
+    box-sizing: border-box;
+
+    width: 43px;
+    height: 100px;
+    background: #FFFFFF;
+    border: 1px solid #00573F;
+}
