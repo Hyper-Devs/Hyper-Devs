@@ -7,17 +7,16 @@
 }
 
 .sidebar-container {
+	position: relative;
 	background-color: #8E1437;
 	width: 300px;
-	height: 1024px;
-	position: absolute;
-	
+	height: 100%;
 	transition: 0.4s;
 }
 
 .sidebar-heading {
 	width: 300px;
-	height: 250px;
+	height: 100%;
 	color: yellow;
 	transition: 0.4s;
 	display: flex;
@@ -28,7 +27,6 @@
 
 .sidebar-heading-profile {
 	width: 200px;
-	height: 75%;
 	transition: 0.4s;
 }
 

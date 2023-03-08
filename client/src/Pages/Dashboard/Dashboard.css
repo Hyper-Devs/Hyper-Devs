@@ -1,7 +1,13 @@
-.Dashboard{
+/* main{
     width: 100%;
+    padding: 20px;
+} */
+
+.dashboard-container{
+    position: absolute;
     display: flex;
-    flex-direction: column;
+    flex-direction: row-reverse;
+    height: 100%;
 }
 
 .Dashboard .dashboard-title {
