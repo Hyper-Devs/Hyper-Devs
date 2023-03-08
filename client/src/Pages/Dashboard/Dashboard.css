@@ -8,6 +8,14 @@
     display: flex;
     flex-direction: row-reverse;
     height: 100%;
+    width: 100%;
+}
+
+.dashboard-content{
+    position: static;
+    background-color: yellow;
+    height: 100vh;
+    width: 100%;
 }
 
 .Dashboard .dashboard-title {
@@ -27,4 +35,15 @@
 
     color: #FFFFFF;
 
+}
+
+.dashboard-container .dashboard-footer{
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    bottom: 0;
+    background-color: gray;
+    height: 105px;
+    width: 100%;
 }

@@ -5,7 +5,7 @@ import Footer from '../../Components/footer'
 function Login() {
   return (
     <div className="login-container">
-      <div className="container">
+      <div className="form-container">
         <div className="upcLogo"></div>
         <div className="formTitle">
           <h3>UNIVERSITY OF THE PHILIPPINES</h3>
