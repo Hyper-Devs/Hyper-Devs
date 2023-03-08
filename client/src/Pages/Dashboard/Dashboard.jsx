@@ -8,17 +8,31 @@ import './Dashboard.css'
 import Sidebar from '../../Components/Sidebar/Sidebar'
 
 function Dashboard() {
+  const styles = {
+    contentDiv: {
+      display: "flex",
+    },
+    contentMargin: {
+      marginLeft: "10px",
+      height: "100%",
+      width: "100%",
+    },
+  };
+  
   return (
-    <div className='Dashboard'>
-      <Header/>
-      <Sidebar />
-      <Greeting />
-      <div className='dashboard-title'>Dashboard</div>
-      <Box/>
-      <DashFoot/>
-      <Footer/>
-    </div>
-  )
+    <>
+      <div style={styles.contentDiv}>
+        <Sidebar></Sidebar>
+        <div style={styles.contentMargin}>
+          <Header/>
+          <Greeting/>
+          <div className='dashboard-title'>Dashboard</div>
+          <Box/>
+          <DashFoot/>
+        </div>
+      </div>
+    </>
+  );
 }
 
 export default Dashboard;
