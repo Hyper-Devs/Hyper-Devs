@@ -2,9 +2,8 @@
 
 .LiveBox {
     width: 100%;
-    min-height: 100px;
-    height: fit-content;
-    padding: 25px;
+    height: 500px;
+    padding-top: 25px;
     background-color: white;
     display: flex;
     justify-content: center;
@@ -14,33 +13,35 @@
     font-size: 32px;
     line-height: 39px;
     }
+
 .LiveBox .rectangle{
     width: 75%;
+    height: fit-content;
     text-align: center;
     background: #FFFFFF;
-    border: 1px solid #00573F;
+    border: 3px solid #00573F;
     border-radius: 10px;
 }
 
 .LiveBox .rectangle2 {
     position: relative;
-    display: flex;
-    height: 200px;
-    background: #FFFFFF;
-    border: 1px solid #00573F;
-    border-radius: 10px;
+    width: 100%;
+    height: fit-content;
+    background: transparent;
+    border-top: 3px solid #00573F;
 }
 
 .LiveBox .rectangle3{
-    padding: 24px;
+    padding: 15px;
     display: flex;
+    height: 100%;
     flex-grow: 1;
     flex-direction: column;
     align-items: center;
     align-content: center;
     gap: 10px;
-    background: #FFFFFF;
-
+    background-color: transparent;
+    border-radius: 10px;
 }
 
 .clock {
@@ -107,28 +108,30 @@
 .entrance-exit {
     width: 50%;
     display: flex;
-    flex-direction: column;
     color:  #00573F;
     border-radius: 10px;
     border: 1px solid #00573F;
-
+    gap: 15px;
     padding-top: 15px;
-    padding-bottom: 14px;
-    font-style: normal;
-    
+    padding-bottom: 15px;
+    padding-left: 44px;
+}
+
+.entrance-exit .icon-boxes{
+    width: 10%;
+    background-color: white;
+    border: 2px solid #00573F;
+}
+.icon-boxes img {
+    width: 26px;
+    height: 26px;
+}
+
+.entrance-exit .text {
     font-weight: 900;
     font-size: 32px;
     font-family: 'Monsterrat', sans-serif;
     line-height: 39px;
     text-align: left;
-    padding-left: 175px;
-}
-
-.Icon-boxes {
-    box-sizing: border-box;
-
-    width: 43px;
-    height: 100px;
-    background: #FFFFFF;
-    border: 1px solid #00573F;
+    font-style: normal;
 }
