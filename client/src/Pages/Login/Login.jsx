@@ -4,7 +4,7 @@ import Footer from '../../Components/footer'
 
 function Login() {
   return (
-    <div>
+    <div className="login-container">
       <div className="container">
         <div className="upcLogo"></div>
         <div className="formTitle">
