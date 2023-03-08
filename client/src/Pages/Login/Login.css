@@ -5,13 +5,15 @@
   font-family: "Playfair Display";
 }
 
-body {
+.login-container {
   background-image: url(../../Assets/UP_ADMIN-1.svg);
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center;
   position: relative;
+  height: 100vh;
+  width: 100%;
 }
 
 .container {
