@@ -7,12 +7,12 @@ function Login() {
     <div className="login-container">
       <div className="form-container">
         <div className="upcLogo"></div>
-        <div className="formTitle">
+        {/* <div className="formTitle">
           <h3>UNIVERSITY OF THE PHILIPPINES</h3>
         </div>
         <div>
           <h3>CEBU HIGH SCHOOL</h3>
-        </div>
+        </div> */}
         <form className="loginForm">
           <div className="inputField">
             <label>ID Number</label>

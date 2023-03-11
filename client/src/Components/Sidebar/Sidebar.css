@@ -6,59 +6,63 @@
 	display: grid;
 }
 
+.arrow-right-hovered,
+.sidebar-menu-item-hovered1,
+.sidebar-menu-item-hovered2,
+.sidebar-menu-item-hovered3,
+.sidebar-menu-item-hovered4,
+.sidebar-menu-item-hovered5 {
+	filter: brightness(0) saturate(100%) invert(100%) sepia(4%) saturate(0%) hue-rotate(342deg) brightness(106%) contrast(106%);
+	color: white;
+}
+
 .sidebar-container {
 	position: relative;
 	background-color: #8E1437;
-	width: 300px;
+	width: 350px;
 	height: 100%;
 	transition: 0.4s;
 }
 
 .sidebar-heading {
 	width: 300px;
-	height: 100%;
+	height: 300px;
 	color: yellow;
 	transition: 0.4s;
 	display: flex;
 	align-items: center; 
 	justify-content: center;
-	margin: 40px 0 0 0;
+	margin-top: 30px;
+	margin-bottom: 30px;
 }
 
 .sidebar-heading-profile {
 	width: 200px;
+	margin-bottom: 20px;
 	transition: 0.4s;
 }
 
 .sidebar-menu {
 	grid-template-rows: repeat(5, 1fr);
-	margin-top: 60px;
-	padding-left: 20px;
+	margin-top: 30px;
+	margin-left: 20px;
 }
 
-.menu-item {
-	height: 40px;
+.sidebar-menu-item {
+	height: 50px;
 	width: 50px;
 	display: flex;
 	color: #FFB81E;
 	text-decoration: none;
 	text-transform: none;
-	margin: auto 20px 30px;
+	margin: auto 40px 40px;
 	padding-bottom: 15px;
 	transition: 1s;
 }
 
-.menu-item-icon{
-	filter: invert(61%) sepia(97%) saturate(399%) hue-rotate(354deg) brightness(106%) contrast(101%);
-}
-
-.menu-item-icon-clicked{
-	filter: invert(100%) sepia(4%) saturate(0%) hue-rotate(342deg) brightness(106%) contrast(106%);
-}
-
 .sidebar-footer {
 	width: 100%;
-	height: 300px;
+	height: 200px;
 	position: absolute;
 	bottom: 0;
 	grid-template-rows: 1fr;
@@ -69,35 +73,33 @@
 
 .arrow-right {
 	width: 50px;
-	margin-top: 170px;
+	margin: auto 20px 50px;
+	margin-top: 100px;
 }
 
 
 
 
 
-/* Not Expanded Styles */
+/* not expanded sidebar styles */
 .sidebar-container-NX {
 	width: 90px;
 }
 
 .sidebar-heading-NX {
 	width: 90px;
-	margin: 40px 0 0 0;
 }
 
 .sidebar-heading-profile-NX {
-	width: 67px;
-	margin-bottom: 100px;
+	width: 100%;
+	padding: 10px
 }
 
-.menu-item-NX {
-	margin: auto 0 30px;
-	padding-left: 2px;
-	color: white;
+.sidebar-menu-item-NX {
+	margin: auto 0 40px 5px;
 }
 
 .sidebar-footer-NX {
-	margin: 0 0 0 20px;
-	padding-bottom: 20px;
+	margin: 0 0 0 0;
 }
+
