@@ -20,7 +20,7 @@ function Login() {
           <a href="#">Forgot Password?</a>
         </form>
       </div>
-      <Footer />
+      {/*<Footer />*/}
     </div>
   );
 }
