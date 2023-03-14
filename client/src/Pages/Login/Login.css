@@ -11,52 +11,49 @@
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center;
-  position: relative;
+  position: absolute;
   height: 100vh;
   width: 100%;
+  display: flex;
+  justify-content: space-between;
 }
 
 .form-container {
-  position: absolute;
+  position: relative;
   height: 620px;
-  width: 350px;
-  margin-left: 75%;
-  margin-top: 2%;
+  width: 450px;
+  margin-right: 3%;
+  margin-top: 3%;
   border-radius: 10px;
   background-image: linear-gradient(#ffb81e, white);
 }
 
 .upcLogo {
+  position: relative;
   background-image: url(../../Assets/upc_logo.png);
   background-repeat: no-repeat;
   background-size: contain;
-  height: 25%;
-  width: 50%;
-  margin-top: 15%;
-  margin-bottom: 15%;
-  margin-left: 25%;
-}
-
-.formTitle {
-  margin-top: 3%;
+  background-position: center;
+  height: 40%;
+  width: 80%;
+  top: 10%;
+  left: 10%;
 }
 
 .loginForm {
+  position: relative;
   display: flex;
   flex-direction: column;
-  margin-top: 30px;
-}
-
-.inputField {
-  padding: 5px;
+  top: 15%;
 }
 
 input {
+  position: relative;
+  padding: 10px;
   width: 70%;
-  padding: 9px;
   border-width: 1px;
-  margin-left: 50px;
-  margin-top: 3px;
+  left: 15%;
+  margin-top: 5px;
   background-color: #d9d9d9;
 }
 
@@ -65,15 +62,17 @@ label {
 }
 
 button {
-  margin-top: 20px;
-  margin-left: 55px;
-  margin-right: 57px;
+  position: relative;
+  padding: 5px;
+  width: 70%;
+  margin-top: 5%;
+  left: 15%;
   border-width: 1px;
   font-weight: 700;
   line-height: 35px;
   background-color: #ffb81e;
   cursor: pointer;
-  opacity: 0.9;
+  opacity: 0.8;
 }
 
 button:hover {
@@ -83,8 +82,8 @@ button:hover {
 a {
   text-decoration: none;
   color: black;
-  margin-top: 10px;
-  margin-left: 56px;
+  margin-left: 15%;
+  margin-top: 2%;
 }
 
 a:hover {
@@ -92,12 +91,12 @@ a:hover {
 }
 
 .title {
-  position: absolute;
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-top: 20%;
-  margin-left: 4%;
+  margin-left: 3%;
   color: white;
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }

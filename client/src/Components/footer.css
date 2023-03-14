@@ -1,260 +1,247 @@
-@import url('https://fonts.googleapis.com/css?family=Playfair');
+@import url("https://fonts.googleapis.com/css?family=Playfair");
 
-  .page-footer{
-    position: relative;
-    width: 1920px;
-    height: 200px;
+.page-footer {
+  position: relative;
+  width: 1920px;
+  height: 200px;
 
-    background: #FFFFFF;
-  }
-  .footer-container{
-    position: absolute;
-    width: 1920px;
-    height: 200px;
-    left: 0px;
-    top: 0px;
+  background: #ffffff;
+}
+.footer-container {
+  position: absolute;
+  width: 1920px;
+  height: 200px;
+  left: 0px;
+  top: 0px;
 
-    background: #D9D9D9;
-  }
-  .footer-content{
-    position: absolute;
-    width: 1732px;
-    height: 137px;
-    left: 84px;
-    top: 53px;
-  }
-  
-  
-  
-  .presented-to-section{
-    position: absolute;
-    width: 661px;
-    height: 101px;
-    left: 84px;
-    top: 53px;
-  }
-  .presented-to-stmnt{
-    position: absolute;
-    width: 195px;
-    height: 23px;
-    left: 84px;
-    top: 53px;
+  background: #d9d9d9;
+}
+.footer-content {
+  position: absolute;
+  width: 1732px;
+  height: 137px;
+  left: 84px;
+  top: 53px;
+}
 
-    font-family: 'Cambria';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 23px;
+.presented-to-section {
+  position: absolute;
+  width: 661px;
+  height: 101px;
+  left: 84px;
+  top: 53px;
+}
+.presented-to-stmnt {
+  position: absolute;
+  width: 195px;
+  height: 23px;
+  left: 84px;
+  top: 53px;
 
-    color: #000000;
-  }
-  .recipient1{
-    position: absolute;
-    width: 481px;
-    height: 31px;
-    left: 84px;
-    top: 76px;
+  font-family: "Cambria";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 23px;
 
-    font-family: 'Cambria';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 30px;
-    line-height: 35px;
-    letter-spacing: 0.015em;
+  color: #000000;
+}
+.recipient1 {
+  position: absolute;
+  width: 481px;
+  height: 31px;
+  left: 84px;
+  top: 76px;
 
-    color: #000000;
+  font-family: "Cambria";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 35px;
+  letter-spacing: 0.015em;
 
-  }
-  .recipient2{
-    position: absolute;
-    width: 467px;
-    height: 35px;
-    left: 84px;
-    top: 113px;
+  color: #000000;
+}
+.recipient2 {
+  position: absolute;
+  width: 467px;
+  height: 35px;
+  left: 84px;
+  top: 113px;
 
-    font-family: 'Cambria';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 30px;
-    line-height: 35px;
+  font-family: "Cambria";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 35px;
 
-    color: #FFB81E;
+  color: #ffb81e;
 
-    border: 1px solid #000000;
-  }
-  .DCS-logo{
-    position: absolute;
-    width: 95px;
-    height: 90px;
-    left: 559px;
-    top: 64px;
+  border: 1px solid #000000;
+}
+.DCS-logo {
+  position: absolute;
+  width: 95px;
+  height: 90px;
+  left: 559px;
+  top: 64px;
 
-    /*background: url(image.png);*/
-  }
-  .UPC-logo{
-    position: absolute;
-    width: 91px;
-    height: 87px;
-    left: 654px;
-    top: 64px;
+  /*background: url(image.png);*/
+}
+.UPC-logo {
+  position: absolute;
+  width: 91px;
+  height: 87px;
+  left: 654px;
+  top: 64px;
 
-    /*background: url(image.png);*/
-  }
-  
-  
-  
-  .collab-section{
-    position: absolute;
-    width: 424px;
-    height: 46px;
-    left: 892px;
-    top: 73px;
-  }
-  .collab-stmnt{
-    position: absolute;
-    width: 185px;
-    height: 23px;
-    left: 892px;
-    top: 73px;
+  /*background: url(image.png);*/
+}
 
-    font-family: 'Cambria';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 23px;
+.collab-section {
+  position: absolute;
+  width: 424px;
+  height: 46px;
+  left: 892px;
+  top: 73px;
+}
+.collab-stmnt {
+  position: absolute;
+  width: 185px;
+  height: 23px;
+  left: 892px;
+  top: 73px;
 
-    color: #000000;
-  }
-  .collaborator{
-    position: absolute;
-    width: 424px;
-    height: 23px;
-    left: 892px;
-    top: 96px;
+  font-family: "Cambria";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 23px;
 
-    font-family: 'Cambria';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 20px;
-    line-height: 23px;
+  color: #000000;
+}
+.collaborator {
+  position: absolute;
+  width: 424px;
+  height: 23px;
+  left: 892px;
+  top: 96px;
 
-    color: #000000;
-  }
- 
- 
- 
-  .copyright-section{
-    width: 224px;
-    height: 18px;
-    left: 848px;
-    top: 172px;
-  }
-  .copyright-stmnt{
-    position: absolute;
-    width: 224px;
-    height: 18px;
-    left: 848px;
-    top: 172px;
+  font-family: "Cambria";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 23px;
 
-    font-family: 'Cambria';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 15px;
-    line-height: 18px;
+  color: #000000;
+}
 
+.copyright-section {
+  width: 224px;
+  height: 18px;
+  left: 848px;
+  top: 172px;
+}
+.copyright-stmnt {
+  position: absolute;
+  width: 224px;
+  height: 18px;
+  left: 848px;
+  top: 172px;
 
-    color: #000000;
-  }
+  font-family: "Cambria";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 18px;
 
+  color: #000000;
+}
 
+.dev-section {
+  position: absolute;
+  width: 348px;
+  height: 67px;
+  left: 1462px;
+  top: 57px;
+}
+.dev-stmnt {
+  position: absolute;
+  width: 264px;
+  height: 23px;
+  left: 1462px;
+  top: 57px;
 
-  .dev-section{
-    position: absolute;
-    width: 348px;
-    height: 67px;
-    left: 1462px;
-    top: 57px;
-  }
-  .dev-stmnt{
-    position: absolute;
-    width: 264px;
-    height: 23px;
-    left: 1462px;
-    top: 57px;
+  font-family: "Cambria";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 23px;
 
-    font-family: 'Cambria';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 23px;
+  color: #000000;
+}
+.developers {
+  position: absolute;
+  width: 163.87px;
+  height: 35px;
+  left: 1567px;
+  top: 84px;
 
-    color: #000000;
-  }
-  .developers{
-    position: absolute;
-    width: 163.87px;
-    height: 35px;
-    left: 1567px;
-    top: 84px;
+  font-family: "Cambria";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 35px;
+  letter-spacing: 0.015em;
 
-    font-family: 'Cambria';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 30px;
-    line-height: 35px;
-    letter-spacing: 0.015em;
+  color: #000000;
+}
+.hyperdevs-logo {
+  position: absolute;
+  width: 70px;
+  height: 44px;
+  left: 1740px;
+  top: 80px;
 
-    color: #000000;
-  }
-  .hyperdevs-logo{
-    position: absolute;
-    width: 70px;
-    height: 44px;
-    left: 1740px;
-    top: 80px;
+  /*background: url(image.png);*/
+}
 
-    /*background: url(image.png);*/
-  }
+.reach-us-section {
+  position: absolute;
+  width: 335px;
+  height: 23px;
+  left: 1462px;
+  top: 125px;
+}
+.reach-us-stmnt {
+  position: absolute;
+  width: 84px;
+  height: 23px;
+  left: 1462px;
+  top: 125px;
 
+  font-family: "Cambria";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 23px;
+  letter-spacing: 0.015em;
 
+  color: #000000;
+}
+.email-address {
+  position: absolute;
+  width: 84px;
+  height: 23px;
+  left: 1462px;
+  top: 125px;
 
-  .reach-us-section{
-    position: absolute;
-    width: 335px;
-    height: 23px;
-    left: 1462px;
-    top: 125px;
-  }
-  .reach-us-stmnt{
-    position: absolute;
-    width: 84px;
-    height: 23px;
-    left: 1462px;
-    top: 125px;
-    
-    font-family: 'Cambria';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 23px;
-    letter-spacing: 0.015em;
-    
-    color: #000000;
-  }
-  .email-address{
-    position: absolute;
-    width: 84px;
-    height: 23px;
-    left: 1462px;
-    top: 125px;
+  font-family: "Cambria";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 23px;
+  letter-spacing: 0.015em;
 
-    font-family: 'Cambria';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 23px;
-    letter-spacing: 0.015em;
-
-    color: #000000;
-  }
-
+  color: #000000;
+}
