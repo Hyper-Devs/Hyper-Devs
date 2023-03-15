@@ -3,8 +3,9 @@ import React, { useState } from "react";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import Login from "./Pages/Login/Login";
-import Dashboard from "./Pages/Dashboard/Dashboard";
+import Login from './Pages/Login/Login';
+import Dashboard from './Pages/Dashboard/Dashboard';
+import Override from './Pages/Overriding/Override';
 import Notification from "./Pages/Notification/Notification";
 
 function App() {
@@ -12,8 +13,18 @@ function App() {
     <div>
       <BrowserRouter>
         <Routes>
-          <Route exact path="/" element={<Login />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+          <Route
+            exact path='/'
+            element={<Login/>}
+          />
+          <Route
+            path='/dashboard'
+            element={<Dashboard/>}
+          />
+          <Route
+            path='/override'
+            element={<Override/>}
+          />
           <Route exact path="/notification" element={<Notification />} />
         </Routes>
       </BrowserRouter>
