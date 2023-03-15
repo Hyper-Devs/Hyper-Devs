@@ -17,10 +17,18 @@ function Dashboard() {
         <Box />
         <div className="dashboard-footer">
           <Dfooter />
-          {/*<Footer />*/}
+          <Footer />
         </div>
       </div>
-      <Sidebar />
+      <Sidebar
+        buttonState={{
+          item1: true,
+          item2: false,
+          item3: false,
+          item4: false,
+          item5: false,
+        }}
+      />
     </div>
   );
 }
