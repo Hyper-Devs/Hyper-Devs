@@ -3,12 +3,13 @@ import { useRef, useEffect } from "react";
 import "./Sidebar.css";
 
 
-const SideNavBar = () => {
-	const [isHovered1, setIsHovered1] = useState(false);
-	const [isHovered2, setIsHovered2] = useState(false);
-	const [isHovered3, setIsHovered3] = useState(false);
-	const [isHovered4, setIsHovered4] = useState(false);
-	const [isHovered5, setIsHovered5] = useState(false);
+const SideNavBar = ({buttonState}) => {
+	const val = buttonState;
+	const [isHovered1, setIsHovered1] = useState(val.item1);
+	const [isHovered2, setIsHovered2] = useState(val.item2);
+	const [isHovered3, setIsHovered3] = useState(val.item3);
+	const [isHovered4, setIsHovered4] = useState(val.item4);
+	const [isHovered5, setIsHovered5] = useState(val.item5);
 	const [isHovered6, setIsHovered6] = useState(false);
 	const handleMouseEnter = (item) => {
 		switch(item){
@@ -37,19 +38,19 @@ const SideNavBar = () => {
 	const handleMouseLeave = (item) => {
 		switch(item){
 			case '1':
-				setIsHovered1(false);
+				setIsHovered1(val.item1);
 				break;
 			case '2':
-				setIsHovered2(false);
+				setIsHovered2(val.item2);
 				break;
 			case '3':
-				setIsHovered3(false);
+				setIsHovered3(val.item3);
 				break;
 			case '4':
-				setIsHovered4(false);
+				setIsHovered4(val.item4);
 				break;
 			case '5':
-				setIsHovered5(false);
+				setIsHovered5(val.item5);
 				break;
 			case '6':
 				setIsHovered6(false);
@@ -59,15 +60,15 @@ const SideNavBar = () => {
 		}
 	};
 
-	const [isExpanded, setExpendState] = useState(false);
+	const [isExpanded, setExpendState] = useState(true);
 	const divRef = useRef(null);
 	useEffect(() => {
 		const handleMouseOver = () => {
-			setExpendState(!isExpanded);
+			setExpendState(isExpanded);
 		};
 
 		const handleMouseOut = () => {
-			setExpendState(isExpanded);
+			setExpendState(!isExpanded);
 		};
 	
 		const div = divRef.current;
@@ -95,7 +96,7 @@ const SideNavBar = () => {
 			className: "sidebar-menu-item-hovered1",
 			text: "Home",
 			icon: "icons/home.svg",
-			link: "home",
+			link: "dashboard",
 			index: '1',
 			currState: isHovered1,
 		},
@@ -177,6 +178,7 @@ const SideNavBar = () => {
 								src={icon} alt="" srcset="" 
 								onMouseEnter={() => handleMouseEnter(index)}
 								onMouseLeave={() => handleMouseLeave(index)}
+								onClick={() => handleMouseEnter(index)}
 							/>
 							{isExpanded && 
 							<p 
@@ -184,6 +186,7 @@ const SideNavBar = () => {
 								style={{align: 'center', margin: 5, fontSize: 20}}
 								onMouseEnter={() => handleMouseEnter(index)}
 								onMouseLeave={() => handleMouseLeave(index)}
+								onClick={() => handleMouseEnter(index)}
 							>
 								{text}
 							</p>
