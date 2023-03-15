@@ -1,0 +1,73 @@
+.notifBox {
+  width: 100%;
+  height: 280px;
+  padding-top: 25px;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  font-family: "Montserrat", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 39px;
+}
+
+.notifBox .rectangle {
+  width: 75%;
+  height: fit-content;
+  background: #00573f;
+  border: 3px solid #00573f;
+  border-radius: 10px;
+}
+
+.notifBox .rectangle p {
+  margin-left: 3%;
+  color: white;
+}
+
+.notifBox .rectangle2 {
+  position: relative;
+  width: 100%;
+  height: fit-content;
+  background: transparent;
+  border-top: 3px solid #00573f;
+}
+
+.notifBox .rectangle3 {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  border-radius: 10px;
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.notifBox .rectangle3 .buttonContainer {
+  background-color: #00573f;
+  margin-left: 35%;
+  margin-top: 1%;
+  margin-bottom: 1%;
+  width: 30%;
+  border-radius: 10px;
+}
+
+.notifBox .rectangle3 button {
+  margin-top: 0;
+  margin-bottom: 0;
+  left: 0;
+  padding: 10px;
+  height: 100%;
+  width: 100%;
+  border-radius: 10px;
+  border-style: none;
+  background-color: transparent;
+
+  font-family: "Cambria";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 38px;
+
+  color: #ffffff;
+}
