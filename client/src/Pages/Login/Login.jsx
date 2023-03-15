@@ -13,10 +13,10 @@ function Login() {
         <div className="upcLogo"></div>
         <form className="loginForm">
           <label>ID Number</label>
-          <input type="text" />
+          <input className="IDnum" type="text" />
           <label>Password</label>
-          <input type="password" />
-          <button>Login</button>
+          <input className="Passw" type="password" />
+          <button className="login-button">Login</button>
           <a href="#">Forgot Password?</a>
         </form>
       </div>

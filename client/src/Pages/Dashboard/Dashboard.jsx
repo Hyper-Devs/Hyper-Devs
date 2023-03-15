@@ -6,7 +6,7 @@ import Sidebar from '../../Components/Sidebar/Sidebar'
 import Greetings from '../../Components/Greeting'
 import Box from '../../Components/Dashboard/Box'
 import Dfooter from '../../Components/Dashboard/Dashboard-Footer'
-import Footer from '../../Components/footer'
+// import Footer from '../../Components/footer'
 
 function Dashboard() {
   return (
@@ -17,7 +17,7 @@ function Dashboard() {
         <Box />
         <div className='dashboard-footer'>
           <Dfooter />
-          <Footer />
+          {/* <Footer /> */}
           
         </div>
       </div>

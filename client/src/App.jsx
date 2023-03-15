@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import Login from './Pages/Login/Login';
 import Dashboard from './Pages/Dashboard/Dashboard';
+import Override from './Pages/Overriding/Override';
 
 function App() {
   return (
@@ -18,6 +19,10 @@ function App() {
           <Route
             path='/dashboard'
             element={<Dashboard/>}
+          />
+          <Route
+            path='/override'
+            element={<Override/>}
           />
         </Routes>
       </BrowserRouter>
