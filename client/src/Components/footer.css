@@ -1,245 +1,159 @@
-.page-footer {
+.page-footer{
+  position: absolute;
+  height: 150px;
+  width: 100%;
+  bottom: 0;
+  background: #D9D9D9;
+}
+.presented-to{
   position: relative;
-  width: 1920px;
-  height: 200px;
-
-  background: #ffffff;
-}
-.footer-container {
-  position: absolute;
-  width: 1920px;
-  height: 200px;
-  left: 0px;
-  top: 0px;
-
-  background: #d9d9d9;
-}
-.footer-content {
-  position: absolute;
-  width: 1732px;
-  height: 137px;
-  left: 84px;
-  top: 53px;
-}
-
-.presented-to-section {
-  position: absolute;
-  width: 661px;
-  height: 101px;
-  left: 84px;
-  top: 53px;
-}
-.presented-to-stmnt {
-  position: absolute;
-  width: 195px;
-  height: 23px;
-  left: 84px;
-  top: 53px;
-
-  font-family: "Cambria";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 20px;
-  line-height: 23px;
-
-  color: #000000;
-}
-.recipient1 {
-  position: absolute;
-  width: 481px;
-  height: 31px;
-  left: 84px;
-  top: 76px;
-
-  font-family: "Cambria";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 30px;
-  line-height: 35px;
-  letter-spacing: 0.015em;
-
-  color: #000000;
-}
-.recipient2 {
-  position: absolute;
-  width: 467px;
-  height: 35px;
-  left: 84px;
-  top: 113px;
-
-  font-family: "Cambria";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 30px;
-  line-height: 35px;
-
-  color: #ffb81e;
-
-  border: 1px solid #000000;
-}
-.DCS-logo {
-  position: absolute;
-  width: 95px;
-  height: 90px;
-  left: 559px;
-  top: 64px;
-
-  /*background: url(image.png);*/
-}
-.UPC-logo {
-  position: absolute;
-  width: 91px;
-  height: 87px;
-  left: 654px;
-  top: 64px;
-
-  /*background: url(image.png);*/
-}
-
-.collab-section {
-  position: absolute;
-  width: 424px;
-  height: 46px;
-  left: 892px;
-  top: 73px;
-}
-.collab-stmnt {
-  position: absolute;
-  width: 185px;
-  height: 23px;
-  left: 892px;
-  top: 73px;
-
-  font-family: "Cambria";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 20px;
-  line-height: 23px;
-
-  color: #000000;
-}
-.collaborator {
-  position: absolute;
-  width: 424px;
-  height: 23px;
-  left: 892px;
-  top: 96px;
-
-  font-family: "Cambria";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 20px;
-  line-height: 23px;
-
-  color: #000000;
-}
-
-.copyright-section {
-  width: 224px;
-  height: 18px;
-  left: 848px;
-  top: 172px;
-}
-.copyright-stmnt {
-  position: absolute;
-  width: 224px;
-  height: 18px;
-  left: 848px;
-  top: 172px;
-
-  font-family: "Cambria";
+  font-family: 'Cambria';
   font-style: normal;
   font-weight: 400;
   font-size: 15px;
-  line-height: 18px;
+  
+  top: 30%;
+  left: 2%;
 
   color: #000000;
 }
-
-.dev-section {
-  position: absolute;
-  width: 348px;
-  height: 67px;
-  left: 1462px;
-  top: 57px;
-}
-.dev-stmnt {
-  position: absolute;
-  width: 264px;
-  height: 23px;
-  left: 1462px;
-  top: 57px;
-
-  font-family: "Cambria";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 20px;
-  line-height: 23px;
-
-  color: #000000;
-}
-.developers {
-  position: absolute;
-  width: 163.87px;
-  height: 35px;
-  left: 1567px;
-  top: 84px;
-
-  font-family: "Cambria";
+.recipient-1{
+  position: relative;
+  
+  font-family: 'Cambria';
   font-style: normal;
   font-weight: 700;
-  font-size: 30px;
-  line-height: 35px;
+  font-size: 20px;
   letter-spacing: 0.015em;
+
+  top: 33%;
+  left: 2%;
+
+  color: #000000;
+
+}
+.recipient-2{
+  position: relative;
+  
+  font-family: 'Cambria';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+ 
+  
+  top: 33%;
+  left: 2%;
+
+  color: #FFB81E;
+
+}
+
+.foot.logo-1{
+  position: relative;
+  width: 95px;
+  height: 90px;
+
+  top: 28%;
+  left: 50%;
+}
+.foot-logo-2{
+  position: absolute;
+  max-width: 12%;
+  height: 90px;
+
+
+  top: 10%;
+  left:30%;
+}
+.in-collab{
+  position: absolute;
+  font-family: 'Cambria';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  
+  top: 30%;
+  left: 40%;
+  
+  color: #000000;
+}
+.collaborator{
+  position: absolute;
+  font-family: 'Cambria';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 15px;
+
+  top: 45%;
+  left: 40%;
+
+  
+  color: #000000;
+}
+.copyright-stmnt{
+  position: absolute;
+  font-family: 'Cambria';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+
+  top: 80%;
+  left: 40%;
+
+
+
+
+color: #000000
+}
+.des-imp-by{
+  position: absolute;
+  font-family: 'Cambria';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+
+  top: 30%;
+  left: 70%;
+  
 
   color: #000000;
 }
-.hyperdevs-logo {
+.dev-hyperdevs{
   position: absolute;
-  width: 70px;
-  height: 44px;
-  left: 1740px;
-  top: 80px;
-
-  /*background: url(image.png);*/
-}
-
-.reach-us-section {
-  position: absolute;
-  width: 335px;
-  height: 23px;
-  left: 1462px;
-  top: 125px;
-}
-.reach-us-stmnt {
-  position: absolute;
-  width: 84px;
-  height: 23px;
-  left: 1462px;
-  top: 125px;
-
-  font-family: "Cambria";
+  font-family: 'Cambria';
   font-style: normal;
-  font-weight: 400;
+  font-weight: 700;
   font-size: 20px;
-  line-height: 23px;
   letter-spacing: 0.015em;
+
+  top: 42%;
+  left: 75%;
 
   color: #000000;
 }
-.email-address {
+.reach-us{
   position: absolute;
-  width: 84px;
-  height: 23px;
-  left: 1462px;
-  top: 125px;
-
-  font-family: "Cambria";
+  font-family: 'Cambria';
   font-style: normal;
   font-weight: 400;
-  font-size: 20px;
-  line-height: 23px;
+  font-size: 15px;
   letter-spacing: 0.015em;
 
+  top: 60%;
+  left: 70%;
+
+  color: #000000;
+}
+.hyperdevs-email{
+  position: absolute;
+  font-family: 'Cambria';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  letter-spacing: 0.015em;
+
+  top: 60%;
+  left: 75%;
+  
   color: #000000;
 }

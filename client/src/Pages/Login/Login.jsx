@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./Login.css";
-import Footer from "../../Components/footer";
+import Footer from '../../Components/footer'
 
 function Login() {
   return (
@@ -20,7 +20,7 @@ function Login() {
           <a href="#">Forgot Password?</a>
         </form>
       </div>
-      {/*<Footer />*/}
+      <Footer />
     </div>
   );
 }

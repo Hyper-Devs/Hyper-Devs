@@ -12,12 +12,14 @@ import Footer from '../../Components/footer'
 function Override() {
     return (
       <div className='override-container'>
+        
         <div className='override-page-proper' >
             <Header />
             <Greetings />
             <div className='override-content'>
               <Box/>
             </div>
+            <Footer/>
         </div>
 
         <Sidebar
@@ -29,6 +31,7 @@ function Override() {
             item5: true
             }}
         />
+        
       </div>
     )
   }
