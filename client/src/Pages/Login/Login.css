@@ -5,27 +5,63 @@
   font-family: "Cambria";
 }
 
-.login-container {
-  background-image: url(../../Assets/UP\ ADMIN1.svg);
+body {
+  background-image: url(../../Assets/UP\ ADMIN\ red\ gray\ 1.png);
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center;
-  position: absolute;
+}
+
+.login-container {
   height: 100vh;
   width: 100%;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin-left: 3%;
+  color: white;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.title h1 {
+  font-weight: 700;
+  font-size: 3.8rem;
+  line-height: 120px;
+}
+
+.title h2 {
+  font-weight: 400;
+  font-size: 1.27rem;
+  line-height: 32px;
+  letter-spacing: 0.67rem;
 }
 
 .form-container {
   position: relative;
-  height: 620px;
-  width: 450px;
-  margin-right: 3%;
-  margin-top: 3%;
-  border-radius: 10px;
+  width: 600px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-top-left-radius: 10px;
   background-image: linear-gradient(#ffb81e, white);
+}
+
+.login-bgi {
+  background-image: url(../../Assets/login-bgi.png);
+  position: absolute;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: bottom,center;
+  height: 100vh;
+  width: 100%;
 }
 
 .upcLogo {
@@ -34,82 +70,57 @@
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
-  height: 40%;
-  width: 80%;
+  width: 300px;
+  height: 300px;
   top: 10%;
-  left: 10%;
 }
 
 .loginForm {
   position: relative;
-  display: flex;
-  flex-direction: column;
   top: 15%;
 }
 
 .IDnum,
 .Passw {
-  position: relative;
   padding: 10px;
-  width: 70%;
+  width: 100%;
   border-width: 1px;
-  left: 15%;
-  margin-top: 5px;
+  border-radius: 10px;
+  margin-top: 1px;
   background-color: #d9d9d9;
 }
 
-label {
-  margin-left: 15%;
+.loginForm label {
+  position: relative;
+  display: flex;
+  padding-top: 5px;
 }
 
 .login-button {
   position: relative;
-  padding: 5px;
-  width: 70%;
+  padding: 2px;
+  width: 100%;
   margin-top: 5%;
-  left: 15%;
   border-width: 1px;
+  border-radius: 10px;
   font-weight: 700;
   line-height: 35px;
   background-color: #ffb81e;
   cursor: pointer;
-  opacity: 0.8;
 }
 
-button:hover {
-  opacity: 1;
+.login-button:hover {
+  background-color: #ffc954;
 }
 
-a {
-  text-decoration: none;
-  color: black;
-  margin-left: 15%;
-  margin-top: 2%;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
-.title {
+.loginForm a {
   position: relative;
-  display: flex;
-  flex-direction: column;
-  margin-top: 20%;
-  margin-left: 3%;
-  color: white;
-  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  text-decoration: none;
+  font-style: italic;
+  color: #686868;
 }
 
-.title h1 {
-  font-weight: 700;
-  font-size: 4rem;
-  line-height: 120px;
-}
-
-.title h2 {
-  font-weight: 400;
-  font-size: 1.32rem;
-  line-height: 32px;
-  letter-spacing: 0.71rem;
+.loginForm a:hover {
+  text-decoration: underline;
+  color: black;
 }
