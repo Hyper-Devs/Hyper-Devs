@@ -7,6 +7,7 @@ import Login from './Pages/Login/Login';
 import Dashboard from './Pages/Dashboard/Dashboard';
 import Override from './Pages/Overriding/Override';
 import Notification from "./Pages/Notification/Notification";
+import Enrollment from "./Pages/Enrollment/Enrollment"
 
 function App() {
   return (
@@ -25,7 +26,12 @@ function App() {
             path='/override'
             element={<Override/>}
           />
-          <Route exact path="/notification" element={<Notification />} />
+          <Route exact path="/notification" element={<Notification />}
+          />
+          <Route 
+            path="/enrollment"
+            element={<Enrollment/>}
+          />
         </Routes>
       </BrowserRouter>
     </div>

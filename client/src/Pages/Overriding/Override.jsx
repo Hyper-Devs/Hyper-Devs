@@ -2,11 +2,7 @@ import React from 'react'
 import './Override.css'
 import Sidebar from '../../Components/Sidebar/Sidebar'
 import OvrContainer from '../../Components/Override/OvrContainer'
-import Header from '../../Components/header';
-import Greetings from '../../Components/Greeting';
-
-
-
+import Footer from '../../Components/footer'
 
 function Override() {
     return (
