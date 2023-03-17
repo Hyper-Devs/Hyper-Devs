@@ -1,0 +1,92 @@
+.enroll-section-container{
+
+    
+    display: flex;
+    align-items: center;
+    flex-direction: row-reverse;
+    width: 100%;
+    height: 100%;
+    padding: 50px;
+    /* margin:50px; */
+}
+
+
+
+.enroll-section-container .E-container1{
+    width: 100%;
+    height: 282px;
+
+    box-sizing: border-box;
+    border: 1px solid #00573F;
+    border-radius: 10px;
+    
+}
+.E-container1 .E-container2{
+    /* position: relative; */
+    width: 100%;
+    height: 72.93px;
+
+    background: #00573F;
+    border-radius: 10px 10px 0px 0px;
+
+    text-align: center;
+
+    font-family: 'Cambria';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 80px;
+
+    color: #FFFFFF;
+    
+}
+.enroll-buttons{
+    position: absolute;
+    width: 505px;
+    height: 159.87px;
+    left: 727.24px;
+    top: 603.38px;
+}
+
+
+.E-container1 .enroll-student-button{
+    /* position: relative; */
+    display: flex;
+    width: 505px;
+    height: 70.5px;
+   
+    /* margin-top: 1%; */
+
+
+    
+    background: #00573F;
+    border-radius: 10px;
+
+    font-family: 'Cambria';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 43px;
+    text-align: center;
+    color: #FFFFFF;
+
+}
+.E-container1 .enroll-admin-button{
+    /* position: relative; */
+    display: flex;
+    width: 505px;
+    height: 70.5px;
+    /* margin-top: 1%; */
+
+
+    background: #00573F;
+    border-radius: 10px;
+
+    font-family: 'Cambria';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 43px;
+
+    color: #FFFFFF;
+}
