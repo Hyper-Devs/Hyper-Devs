@@ -1,12 +1,14 @@
 .page-footer{
-  position: absolute;
+  position: fixed;
+  flex-direction: column;
   height: 150px;
   width: 100%;
+  
   bottom: 0;
   background: #D9D9D9;
 }
 .presented-to{
-  position: relative;
+  position:relative;  
   font-family: 'Cambria';
   font-style: normal;
   font-weight: 400;
@@ -18,7 +20,7 @@
   color: #000000;
 }
 .recipient-1{
-  position: relative;
+  position:relative;
   
   font-family: 'Cambria';
   font-style: normal;
@@ -26,7 +28,7 @@
   font-size: 20px;
   letter-spacing: 0.015em;
 
-  top: 33%;
+  top: 30%;
   left: 2%;
 
   color: #000000;
@@ -41,7 +43,7 @@
   font-size: 20px;
  
   
-  top: 33%;
+  top: 30%;
   left: 2%;
 
   color: #FFB81E;
@@ -49,111 +51,118 @@
 }
 
 .foot.logo-1{
-  position: relative;
-  width: 95px;
-  height: 90px;
-
-  top: 28%;
-  left: 50%;
+  height: 65px;
+  width: auto;
+  /* margin-left: 10px; */
+  left: 70%;
+  top: 30%;
 }
+
 .foot-logo-2{
   position: absolute;
-  max-width: 12%;
-  height: 90px;
-
-
-  top: 10%;
-  left:30%;
+  height: 65px;
+  width: auto;
+  /* margin-left: 10px; */
+  left: 560px;
+  top: 30%;
 }
+
 .in-collab{
-  position: absolute;
+  position: relative;
+
   font-family: 'Cambria';
   font-style: normal;
   font-weight: 400;
   font-size: 15px;
   
-  top: 30%;
+  bottom: 10%;
   left: 40%;
   
   color: #000000;
 }
 .collaborator{
-  position: absolute;
+  position:relative;
+
   font-family: 'Cambria';
   font-style: normal;
   font-weight: 700;
   font-size: 15px;
 
-  top: 45%;
+  bottom: 10%;
   left: 40%;
 
   
   color: #000000;
 }
 .copyright-stmnt{
-  position: absolute;
+  position: relative;
+
   font-family: 'Cambria';
   font-style: normal;
   font-weight: 400;
   font-size: 15px;
 
-  top: 80%;
+  top: 15%;
   left: 40%;
 
 
 
 
-color: #000000
+color: #000000;
 }
 .des-imp-by{
-  position: absolute;
+  position: relative;
+
   font-family: 'Cambria';
   font-style: normal;
   font-weight: 400;
   font-size: 15px;
 
-  top: 30%;
-  left: 70%;
+  bottom: 46%;
+  left:70%;
   
 
   color: #000000;
 }
 .dev-hyperdevs{
-  position: absolute;
+  position: relative;
+
   font-family: 'Cambria';
   font-style: normal;
   font-weight: 700;
   font-size: 20px;
   letter-spacing: 0.015em;
 
-  top: 42%;
-  left: 75%;
+  bottom: 46%;
+  left: 76%;
 
   color: #000000;
 }
 .reach-us{
-  position: absolute;
+  position: relative;
+
   font-family: 'Cambria';
   font-style: normal;
   font-weight: 400;
   font-size: 15px;
   letter-spacing: 0.015em;
 
-  top: 60%;
+  bottom: 46%;
   left: 70%;
 
   color: #000000;
 }
 .hyperdevs-email{
-  position: absolute;
+  position: relative;
+
   font-family: 'Cambria';
   font-style: normal;
   font-weight: 400;
   font-size: 15px;
   letter-spacing: 0.015em;
 
-  top: 60%;
-  left: 75%;
+  bottom: 58%;
+  left: 73%;
   
   color: #000000;
 }
