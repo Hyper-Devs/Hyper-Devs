@@ -8,7 +8,15 @@ import OvrContainer from '../../Components/Override/OvrContainer'
 function Override() {
     return (
       <div className='override-container'>
-        <OvrContainer/>
+        
+        <div className='override-page-proper' >
+            <Header />
+            <Greetings />
+            <div className='override-content'>
+              <Box/>
+            </div>
+            <Footer/>
+        </div>
 
         <Sidebar
             buttonState = {{
@@ -19,6 +27,7 @@ function Override() {
             item5: true
             }}
         />
+        
       </div>
     )
   }
