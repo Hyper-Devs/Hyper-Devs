@@ -3,6 +3,7 @@ import './Override.css'
 import Sidebar from '../../Components/Sidebar/Sidebar'
 import OvrContainer from '../../Components/Override/OvrContainer'
 import Footer from '../../Components/footer'
+import Header from '../../Components/header'
 
 function Override() {
     return (
