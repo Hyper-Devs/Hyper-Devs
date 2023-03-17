@@ -1,0 +1,49 @@
+.enroll-container{
+    position: absolute;
+    display: flex;
+    flex-direction: row-reverse;
+    height: 100%;
+    width: 100%;
+    /* justify-content: center; */
+}
+
+.enroll-page{
+    position: static;
+    height: fit-content;
+    width: 100%;
+    align-content: center;
+}
+
+.enroll-component{
+    position: static;
+    height: 100%;
+    width: 100%;
+}
+
+.enroll-page .enroll-page-title {
+ 
+    font-family: 'Cambria';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 50px;
+    text-align: center;
+    
+    background: #8E1437;
+    border-width: 10px 0px;
+    border-style: solid;
+    border-color: #FFB81E;
+    
+   
+    letter-spacing: 0.25em;
+
+    color: #FFFFFF; 
+
+}
+
+.enroll-component{
+    width: 100%;
+    height: 100%;
+    position: static;
+}
+
