@@ -16,7 +16,7 @@ function footer() {
 
       <div className='in-collab'><p>In collaboration with:</p></div>
       <div className='collaborator'><p>University of the Philippines Cebu High School</p></div>  
-      
+        
       <div className='copyright-stmnt'><p>ⓒUPCHS 2023. All rights reserved.</p></div>
 
       <div className='des-imp-by'><p>Designed and implemented by:</p></div>
