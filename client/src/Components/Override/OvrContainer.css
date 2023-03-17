@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=Arvo:wght@700&family=Montserrat:wght@500;600&family=Playfair+Display:wght@400;700&display=swap');
+
+.container {
+    display: flex;
+    align-items: center;
+    flex-direction: column; 
+    /* yay */
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    padding: 20px;
+}
+
+.rectangle,
+.rectangle3 {
+    margin: 50px;
+}
+
+.container .rectangle{
+    width: 50%;
+    height: fit-content;
+    text-align: left;
+    background: #00573F;
+    color: white;
+    /* border: 3px solid #00573F; */
+    justify-content: left;
+    font-size: 27px;
+    position: relative;
+    border-radius: 10px;
+}
+
+.container .rectangle2 {
+    display: flex;
+    width: 100%;
+    height: 90%;
+    flex-grow: 1;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    gap: 10px;
+    background-color: white;
+    border-radius: 10px;
+    border-style: solid;
+    border-width: 2px;
+    border-color: #00573F;
+}
+
+.container .rectangle3{
+    background-color: rgb(255, 255, 255);
+    color: black;
+    position: relative;
+    height: 60%;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #00573F;
+    padding: 10px;
+    text-align: center;
+    
+}
+
+.container .student-details{
+    width: 100%;
+    height: 80%;
+    background-color: white;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #00573F;
+    border-radius: 10px;
+    color: black;
+}
+
+.container button {
+    position: relative;
+    border-radius: 5px;
+    width: 60%;
+    height: 30%;
+    font-weight: 700;
+    font-size: 60%;
+    background-color: #00573F;
+    color: white;
+    cursor: pointer;
+  }
+    
+.container button:hover {
+    background-color: #008861;
+} 
+
+.container .search-field{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
