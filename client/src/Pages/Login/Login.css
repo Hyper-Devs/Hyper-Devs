@@ -5,7 +5,7 @@
   font-family: "Cambria";
 }
 
-body {
+.login-container body {
   background-image: url(../../Assets/UP\ ADMIN\ red\ gray\ 1.png);
   background-size: cover;
   background-repeat: no-repeat;
