@@ -7,11 +7,9 @@ import Footer from '../../Components/footer'
 function Override() {
     return (
       <div className='override-container'>
-        
         <div className='override-page-proper' >
-            <div className='override-content'>
-            </div>
-            <Footer/>
+            <Header />
+            <OvrContainer/>
         </div>
 
         <Sidebar
