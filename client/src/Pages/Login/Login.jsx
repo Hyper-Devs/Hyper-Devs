@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import "./Login.css";
 import Footer from '../../Components/footer'
+import {FiHash} from 'react-icons/fi'
+import {FiKey} from 'react-icons/fi'
+import {FiLogIn} from 'react-icons/fi'
 
 function Login() {
   return (
@@ -15,10 +18,12 @@ function Login() {
         <div className="loginForm">
           <form>
             <label>ID Number</label>
+            <div className="login-input-icons"><FiHash color="#7A1315"/></div>
             <input className="IDnum" type="text" />
             <label>Password</label>
+            <div className="login-input-icons"><FiKey color="#7A1315"/></div>
             <input className="Passw" type="password" />
-            <button className="login-button">Login</button>
+            <button className="login-button"><div className="login-icon"><FiLogIn color="#7A1315"/></div>Login</button>
             <a href="#">Forgot Password?</a>
           </form>
         </div>
