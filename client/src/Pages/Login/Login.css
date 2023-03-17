@@ -5,15 +5,8 @@
   font-family: "Cambria";
 }
 
-.login-container body {
-  background-image: url(../../Assets/UP\ ADMIN\ red\ gray\ 1.png);
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-position: center;
-}
-
 .login-container {
+  background-image: url(../../Assets/UP\ ADMIN\ red\ gray\ 1.png);
   height: 100vh;
   width: 100%;
   display: flex;
