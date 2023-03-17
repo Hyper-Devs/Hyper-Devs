@@ -16,14 +16,17 @@ function EnrollBox(){
     return( 
         <div className="enroll-section-container">  
             <div className="E-container1">
-                <div className="E-container2"><p>Enrollment Access</p></div>
-                <div className="enroll-buttons">
-                    
-                    <button className="enroll-student-">Enroll Student</button>
-                    <button className="enroll-admin-button">Enroll Admin</button>
+                
 
+            <div className="E-container2"><p>Enrollment Access</p></div>    
+                <div className="enroll-buttons">
+                    {/* <form> */}
+                    <button className="enroll-student-button">Enroll Student</button>
+                    <button className="enroll-admin-button">Enroll Admin</button>
+                    {/* </form> */}
+                
                 </div>
-                    
+                
                 
                 
                 </div>
