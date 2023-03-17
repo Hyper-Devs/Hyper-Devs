@@ -1,27 +1,17 @@
 import React, { useState } from 'react';
 import './SearchField.css';
-import { FaSearch } from 'react-icons/fa'
 
-function SearchBar(props) {
-  const [query, setQuery] = useState('');
-
-  function handleChange(event) {
-    setQuery(event.target.value);
-  }
-
-  function handleSubmit(event) {
-    event.preventDefault();
-    props.onSearch(query);
-  }
-
+export default function InputField({name}) {
+  const [state, setState] = useState('')
   return (
-    <div className="search-bar">
-      <form onSubmit={handleSubmit} style={{margin: 20}}>
-        <input type="text" defaultValue="Enter Student Name or ID Number" value={query} onChange={handleChange} style={{color: 'black'}}/>
-        <button type="submit">Search <icon><FaSearch /></icon></button>
-      </form>
+    <div className='search-bar'>
+      <input 
+        type="text" 
+        value={state} 
+        name={name}
+        onChange={(e) => setState(e.target.value)} 
+      />
     </div>
   );
-}
 
-export default SearchBar;
+}
