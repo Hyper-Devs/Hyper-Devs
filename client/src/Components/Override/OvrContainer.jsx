@@ -1,6 +1,7 @@
 import './OvrContainer.css';
 import React, { useRef, useState } from 'react';
 import InputField from './SearchField';
+import  Footer from '../footer';
 
 function Box() {
     const nameForm = useRef(null);
@@ -16,26 +17,63 @@ function Box() {
 
     return (
         <div className='container'>
-            <div className='rectangle'>
+            <div className='first-container'>
                 <p style={{padding: 15}}>Override Access</p>
-                <div className='rectangle2'>
-                    <form className='search-field' ref={nameForm}>
+                <div className='search-content'>
+                    <form 
+                        className='search-field' 
+                        ref={nameForm}>
                         <InputField name={'firstname'}/>
                     </form>
-                    <button onClick={toggleVisibility}>Search</button>
+
+                    <button onClick={toggleVisibility}>Search</button>     
                 </div>
             </div>
-
+            {/*Search results from the input field is reflected by the following code block*/}
             {isVisible &&          
-                <div 
-                    className='rectangle rectangle3'
-                >
+                <div className='search-result'>
                     <h2 style={{color: '#00573F'}}>STUDENT INFORMATION</h2>
                     <div className='student-details'>
+                        <p>ASHDOLajsh</p>
+                        <p>ASHDOLajsh</p>
+                        <p>ASHDOLajsh</p>
+                        <p>ASHDOLajsh</p>
+                        <p>ASHDOLajsh</p>
+                        <p>ASHDOLajsh</p>
+                        <p>ASHDOLajsh</p>
+                        <p>ASHDOLajsh</p>
+                        <p>ASHDOLajsh</p>
+                        <p>ASHDOLajsh</p>
+                        <p>ASHDOLajsh</p>
+                        <p>ASHDOLajsh</p>
+                        <p>ASHDOLajsh</p>
+                        <p>ASHDOLajsh</p>
+                        <p>ASHDOLajsh</p>
+                        <p>ASHDOLajsh</p>
+                        <p>ASHDOLajsh</p>
+                        <p>ASHDOLajsh</p>
+                        <p>ASHDOLajsh</p>
+                        <p>ASHDOLajsh</p>
+                        <p>ASHDOLajsh</p>
+                        <p>ASHDOLajsh</p>
+                        <p>ASHDOLajsh</p>
+                        <p>ASHDOLajsh</p>
+                        <p>ASHDOLajsh</p>
+                        <p>ASHDOLajsh</p>
+                        <p>ASHDOLajsh</p>
+                        <p>ASHDOLajsh</p>
+                        <p>ASHDOLajsh</p>
+                        <p>ASHDOLajsh</p>
+                        <p>ASHDOLajsh</p>
+                        <p>ASHDOLajsh</p>
+                        <p>ASHDOLajsh</p>
+                        <p>ASHDOLajsh</p>
+
                     </div>
-                
                 </div>
-            }           
+            } 
+
+            <Footer/>  
       </div>
     )
 }

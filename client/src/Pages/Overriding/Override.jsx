@@ -2,20 +2,18 @@ import React from 'react'
 import './Override.css'
 import Sidebar from '../../Components/Sidebar/Sidebar'
 import OvrContainer from '../../Components/Override/OvrContainer'
+import Header from '../../Components/header';
+import Greetings from '../../Components/Greeting';
+
 
 
 
 function Override() {
     return (
       <div className='override-container'>
-        
         <div className='override-page-proper' >
             <Header />
-            <Greetings />
-            <div className='override-content'>
-              <Box/>
-            </div>
-            <Footer/>
+            <OvrContainer/>
         </div>
 
         <Sidebar

@@ -1,10 +1,10 @@
 .search-bar {
     position: fit-content;
-    width: 60%;
+    width: 100%;
 }
   
 .search-bar input[type="text"] {
-  height: 80%;
+  height: 100%;
   width: 100%;
   margin-top: 20px;
   padding: 10px;
