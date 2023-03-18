@@ -4,6 +4,8 @@ import Sidebar from '../../Components/Sidebar/Sidebar'
 import "./Enrollment.css";
 import Footer from '../../Components/footer'
 import EnrollBox from '../../Components/Enrollment/EnrollBox'
+import EnrollStudentBox from "../../Components/Enrollment/Enroll-Student-Box";
+import EnrollBatchStudentBox from "../../Components/Enrollment/Enroll-Batch-Student-Box";
 
 function Enrollment(){
     return(
@@ -12,8 +14,9 @@ function Enrollment(){
                 <div className="enroll-page-title"><p>Enroll</p></div>
                 <div className="enroll-components">
                     <EnrollBox/>
+                    <EnrollStudentBox/>
+                    <EnrollBatchStudentBox/>
                     <Footer/>
-                    
                     </div>
 
             </div>
