@@ -7,6 +7,7 @@ import {FiLogIn} from 'react-icons/fi'
 
 function Login() {
   return (
+    <body id="login-page">
     <div className="login-content">
     <div className="login-container">
       <div className="title">
@@ -32,6 +33,7 @@ function Login() {
     </div>
     <Footer />
     </div>
+    </body>
   );
 }
 
