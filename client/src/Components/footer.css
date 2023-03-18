@@ -1,11 +1,4 @@
-* {
-  font-family: 'Cambria';
-}
-
-.page-footer {
-  position: relative;
-  top: 0;
-  height: 100%;
+.footer-content {
   background: #D9D9D9;
 }
 
@@ -13,16 +6,85 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin: 2%;
+  padding: 1% 2% 1% 2%;
 }
 
-.col1, .col2, .col3 {
+.col1-container {
+  display: flex;
+}
+
+.col1{
   display: flex;
   flex-direction: column;
+  justify-content: center;
 }
 
-.footer-upc {
+.footer-cs-text {
+  letter-spacing: 0.02em
+}
+
+.footer-upc-text {
   color: #8E1437;
+}
+
+.footer-logos {
+  display: flex;
+  margin-top: 20px;
+  margin-left: 10px;
+}
+
+.footer-cs-logo {
+  background-image: url(../Assets/dept_compsci.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  height: 70px;
+  width: 70px;
+}
+
+.footer-upc-logo {
+  background-image: url(../Assets/upc_logo.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  height: 70px;
+  width: 70px;
+
+}
+
+.col3 {
+  display: flex;
+  align-items: center;
+}
+
+.col3-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-top: -10px;
+}
+
+.footer-hd-logo {
+  background-image: url(../Assets/hd\ logo\ black.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  height: 60px;
+  width: 60px;
+  margin-left: 5px;
+}
+
+.footer-reach-us {
+  margin-top: -8px;
+}
+
+.footer-reach-us a {
+  margin-left: 20px;
+  text-decoration: none;
+  color: black;
+}
+.footer-reach-us a:hover{
+  text-decoration: underline;
 }
 
 .copyright-stmnt {

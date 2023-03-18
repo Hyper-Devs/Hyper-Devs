@@ -2,7 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Playfair Display";
+  font-family: "Cambria";
 }
 
 body {
@@ -14,13 +14,8 @@ body {
 }
 
 .login-container {
-  display: flex;
-  flex-direction: column;
-}
-
-.inner-container {
-  height: 100vh;
-  width: 100%;
+  min-height: 100vh;
+  min-width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -43,7 +38,7 @@ body {
 
 .title h2 {
   font-weight: 400;
-  font-size: 1.2rem;
+  font-size: 1.25rem;
   line-height: 32px;
   letter-spacing: 0.67rem;
 }
@@ -75,8 +70,8 @@ body {
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
-  width: 300px;
-  height: 300px;
+  width: 100%;
+  height: 25%;
   top: 10%;
 }
 
@@ -88,11 +83,10 @@ body {
 .IDnum,
 .Passw {
   position: relative;
-  padding: 10px;
-  width: 92%;
+  padding: 10px 10px 10px 40px;
+  width: 100%;
   border-width: 1px;
-  border-radius: 0 10px 10px 0;
-  margin-left: 34px;
+  border-radius: 10px;
   margin-top: 1px;
   font-family: Arial;
   font-size: 1em;
@@ -108,8 +102,8 @@ body {
 .login-input-icons {
   position: absolute;
   background-color: #FFB81E;
-  margin-top: 1px;
-  padding: 9.25px 8.5px 9.25px 8.5px;
+  padding: 9px 8.25px 9px 8.25px;
+  margin-top: -40px;
   border-style: solid;
   border-width: 1px;
   border-radius: 10px 0 0 10px;
