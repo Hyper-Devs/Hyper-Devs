@@ -1,0 +1,140 @@
+/* @import url('https://fonts.google.com/specimen/Alegreya+Sans')  */
+
+*{
+    box-sizing: border-box;
+}
+.enroll-a-student-section-container{
+
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-direction: row-reverse;
+    width: 100%;
+    height: 100%;
+    padding: 50px;
+    /* margin:50px; */
+}
+
+
+
+.enroll-a-student-section-container .E-a-student-container1{
+    /* display: block; */
+    /* position: static; */
+    width: 100%;
+    height: 1125px;
+
+    box-sizing: border-box;
+    border: 1px solid #00573F;
+    border-radius: 10px;
+    justify-content: center;
+    /* padding: 20px; */
+}
+.enroll-a-student-section-container .E-a-student-container2{
+    width: 100%;
+    height: 72.93px;
+
+    background: #00573F;
+    border-radius: 10px 10px 0px 0px;
+
+    text-align: center;
+
+    font-family: 'Cambria';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 80px;
+
+    color: #FFFFFF;
+}
+
+.E-a-student-container1 .E-a-student-form {
+    position: static;
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 50px;
+}
+
+.E-a-student-container1 .E-a-student-container3{
+
+    width: 100%;
+    height: fit-content;
+
+    padding: 20px;
+    border: 1px solid #00573F;
+    border-radius: 10px;
+}
+.E-a-student-container1 .E-a-student-container4{
+    width: 100%;
+    height: 700px;
+    margin-top: 20px;
+
+    padding-top: 10px;
+
+    border: 1px solid #00573F;
+    border-radius: 10px;
+
+    font-family: 'Cambria';
+    font-style: normal;
+    font-weight: 900;
+    font-size: 40px;
+    line-height: 48px;
+    text-align: center;
+
+    color: #00573F;
+}
+.E-a-student-container1 .E-a-student-container5{
+    width: 100%;
+    height: 642px;
+    border: 1px solid #00573F;
+    border-radius: 10px;
+}
+
+.E-a-student-container3 .E-a-student-generate-ID-button{
+    /* position: relative; */
+    display: block;
+    width: 603.96px;
+    height: 90.27px;
+    padding-top: 5px;
+    margin: 0 auto;
+
+    background: #00573F;
+    border-radius: 10px;
+
+    font-family: 'Cambria';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 43px;
+    justify-content:center;
+
+    /* margin-top: 25px; */
+    
+    color: #FFFFFF;
+
+    cursor: pointer;
+}
+.E-a-student-container1 .E-a-student-enroll-button{
+    /* position: relative; */
+    display: block;
+    width: 603.96px;
+    height: 90.27px;
+    padding-top: 5px;
+    margin: 0 auto;
+
+    background: #00573F;
+    border-radius: 10px;
+
+    font-family: 'Cambria';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 43px;
+    justify-content:center;
+
+    margin-top: 25px;
+    
+    color: #FFFFFF;
+
+    cursor: pointer;
+}
