@@ -24,3 +24,9 @@
 .footer-upc {
   color: #8E1437;
 }
+
+.copyright-stmnt {
+  display: flex;
+  justify-content: center;
+  padding: 5px;
+}
