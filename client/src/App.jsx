@@ -29,7 +29,7 @@ function App() {
           <Route exact path="/notification" element={<Notification />}
           />
           <Route 
-            path="/enrollment"
+            path="/enroll"
             element={<Enrollment/>}
           />
         </Routes>
