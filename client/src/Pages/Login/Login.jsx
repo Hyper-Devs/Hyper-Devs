@@ -8,6 +8,7 @@ import {FiLogIn} from 'react-icons/fi'
 function Login() {
   return (
     <div className="login-container">
+      <div className="inner-container">
       <div className="title">
         <h2>University of the Philippines Cebu High School</h2>
         <h1>Gate Access Notification System</h1>
@@ -28,8 +29,10 @@ function Login() {
           </form>
         </div>
       </div>
-      {/*<Footer/>*/}
+      </div>
+      <Footer />
     </div>
+
   );
 }
 

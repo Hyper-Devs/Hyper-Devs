@@ -1,30 +1,29 @@
 import React from "react";
 import "./footer.css";
 
-import UPClogo from "../Assets/upc_logo.png";
-import DCSlogo from "../Assets/dept_compsci.png";
-import HDlogo from "../Assets/hd logo black.png";
-
 function footer() {
   return(
     <div className= 'page-footer'>
-      <div className='presented-to'><p>A project presented to:</p></div>
-      <div className='recipient-1'><p>Department of Computer Science</p></div>
-      <div className='recipient-2'><p>University of the Philippines-Cebu</p></div>
-      {/* <div className="foot-logo-1"><img src={DCSlogo}/></div>
-      <div className='foot-logo-2'><img src={UPClogo}/></div> */}
+      <div className="footer-container">
+      <div className="col1">
+        <div>A project presented to:</div>
+        <div><h2>Department of Computer Science</h2></div>
+        <div className="footer-upc"><h2>University of the Philippines Cebu</h2></div>
+      </div>
 
-      <div className='in-collab'><p>In collaboration with:</p></div>
-      <div className='collaborator'><p>University of the Philippines Cebu High School</p></div>  
+      <div className="col2">
+        <div>In collaboration with:</div>
+        <div><h3>University of the Philippines Cebu High School</h3></div>
+      </div>
         
-      <div className='copyright-stmnt'><p>ⓒUPCHS 2023. All rights reserved.</p></div>
-
-      <div className='des-imp-by'><p>Designed and implemented by:</p></div>
-      <div className='dev-hyperdevs'><p>Hyper Devs</p></div> 
-
-      <div className='reach-us'><>Reach us:</></div>
-      <div className='hyperdevs-email'><p>upc.hyperdevs@gmail.com</p></div>
-
+      <div className="col3">
+        <div>Designed and implemented by:</div>
+        <div><h2>Hyper Devs</h2></div> 
+        <div>Reach us:<a href="#">upc.hyperdevs@gmail.com</a></div>
+      </div>
+      </div>
+      <hr />
+      <div className='copyright-stmnt'>&copy; UPCHS 2023. All rights reserved.</div>
 
     </div>  
   )
