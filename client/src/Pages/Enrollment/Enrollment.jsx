@@ -6,17 +6,20 @@ import Footer from '../../Components/footer'
 import EnrollBox from '../../Components/Enrollment/EnrollBox'
 import EnrollStudentBox from "../../Components/Enrollment/Enroll-Student-Box";
 import EnrollBatchStudentBox from "../../Components/Enrollment/Enroll-Batch-Student-Box";
+import EnrollaStudentBox from "../../Components/Enrollment/Enroll-a-Student-Box";
 
 function Enrollment(){
     return(
         <div className="enroll-container">
             <div className="enroll-page">
-                <div className="enroll-page-title"><p>Enroll</p></div>
+                <div className="enroll-page-title"><p>System Enroll</p></div>
                 <div className="enroll-components">
-                    <EnrollBox/>
+                    {/* <EnrollBox/>
                     <EnrollStudentBox/>
-                    <EnrollBatchStudentBox/>
-                    <Footer/>
+                    <EnrollBatchStudentBox/> */}
+                    <EnrollaStudentBox/>
+                    {/* <Footer/> */}
+                    
                     </div>
 
             </div>

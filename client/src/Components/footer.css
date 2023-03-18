@@ -1,5 +1,5 @@
 .page-footer{
-  position: static;
+  position: fixed;
   flex-direction: column;
   height: 150px;
   width: 100%;
