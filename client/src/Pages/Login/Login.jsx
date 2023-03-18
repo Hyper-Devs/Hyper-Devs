@@ -21,11 +21,11 @@ function Login() {
           <form>
             <label>ID Number</label>
             <input className="IDnum" type="text" />
-            <div className="login-input-icons"><FiHash color="#7A1315"/></div>
+            <div className="login-input-icons"><FiHash color="#7A1315" size="1.5rem"/></div>
             <label>Password</label>
             <input className="Passw" type="password" />
-            <div className="login-input-icons"><FiKey color="#7A1315"/></div>
-            <button className="login-button"><div className="login-icon"><FiLogIn color="#7A1315"/></div>Login</button>
+            <div className="login-input-icons"><FiKey color="#7A1315" size="1.5rem"/></div>
+            <button className="login-button"><div className="login-icon"><FiLogIn color="#7A1315" size="1.5rem"/></div>Login</button>
             <a href="#">Forgot Password?</a>
           </form>
         </div>
