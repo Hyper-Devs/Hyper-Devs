@@ -1,168 +1,26 @@
-.page-footer{
-  position: fixed;
-  flex-direction: column;
-  height: 150px;
-  width: 100%;
-  margin-top: 20px;
-  bottom: 0;
+* {
+  font-family: 'Cambria';
+}
+
+.page-footer {
+  position: relative;
+  top: 0;
+  height: 100%;
   background: #D9D9D9;
 }
-.presented-to{
-  position:relative;  
-  font-family: 'Cambria';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 15px;
-  
-  top: 30%;
-  left: 2%;
 
-  color: #000000;
-}
-.recipient-1{
-  position:relative;
-  
-  font-family: 'Cambria';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 20px;
-  letter-spacing: 0.015em;
-
-  top: 30%;
-  left: 2%;
-
-  color: #000000;
-
-}
-.recipient-2{
-  position: relative;
-  
-  font-family: 'Cambria';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 20px;
- 
-  
-  top: 30%;
-  left: 2%;
-
-  color: #FFB81E;
-
+.footer-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 2%;
 }
 
-.foot.logo-1{
-  height: 65px;
-  width: auto;
-  /* margin-left: 10px; */
-  left: 70%;
-  top: 30%;
+.col1, .col2, .col3 {
+  display: flex;
+  flex-direction: column;
 }
 
-.foot-logo-2{
-  position: absolute;
-  height: 65px;
-  width: auto;
-  /* margin-left: 10px; */
-  left: 560px;
-  top: 30%;
-}
-
-.in-collab{
-  position: relative;
-
-  font-family: 'Cambria';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 15px;
-  
-  bottom: 10%;
-  left: 40%;
-  
-  color: #000000;
-}
-.collaborator{
-  position:relative;
-
-  font-family: 'Cambria';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 15px;
-
-  bottom: 10%;
-  left: 40%;
-
-  
-  color: #000000;
-}
-.copyright-stmnt{
-  position: relative;
-
-  font-family: 'Cambria';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 15px;
-
-  top: 5%;
-  left: 40%;
-
-
-
-
-color: #000000;
-}
-.des-imp-by{
-  position: relative;
-
-  font-family: 'Cambria';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 15px;
-
-  bottom: 46%;
-  left:70%;
-  
-
-  color: #000000;
-}
-.dev-hyperdevs{
-  position: relative;
-
-  font-family: 'Cambria';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 20px;
-  letter-spacing: 0.015em;
-
-  bottom: 46%;
-  left: 76%;
-
-  color: #000000;
-}
-.reach-us{
-  position: relative;
-
-  font-family: 'Cambria';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 15px;
-  letter-spacing: 0.015em;
-
-  bottom: 46%;
-  left: 70%;
-
-  color: #000000;
-}
-.hyperdevs-email{
-  position: relative;
-
-  font-family: 'Cambria';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 15px;
-  letter-spacing: 0.015em;
-
-  bottom: 58%;
-  left: 73%;
-  
-  color: #000000;
+.footer-upc {
+  color: #8E1437;
 }

@@ -5,8 +5,20 @@
   font-family: "Playfair Display";
 }
 
-.login-container {
+body {
   background-image: url(../../Assets/UP\ ADMIN\ red\ gray\ 1.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: top,center;
+}
+
+.login-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.inner-container {
   height: 100vh;
   width: 100%;
   display: flex;
@@ -31,7 +43,7 @@
 
 .title h2 {
   font-weight: 400;
-  font-size: 1.27rem;
+  font-size: 1.2rem;
   line-height: 32px;
   letter-spacing: 0.67rem;
 }
@@ -70,14 +82,14 @@
 
 .loginForm {
   position: relative;
-  top: 13%;
+  top: 10%;
 }
 
 .IDnum,
 .Passw {
   position: relative;
   padding: 10px;
-  width: 90.7%;
+  width: 92%;
   border-width: 1px;
   border-radius: 0 10px 10px 0;
   margin-left: 34px;
@@ -97,7 +109,7 @@
   position: absolute;
   background-color: #FFB81E;
   margin-top: 1px;
-  padding: 8.65px 8.5px 8.65px 8.5px;
+  padding: 9.25px 8.5px 9.25px 8.5px;
   border-style: solid;
   border-width: 1px;
   border-radius: 10px 0 0 10px;
@@ -108,10 +120,7 @@
   top: -1px;
   left: -1px;
   background-color: white;
-  padding-top: 2px;
-  padding-bottom: 2px;
-  padding-left: 10px;
-  padding-right: 10px;
+  padding: 2px 10px 2px 10px;
   border-style: solid;
   border-width: 1px;
   border-radius: 10px 0 0 10px;
