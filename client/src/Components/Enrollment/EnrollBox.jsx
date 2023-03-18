@@ -20,15 +20,8 @@ function EnrollBox(){
 
             <div className="E-container2"><p>Enrollment Access</p></div>    
                 <div className="enroll-buttons">
-                    {/* <form> */}
                     <button className="enroll-student-button">Enroll Student</button>
-                    <button className="enroll-admin-button">Enroll Admin</button>
-                    {/* </form> */}
-                
-                </div>
-                
-                
-                
+                    <button className="enroll-admin-button">Enroll Admin</button></div>
                 </div>
         </div>
     
