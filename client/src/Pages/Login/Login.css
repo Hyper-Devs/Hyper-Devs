@@ -14,9 +14,13 @@
   font-family: "Cambria";
 }
 
-.login-container {
+.login-content {
   min-height: 100vh;
-  min-width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.login-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -47,7 +51,7 @@
 .form-container {
   position: relative;
   width: 600px;
-  height: 100vh;
+  height: 80.6vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -61,7 +65,7 @@
   background-repeat: no-repeat;
   background-size: contain;
   background-position: bottom,center;
-  height: 100vh;
+  height: 100%;
   width: 100%;
 }
 
@@ -73,22 +77,22 @@
   background-position: center;
   width: 100%;
   height: 25%;
-  top: 10%;
+  top: 15%;
 }
 
 .loginForm {
   position: relative;
-  top: 15%;
+  top: 17%;
+  width: 60%;
 }
 
-.IDnum,
-.Passw {
+.loginForm input{
   position: relative;
-  padding: 15px 15px 15px 50px;
+  float: right;
+  padding: 2%;
   width: 100%;
   border-width: 1px;
-  border-radius: 10px;
-  margin-top: 1px;
+  border-radius: 0 8px 8px 0;
   font-family: Arial;
   font-size: 1em;
   background-color: #d9d9d9;
@@ -100,49 +104,58 @@
   padding-top: 5px;
 }
 
-.login-input-icons {
-  position: absolute;
+.login-input-container {
+  position: relative;
   background-color: #FFB81E;
-  padding: 10.4px;
-  margin-top: -50px;
+  display: flex;
+  align-items: center;
   border-style: solid;
   border-width: 1px;
-  border-radius: 10px 0 0 10px;
+  border-radius: 10px;
+}
+
+.login-input-icon {
+  height: 10%;
+  width: 10%;
+  padding: 1%;
 }
 
 .login-icon {
-  position: absolute;
-  top: -1px;
-  left: -1px;
-  background-color: white;
-  padding: 8px 10px 0px 10px;
-  border-style: solid;
-  border-width: 1px;
-  border-radius: 10px 0 0 10px;
+  height: 10%;
+  width: 10%;
+  padding: 1%;
 }
 
 .login-button {
+  background-color: white;
   position: relative;
-  padding: 5px;
   width: 100%;
   margin-top: 5%;
+  border-style: solid;
   border-width: 1px;
   border-radius: 10px;
-  font-weight: 700;
-  line-height: 35px;
+  display: flex;
+}
+
+.login-button button {
   background-color: #ffb81e;
+  height: 100%;
+  width: 100%;
+  font-weight: 700;
+  line-height: 31px;
+  border-width: 1px;
+  border-radius: 0 9px 9px 0;
   cursor: pointer;
   font-family: "Cambria";
 }
 
-.login-button:hover {
+.login-button button:hover {
   background-color: #ffc954;
 }
 
 .loginForm a {
   position: relative;
-  top: 10px;
-  left: 300px;
+  top: 5px;
   text-decoration: none;
   font-style: italic;
   color: #686868;
