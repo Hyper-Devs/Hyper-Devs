@@ -8,8 +8,7 @@ function Notification() {
   return (
     <div className="notification-container">
       <div className="notification-content">
-        <Header />
-        <div className="notificationTitle">Notification</div>
+        <div className="notification-title">Notification</div>
         <NotificationBox />
       </div>
       <Sidebar />
