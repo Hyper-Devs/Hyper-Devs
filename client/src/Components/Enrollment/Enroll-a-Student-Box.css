@@ -134,7 +134,8 @@
     line-height: 43px;
     justify-content:center;
 
-    margin-top: 25px;
+    margin-top: 0px;
+    margin-bottom: 50px;
     
     color: #FFFFFF;
 
@@ -278,14 +279,11 @@
 }
 
 .EAS-Name-container .EAS-Name-input{
-    
+
     display: flex;
     width: 100%;
     height: 100%;
-    justify-content: baseline;
     gap: 10px; 
-    /* left: 686px;
-    top: 943px; */
     padding: 10px;
 }
 
@@ -589,6 +587,7 @@
     height: 100%;
 
     background: #00573F;
+
 
     font-family: 'Cambria';
     font-style: normal;

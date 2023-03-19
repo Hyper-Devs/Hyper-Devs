@@ -1,7 +1,7 @@
 import "./Enroll-a-Student-Box.css";
 import React, { useRef, useState } from 'react'
-import UserIcon from '../../Assets/Vectors/User.png'
-import UsersIcon from '../../Assets/Vectors/Users.png'
+// import UserIcon from '../../Assets/Vectors/User.png'
+// import UsersIcon from '../../Assets/Vectors/Users.png'
 
 function EnrollaStudentBox(){
     const [state, setState] = useState('')
@@ -35,7 +35,7 @@ function EnrollaStudentBox(){
                 </div>
                 <div className="E-a-student-container4"><p>STUDENT INFORMATION</p>
                     <div className="E-a-student-container5">
-                        <div className="E-a-student-form">
+                        {/* <div className="E-a-student-form"> */}
                             
                             
                             <div className="EAS-container1">
@@ -74,7 +74,7 @@ function EnrollaStudentBox(){
                                             <div className="EAS-BD-container">
                                                 <div className="EAS-BD-BD"><p>Birthdate</p></div>
                                                 <div className="EAS-BD-input">
-                                                    <input type= "text" name="{contactno.}" className= "EAS-BD-Birthdate" value={state}/>
+                                                    <input type= "text" name="{birthdate}" className= "EAS-BD-Birthdate" value={state}/>
                                                 </div>
                                             </div>
                                     </div>
@@ -104,7 +104,7 @@ function EnrollaStudentBox(){
                                             </div>
                                         </div>
                                         <div className="EAS-Contact-Number-container">
-                                            <div className="EAS-Contact-Number-CN"><p>Contact</p></div>
+                                            <div className="EAS-Contact-Number-CN"><p>ContactNo.</p></div>
                                             <div className="EAS-Contact-Number-input">
                                                 <input type= "text" name="{contactno.}" className= "EAS-CN" value={state}/>
                                             </div>
@@ -146,13 +146,14 @@ function EnrollaStudentBox(){
                                 </div>
                             </div>
                             
-                        </div>
+                        {/* </div> */}
                     
                     
                     </div>
                 </div>
 
-            <button className="E-a-student-enroll-button">Enroll</button></div>                
+                <button className="E-a-student-enroll-button">Enroll</button>
+            </div>                
 
 
 
@@ -162,7 +163,7 @@ function EnrollaStudentBox(){
                     <button className="enroll-a-student-button">Individual Enroll</button>
                     <button className="enroll-group-student-button">Batch Enroll</button></div>
                 </div> */}
-            </div>
+        </div>
 
     
     )
