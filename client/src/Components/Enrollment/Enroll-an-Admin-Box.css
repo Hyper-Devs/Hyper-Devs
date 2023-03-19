@@ -1,0 +1,388 @@
+*{
+    box-sizing: border-box;
+}
+.enroll-an-admin-section-container{
+    /* position: relative; */
+    display: block;  
+    align-items: center;
+    flex-direction: row-reverse;
+    width: 100%;
+    height: 100%;
+    padding: 50px;
+}
+.enroll-an-admin-section-container .E-an-admin-container1{
+
+    width: 100%;
+    height: fit-content;
+
+    border: 1px solid #00573F;
+    
+    border-radius: 10px;
+    justify-content: center;
+}
+.E-an-admin-container1 .E-an-admin-container2{
+    
+    width: 100%;
+    height: 72.93px;
+
+    background: #00573F;
+    border-radius: 10px 10px 0px 0px;
+
+    text-align: center;
+
+    font-family: 'Cambria';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 80px;
+
+    color: #FFFFFF;
+}
+.E-an-admin-form .E-an-admin-container3{
+    width: 100%;
+    height: fit-content;
+
+    padding: 20px;
+    border: 1px solid #00573F;
+    border-radius: 10px;
+}
+.E-an-admin-form .E-an-admin-container4{
+    width: 100%;
+    height: fit-content;
+    margin-top: 20px;
+
+    /* padding-top: 10px; */
+
+    border: 1px solid #00573F;
+    border-radius: 10px;
+
+    font-family: 'Cambria';
+    font-style: normal;
+    font-weight: 900;
+    font-size: 40px;
+    line-height: 48px;
+    text-align: center;
+
+    color: #00573F;
+}
+.E-an-admin-container4 .E-an-admin-container5{
+    display: block;
+    width: 100%;
+    height: fit-content;
+    border: 1px solid #00573F;
+    border-radius: 10px;
+
+    padding: 20px;
+}
+.E-an-admin-container1 .E-an-admin-form{
+    position: static;
+    display: grid;
+    gap: 20px;
+    width: 100%;
+    height: 100%;
+    padding: 50px;
+}
+.E-an-admin-container3 .E-an-admin-generate-ID-button{
+    display: block;
+    width: 603.96px;
+    height: 90.27px;
+    padding-top: 5px;
+    margin: 0 auto;
+
+    background: #00573F;
+    border-radius: 10px;
+
+    font-family: 'Cambria';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 43px;
+    justify-content:center;
+
+    /* margin-top: 25px; */
+    
+    color: #FFFFFF;
+
+    cursor: pointer;
+}
+.EAA-container1{
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    height:fit-content;
+    border: 1px solid #003000;
+}
+.EAA-container2{
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    height: fit-content;
+    border: 1px solid #003000;
+}
+.EAA-container3{
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    height: fit-content;
+    border: 1px solid #003000;
+}
+.EAA-container1 .EAA-container1-header{
+    width: 100%;
+    height: 50px;
+    font-family: 'Cambria';
+    font-style: normal;
+    
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 38px;
+
+    text-align: center;
+    
+    color: #FFFFFF;
+
+    background: #003000;
+}
+.EAA-container1 .EAA-PI{
+    display: grid;
+    width: 100%;
+    height: fit-content;
+    padding: 20px;
+    gap:20px;   
+}
+.EAA-PI .EAA-Name-container{
+    display: flex;
+    width: 100%;
+    height: 70px;
+    border: 1px solid #00573F;
+}
+.EAA-Name-container .EAA-Name-Name{
+    width: 30%;
+    height: 100%;
+
+    padding: 20px;
+
+    background: #00573F;
+
+    font-family: 'Cambria';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 32px;
+    justify-content: center;
+    /* padding-top: 20px; */
+
+    text-align: center;
+
+    color: #FFFFFF;
+}
+.EAA-Name-container .EAA-Name-input{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    gap: 10px; 
+    padding: 10px;
+}
+.EAA-Name-input .EAA-first-name{
+    width: 100%;
+    height: 100%;
+    background-color: #D9D9D9;;
+}
+.EAA-Name-input .EAA-middle-name{
+    width: 100%;
+    height: 100%;
+    background-color: #D9D9D9;;
+}
+.EAA-Name-input .EAA-last-name{
+    width: 100%;
+    height: 100%;
+    background-color: #D9D9D9;;
+}
+.EAA-PI .EAA-Sex-BD-container{
+    display: flex;
+    width: 100%;
+    height: 70px;
+    gap: 10px;
+}
+.EAA-Sex-BD-container .EAA-Sex-container{
+    box-sizing: border-box;
+    width: 100%;
+    height: 70px;
+    border: 1px solid #00573F;
+}
+.EAA-Sex-container .EAA-Sex-Sex{
+    width: fit-content;
+    height: 100%;
+    padding: 20px;
+    background: #00573F;
+    font-family: 'Cambria';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 32px;
+    text-align: center;
+    color: #FFFFFF;
+}
+.EAA-Sex-BD-container .EAA-BD-container{
+    display: flex;
+    box-sizing: border-box;
+    width: 100%;
+    height: 70px;
+    border: 1px solid #00573F;
+}
+.EAA-BD-container .EAA-BD-BD{
+    width: fit-content;
+    height: 100%;
+    background: #00573F;
+    font-family: 'Cambria';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 32px;
+    padding: 20px;
+    text-align: center;
+    color: #FFFFFF;
+}
+.EAA-BD-container .EAA-BD-input{
+    box-sizing: border-box;
+    width: 100%;
+    height: 70px;
+    padding: 10px;
+}
+.EAA-BD-input .EAA-BD-Birthdate{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    background-color: #D9D9D9;
+}
+.EAA-container2 .EAA-container2-header{
+    width: 100%;
+    height: 50px;
+    font-family: 'Cambria';
+    font-style: normal;
+    
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 38px;
+
+    text-align: center;
+    
+    color: #FFFFFF;
+
+    background: #003000;
+}
+.EAA-CN{
+    display: flex;
+    width: 100%;
+    height: fit-content;
+    padding: 20px;
+    gap:20px;   
+}
+.EAA-CN .EAA-CN-container{
+    display: flex;
+    box-sizing: border-box;
+    width: 100%;
+    height: 70px;
+    border: 1px solid #00573F;
+}
+.EAA-CN-container .EAA-CN-CN{
+    width: 30%;
+    height: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    background: #00573F;
+    font-family: 'Cambria';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 32px;
+    padding: 20px;
+    text-align: center;
+    color: #FFFFFF;
+}
+.EAA-CN-container .EAA-CN-input{
+    box-sizing: border-box;
+    width: 100%;
+    height: 70px;
+    padding: 10px;
+}
+.EAA-CN-input .EAA-Contact-No{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    background-color: #D9D9D9;
+}
+.EAA-container3 .EAA-container3-header{
+    width: 100%;
+    height: 50px;
+    font-family: 'Cambria';
+    font-style: normal;
+    
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 38px;
+
+    text-align: center;
+    
+    color: #FFFFFF;
+
+    background: #003000;
+}
+.EAA-P{
+    display: flex;
+    width: 100%;
+    height: fit-content;
+    padding: 20px;
+    gap:20px; 
+}
+.EAA-P .EAA-P-container{
+    display: flex;
+    box-sizing: border-box;
+    width: 100%;
+    height: 70px;
+    border: 1px solid #00573F;
+}
+.EAA-P-container .EAA-P-P{
+    width: 30%;
+    height: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    background: #00573F;
+    font-family: 'Cambria';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 32px;
+    padding: 20px;
+    text-align: center;
+    color: #FFFFFF;
+}
+.EAA-P-container .EAA-P-input{
+    box-sizing: border-box;
+    width: 100%;
+    height: 70px;
+    padding: 10px;
+}
+.E-an-admin-container1 .E-an-admin-enroll-button{
+    display: block;
+    width: 603.96px;
+    height: 90.27px;
+    /* padding-top: 5px; */
+    margin: 0 auto;
+
+    background: #00573F;
+    border-radius: 10px;
+
+    font-family: 'Cambria';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 43px;
+    justify-content:center;
+
+    margin-top: 0px;
+    margin-bottom: 50px;
+    
+    color: #FFFFFF;
+
+    cursor: pointer;
+}
