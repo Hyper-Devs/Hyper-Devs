@@ -8,7 +8,9 @@ function EnrollaStudentBox(){
     function myFunction() {
   document.getElementById("myDropdown").classList.toggle("show");
 }
-
+    const [sex,setSex]=useState();
+    const [grade,setGrade]=useState();
+    const [section,setSection]=useState();
 // Close the dropdown menu if the user clicks outside of it
 // window.onclick = function(event) {
 //   if (!event.target.matches('.dropbtn')) {
@@ -23,6 +25,7 @@ function EnrollaStudentBox(){
 //   }
 // }
     return(
+
         <div className="enroll-a-student-section-container">  
         <div className="E-a-student-container1">
             <div className="E-a-student-container2"><p>Student Enroll | Individual Enroll</p></div>    
@@ -50,7 +53,13 @@ function EnrollaStudentBox(){
                                     <div className="EAS-Sex-BD">
                                         <div className="EAS-Sex">
                                             <div className="EAS-Sex-container">
-                                                <div className="EAS-Sex-Sex"><p>Sex</p></div>
+                                            <div className="EAS-Sex-Sex"><p>Sex</p></div>
+                                            <select className="sex-options" value={sex} onChange={e=>setSex(e.target.value)}>
+                                                <option></option>
+                                                <option>Male</option>
+                                                <option>Female</option>
+                                               </select>
+                                                
                                                 {/* <div class="dropdown">
                                                     <button onclick="myFunction()" class="dropbtn">Dropdown</button>
                                                     <div id="myDropdown" class="dropdown-content">
@@ -61,6 +70,7 @@ function EnrollaStudentBox(){
                                                 </div> */}
                                             </div>
                                         </div>
+
                                             <div className="EAS-BD-container">
                                                 <div className="EAS-BD-BD"><p>Birthdate</p></div>
                                                 <div className="EAS-BD-input">
@@ -108,11 +118,27 @@ function EnrollaStudentBox(){
                                 <div className="EAS-Grade-Section">
                                 <div className="EAS-Grade-container">
                                             <div className="EAS-Grade-Grade"><p>Grade</p></div>
-                                            <div className="EAS-Grade-input"></div>
+                                            <select className="grade-options" value={grade} onChange={e=>setGrade(e.target.value)}>
+                                                <option></option>
+                                                <option>Grade 7</option>
+                                                <option>Grade 8</option>
+                                                <option>Grade 9</option>
+                                                <option>Grade 10</option>
+                                                <option>Grade 11</option>
+                                                <option>Grade 12</option>
+                                               </select>
                                     </div>
                                     <div className="EAS-Section-container">
                                             <div className="EAS-Section-Section"><p>Section</p></div>
-                                            <div className="EAS-Section-input"></div>
+                                            <select className="section-options" value={section} onChange={e=>setSection(e.target.value)}>
+                                                <option></option>
+                                                <option>Section 1</option>
+                                                <option>Section 2</option>
+                                                <option>Section 3</option>
+                                                <option>Section 4</option>
+                                                <option>Section 5</option>
+                                                <option>Section 6</option>
+                                               </select>
                                     </div>
                                 </div>
 
