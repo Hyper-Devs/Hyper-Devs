@@ -20,12 +20,16 @@ function Login() {
         <div className="loginForm">
           <form>
             <label>ID Number</label>
-            <input className="IDnum" type="text" />
-            <div className="login-input-icons"><FiHash color="#7A1315"/></div>
+            <div className="login-input-container">
+            <FiHash className="login-input-icon" color="#7A1315" size="1.2rem"/><input className="IDnum" type="text" />
+            </div>
             <label>Password</label>
-            <input className="Passw" type="password" />
-            <div className="login-input-icons"><FiKey color="#7A1315"/></div>
-            <button className="login-button"><div className="login-icon"><FiLogIn color="#7A1315"/></div>Login</button>
+            <div className="login-input-container">
+            <FiKey className="login-input-icon" color="#7A1315" size="1.2rem"/><input className="Passw" type="password" />
+            </div>
+            <div className="login-button">
+            <FiLogIn className="login-icon" color="#7A1315" size="1.1rem"/><button>Login</button>
+            </div>
             <a href="#">Forgot Password?</a>
           </form>
         </div>

@@ -6,7 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from './Pages/Login/Login';
 import Dashboard from './Pages/Dashboard/Dashboard';
 import Override from './Pages/Overriding/Override';
-import Notification from "./Pages/Notification/Notification";
+import Notification from './Pages/Notification/Notification';
 import Enrollment from "./Pages/Enrollment/Enrollment"
 
 function App() {
@@ -26,7 +26,9 @@ function App() {
             path='/override'
             element={<Override/>}
           />
-          <Route exact path="/notification" element={<Notification />}
+          <Route
+            path='notification'
+            element={<Notification/>}
           />
           <Route 
             path="/enroll"
