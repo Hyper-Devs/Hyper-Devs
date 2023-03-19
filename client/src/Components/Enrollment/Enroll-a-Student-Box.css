@@ -21,7 +21,7 @@
     /* display: block; */
     /* position: static; */
     width: 100%;
-    height: 1125px;
+    height: fit-content;
 
     box-sizing: border-box;
     border: 1px solid #00573F;
@@ -49,7 +49,8 @@
 
 .E-a-student-container1 .E-a-student-form {
     position: static;
-    display: block;
+    display: grid;
+    gap: 20px;
     width: 100%;
     height: 100%;
     padding: 50px;
@@ -66,7 +67,7 @@
 }
 .E-a-student-container1 .E-a-student-container4{
     width: 100%;
-    height: 700px;
+    height: fit-content;
     margin-top: 20px;
 
     padding-top: 10px;
@@ -84,8 +85,9 @@
     color: #00573F;
 }
 .E-a-student-container1 .E-a-student-container5{
+    display: block;
     width: 100%;
-    height: 642px;
+    height: fit-content;
     border: 1px solid #00573F;
     border-radius: 10px;
 }
@@ -137,4 +139,545 @@
     color: #FFFFFF;
 
     cursor: pointer;
+}
+.E-a-student-container5.E-a-student-form{
+    display: block;
+    width: 100%;
+    height: 100%;
+    gap: 50px;
+}
+
+.E-a-student-form .EAS-container1{
+    display: block;
+    box-sizing: border-box;
+
+
+    width: 100%;
+    height: fit-content;
+
+    border: 1px solid #003000;
+}
+
+.E-a-student-form .EAS-container2{
+    box-sizing: border-box;
+
+    width: 100%;
+    height: fit-content;
+
+    /* margin-top: 50px; */
+
+    /* left: 402px;
+    top: 838px; */
+    
+    border: 1px solid #003000;
+}
+.E-a-student-form .EAS-container3{
+    box-sizing: border-box;
+
+    width: 100%;
+    height: 170px;
+
+    /* margin-top: 50px; */
+
+    /* left: 402px;
+    top: 838px; */
+    
+    border: 1px solid #003000;
+}
+.EAS-container1 .EAS-container-header1{
+
+    width: 100%;
+    height: 50px;
+    font-family: 'Cambria';
+    font-style: normal;
+    
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 38px;
+
+    text-align: center;
+    
+    color: #FFFFFF;
+
+    background: #003000;
+}
+.EAS-container2 .EAS-container-header2{
+
+    width: 100%;
+    height: 50px;
+    font-family: 'Cambria';
+    font-style: normal;
+    
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 38px;
+
+    text-align: center;
+    
+    color: #FFFFFF;
+
+    background: #003000;
+}
+.EAS-container3 .EAS-container-header3{
+
+    width: 100%;
+    height: 50px;
+    font-family: 'Cambria';
+    font-style: normal;
+    
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 38px;
+
+    text-align: center;
+    
+    color: #FFFFFF;
+
+    background: #003000;
+}
+.EAS-Name{
+    box-sizing: border-box;
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    gap:20px;
+}
+.EAS-Name .EAS-Name-container{
+    
+    display: flex;
+    width: 100%;
+    height: 70px;
+    
+
+    /* left: 459px;
+    top: 932px; */
+
+    border: 1px solid #00573F;
+}
+.EAS-Name .EAS-Name-Name{
+    display: flex;
+    width: 30%;
+    height: 100%;
+
+    padding: 20px;
+
+    background: #00573F;
+
+    font-family: 'Cambria';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 32px;
+    justify-content: center;
+    /* padding-top: 20px; */
+
+    text-align: center;
+
+    color: #FFFFFF;
+}
+
+.EAS-Name-container .EAS-Name-input{
+    
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: baseline;
+    gap: 10px; 
+    /* left: 686px;
+    top: 943px; */
+    padding: 10px;
+}
+
+.EAS-Name-input .EAS-first-name{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    background-color: #D9D9D9;;
+}
+.EAS-Name-input .EAS-middle-name{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    /* margin-left: 10px; */
+    background-color: #D9D9D9;;
+}
+.EAS-Name-input .EAS-last-name{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    /* margin-left: 10px; */
+    background-color: #D9D9D9;;
+}
+.EAS-Sex-BD{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    /* left: 360px;
+    top: 512px; */
+    padding-top: 20px;
+    padding-bottom: 20px;
+    /* border: 1px solid #00573F; */
+}
+.EAS-Sex-BD .EAS-Sex{
+
+    display: flex;
+    
+    width:100%;
+    padding-right: 20px;
+    height: fit-content;
+    /* left: 459px;
+    top: 1011px; */
+}
+.EAS-Sex .EAS-Sex-container{
+    box-sizing: border-box;
+
+    /* position: absolute; */
+    width: inherit;
+    height: 70px;
+    /* left: 459px;
+    top: 1011px; */
+
+    border: 1px solid #00573F;
+}
+.EAS-Sex-Sex{
+
+    width: fit-content;
+    height: 100%;
+    /* left: 459px;
+    top: 1011px; */
+    
+    padding: 20px;
+    
+    background: #00573F;
+
+    font-family: 'Cambria';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 32px;
+    /* identical to box height */
+
+    text-align: center;
+
+    color: #FFFFFF;
+
+}
+
+.EAS-BD-container{
+    display: flex;
+    box-sizing: border-box;
+    width: 100%;
+    height: 70px;
+    border: 1px solid #00573F;
+}
+.EAS-BD-container .EAS-BD-BD{
+    width: fit-content;
+    height: 100%;
+
+    
+    background: #00573F;
+
+    /* padding: 20px; */
+
+    font-family: 'Cambria';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 32px;
+
+    padding: 20px;
+    
+    text-align: center;
+
+    color: #FFFFFF;
+}
+/* .dropbtn {
+    background-color: #3498DB;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+.dropdown-content a:hover {background-color: #ddd;}
+.show {display:block;}  */
+
+.EAS-BD-input{
+    box-sizing: border-box;
+    width: 100%;
+    height: 70px;
+  
+    padding: 10px;
+  
+}
+
+.EAS-BD-Birthdate{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    background-color: #D9D9D9;
+}
+
+.EAS-P-content{
+    display: grid;
+    /* position: absolute; */
+    width: 100%;
+    height: fit-content;
+    /* left: 459px;
+    top: 1167px; */
+    padding: 20px;
+    gap: 20px;
+}
+.EAS-P-Name{
+    display: flex;
+    width: 100%;
+    height: 70px;
+}
+.EAS-P-Name-container{
+    box-sizing: border-box;
+    display: flex;
+
+    /* position: absolute; */
+    width: 100% ;
+    height: 70px;
+    /* left: 459px;
+    top: 1167px; */
+
+    border: 1px solid #00573F;
+}
+.EAS-P-Name-container .EAS-P-Name-Name{
+    box-sizing: border-box;
+
+    /* position: absolute; */
+    width: 30%;
+    height: 70px;
+    /* left: 459px;
+    top: 1167px; */
+
+    background: #00573F;
+
+    padding: 20px;
+
+    font-family: 'Cambria';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 32px;
+    /* identical to box height */
+
+    text-align: center;
+
+    color: #FFFFFF;
+
+}
+.EAS-P-Name-container .EAS-P-Name-input{
+    /* position: absolute; */
+    display: flex;
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    gap: 10px;
+    /* left: 686px;
+    top: 1178px; */
+}
+.EAS-P-Name-input .EAS-P-first-name{
+    /* display: flex; */
+    width: 100%;
+    height: 100%;
+    background-color: #D9D9D9;;
+}
+.EAS-P-Name-input .EAS-P-middle-name{
+    /* display: flex; */
+    width: 100%;
+    height: 100%;
+    background-color: #D9D9D9;;
+}
+.EAS-P-Name-input .EAS-P-last-name{
+    /* display: flex; */
+    width: 100%;
+    height: 100%;
+    background-color: #D9D9D9;;
+}
+.EAS-R-CN{
+    display: flex;
+    width:100%;
+    height: 70px;
+    gap: 20px;
+
+}
+.EAS-Relationship-container{
+
+    display: flex;
+    width: 100%;
+    height: 100%;
+    border: 1px solid #00573F;
+}
+.EAS-Relationship-container .EAS-Relationship-Relationship{
+    width: fit-content;
+    height: 100%;
+
+    
+    background: #00573F;
+
+    /* padding: 20px; */
+
+    font-family: 'Cambria';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 32px;
+
+    padding: 20px;
+    
+    text-align: center;
+
+    color: #FFFFFF;
+}
+.EAS-Relationship-container .EAS-Relationship-input{
+    display: flex;
+    box-sizing: border-box;
+    /* margin: auto; */
+    padding: 10px;
+    width: 100%;
+    height: 100%;
+
+}
+.EAS-P-Relation{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    background-color: #D9D9D9;
+}
+
+.EAS-Contact-Number-container{
+    display: flex;
+    box-sizing: border-box;
+    width: 100%;
+    height: 70px;
+    border: 1px solid #00573F;
+}
+.EAS-Contact-Number-container .EAS-Contact-Number-CN{
+    width: fit-content;
+    height: 100%;
+
+    background: #00573F;
+
+    font-family: 'Cambria';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 32px;
+
+    padding: 20px;
+    
+    text-align: center;
+
+    color: #FFFFFF;
+}
+.EAS-Contact-Number-container .EAS-Contact-Number-input{
+    box-sizing: border-box;
+    width: 100%;
+    height: 70px;
+  
+    padding: 10px;
+
+}
+.EAS-Contact-Number-input .EAS-CN{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    background-color: #D9D9D9;
+}
+
+.EAS-Grade-Section{
+    display: flex;
+    width:100%;
+    height: 70px;
+    gap: 20px;
+    padding: 20px;
+
+}
+
+.EAS-Grade-container{
+    display: flex;
+    box-sizing: border-box;
+    width: 100%;
+    height: 70px;
+    border: 1px solid #00573F;
+}
+.EAS-Grade-container .EAS-Grade-Grade{
+    width: fit-content;
+    height: 100%;
+
+    background: #00573F;
+
+    font-family: 'Cambria';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 32px;
+
+    padding: 20px;
+    
+    text-align: center;
+
+    color: #FFFFFF;
+}
+.EAS-Grade-container .EAS-Grade-input{
+    box-sizing: border-box;
+    width: 100%;
+    height: 70px;
+  
+    padding: 10px;
+}
+.EAS-Section-container{
+    display: flex;
+    box-sizing: border-box;
+    width: 100%;
+    height: 70px;
+    border: 1px solid #00573F;
+}
+.EAS-Section-container .EAS-Section-Section{
+    width: fit-content;
+    height: 100%;
+
+    background: #00573F;
+
+    font-family: 'Cambria';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 32px;
+
+    padding: 20px;
+    
+    text-align: center;
+
+    color: #FFFFFF;
+}
+.EAS-Section-container .EAS-Section-input{
+    box-sizing: border-box;
+    width: 100%;
+    height: 70px;
+  
+    padding: 10px;
 }
