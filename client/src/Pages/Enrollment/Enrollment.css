@@ -12,19 +12,25 @@
 
 .enroll-page{
     position: static;
-    height: fit-content;
+    height: 100%;
     width: 100%;
     align-content: center;
 }
 
-.enroll-component{
+.enroll-components{
     position: static;
-    height: 100%;
+    height: 90%;
     width: 100%;
+    display: flex;
+    overflow-y: scroll;
+    flex-direction: column; 
+}
+
+.enroll-page-title{
+    height: 10%;
 }
 
 .enroll-page .enroll-page-title {
- 
     font-family: 'Cambria';
     font-style: normal;
     font-weight: 700;
