@@ -2,19 +2,16 @@
 
 .LiveBox {
     width: 100%;
-    height: 280px;
-    padding-top: 25px;
+    height: 100%;
     background-color: white;
     display: flex;
     justify-content: center;
-    font-family: 'Montserrat', sans-serif;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 32px;
+    align-items: center;
     line-height: 39px;
-    }
+    flex-direction: column;
+}
 
-.LiveBox .rectangle{
+.rectangle{
     width: 75%;
     height: fit-content;
     text-align: center;
@@ -23,7 +20,7 @@
     border-radius: 10px;
 }
 
-.LiveBox .rectangle2 {
+.rectangle2 {
     position: relative;
     width: 100%;
     height: fit-content;
@@ -31,7 +28,7 @@
     border-top: 3px solid #00573F;
 }
 
-.LiveBox .rectangle3{
+.rectangle3{
     padding: 15px;
     display: flex;
     height: 100%;

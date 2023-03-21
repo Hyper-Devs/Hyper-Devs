@@ -3,6 +3,7 @@ import './Box.css'
 import circle1 from '../../Assets/Ellipse 14.png'
 import circle2 from '../../Assets/Ellipse 15.png'
 import bell from '../../Assets/Vector.png'
+import Footer from '../../Components/footer'
 
 
 
@@ -10,7 +11,7 @@ function Box() {
     return (
         <div className='LiveBox'>
             <div className='rectangle'>
-                <p>Live RFID Access</p>
+                <p style={{fontSize: 32}}>Live RFID Access</p>
                 <div className='rectangle2'>
                     <div className='Date'>
                         <div className='Month'>March</div>
@@ -40,7 +41,8 @@ function Box() {
                     </div>
                 </div>
             </div>
-      </div>
+            <Footer/>
+        </div>
     )
 }
 

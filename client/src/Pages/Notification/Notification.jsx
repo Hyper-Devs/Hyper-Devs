@@ -1,17 +1,25 @@
-import React, { useState } from "react";
+import React from "react";
 import "./Notification.css";
-import Header from "../../Components/header";
 import Sidebar from "../../Components/Sidebar/Sidebar";
-import NotificationBox from "../../Components/Notification/notificationBox";
+import NotifContainer from "../../Components/Notification/notificationBox";
+import PageTitle from "../../Components/PageTitle";
 
 function Notification() {
   return (
     <div className="notification-container">
       <div className="notification-content">
-        <div className="notification-title">Notification</div>
-        <NotificationBox />
+        <PageTitle pageName={"Notification"}/>
+        <NotifContainer/>
       </div>
-      <Sidebar />
+      <Sidebar
+        buttonState = {{
+        item1: false,
+        item2: false,
+        item3: false,
+        item4: true,
+        item5: false
+        }}
+      />
     </div>
   );
 }

@@ -65,14 +65,10 @@ function Box() {
                         <p>ASHDOLajsh</p>
                         <p>ASHDOLajsh</p>
                         <p>ASHDOLajsh</p>
-                        <p>ASHDOLajsh</p>
-                        <p>ASHDOLajsh</p>
-                        <p>ASHDOLajsh</p>
 
                     </div>
                 </div>
-            } 
-
+            }
             <Footer/>  
       </div>
     )
