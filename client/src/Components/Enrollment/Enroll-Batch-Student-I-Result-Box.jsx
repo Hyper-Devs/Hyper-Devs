@@ -1,5 +1,5 @@
 import "./Enroll-Batch-Student-I-Result-Box.css";
-import React from "react";
+import React, {useState} from "react";
 
 function EnrollBatchStudentIncomingResult(){
     const [cons1IResultGrade,setCons1IResultGrade]=useState();
