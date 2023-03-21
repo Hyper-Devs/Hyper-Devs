@@ -10,6 +10,8 @@ import EnrollaStudentBox from "../../Components/Enrollment/Enroll-a-Student-Box"
 import EnrollanAdminBox from "../../Components/Enrollment/Enroll-an-Admin-Box";
 import EnrollBatchStudentIncomingBox from "../../Components/Enrollment/Enroll-Batch-Student-Incoming-Box";
 import EnrollBatchStudentNYBox from "../../Components/Enrollment/Enroll-Batch-Student-NewYear-Box";
+import EnrollBatchStudentNewYearResult from "../../Components/Enrollment/Enroll-Batch-Student-NY-Result-Box";
+import EnrollBatchStudentIncomingResult from "../../Components/Enrollment/Enroll-Batch-Student-I-Result-Box";
 
 function Enrollment(){
     return(
@@ -23,8 +25,10 @@ function Enrollment(){
                     {/* <EnrollaStudentBox/> */}
                     {/* <EnrollanAdminBox/> */}
                     {/* <EnrollBatchStudentIncomingBox/> */}
-                    <EnrollBatchStudentNYBox/>
-                    {/* <Footer/> x */}
+                    {/* <EnrollBatchStudentNYBox/> */}
+                    {/* <EnrollBatchStudentNewYearResult/> */}
+                    <EnrollBatchStudentIncomingResult/>
+                    {/* <Footer/> */}
                     </div>
 
             </div>

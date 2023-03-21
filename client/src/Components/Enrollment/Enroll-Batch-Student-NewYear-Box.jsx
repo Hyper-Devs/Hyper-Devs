@@ -50,7 +50,7 @@ function EnrollBatchStudentNYBox(){
                         </div>
                     </div>
                     <div className="EBS-NY-sec-cons2">
-                        <div className="EBS-NY-section-container2"><p>Current Class</p>
+                        <div className="EBS-NY-section-container2"><p>Class Update</p>
                             <div className="EBS-NY-section-container2-2">
                                 <div className="EBS-NY-section2">
                                     <div className="EBS-NY-selection-section2">

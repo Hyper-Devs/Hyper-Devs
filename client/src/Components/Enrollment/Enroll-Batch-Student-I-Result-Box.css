@@ -1,0 +1,396 @@
+*{
+    box-sizing: border-box;
+}
+.enroll-batch-student-I-container-result{
+    /* position: relative; */
+    display: block;  
+    align-items: center;
+    flex-direction: row-reverse;
+    width: 100%;
+    height: 100%;
+    padding: 50px;
+}
+.enroll-batch-student-I-container-result .EBS-I-container1-result{
+    width: 100%;
+    height: fit-content;
+    border: 1px solid #00573F;    
+    border-radius: 10px;
+    justify-content: center;
+}
+.EBS-I-container1-result .EBS-I-header-container1-result{
+        display: block;
+        width: 100%;
+        height: fit-content;
+
+        justify-content: center;
+
+        background: #00573F;
+        border-radius: 10px 10px 0px 0px;
+        text-align: center;
+        font-family: 'Cambria';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 32px;
+        line-height: 80px;
+        color: #FFFFFF;
+}
+.EBS-I-sec-cons1-result{
+    width: 100%;
+    height: 100%;
+    /* padding: 70px; */
+    padding-top: 100px;
+
+    padding-right: 100px;
+    padding-left: 100px;
+
+
+}
+.EBS-I-sec-cons1-result .EBS-I-section-container1-result{
+
+    width: 100%;
+    height: fit-content;
+
+
+    border: 1px solid #00573F;
+    border-radius: 10px;
+
+    font-family: 'Cambria';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 100px;
+    text-align: center;
+
+    color: #00573F;
+}
+.EBS-I-sec-cons1-result .EBS-I-section-container2-result{
+    /* position: absolute; */
+    width: 100%;
+    height: fit-content;
+    /* left: 519px;
+    top: 708px; */
+
+    border: 1px solid #00573F;
+    border-radius: 10px;
+}
+.EBS-I-container1-result .EBS-I-section-result{
+    width: 100%;
+    height: fit-content;
+    padding: 50px;
+    justify-content: center;
+    /* gap: 50px; */
+}
+.EBS-I-section-result .EBS-I-selection-section-result{
+    display: flex;
+    width: 100%;
+    height: fit-content;
+    justify-content: center;
+    gap: 20px;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+.EBS-I-selection-section-result .EBS-I-selection-GL-result{
+    display: block;
+    width: 100%;
+    height: fit-content;
+    justify-content: baseline;
+    font-family: 'Cambria';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 38px;
+    overflow: hidden;
+    white-space: nowrap;
+    
+    /* text-align: center; */
+    
+    color: #00573F;
+}
+.EBS-I-selection-GL-result .EBS-I-GL-drop-result{
+    /* position: absolute; */
+    width: 100%;
+    height: 76px;
+
+    
+    background: #00573F;
+    border: 1px solid #00573F;
+    border-radius: 10px;    
+}
+.EBS-I-selection-section-result .EBS-I-selection-Sec-result{
+    display: block;
+    width: 100%;
+    height: fit-content;
+    justify-content: baseline;
+    font-family: 'Cambria';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 38px;
+    
+    /* text-align: center; */
+    
+    color: #00573F;
+}
+.EBS-I-selection-Sec-result .EBS-I-Sec-drop-result{
+    /* position: absolute; */
+    width: 100%;
+    height: 76px;
+
+    
+    background: #00573F;
+    border: 1px solid #00573F;
+    border-radius: 10px;
+
+
+    background: #00573F;
+    border: 1px solid #00573F;
+    border-radius: 10px;
+}
+.EBS-I-section-result .EBS-I-enter-bttn-result{
+    width: 100%;
+    height: fit-content;
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.EBS-I-enter-bttn-result .EBS-I-ENTER-button-result{
+    width: 100%;
+    height: 50px;
+
+    background: #00573F;
+    border: 1px solid #00573F;
+    border-radius: 10px;
+    font-family: 'Cambria';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 38px;
+    /* identical to box height */
+
+    
+
+    text-align: center;
+
+    color: #FFFFFF;
+}
+
+.EBS-I-sec-DL-result{
+    width: 100%;
+    height: 100%;
+    /* padding: 70px; */
+    padding-top: 100px;
+
+    padding-right: 100px;
+    padding-left: 100px;
+}
+.EBS-I-sec-DL-result .EBS-I-section-container-DL-header-result{
+    width: 100%;
+    height: fit-content;
+    left: 514px;
+    top: 964.57px;
+
+    background: #FFB81E;
+    border: 1px solid #FFB81E;
+    border-radius: 10px;
+
+    font-family: 'Cambria';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 35px;
+    line-height: 100px;
+    text-align: center;
+
+    color: #000000;
+}
+.EBS-I-sec-DL-result .EBS-I-section-container-DL-section-result{
+    width: 100%;
+    height: fit-content;
+    border: 1px solid #FFB81E;
+    border-radius: 10px;
+
+}
+.EBS-I-section-container-DL-section-result .EBS-I-section{
+    display: grid;
+    width: 100%;
+    height: fit-content;
+    padding: 50px;
+    justify-content:  center;
+    gap: 20px;
+}
+.EBS-I-section .EBS-I-instruct{
+    width: 100%;
+    height: fit-content;
+    border-radius: 10px;
+
+    font-family: 'Cambria';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 23px;
+    text-align: center;
+    
+    color: #000000;
+}
+.EBS-I-section.EBS-I-bttn-div{
+    width: 100%;
+    height: fit-content;
+    padding-top: 20px;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+.EBS-I-DL-info{
+    width: 100%;
+    height: fit-content;
+    /* left: 627px;
+    top: 1127px; */
+
+    background: #FFB81E;
+    border: 1px solid #00573F;
+    border-radius: 10px;
+
+    font-family: 'Cambria';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 50px;
+    text-align: center;
+
+    color: #374151;
+}
+.EBS-I-sec-cons2-result{
+    width: 100%;
+    height: 100%;
+    padding-top: 100px;
+    padding-bottom: 100px;
+}
+.EBS-I-sec-cons2-result .EBS-I-section-container2-result{
+
+    width: 100%;
+    height: fit-content;
+
+
+    border: 1px solid #00573F;
+    border-radius: 10px;
+
+    font-family: 'Cambria';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 100px;
+    text-align: center;
+    
+
+    color: #00573F;
+}
+.EBS-I-sec-cons2-result .EBS-I-section-container2-2-result{
+    /* position: absolute; */
+    width: 100%;
+    height: fit-content;
+    /* left: 519px;
+    top: 708px; */
+
+    border: 1px solid #00573F;
+    border-radius: 10px;
+}
+.EBS-I-section2-result{
+    width: 100%;
+    height: fit-content;
+    padding: 50px;
+    justify-content: center;
+    /* gap: 50px; */
+}
+.EBS-I-section2-result .EBS-I-selection-section2-result{
+    display: flex;
+    width: 100%;
+    height: fit-content;
+    justify-content: center;
+    gap: 20px;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+.EBS-I-selection-section2-result .EBS-I-selection-GL2-result{
+    display: block;
+    width: 100%;
+    height: fit-content;
+    justify-content: baseline;
+    font-family: 'Cambria';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 38px;
+    overflow: hidden;
+    white-space: nowrap;
+    
+    /* text-align: center; */
+    
+    color: #00573F;
+}
+.EBS-I-selection-GL2-result .EBS-I-GL-drop2-result{
+    /* position: absolute; */
+    width: 100%;
+    height: 76px;
+
+    
+    background: #00573F;
+    border: 1px solid #00573F;
+    border-radius: 10px;    
+}
+.EBS-I-selection-section2-result .EBS-I-selection-Sec2-result{
+    display: block;
+    width: 100%;
+    height: fit-content;
+    justify-content: baseline;
+    font-family: 'Cambria';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 38px;
+    
+    /* text-align: center; */
+    
+    color: #00573F;
+}
+.EBS-I-selection-Sec2-result .EBS-I-Sec-drop2-result{
+    /* position: absolute; */
+    width: 100%;
+    height: 76px;
+
+    
+    background: #00573F;
+    border: 1px solid #00573F;
+    border-radius: 10px;
+
+
+    background: #00573F;
+    border: 1px solid #00573F;
+    border-radius: 10px;
+}
+.EBS-I-section2-result .EBS-I-enter-bttn2-result{
+    width: 100%;
+    height: fit-content;
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.EBS-I-enter-bttn2-result .EBS-I-ENTER-button2-result{
+    width: 100%;
+    height: 50px;
+
+    background: #00573F;
+    border: 1px solid #00573F;
+    border-radius: 10px;
+    font-family: 'Cambria';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 38px;
+    /* identical to box height */
+
+    
+
+    text-align: center;
+
+    color: #FFFFFF;
+}
