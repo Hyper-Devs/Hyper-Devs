@@ -15,7 +15,7 @@ function Enrollment(){
     return(
         <div className="enroll-container">
             <div className="enroll-page">
-                <div className="enroll-page-title"><p>System Enroll</p></div>
+                <div className="enroll-page-title" ><p>System Enroll</p></div>
                 <div className="enroll-components">
                     {/* <EnrollBox/>
                     <EnrollStudentBox/>
@@ -24,7 +24,6 @@ function Enrollment(){
                     {/* <EnrollanAdminBox/> */}
                     <EnrollBatchStudentIncomingBox/>
                     {/* <Footer/> */}
-                    
                     </div>
 
             </div>
