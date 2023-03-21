@@ -103,6 +103,16 @@
     border: 1px solid #00573F;
     border-radius: 10px;
 }
+
+.enroll-batch-student-incoming-container .grade-options, .enroll-batch-student-incoming-container .section-options {
+    color: white;
+    background: #00573F;
+}
+
+.enroll-batch-student-incoming-container .grade-options, .enroll-batch-student-incoming-container .section-options:hover {
+    cursor: pointer;
+}
+
 .EBS-incoming-section .EBS-incoming-enter-bttn{
     width: 100%;
     height: fit-content;
