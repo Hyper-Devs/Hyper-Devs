@@ -8,6 +8,8 @@ import EnrollStudentBox from "../../Components/Enrollment/Enroll-Student-Box";
 import EnrollBatchStudentBox from "../../Components/Enrollment/Enroll-Batch-Student-Box";
 import EnrollaStudentBox from "../../Components/Enrollment/Enroll-a-Student-Box";
 import EnrollanAdminBox from "../../Components/Enrollment/Enroll-an-Admin-Box";
+import EnrollBatchStudentIncomingBox from "../../Components/Enrollment/Enroll-Batch-Student-Incoming-Box";
+
 
 function Enrollment(){
     return(
@@ -19,7 +21,8 @@ function Enrollment(){
                     <EnrollStudentBox/>
                     <EnrollBatchStudentBox/> */}
                     {/* <EnrollaStudentBox/> */}
-                    <EnrollanAdminBox/>
+                    {/* <EnrollanAdminBox/> */}
+                    <EnrollBatchStudentIncomingBox/>
                     {/* <Footer/> */}
                     
                     </div>
