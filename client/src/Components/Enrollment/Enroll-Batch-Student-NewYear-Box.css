@@ -1,0 +1,320 @@
+*{
+    box-sizing: border-box;
+}
+.enroll-batch-student-NY-container{
+    /* position: relative; */
+    display: block;  
+    align-items: center;
+    flex-direction: row-reverse;
+    width: 100%;
+    height: 100%;
+    padding: 50px;
+}
+.enroll-batch-student-NY-container .EBS-NY-container1{
+    width: 100%;
+    height: fit-content;
+    border: 1px solid #00573F;    
+    border-radius: 10px;
+    justify-content: center;
+}
+.EBS-NY-container1 .EBS-NY-header-container1{
+        display: block;
+        width: 100%;
+        height: fit-content;
+
+        justify-content: center;
+
+        background: #00573F;
+        border-radius: 10px 10px 0px 0px;
+        text-align: center;
+        font-family: 'Cambria';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 32px;
+        line-height: 80px;
+        color: #FFFFFF;
+}
+.EBS-NY-sec-cons1{
+    width: 100%;
+    height: 100%;
+    /* padding: 70px; */
+    padding-top: 100px;
+
+    padding-right: 100px;
+    padding-left: 100px;
+
+
+}
+
+
+.EBS-NY-sec-cons1 .EBS-NY-section-container1{
+
+    width: 100%;
+    height: fit-content;
+
+
+    border: 1px solid #00573F;
+    border-radius: 10px;
+
+    font-family: 'Cambria';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 100px;
+    text-align: center;
+
+    color: #00573F;
+}
+.EBS-NY-sec-cons1 .EBS-NY-section-container2{
+    /* position: absolute; */
+    width: 100%;
+    height: fit-content;
+    /* left: 519px;
+    top: 708px; */
+
+    border: 1px solid #00573F;
+    border-radius: 10px;
+}
+
+.EBS-NY-container1 .EBS-NY-section{
+    width: 100%;
+    height: fit-content;
+    padding: 50px;
+    justify-content: center;
+    /* gap: 50px; */
+}
+.EBS-NY-section .EBS-NY-selection-section{
+    display: flex;
+    width: 100%;
+    height: fit-content;
+    justify-content: center;
+    gap: 20px;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+.EBS-NY-selection-section .EBS-NY-selection-GL{
+    display: block;
+    width: 100%;
+    height: fit-content;
+    justify-content: baseline;
+    font-family: 'Cambria';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 38px;
+    overflow: hidden;
+    white-space: nowrap;
+    
+    /* text-align: center; */
+    
+    color: #00573F;
+}
+.EBS-NY-selection-GL .EBS-NY-GL-drop{
+    /* position: absolute; */
+    width: 100%;
+    height: 76px;
+
+    
+    background: #00573F;
+    border: 1px solid #00573F;
+    border-radius: 10px;    
+}
+.EBS-NY-selection-section .EBS-NY-selection-Sec{
+    display: block;
+    width: 100%;
+    height: fit-content;
+    justify-content: baseline;
+    font-family: 'Cambria';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 38px;
+    
+    /* text-align: center; */
+    
+    color: #00573F;
+}
+.EBS-NY-selection-Sec .EBS-NY-Sec-drop{
+    /* position: absolute; */
+    width: 100%;
+    height: 76px;
+
+    
+    background: #00573F;
+    border: 1px solid #00573F;
+    border-radius: 10px;
+
+
+    background: #00573F;
+    border: 1px solid #00573F;
+    border-radius: 10px;
+}
+.EBS-NY-section .EBS-NY-enter-bttn{
+    width: 100%;
+    height: fit-content;
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.EBS-NY-enter-bttn .EBS-NY-ENTER-button{
+    width: 100%;
+    height: 50px;
+
+    background: #00573F;
+    border: 1px solid #00573F;
+    border-radius: 10px;
+    font-family: 'Cambria';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 38px;
+    /* identical to box height */
+
+    
+
+    text-align: center;
+
+    color: #FFFFFF;
+}
+.EBS-NY-sec-cons2{
+    width: 100%;
+    height: 100%;
+    /* padding: 70px; */
+    padding: 100px;
+
+
+}
+
+
+.EBS-NY-sec-cons2 .EBS-NY-section-container2{
+
+    width: 100%;
+    height: fit-content;
+
+
+    border: 1px solid #00573F;
+    border-radius: 10px;
+
+    font-family: 'Cambria';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 100px;
+    text-align: center;
+    
+
+    color: #00573F;
+}
+.EBS-NY-sec-cons2 .EBS-NY-section-container2-2{
+    /* position: absolute; */
+    width: 100%;
+    height: fit-content;
+    /* left: 519px;
+    top: 708px; */
+
+    border: 1px solid #00573F;
+    border-radius: 10px;
+}
+
+.EBS-NY-section2{
+    width: 100%;
+    height: fit-content;
+    padding: 50px;
+    justify-content: center;
+    /* gap: 50px; */
+}
+.EBS-NY-section2 .EBS-NY-selection-section2{
+    display: flex;
+    width: 100%;
+    height: fit-content;
+    justify-content: center;
+    gap: 20px;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+.EBS-NY-selection-section2 .EBS-NY-selection-GL2{
+    display: block;
+    width: 100%;
+    height: fit-content;
+    justify-content: baseline;
+    font-family: 'Cambria';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 38px;
+    overflow: hidden;
+    white-space: nowrap;
+    
+    /* text-align: center; */
+    
+    color: #00573F;
+}
+.EBS-NY-selection-GL2 .EBS-NY-GL-drop2{
+    /* position: absolute; */
+    width: 100%;
+    height: 76px;
+
+    
+    background: #00573F;
+    border: 1px solid #00573F;
+    border-radius: 10px;    
+}
+.EBS-NY-selection-section2 .EBS-NY-selection-Sec2{
+    display: block;
+    width: 100%;
+    height: fit-content;
+    justify-content: baseline;
+    font-family: 'Cambria';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 38px;
+    
+    /* text-align: center; */
+    
+    color: #00573F;
+}
+.EBS-NY-selection-Sec2 .EBS-NY-Sec-drop2{
+    /* position: absolute; */
+    width: 100%;
+    height: 76px;
+
+    
+    background: #00573F;
+    border: 1px solid #00573F;
+    border-radius: 10px;
+
+
+    background: #00573F;
+    border: 1px solid #00573F;
+    border-radius: 10px;
+}
+.EBS-NY-section2 .EBS-NY-enter-bttn2{
+    width: 100%;
+    height: fit-content;
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.EBS-NY-enter-bttn2 .EBS-NY-ENTER-button2{
+    width: 100%;
+    height: 50px;
+
+    background: #00573F;
+    border: 1px solid #00573F;
+    border-radius: 10px;
+    font-family: 'Cambria';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 38px;
+    /* identical to box height */
+
+    
+
+    text-align: center;
+
+    color: #FFFFFF;
+}
