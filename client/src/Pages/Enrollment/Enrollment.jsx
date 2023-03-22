@@ -23,11 +23,11 @@ function Enrollment(){
                     <EnrollStudentBox/>
                     <EnrollBatchStudentBox/> */}
                     {/* <EnrollaStudentBox/> */}
-                    {/* <EnrollanAdminBox/> */}
+                    <EnrollanAdminBox/>
                     {/* <EnrollBatchStudentIncomingBox/> */}
                     {/* <EnrollBatchStudentNYBox/> */}
                     {/* <EnrollBatchStudentNewYearResult/> */}
-                    <EnrollBatchStudentIncomingResult/>
+                    {/* <EnrollBatchStudentIncomingResult/> */}
                     {/* <Footer/> */}
                     </div>
 
