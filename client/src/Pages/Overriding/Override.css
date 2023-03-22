@@ -1,24 +1,14 @@
-/* main{
-    width: 100%;
-    padding: 20px;
-} */
-
 .override-container{
     position: absolute;
     display: flex;
     flex-direction: row-reverse;
     height: 100%;
     width: 100%;
-    /* background-image: url(../../Assets/UP\ ADMIN3\ 1.png) */
+    overflow-y: hidden;
 }
 
-.override-container .override-footer{
-    position: fixed;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    bottom: 0;
-    background-color: gray;
-    height: 50px;
+.override-content{
+    position: static;
+    height: 100vh;
     width: 100%;
 }

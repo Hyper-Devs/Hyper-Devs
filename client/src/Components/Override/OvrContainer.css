@@ -52,8 +52,8 @@
     color: black;
     position: relative;
     height: auto;
-    width: 50%;
-    padding: 10px;
+    width: 70%;
+    padding: 20px;
     text-align: center;
     margin-top: 60px;
     
@@ -72,6 +72,12 @@
     border-color: #00573F;
     border-radius: 10px;
     color: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: left;
+    padding: 10px;
 }
 
 .container button {
@@ -99,3 +105,83 @@
     margin-bottom: 10px;
     margin-top: 10px;
 }
+
+.name,
+.id,
+.sex,
+.age,
+.gradeLevel,
+.section{
+    background-color: white;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #00573F;
+    display: flex;
+    justify-content: left;
+    text-align: left;
+    padding-left: 5px;
+    font-family: "Playfair Display";
+    text-align: center;
+}
+
+.name-id-block{
+    width: 80%;
+    height: 40px;
+    margin-top: 20px;
+    flex-direction: row;
+    display: flex;
+    justify-content: center;
+    background-color: rgb(81, 0, 0);
+}
+
+.name{
+    width: 80%;
+    height: 100%;
+}
+
+.id{
+    width: 20%;
+    height: 100%;
+}
+
+.addtl-info-block{
+    width: 80%;
+    height: 40px;
+    flex-direction: row;
+    display: flex;
+    justify-content: center;
+    background-color: rgb(0, 0, 0);
+}
+
+.sex{
+    width: 17%;
+    height: 100%;
+}
+
+.age{
+    width: 17%;
+    height: 100%;
+}
+
+.gradeLevel{
+    width: 31%;
+    height: 100%;
+}
+
+.section{
+    width: 35%;
+    height: 100%;
+}
+
+.reason-input{
+    width: 100%;
+    height: 40px;
+    padding: 5px;
+    margin-bottom: 5px;
+}
+
+.student-details .input-fields-block{
+    text-align: left;
+    width: 80%;
+}
+
