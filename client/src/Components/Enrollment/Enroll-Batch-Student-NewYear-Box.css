@@ -119,6 +119,16 @@
     border: 1px solid #00573F;
     border-radius: 10px;    
 }
+
+.enroll-batch-student-NY-container .grade-options, .enroll-batch-student-NY-container .section-options {
+    color: white;
+    background: #00573F;
+}
+
+.enroll-batch-student-NY-container .grade-options, .enroll-batch-student-NY-container .section-options:hover {
+    cursor: pointer;
+}
+
 .EBS-NY-selection-section .EBS-NY-selection-Sec{
     display: block;
     width: 100%;

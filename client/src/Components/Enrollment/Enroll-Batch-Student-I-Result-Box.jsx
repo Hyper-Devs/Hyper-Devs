@@ -1,7 +1,12 @@
 import "./Enroll-Batch-Student-I-Result-Box.css";
-import React from "react";
+import React, {useState} from "react";
 
 function EnrollBatchStudentIncomingResult(){
+    const [cons1IResultGrade,setCons1IResultGrade]=useState();
+    const [cons1IResultSection,setCons1IResultSection]=useState();
+    const [cons2IResultGrade,setCons2IResultGrade]=useState();
+    const [cons2IResultSection,setCons2IResultSection]=useState();
+    
     return(
         <div className="enroll-batch-student-I-container-result">
             <div className="EBS-I-container1-result">
@@ -12,10 +17,30 @@ function EnrollBatchStudentIncomingResult(){
                                 <div className="EBS-I-section-result">
                                     <div className="EBS-I-selection-section-result">
                                         <div className="EBS-I-selection-GL-result"><p>Grade Level</p>
-                                            <div className="EBS-I-GL-drop-result"></div>
+                                            <div className="EBS-I-GL-drop-result">
+                                            <select className="grade-options" value={cons1IResultGrade} onChange={e=>setCons1IResultGrade(e.target.value)}>
+                                                <option></option>
+                                                <option>Grade 7</option>
+                                                <option>Grade 8</option>
+                                                <option>Grade 9</option>
+                                                <option>Grade 10</option>
+                                                <option>Grade 11</option>
+                                                <option>Grade 12</option>
+                                            </select>
+                                            </div>
                                         </div>
                                         <div className="EBS-I-selection-Sec-result"><p>Section</p>
-                                            <div className="EBS-I-Sec-drop-result"></div>
+                                            <div className="EBS-I-Sec-drop-result">
+                                            <select className="section-options" value={cons1IResultSection} onChange={e=>setCons1IResultSection(e.target.value)}>
+                                                <option></option>
+                                                <option>Section 1</option>
+                                                <option>Section 2</option>
+                                                <option>Section 3</option>
+                                                <option>Section 4</option>
+                                                <option>Section 5</option>
+                                                <option>Section 6</option>
+                                            </select>
+                                            </div>
                                         </div>
                                     </div>
                                     <div className="EBS-I-enter-bttn-result">
@@ -47,10 +72,30 @@ function EnrollBatchStudentIncomingResult(){
                                 <div className="EBS-I-section2-result">
                                     <div className="EBS-I-selection-section2-result">
                                         <div className="EBS-I-selection-GL2-result"><p>Grade Level</p>
-                                            <div className="EBS-I-GL-drop2-result"></div>
+                                            <div className="EBS-I-GL-drop2-result">
+                                            <select className="grade-options" value={cons2IResultGrade} onChange={e=>setCons2IResultGrade(e.target.value)}>
+                                                <option></option>
+                                                <option>Grade 7</option>
+                                                <option>Grade 8</option>
+                                                <option>Grade 9</option>
+                                                <option>Grade 10</option>
+                                                <option>Grade 11</option>
+                                                <option>Grade 12</option>
+                                            </select>
+                                            </div>
                                         </div>
                                         <div className="EBS-I-selection-Sec2-result"><p>Section</p>
-                                            <div className="EBS-I-Sec-drop2-result"></div>
+                                            <div className="EBS-I-Sec-drop2-result">
+                                            <select className="section-options" value={cons2IResultSection} onChange={e=>setCons2IResultSection(e.target.value)}>
+                                                <option></option>
+                                                <option>Section 1</option>
+                                                <option>Section 2</option>
+                                                <option>Section 3</option>
+                                                <option>Section 4</option>
+                                                <option>Section 5</option>
+                                                <option>Section 6</option>
+                                            </select>
+                                            </div>
                                         </div>
                                     </div>
                                     <div className="EBS-I-enter-bttn2-result">
