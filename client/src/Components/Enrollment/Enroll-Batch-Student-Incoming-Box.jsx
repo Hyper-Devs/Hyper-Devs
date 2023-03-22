@@ -1,9 +1,13 @@
 import "./Enroll-Batch-Student-Incoming-Box.css";
 import React, {useState} from "react";
 
-function EnrollBatchStudentIncomingBox(){
+function EnrollBatchStudentIncomingBox(props){
     const [iGrade,setIGrade]=useState();
     const [iSection,setISection]=useState();
+
+    const handleClick = (buttonId) => {
+        props.onButtonClick(buttonId);
+    };
 
     return(
         <div className="enroll-batch-student-incoming-container">
@@ -39,7 +43,7 @@ function EnrollBatchStudentIncomingBox(){
                         </div>
                     </div>
                     <div className="EBS-incoming-enter-bttn">
-                        <button className="EBS-incoming-ENTER-button">Enter</button>
+                        <button className="EBS-incoming-ENTER-button" onClick={() => handleClick('enStud-batch-incoming-result')} >Enter</button>
                     </div>
                 </div>
             </div>

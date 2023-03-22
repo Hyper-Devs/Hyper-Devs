@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import Sidebar from '../../Components/Sidebar/Sidebar'
 import "./Enrollment.css";
@@ -13,34 +13,41 @@ import EnrollBatchStudentNYBox from "../../Components/Enrollment/Enroll-Batch-St
 import EnrollBatchStudentNewYearResult from "../../Components/Enrollment/Enroll-Batch-Student-NY-Result-Box";
 import EnrollBatchStudentIncomingResult from "../../Components/Enrollment/Enroll-Batch-Student-I-Result-Box";
 
-function Enrollment(){
-    return(
+function Enrollment() {
+    const [active, setActive] = useState("start");
+
+    const handleButtonClick = (buttonId) => {
+        setActive(buttonId)
+    };
+
+    return (
         <div className="enroll-container">
             <div className="enroll-page">
                 <div className="enroll-page-title" ><p>System Enroll</p></div>
                 <div className="enroll-components">
-                    {/* <EnrollBox/>
-                    <EnrollStudentBox/>
-                    <EnrollBatchStudentBox/> */}
-                    {/* <EnrollaStudentBox/> */}
-                    {/* <EnrollanAdminBox/> */}
-                    {/* <EnrollBatchStudentIncomingBox/> */}
-                    {/* <EnrollBatchStudentNYBox/> */}
-                    {/* <EnrollBatchStudentNewYearResult/> */}
-                    <EnrollBatchStudentIncomingResult/>
-                    {/* <Footer/> */}
-                    </div>
+                    {active == "start" && <EnrollBox onButtonClick={handleButtonClick} />}
+                    {active === "enStud" && <EnrollStudentBox onButtonClick={handleButtonClick} />}
+                    {active === "enAdm" && <EnrollanAdminBox onButtonClick={handleButtonClick} />}
+                    {active === "enStud-indi" && <EnrollaStudentBox />}
+                    {active === "enStud-batch" && <EnrollBatchStudentBox onButtonClick={handleButtonClick} />}
+                    {active === "enStud-batch-incoming" && <EnrollBatchStudentIncomingBox onButtonClick={handleButtonClick} />}
+                    {active === "enStud-batch-new" && <EnrollBatchStudentNYBox onButtonClick={handleButtonClick} />}
+                    {active === "enStud-batch-incoming-result" && <EnrollBatchStudentIncomingResult onButtonClick={handleButtonClick} />}
+                    {active === "enStud-batch-new-result" && <EnrollBatchStudentIncomingResult onButtonClick={handleButtonClick} />}
+                    
+                    {/*<Footer/> */}
+                </div>
 
             </div>
-            
+
             <Sidebar
-                    buttonState={{
+                buttonState={{
                     item1: false,
                     item2: false,
                     item3: true,
                     item4: false,
                     item5: false,
-                }}/>
+                }} />
         </div>
     )
 }
