@@ -3,7 +3,12 @@ import React, { useRef, useState } from 'react'
 
 
 function EnrollanAdminBox() {
-    const [state, setState] = useState('')
+    const [EAAFirstName, setEAAFirstName] = useState()
+    const [EAAMiddleName, setEAAMiddleName] = useState()
+    const [EAALastName, setEAALastName] = useState()
+    const [EAABirthdate, setEAABirthdate] = useState()
+    const [EAAContact, setEAAContact] = useState()
+
     function myFunction() {
         document.getElementById("myDropdown").classList.toggle("show");
     }
