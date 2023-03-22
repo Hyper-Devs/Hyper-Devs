@@ -4,6 +4,16 @@ import React, { useRef, useState } from 'react'
 
 function EnrollanAdminBox(){
     const [state, setState] = useState('')
+    const [EAAFirstName, setEAAFirstName] = useState()
+    const [EAAMiddleName, setEAAMiddleName] = useState()
+    const [EAALastName, setEAALastName] = useState()
+    const [EAABirthdate, setEAABirthdate] = useState()
+    const [EAAContact, setEAAContact] = useState()
+    
+
+
+
+
     return(
         <div className="enroll-an-admin-section-container">
             <div className="E-an-admin-container1">
@@ -20,9 +30,9 @@ function EnrollanAdminBox(){
                                     <div className="EAA-Name-container">
                                         <div className="EAA-Name-Name"><p>Name</p></div>
                                         <div className="EAA-Name-input">
-                                                <input type= "text" name="{firstname}" className= "EAA-first-name" value={state}/>
-                                                <input type= "text" name="{middlename}" className="EAA-middle-name" value={state}/>
-                                                <input type= "text" name="{lastname}" className= "EAA-last-name" value={state}/>
+                                                <input type= "text" name="{firstname}" className= "EAA-first-name" value={EAAFirstName} onChange={(e) => setEAAFirstName(e.target.value)} />
+                                                <input type= "text" name="{middlename}" className="EAA-middle-name" value={EAAMiddleName} onChange={(e) => setEAAMiddleName(e.target.value)} />
+                                                <input type= "text" name="{lastname}" className= "EAA-last-name" value={EAALastName} onChange={(e) => setEAALastName(e.target.value)} />
                                         </div>
                                     </div>
                                     <div className="EAA-Sex-BD-container">
@@ -33,7 +43,7 @@ function EnrollanAdminBox(){
                                         <div className="EAA-BD-container">
                                             <div className="EAA-BD-BD"><p>Birthdate</p></div>
                                             <div className="EAA-BD-input">
-                                            <input type= "text" name="{birthdate}" className= "EAA-BD-Birthdate" value={state}/>
+                                            <input type= "text" name="{birthdate}" className= "EAA-BD-Birthdate" value={EAABirthdate} onChange={(e) => setEAABirthdate(e.target.value)} />
                                             </div>
                                         </div>
                                     </div>
@@ -45,7 +55,7 @@ function EnrollanAdminBox(){
                                     <div className="EAA-CN-container">
                                         <div className="EAA-CN-CN"><p>Contact Number</p></div>
                                         <div className="EAA-CN-input">
-                                            <input type= "text" name="{contacno.}" className= "EAA-Contact-No" value={state}/>
+                                            <input type= "text" name="{contacno.}" className= "EAA-Contact-No" value={EAAContact} onChange={(e) => setEAAContact(e.target.value)}/>
                                         </div>
                                     </div>
                                 </div>
