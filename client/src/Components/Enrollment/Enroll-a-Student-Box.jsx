@@ -5,7 +5,16 @@ import React, { useRef, useState } from 'react'
 
 function EnrollaStudentBox(){
     const [state, setState] = useState('')
-    function myFunction() {
+    const [EASFirstName, setEASFirstName] = useState()
+    const [EASMiddleName, setEASMiddleName] = useState()
+    const [EASLastName, setEASLastName] = useState()
+    const [EASBirthdate, setEASBirthdate] = useState()
+    const [EASParentFirstName, setEASParentFirstName] = useState()
+    const [EASParentMiddleName, setEASParentMiddleName] = useState()
+    const [EASParentLastName, setEASParentLastName] = useState()
+    const [EASParentRelation, setEASParentRelation] = useState()
+    
+function myFunction() {
   document.getElementById("myDropdown").classList.toggle("show");
 }
     const [sex,setSex]=useState();
@@ -44,9 +53,9 @@ function EnrollaStudentBox(){
                                     <div className="EAS-Name-container">
                                         <div className="EAS-Name-Name"><p>Name</p></div>
                                         <div className="EAS-Name-input">
-                                                <input type= "text" name="{firstname}" className= "EAS-first-name" value={state}/>
-                                                <input type= "text" name="{middlename}" className="EAS-middle-name" value={state}/>
-                                                <input type= "text" name="{lastname}" className= "EAS-last-name" value={state}/>
+                                                <input type= "text" name="{firstname}" className= "EAS-first-name" value={EASFirstName} onChange={(e) => setEASFirstName(e.target.value)}/>
+                                                <input type= "text" name="{middlename}" className="EAS-middle-name" value={EASMiddleName} onChange={(e) => setEASMiddleName(e.target.value)}/>
+                                                <input type= "text" name="{lastname}" className= "EAS-last-name" value={EASLastName} onChange={(e) => setEASLastName(e.target.value)}/>
                                         </div>                                   
                                     </div>
                                     
@@ -74,7 +83,7 @@ function EnrollaStudentBox(){
                                             <div className="EAS-BD-container">
                                                 <div className="EAS-BD-BD"><p>Birthdate</p></div>
                                                 <div className="EAS-BD-input">
-                                                    <input type= "text" name="{birthdate}" className= "EAS-BD-Birthdate" value={state}/>
+                                                    <input type= "text" name="{birthdate}" className= "EAS-BD-Birthdate" value={EASBirthdate} onChange={(e) => setState(e.target.value)} />
                                                 </div>
                                             </div>
                                     </div>
@@ -89,9 +98,9 @@ function EnrollaStudentBox(){
                                     <div className="EAS-P-Name-container">
                                         <div className="EAS-P-Name-Name"><p>Name</p></div>
                                         <div className="EAS-P-Name-input">
-                                                <input type= "text" name="{firstname}" className= "EAS-P-first-name" value={state}/>
-                                                <input type= "text" name="{middlename}" className="EAS-P-middle-name" value={state}/>
-                                                <input type= "text" name="{lastname}" className= "EAS-P-last-name" value={state}/>
+                                                <input type= "text" name="{Pfirstname}" className= "EAS-P-first-name" value={EASParentFirstName} onChange={(e) => setEASParentFirstName(e.target.value)}/>
+                                                <input type= "text" name="{Pmiddlename}" className="EAS-P-middle-name" value={EASParentMiddleName} onChange={(e) => setEASParentMiddleName(e.target.value)}/>
+                                                <input type= "text" name="{Plastname}" className= "EAS-P-last-name" value={EASParentLastName} onChange={(e) => setEASParentLastName(e.target.value)}/>
                                         </div>
                                     </div>
                                     </div>
@@ -100,17 +109,17 @@ function EnrollaStudentBox(){
                                         <div className="EAS-Relationship-container">
                                             <div className="EAS-Relationship-Relationship">Relationship</div>
                                             <div className="EAS-Relationship-input">
-                                                <input type= "text" name="{relationship}" className= "EAS-P-Relation" value={state}/>
+                                                <input type= "text" name="{relationship}" className= "EAS-P-Relation" value={EASParentRelation} onChange={(e) => setEASParentRelation(e.target.value)}/>
                                             </div>
                                         </div>
                                         <div className="EAS-Contact-Number-container">
                                             <div className="EAS-Contact-Number-CN"><p>ContactNo.</p></div>
                                             <div className="EAS-Contact-Number-input">
-                                                <input type= "text" name="{contactno.}" className= "EAS-CN" value={state}/>
+                                                <input type= "text" name="{contactno.}" className= "EAS-CN" value={state} onChange={(e) => setState(e.target.value)}/>
                                             </div>
                                         </div>
                                     </div>
-
+        
                                 </div>
                             </div>
                             <div className="EAS-container3">

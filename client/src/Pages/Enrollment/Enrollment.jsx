@@ -37,7 +37,6 @@ function Enrollment() {
                     
                     {/*<Footer/> */}
                 </div>
-
             </div>
 
             <Sidebar
