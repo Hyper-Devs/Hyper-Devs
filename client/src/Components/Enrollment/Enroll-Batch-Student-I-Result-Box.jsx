@@ -1,11 +1,15 @@
 import "./Enroll-Batch-Student-I-Result-Box.css";
 import React, {useState} from "react";
 
-function EnrollBatchStudentIncomingResult(){
+function EnrollBatchStudentIncomingResult(props){
     const [cons1IResultGrade,setCons1IResultGrade]=useState();
     const [cons1IResultSection,setCons1IResultSection]=useState();
     const [cons2IResultGrade,setCons2IResultGrade]=useState();
     const [cons2IResultSection,setCons2IResultSection]=useState();
+
+    const handleClick = (buttonId) => {
+        props.onButtonClick(buttonId);
+    };
     
     return(
         <div className="enroll-batch-student-I-container-result">
@@ -44,7 +48,7 @@ function EnrollBatchStudentIncomingResult(){
                                         </div>
                                     </div>
                                     <div className="EBS-I-enter-bttn-result">
-                                        <button className="EBS-I-ENTER-button-result">New Search</button>
+                                        <button className="EBS-I-ENTER-button-result" onClick={handleClick("enStud-batch-incoming-result")}>New Search</button>
                                     </div>
                                 </div>
                             </div>

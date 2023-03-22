@@ -1,11 +1,17 @@
 import "./Enroll-Batch-Student-NewYear-Box.css";
 import React, {useState} from "react";
 
-function EnrollBatchStudentNYBox(){
+function EnrollBatchStudentNYBox(props){
     const [cons1NYGrade,setCons1NYGrade]=useState();
     const [cons2NYGrade,setCons2NYGrade]=useState();
     const [cons1NYSection,setCons1NYSection]=useState();
     const [cons2NYSection,setCons2NYSection]=useState();
+
+    const handleClick = (buttonId) => {
+        props.onButtonClick(buttonId);
+    };
+
+
     return(
         <div className="enroll-batch-student-NY-container">
             <div className="EBS-NY-container1">
@@ -43,7 +49,7 @@ function EnrollBatchStudentNYBox(){
                                         </div>
                                     </div>
                                     <div className="EBS-NY-enter-bttn">
-                                        <button className="EBS-NY-ENTER-button">Enter</button>
+                                        <button className="EBS-NY-ENTER-button" onClick={() => handleClick('enStud-batch-new-result')}>Enter</button>
                                     </div>
                                 </div>
                             </div>
@@ -82,7 +88,7 @@ function EnrollBatchStudentNYBox(){
                                         </div>
                                     </div>
                                     <div className="EBS-NY-enter-bttn2">
-                                        <button className="EBS-NY-ENTER-button2">Enter</button>
+                                        <button className="EBS-NY-ENTER-button2" onClick={() => handleClick('enStud-batch-new-result')} >Enter</button>
                                     </div>
                                 </div>
                             </div>

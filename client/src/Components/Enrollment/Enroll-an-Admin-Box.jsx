@@ -2,18 +2,11 @@ import "./Enroll-an-Admin-Box.css";
 import React, { useRef, useState } from 'react'
 
 
-function EnrollanAdminBox(){
+function EnrollanAdminBox() {
     const [state, setState] = useState('')
-    const [EAAFirstName, setEAAFirstName] = useState()
-    const [EAAMiddleName, setEAAMiddleName] = useState()
-    const [EAALastName, setEAALastName] = useState()
-    const [EAABirthdate, setEAABirthdate] = useState()
-    const [EAAContact, setEAAContact] = useState()
-    
-
-
-
-
+    function myFunction() {
+        document.getElementById("myDropdown").classList.toggle("show");
+    }
     return(
         <div className="enroll-an-admin-section-container">
             <div className="E-an-admin-container1">
@@ -59,7 +52,7 @@ function EnrollanAdminBox(){
                                         </div>
                                     </div>
                                 </div>
-         
+
                             </div>
                             <div className="EAA-container3">
                                 <div className="EAA-container3-header"><p>Position</p></div>
@@ -67,12 +60,12 @@ function EnrollanAdminBox(){
                                     <div className="EAA-P-container">
                                         <div className="EAA-P-P">Position</div>
                                         <div className="EAA-P-input">
-                                    
+
                                         </div>
                                     </div>
-                                    
-                                    </div>    
-                            </div>  
+
+                                </div>
+                            </div>
 
 
 
@@ -83,8 +76,8 @@ function EnrollanAdminBox(){
 
                 <button className="E-an-admin-enroll-button">Enroll</button>
             </div>
-            
-        </div>  
+
+        </div>
     )
 }
 export default EnrollanAdminBox
