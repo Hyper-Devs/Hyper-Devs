@@ -208,9 +208,9 @@
     width: 100%;
     height: 70px;
     border: 1px solid #00573F;
+    display: flex;
 }
 .EAA-Sex-container .EAA-Sex-Sex{
-    width: fit-content;
     height: 100%;
     padding: 20px;
     background: #00573F;
