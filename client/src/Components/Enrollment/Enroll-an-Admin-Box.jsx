@@ -8,6 +8,7 @@ function EnrollanAdminBox() {
     const [EAALastName, setEAALastName] = useState()
     const [EAABirthdate, setEAABirthdate] = useState()
     const [EAAContact, setEAAContact] = useState()
+    const [adminSex,setAdminSex]=useState();
 
     function myFunction() {
         document.getElementById("myDropdown").classList.toggle("show");
@@ -36,7 +37,11 @@ function EnrollanAdminBox() {
                                     <div className="EAA-Sex-BD-container">
                                         <div className="EAA-Sex-container">
                                             <div className="EAA-Sex-Sex"><p>Sex</p></div>
-                                            <div className="EAA-Sex-Input"></div>
+                                            <select className="sex-options" value={adminSex} onChange={e=>setAdminSex(e.target.value)}>
+                                                <option></option>
+                                                <option>Male</option>
+                                                <option>Female</option>
+                                               </select>
                                         </div>
                                         <div className="EAA-BD-container">
                                             <div className="EAA-BD-BD"><p>Birthdate</p></div>
