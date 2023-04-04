@@ -12,13 +12,13 @@ function Box() {
         <div className='LiveBox'>
             <div className='rectangle'>
                 <p style={{fontSize: 32}}>Live RFID Access</p>
-                <div className='rectangle2'>
+                <div className='rectangle1'>
                     <div className='Date'>
                         <div className='Month'>March</div>
                         <div className='Day'>08</div>
                         <div className='Year'>2023</div>
                     </div>
-                    <div className='rectangle3'>
+                    <div className="rectangle2">
                         <div className='clock'><Clocks/></div>
                         <div className='entrance-exit'>
                             <div className='icon-boxes'>
@@ -37,11 +37,10 @@ function Box() {
                                 EXIT
                             </div>
                         </div>
-                        
                     </div>
                 </div>
             </div>
-            <Footer/>
+            <Footer />
         </div>
     )
 }
