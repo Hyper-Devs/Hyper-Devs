@@ -7,6 +7,7 @@ import Dashboard from './Pages/Dashboard/Dashboard';
 import Override from './Pages/Overriding/Override';
 import Notification from './Pages/Notification/Notification';
 import Enrollment from "./Pages/Enrollment/Enrollment"
+import Database from "./Pages/Database/Database";
 
 function App() {
   return (
@@ -32,6 +33,10 @@ function App() {
           <Route 
             path="/enroll"
             element={<Enrollment/>}
+          />
+          <Route 
+            path="/database"
+            element={<Database/>}
           />
         </Routes>
       </BrowserRouter>
