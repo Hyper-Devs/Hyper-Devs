@@ -69,19 +69,19 @@ function Login() {
 
                 <label>ID Number</label>
                 <div className="login-input-container">
-                  <FiHash className="login-input-icon" color="#7A1315" size="1.2rem"/>
+                  <FiHash className="login-input-icon" color="#7A1315"/>
                   <input name='login-id' type="text" />
                 </div>
 
                 <label>Password</label>
                 <div className="login-input-container">
-                  <FiKey className="login-input-icon" color="#7A1315" size="1.2rem"/>
+                  <FiKey className="login-input-icon" color="#7A1315"/>
                   <input name='login-password' type="password" />
                 </div>
 
                 {authStatus && <p style={{color: 'red'}}>Access ID or password is incorrect</p>}
                 <div className="login-button">
-                  <FiLogIn className="login-icon" color="#7A1315" size="1.1rem"/>
+                  <FiLogIn className="login-icon" color="#7A1315"/>
                   <button type='submit'>Login</button>
                   {/* put a mechanism where the login button redirects to dashboard when the creds are correct */}
                   {/* <a href = {'/dashboard'}> <button type='submit'>Login</button></a> */}
