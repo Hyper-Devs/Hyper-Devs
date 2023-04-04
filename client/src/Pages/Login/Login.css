@@ -15,9 +15,7 @@
 }
 
 .login-content {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+  height: 100vh;
 }
 
 .login-container {
@@ -50,7 +48,7 @@
 
 .form-container {
   position: relative;
-  width: 600px;
+  width: 37.5%;
   height: 80.6vh;
   display: flex;
   flex-direction: column;
@@ -164,4 +162,10 @@
 .loginForm .forgotPassword:hover {
   text-decoration: underline;
   color: black;
+}
+
+.login-footer {
+  position: relative;
+  display: flex;
+  flex: 1;
 }

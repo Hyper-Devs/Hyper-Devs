@@ -40,7 +40,9 @@ function Box() {
                     </div>
                 </div>
             </div>
+            <div className="dashboard-footer">
             <Footer />
+            </div>
         </div>
     )
 }
