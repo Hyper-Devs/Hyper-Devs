@@ -35,14 +35,3 @@
     color: #FFFFFF;
 
 }
-
-.dashboard-container .dashboard-footer{
-    position: fixed;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    bottom: 0;
-    background-color: gray;
-    height: 105px;
-    width: 100%;
-}

@@ -8,8 +8,8 @@ function Footer1() {
         <div className="col1-container">
           <div className="col1">
           <div>A project presented to:</div>
-          <div className="footer-cs-text"><h2>Department of Computer Science</h2></div>
-          <div className="footer-upc-text"><h2>University of the Philippines Cebu</h2></div>
+          <div className="footer-cs-text">Department of Computer Science</div>
+          <div className="footer-upc-text">University of the Philippines Cebu</div>
           </div>
           <div className="footer-logos">
           <div className="footer-cs-logo"></div><div className="footer-upc-logo"></div>
@@ -18,14 +18,14 @@ function Footer1() {
           
         <div>
           <div>In collaboration with:</div>
-          <div><h3>University of the Philippines Cebu High School</h3></div>
+          <div className="footer-upchs-text">University of the Philippines Cebu High School</div>
         </div>
         
         <div>
             <div className="col3">
               <div className="col3-container">
               <div>Designed and implemented by:</div>
-              <div><h2>Hyper Devs</h2></div>
+              <div className="footer-hd-text">Hyper Devs</div>
               </div>
               <div className="footer-hd-logo"></div>
             </div>
