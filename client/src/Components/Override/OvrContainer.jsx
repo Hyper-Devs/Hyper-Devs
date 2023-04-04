@@ -6,22 +6,13 @@ import axios from 'axios';
 
 function Box() {
     const [students,setStudents] = useState([])
-    // useEffect(()=>{
-    //     const fetchAllStudents = async (id)=>{
-    //         try{
-    //             const res = await axios.get("http://localhost:8800/students/${id}")
-    //             setStudents(res.data)
-    //         }catch(err){
-    //             console.log(err)
-    //         }
-    //     }
-    //     // fetchAllStudents()
-    // },[])
-
     const fetchStudent = async (id) => {
+        setStudents([]);
         try {
             const res = await axios.get(`http://localhost:8800/students/${id}`);
-            setStudents(res.data)
+            if (res.data.length > 0){
+                setStudents(res.data)
+            }
         } catch (err) {
             console.log(err);
         }
@@ -29,33 +20,30 @@ function Box() {
 
     const nameForm = useRef(null);
     const handleClickEvent = () => {
-        const form = nameForm.current
-        fetchStudent(form['firstname'].value);
-        toggleVisibility()
+        const form = nameForm.current;
+        fetchStudent(form['student-id'].value);
+        setIsVisible(true);
     }
 
     const [isVisible, setIsVisible] = useState(false);
-    const toggleVisibility = () => {
-      setIsVisible(!isVisible);
-    };
-
+    // const toggleVisibility = () => {setIsVisible(!isVisible);};
 
     return (
         <div className='container'>
-            <div className='first-container'>
+            <div className='first-container'> 
                 <p style={{padding: 15}}>Excuse a student</p>
                 <div className='search-content'>
                     <form 
                         className='search-field' 
-                        ref={nameForm}>
-                        <InputField name={'firstname'}/>
+                        ref={nameForm}
+                    >
+                        <InputField name={'student-id'}/>
                     </form>
 
                     <button onClick={handleClickEvent}>Search</button>     
                 </div>
             </div>
-            {/*Search results from the input field is reflected by the following code block*/}
-            {isVisible &&          
+            {(students.length > 0) && isVisible &&          
                 <div className='search-result'>
                     <h2 style={{color: '#00573F', margin: 10, fontFamily: "Playfair Display", fontWeight: 900}}><b>STUDENT INFORMATION</b></h2>
                     <div className='student-details'>
@@ -80,9 +68,14 @@ function Box() {
                     </div>
                 </div>
             }
+            {(students.length <= 0) && isVisible &&
+                <div className='search-result'>
+                    <h2>Student does not exist</h2>
+                </div>
+            }
             <Footer/>  
       </div>
     )
 }
 
-export default Box
+export default Box;
