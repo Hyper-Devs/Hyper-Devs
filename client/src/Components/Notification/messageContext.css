@@ -1,0 +1,114 @@
+.notif-message-box {
+
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  
+  }
+  
+  .notif-message-box .notif-message-rectangle {
+    margin-top: min(9.5%, 150px);
+    width: 75%;
+    height: fit-content;
+    background: #00573f;
+    border: 3px solid #00573f;
+    border-radius: 10px;
+    font-family: "Cambria";
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 39px;
+  }
+
+  .notif-message-header {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .notif-message-rectangle button {
+    background-color: white;
+    color: #00573f;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 5%;
+    border-radius: 10px;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    margin-right: 3%;
+  }
+  
+  .notif-message-box .notif-message-rectangle p {
+    margin: 1% 0 1% 3%;
+    color: white;
+  }
+  
+  .notif-message-box .notif-message-rectangle2 {
+    position: relative;
+    width: 100%;
+    height: fit-content;
+    background: transparent;
+    border-top: 3px solid #00573f;
+  }
+  
+  .notif-message-box .notif-message-rectangle3 {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 10px;
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+  }
+
+  .notif-message-box .notif-message-rectangle4 {
+    height: fit-content;
+    padding: 15px 100px 15px 100px;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 10px;
+    border: 3px solid #00573F;
+  }
+
+  .notif-message-box .notif-message-rectangle5 {
+    padding: 15px;
+    display: flex;
+    background-color: white;
+    border-radius: 10px;
+    border: solid #00573F;
+  }
+
+  .notif-message-box .notif-message-rectangle3 p{
+    color: #00573F;
+    font-weight: 700;
+    text-align: center;
+    margin-left: 0;
+  }
+
+  .notif-message-box .notif-message-rectangle5 p{
+    color: #00573F;
+    font-weight: 400;
+    text-align: center;
+    margin-left: 0;
+  }
+
+.notif-message-box .notif-update-button button {
+  background-color: #00573f;
+  color: white;
+  display: inline-block;
+  justify-content: center;
+  margin-top: 3%;
+  margin-left: 35%;
+  width: 30%;
+  border-radius: 10px;
+  padding: 5px;
+}
+
+  .notif-footer {
+    width: 100%;
+    margin-top: min(9.5%, 140px);
+  }
+  
+  
