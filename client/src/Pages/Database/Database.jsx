@@ -29,7 +29,7 @@ function Database(){
                 <div className="page-title"><p>SYSTEM DATABASE</p></div>
             <DatabaseModifier/>
             <DatabaseResult/>
-            <Footer1/>
+            <div className="database-footer"><Footer1/></div>
         </div> 
     </div>
 
