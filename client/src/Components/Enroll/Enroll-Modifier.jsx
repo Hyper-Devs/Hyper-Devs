@@ -5,12 +5,13 @@ import "bootstrap/dist/js/bootstrap.min.js";
 
 function EnrollModifier(){
     return(
-        <div className="container-md border p-3">enroll
+        <div className="container-md border p-3">
         <div className="row-fluid">
-            <div className="col-5  p-3">
-                <div className="row border border-2 rounded border-black ">
+            <div className="col-4  p-3">
+                <div className="row border border-2 rounded">
                 <div className="row rounded-top pt-3 bg-success"><p class="fs-5 fw-bold text-center text-light ">Enroll Type</p></div>
                 <div className="row rounded-bottom  p-3 border  ">
+                
                 <div class="accordion" id="accordionEnrollType">
                 <div class="accordion gap-3" id="accordionPanelsStayOpenStudent">
                     <div class="accordion-item">
@@ -67,6 +68,37 @@ function EnrollModifier(){
         </div>
         </div>
         </div>
+        </div>
+        </div>
+        <div className="row-fluid ">
+            <div className="col-4 p-3"> 
+                <div className="row border border-2 rounded">
+                    <div className="row border rounded-top bg-success pt-3"><p class="fs-5 fw-bold text-center text-light ">Enroll Settings</p></div>
+                    <div className="row rounded-bottom p-3 ">
+                    
+                    <div class="accordion" id="accordionEnrollSettings">
+                    <div class="accordion" id="accordionPanelsStayOpenSettings">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFour" aria-expanded="true" aria-controls="panelsStayOpen-collapseFour">
+                                Enroll Settings
+                            </button>
+                            </h2>
+                            <div id="panelsStayOpen-collapseFour" class="accordion-collapse collapse show">
+                            <div class="accordion-body">
+                            <div class="d-grid gap-2 mb-2">
+                                <button class="btn btn-success border border-success-subtle" type="button">Add a Section</button>
+                                <button class="btn btn-success border border-success-subtle" type="button">Delete a Section</button>
+                                <button class="btn btn-success border border-success-subtle" type="button">Delete a Student</button>
+                            </div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+
+                </div>
+            </div>
         </div>
         </div>
         </div>
