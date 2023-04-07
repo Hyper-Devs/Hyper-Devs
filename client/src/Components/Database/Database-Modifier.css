@@ -25,26 +25,7 @@ body{
       border-radius: 0;
       color:#D9D9D9;
   }
-  .btn{
-    background: #198754;
-    color: black;
-  } 
-  .btn:focus{
-    background:#00573F;
-    color: white;
-  }
-  .btn:active{
-    background: #198754;
-  }
-  button{
-    background: #198754;
-  } 
-  button:focus{
-      background:#00573F;
-  }
-  button:active{
-    background: #198754;
-  }
+
   .input-group-text{
     justify-content: center;
   }
