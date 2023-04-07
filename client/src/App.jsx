@@ -10,6 +10,7 @@ import Enrollment from "./Pages/Enrollment/Enrollment"
 import Database from "./Pages/Database/Database";
 import Profile from "./Pages/Profile/Profile";
 import Enroll from "./Pages/Enroll/Enroll";
+import Sass from "./Pages/sass-doc/sass"
 
 function App() {
   return (
@@ -47,6 +48,10 @@ function App() {
             <Route 
             path="/profile"
             element={<Profile/>}
+          />
+            <Route 
+            path="/sass"
+            element={<Sass/>}
           />
         </Routes>
       </BrowserRouter>
