@@ -20,7 +20,9 @@ function Login() {
 
     // Or you can work with it as a plain object:
     const formJson = Object.fromEntries(formData.entries());
-    // console.log(formJson);
+
+
+    console.log(formJson);
     // console.log(formJson['login-id']);
 
     authUser(formJson);
@@ -41,7 +43,8 @@ function Login() {
               login_password,
             }
           });
-
+          
+          // console.log(result)
           setAuthStatus(false);
           if(result.status == 201){setAuthStatus(true);}
           
