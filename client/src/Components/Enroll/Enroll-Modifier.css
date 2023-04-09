@@ -1,0 +1,16 @@
+
+.accordion-button{
+    background: #d9d9d9;
+    color: black;
+  } 
+  .accordion-button:focus{
+    background:#00573F;
+    color: white;
+  }
+  .accordion-button:active{
+    background: #198754;
+    color: black;
+  }
+  .accordion-header{
+    color: black; 
+  }

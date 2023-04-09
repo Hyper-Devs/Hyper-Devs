@@ -8,6 +8,9 @@ import Override from './Pages/Overriding/Override';
 import Notification from './Pages/Notification/Notification';
 import Enrollment from "./Pages/Enrollment/Enrollment"
 import Database from "./Pages/Database/Database";
+import Profile from "./Pages/Profile/Profile";
+import Enroll from "./Pages/Enroll/Enroll";
+import Sass from "./Pages/sass-doc/sass"
 
 function App() {
   return (
@@ -31,12 +34,24 @@ function App() {
             element={<Notification/>}
           />
           <Route 
-            path="/enroll"
+            path="/enrollment"
             element={<Enrollment/>}
+          />
+          <Route 
+            path="/enroll"
+            element={<Enroll/>}
           />
           <Route 
             path="/database"
             element={<Database/>}
+          />
+            <Route 
+            path="/profile"
+            element={<Profile/>}
+          />
+            <Route 
+            path="/sass"
+            element={<Sass/>}
           />
         </Routes>
       </BrowserRouter>
