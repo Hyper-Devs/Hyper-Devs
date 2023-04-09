@@ -9,6 +9,7 @@ export default function InputField({name}) {
         type="text" 
         value={state} 
         name={name}
+        placeholder='Enter student ID'
         onChange={(e) => setState(e.target.value)} 
       />
     </div>

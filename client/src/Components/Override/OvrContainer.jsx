@@ -53,8 +53,8 @@ function Box() {
                         </div>
                         <div className='addtl-info-block'>
                             <div className="sex">Sex: {students[0].sex}</div>
-                            <div className="age">Age: {students[0].grade_level}</div>
-                            <div className="gradeLevel">Grade Level: {students[0].id}</div>
+                            <div className="age">Age: {students[0].age}</div>
+                            <div className="gradeLevel">Grade Level: {students[0].grade_level}</div>
                             <div className="section">Section: {students[0].section}</div>
                         </div>
                         <div className='input-fields-block'>

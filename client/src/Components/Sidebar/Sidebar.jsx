@@ -60,6 +60,8 @@ const SideNavBar = ({buttonState}) => {
 		}
 	};
 
+
+	//the following block of code enables onHover & offHover behavior for a parent component and its children
 	const [isExpanded, setExpendState] = useState(true);
 	const divRef = useRef(null);
 	useEffect(() => {
@@ -90,6 +92,7 @@ const SideNavBar = ({buttonState}) => {
 		});
 		};
 	  }, []);
+
 
 	const menuItems = [
 		{
@@ -133,7 +136,6 @@ const SideNavBar = ({buttonState}) => {
 			currState: isHovered5,
 		},
 	];
-
 
 	return (
 		<div
