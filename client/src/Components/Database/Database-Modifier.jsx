@@ -103,7 +103,7 @@ function DatabaseModifier(){
     return(
         <div className="container-md p-3 ">
             <nav>
-                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                <div class="nav nav-tabs border border-success-subtle" id="nav-tab" role="tablist">
                     <button class="nav-link active text-black" id="nav-student-tab" data-bs-toggle="tab" data-bs-target="#nav-student" type="button" role="tab" aria-controls="nav-student" aria-selected="true">Student Information</button>
                     <button class="nav-link text-black" id="nav-admin-tab" data-bs-toggle="tab" data-bs-target="#nav-admin" type="button" role="tab" aria-controls="nav-admin" aria-selected="false">Admin Information</button>
                 </div>
@@ -114,24 +114,24 @@ function DatabaseModifier(){
                         <form onSubmit={handleSubmit}>
                             <div className="row">
                                 <div class="input-group mb-1">
-                                    <span class="input-group-text  " id="basic-addon1">#</span>
+                                    <span class="input-group-text  " id="basic-addonS1">#</span>
                                     <input 
                                         name='student-prim-info'
                                         type="text" 
                                         class="form-control" 
                                         placeholder="Enter Name or Number or Class" 
-                                        aria-label="StudentInfo" aria-describedby="basic-addon1" 
+                                        aria-label="StudentInfo" aria-describedby="basic-addonS2" 
                                     >
                                     </input>
 
                                 </div>
                                 <div className="col">
                                     <div class="input-group mb-1">
-                                        <label class="input-group-text" for="inputGroupSelect01">School Year</label>
+                                        <label class="input-group-text" for="inputGroupSelectS5">School Year</label>
                                         <select 
                                             name="student-school-year"
                                             class="form-select" 
-                                            id="inputGroupSelect01"
+                                            id="inputGroupSelectS6"
                                             onClick={(e) => updateSelectedSY(e)}
                                         >
                                             <option selected>Select</option>
@@ -141,11 +141,11 @@ function DatabaseModifier(){
                                 </div>
                                 <div className="col">
                                     <div class="input-group mb-1">
-                                        <label class="input-group-text " for="inputGroupSelect01">Grade Level</label>
+                                        <label class="input-group-text " for="inputGroupSelectS1">Grade Level</label>
                                             <select 
                                                 name="student-grade-level"
                                                 class="form-select" 
-                                                id="inputGroupSelect01" 
+                                                id="inputGroupSelectS2" 
                                                 onClick={() => updateGLStudentFilter()}
                                                 onChange={(e) => updateSelectedGL(e)}
                                             >
@@ -157,14 +157,16 @@ function DatabaseModifier(){
                                 <div className="col">
                                     
                                     <div class="input-group mb-1">
-                                        <label class="input-group-text" for="inputGroupSelect01">Section</label>
+                                        <label class="input-group-text" for="inputGroupSelectS3">Section</label>
                                         <select 
                                             name="student-section"
                                             class="form-select" 
-                                            id="inputGroupSelect01"
+                                            id="inputGroupSelectS4"
                                             onClick={() => updateSectionStudentFilter()}
                                             onChange={(e) => updateSelectedSection(e)}
                                         >
+
+
                                             <option selected>Select</option>
                                             {st_sections.map(({ value, label }, index) => <option value={value} >{label}</option>)}
                                         </select>
@@ -175,11 +177,11 @@ function DatabaseModifier(){
                             <div className="row ">
                                 <div className="col-4">
                                     <div class="input-group mb-1">
-                                        <label class="input-group-text" for="inputGroupSelect01">Access Type</label>
+                                        <label class="input-group-text" for="inputGroupSelectS7">Access Type</label>
                                         <select 
                                             name="access-type"
                                             class="form-select" 
-                                            id="inputGroupSelect01"
+                                            id="inputGroupSelectS8"
                                             value={accessType}
                                             onChange={handleChange}
                                         >
@@ -259,20 +261,31 @@ function DatabaseModifier(){
                                 <div className="row">
                                     <div class="input-group mb-1">
                                             <span class="input-group-text" id="basic-addon1">#</span>
-                                            <input type="text" class="form-control" placeholder="Enter Name or Position" aria-label="StudentInfo" aria-describedby="basic-addon1"></input>
+                                            <input type="text" class="form-control" placeholder="Enter Name or Position" aria-label="StudentInfo" aria-describedby="basic-addonS3"></input>
                                         </div>
                                         <div className="col">
                                             <div class="input-group mb-1">
-                                                <label class="input-group-text" for="inputGroupSelect01">Position</label>
-                                                    <select class="form-select" id="inputGroupSelect01">
+                                                <label class="input-group-text" for="inputGroupSelectS9">Position</label>
+                                                    <select class="form-select" id="inputGroupSelectS10">
                                                         <option selected>Select</option>
                                                         <option value="AdminOp">Admin</option>
                                                         <option value="FacultyOp">Faculty</option>
                                                     </select>
                                             </div>
                                         </div>
+                                    </div>
 
-
+                </div>
+                <div className="row">
+                            <div className="col-4">
+                            <div class="input-group mb-1">
+                                <label class="input-group-text" for="inputGroupSelectS11">Access Type</label>
+                                <select class="form-select" id="inputGroupSelectS12">
+                                    <option selected>Select</option>
+                                    <option value="ADBasicInformation">Basic Information</option>
+                                    <option value="ADOverrideLogs">Override Logs</option>
+                                </select>
+                            </div>
                             </div>
                             <div className="row">
                                         <div className="col-4">

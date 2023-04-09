@@ -115,7 +115,7 @@ app.get("/database/student-filter/student/:student_prim_info/:school_year/:grade
       testCases.push(data[i][searchVal] == student_prim_info);
 
       if (testCases.includes(true)){
-        returnVal = data[i][searchVal];
+        returnVal = data[i];
         break;
       }
     }
