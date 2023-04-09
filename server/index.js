@@ -43,10 +43,10 @@ app.get("/students/:id", (req, res) => {
 app.get("/", async (req, res) => {
   const { login_id, login_password } = req.query;
   const query = "SELECT * FROM `users` WHERE access_id = ? AND password = ?";
-  var authStatus = 201;
+  var authStatus = 201; //201 = fail, 202 = success
   db.query(query, [login_id, login_password], (err, data) => {
     if (err) {
-      console.log(err);
+      // console.log(err);
       return res.json(err);
     }
     if(data.length > 0){
@@ -58,6 +58,76 @@ app.get("/", async (req, res) => {
       .json(data);
   });
 });
+
+//API for setting up the search filters in the Database page
+app.get("/database/student-filter", async (request, response) => {
+  const query = "SELECT * FROM `sections`"
+  db.query(query, (error, data) => {
+    if(error) { return response.json(error); }
+
+    //the task here is to categorize the school years and the grade levels under them and sections under the grade levels
+    const sectionOption = data.map((section) => [section.section_name, section.grade_level,section.school_year])
+    let school_years = {};
+    let tempContainer = [];
+
+    for (let i=0; i < sectionOption.length; i++){
+      if (!tempContainer.includes(sectionOption[i][2])){  
+        tempContainer.push(sectionOption[i][2]);
+        school_years[sectionOption[i][2]] = {};
+      }
+    
+      let currentObject = school_years[sectionOption[i][2]];
+      let grade_level = sectionOption[i][1];
+      if (!(grade_level in currentObject))
+        currentObject[grade_level] = [];
+      
+      if (!(currentObject[grade_level].includes(sectionOption[i][0])))
+        currentObject[grade_level].push(sectionOption[i][0])
+      
+      school_years[sectionOption[i][2]] = currentObject;
+    }
+
+    response.json(school_years)
+  });
+});
+
+//API for retrieving students in the Database page
+app.get("/database/student-filter/student/:student_prim_info/:school_year/:grade_level/:section_name", (request, response) => {
+  const query = `SELECT students.id, students.first_name, students.middle_name, students.last_name, students.grade_level, students.section_name, sections.school_year
+              FROM students,sections
+              WHERE students.grade_level = sections.grade_level AND students.section_name = sections.section_name 
+              AND sections.school_year = ? AND students.grade_level = ? AND students.section_name = ?`;
+  const values = [request.params.school_year, request.params.grade_level, request.params.section_name];
+
+  db.query(query, values, (error, data) => {
+    if (error) { return response.json(error); }
+
+    //the task here is to further refine the query results by using the given ID or name
+    var searchVal, returnVal;
+    const student_prim_info = request.params.student_prim_info;
+    if (/^\d+$/.test(student_prim_info))  searchVal = 'id';     //student_prim_info parameter is an ID  
+    else  searchVal = 'first_name'                              //student_prim_info parameter is a name
+
+    for(let i=0; i<data.length; i++){
+      var testCases = [];
+      testCases.push(data[i][searchVal]+' '+data[i]['last_name'] == student_prim_info);
+      testCases.push(data[i]['last_name'] == student_prim_info);
+      testCases.push(data[i][searchVal] == student_prim_info);
+
+      if (testCases.includes(true)){
+        returnVal = data[i][searchVal];
+        break;
+      }
+    }
+
+    return response.json(returnVal)
+  });
+});
+
+
+
+
+
 
 //a potential scrap api
 app.post("/addstuds", (req, res) => {
