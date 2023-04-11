@@ -1,4 +1,4 @@
-iimport "./Database-Modifier.css";
+import "./Database-Modifier.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
 import { useState, useRef, useEffect } from "react";

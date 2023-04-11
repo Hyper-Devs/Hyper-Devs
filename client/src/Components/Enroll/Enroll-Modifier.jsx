@@ -5,40 +5,42 @@ import "bootstrap/dist/js/bootstrap.min.js";
 
 function EnrollModifier(){
     return(
-        <div className="container-md border p-3">
-        <div className="row-fluid">
-            <div className="col-4  p-3">
-                <div className="row border border-2 rounded">
-                <div className="row rounded-top pt-3 bg-success"><p class="fs-5 fw-bold text-center text-light ">Enroll Type</p></div>
-                <div className="row rounded-bottom  p-3 border  ">
+        <div className="container-fluid p-3">
+        <div className="row ">
+            <div className="col border"> 
+                <div className="row ">
+                    <div className="row rounded-top bg-success mt-3"><p class="fs-5 fw-bold text-center text-light ">Enroll Options</p></div>
+                    <div className="row rounded-bottom m-3 ">
                 
                 <div class="accordion" id="accordionEnrollType">
                 <div class="accordion gap-3" id="accordionPanelsStayOpenStudent">
                     <div class="accordion-item">
                         <h2 class="accordion-header">
-                        <button class="accordion-button border " type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                        <div class="d-grid gap-1 mb-2">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
                             Student Enroll
                         </button>
+                        </div>
                         </h2>
                         <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
                         <div class="accordion-body">
-                        <div class="d-grid gap-2 mb-2">
-                            <button class="btn btn-success border border-success-subtle" type="button">Individual Enroll</button>
+                        <div class="d-grid gap-1 mb-2">
+                            <button class="btn border " type="button">Individual Enroll</button>
                         </div>
 
                         <div class="dropdown">
 
                         <div class="accordion-item">
                             <h2 class="accordion-header">
-                            <button class="accordion-button bg-succe border collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
                                 Batch Enroll
                             </button>
                             </h2>
                             <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse">
                             <div class="accordion-body">
                             <div class="d-grid gap-2">
-                                <button class="btn btn-success  border border-success-subtle" type="button">Incoming Students</button>
-                                <button class="btn btn-success " type="button">New School Year</button>
+                                <button class="btn border " type="button">Incoming Students</button>
+                                <button class="btn border " type="button">New School Year</button>
                                 </div>
                             </div>
                             </div>
@@ -56,8 +58,8 @@ function EnrollModifier(){
                         </h2>
                         <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse">
                         <div class="accordion-body">
-                        <div class="d-grid gap-2 mb-2">
-                            <button class="btn btn-success border border-success-subtle" type="button">Individual Enroll</button>
+                        <div class="d-grid gap-1 mb-2">
+                            <button class="btn border " type="button">Individual Enroll</button>
                         </div>
                         </div>
                         </div>
@@ -70,10 +72,10 @@ function EnrollModifier(){
         </div>
         </div>
         </div>
-        <div className="row-fluid ">
-            <div className="col-4 p-3"> 
-                <div className="row border border-2 rounded">
-                    <div className="row border rounded-top bg-success pt-3"><p class="fs-5 fw-bold text-center text-light ">Enroll Settings</p></div>
+        <div className="row ">
+            <div className="col"> 
+                <div className="row ">
+                    <div className="row rounded-top bg-success pt-3"><p class="fs-5 fw-bold text-center text-light ">Enroll Settings</p></div>
                     <div className="row rounded-bottom p-3 ">
                     
                     <div class="accordion" id="accordionEnrollSettings">
@@ -81,15 +83,15 @@ function EnrollModifier(){
                         <div class="accordion-item">
                             <h2 class="accordion-header">
                             <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFour" aria-expanded="true" aria-controls="panelsStayOpen-collapseFour">
-                                Enroll Settings
+                                Admin Configurations
                             </button>
                             </h2>
                             <div id="panelsStayOpen-collapseFour" class="accordion-collapse collapse show">
                             <div class="accordion-body">
                             <div class="d-grid gap-2 mb-2">
-                                <button class="btn btn-success border border-success-subtle" type="button">Add a Section</button>
-                                <button class="btn btn-success border border-success-subtle" type="button">Delete a Section</button>
-                                <button class="btn btn-success border border-success-subtle" type="button">Delete a Student</button>
+                                <button class="btn border " type="button">Add a Section</button>
+                                <button class="btn border " type="button">Delete a Section</button>
+                                <button class="btn border " type="button">Delete a Student</button>
                             </div>
                             </div>
                             </div>
