@@ -23,9 +23,9 @@ function Override() {
         <div className='override-content' >
             <PageTitle pageName={"Override"}/>
             <OvrContainer/>
+            <Footer/>
         </div>
         </div>
-        <Footer/>
       </div>
     );
   }

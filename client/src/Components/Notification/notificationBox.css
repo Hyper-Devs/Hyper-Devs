@@ -3,7 +3,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 10%;
+  padding-top: 9.1%;
+  padding-bottom: 9.1%;
 }
 
 .notifBox .notif-rectangle {

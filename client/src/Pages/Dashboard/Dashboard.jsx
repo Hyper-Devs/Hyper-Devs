@@ -27,9 +27,9 @@ function Dashboard() {
         <Header />
         <PageTitle pageName={"Dashboard"}/>
         <Box />
+        <Footer />
       </div>
       </div>
-      <Footer />
     </div>
   );
 }

@@ -31,9 +31,9 @@ function Database(){
                 <div className="page-title"><p>SYSTEM DATABASE</p></div>
             <DatabaseModifier/>
             <DatabaseResult/>
+            <Footer1/>
         </div>
         </div> 
-        <Footer1/>
     </div>
 
 

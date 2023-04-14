@@ -33,9 +33,9 @@ function Notification() {
         {active == "notifBox" && <NotificationBox onButtonClick={handleButtonClick} />}
         {active === "msgContext" && <MessageContext onButtonClick={handleButtonClick} />}
         </div>
+        <Footer /> 
       </div>
       </div>
-      <Footer />     
     </div>
   );
 }
