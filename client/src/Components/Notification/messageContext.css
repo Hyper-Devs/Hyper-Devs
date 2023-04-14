@@ -1,15 +1,13 @@
 .notif-message-box {
-
     background-color: white;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     align-items: center;
-  
+    padding-top: 10%;
+    padding-bottom: 10%;
   }
   
   .notif-message-box .notif-message-rectangle {
-    margin-top: min(9.5%, 150px);
     width: 75%;
     height: fit-content;
     background: #00573f;
@@ -105,10 +103,3 @@
   border-radius: 10px;
   padding: 5px;
 }
-
-  .notif-footer {
-    width: 100%;
-    margin-top: min(9.5%, 140px);
-  }
-  
-  

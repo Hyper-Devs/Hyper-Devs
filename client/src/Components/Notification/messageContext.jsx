@@ -33,9 +33,6 @@ function messageContext(props) {
           </div>
         </div>
       </div>
-      <div className="notif-footer">
-        <Footer />
-      </div>
     </div>
   );
 }

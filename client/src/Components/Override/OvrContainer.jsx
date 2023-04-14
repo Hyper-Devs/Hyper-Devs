@@ -1,7 +1,6 @@
 import './OvrContainer.css';
 import React, { useRef, useState } from 'react';
 import InputField from './SearchField';
-import  Footer from '../footer';
 import axios from 'axios';
 
 function Box() {
@@ -72,8 +71,7 @@ function Box() {
                 <div className='search-result'>
                     <h2>Student does not exist</h2>
                 </div>
-            }
-            <Footer/>  
+            }  
       </div>
     )
 }

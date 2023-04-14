@@ -1,17 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Arvo:wght@700&family=Montserrat:wght@500;600&family=Playfair+Display:wght@400;700&display=swap');
 
 .LiveBox {
-
     background-color: white;
     display: flex;
     align-items: center;
     line-height: 39px;
     flex-direction: column;
+    padding-top: 8.2%;
+    padding-bottom: 8.2%;
 }
 
 .rectangle{
     width: 75%;
-    margin-top: min(9.1%, 140px);
     text-align: center;
     background: #FFFFFF;
     border: 3px solid #00573F;
@@ -125,9 +125,4 @@
     line-height: 39px;
     text-align: left;
     font-style: normal;
-}
-
-.dashboard-footer {
-    width: 100%;
-    margin-top: min(9.1%, 140px);
 }

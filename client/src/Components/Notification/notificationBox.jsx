@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React from 'react'
 import "./notificationBox.css";
-import Footer from '../../Components/footer'
+
 
 function notificationBox(props) {
   const handleClick = (buttonId) => {
@@ -20,9 +20,6 @@ function notificationBox(props) {
             </div>
           </div>
         </div>
-      </div>
-      <div className="notif-footer">
-        <Footer />
       </div>
     </div>
   );

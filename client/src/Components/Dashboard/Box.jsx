@@ -3,7 +3,6 @@ import './Box.css'
 import circle1 from '../../Assets/Ellipse 14.png'
 import circle2 from '../../Assets/Ellipse 15.png'
 import bell from '../../Assets/Vector.png'
-import Footer from '../../Components/footer'
 
 
 
@@ -39,9 +38,6 @@ function Box() {
                         </div>
                     </div>
                 </div>
-            </div>
-            <div className="dashboard-footer">
-            <Footer />
             </div>
         </div>
     )
