@@ -26,15 +26,18 @@
 .footer-cs-text {
   letter-spacing: 0.02em;
   font-size: 1.5rem;
+  font-weight: 700;
 }
 
 .footer-upc-text {
   color: #FFB81E;
   font-size: 1.5rem;
+  font-weight: 700;
 }
 
 .footer-upchs-text, .footer-hd-text{
   font-size: 1.5rem;
+  font-weight: 700;
 }
 
 .footer-logos {
