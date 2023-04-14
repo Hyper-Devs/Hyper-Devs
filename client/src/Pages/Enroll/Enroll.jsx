@@ -7,10 +7,12 @@ import EnrollIndResult from "../../Components/Enroll/Enroll-Ind-Results"
 import EnrollResults from "../../Components/Enroll/Enroll-Results"
 import EnrollBNewSYResults from "../../Components/Enroll/Enroll-BNewSY-Results"
 
+import Sidebar from '../../Components/Sidebar/Sidebar'
+
+import EnrollModifier1 from "../../Components/Enroll/Enroll-Modifier1"
+import BSNewSResults from "../../Components/Enroll/Enroll-BNewS-Results"
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
-import EnrollModifier1 from "../../Components/Enroll/Enroll-Modifier1"
-
 function Enroll(){
     return(
         <div>
@@ -26,7 +28,8 @@ function Enroll(){
                             <EnrollModifier1/>
                         </div>
                         <div class="col-8">
-                            <EnrollBNewSYResults/>
+                            <BSNewSResults/>
+                            {/* <EnrollBNewSYResults/> */}
                             {/* <EnrollIndResult/> */}
                         </div>
                     </div>

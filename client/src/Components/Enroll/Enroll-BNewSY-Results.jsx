@@ -69,6 +69,19 @@ function EnrollBNewSYResults(){
                         </div>
                         </div>
                     </div>
+                    <div className="row">
+                    <label for="SInfo" class="form-label text-center text-success">or </label>
+                    </div>
+                    <div className="row p-3 mb-2 border border-success rounded"> 
+                        <label for="SInfo" class="form-label text-center text-success">UPLOAD CLASS LIST</label>
+                        <div class="input-group mb-3">
+                            <label class="input-group-text" for="inputGroupFile01">Upload</label>
+                            <input type="file" class="form-control bg-success bg-opacity-50" id="inputGroupFile01"></input>
+                        </div>
+                        </div>
+                    <div className="row">
+                        <button type="button" class="btn btn-success">Enroll Student</button>
+                    </div>
                 </div>
             </div>
         </div>
