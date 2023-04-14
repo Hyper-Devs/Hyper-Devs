@@ -16,16 +16,7 @@ import "bootstrap/dist/js/bootstrap.min.js";
 function Enroll(){
     return(
         <div className="enroll-container">
-            <div className="enroll-sidebar">
-            <Sidebar
-                buttonState={{
-                    item1: false,
-                    item2: false,
-                    item3: true,
-                    item4: false,
-                    item5: false,
-                }} />
-            </div>
+
             <div className="enroll-default">
                 <Header2/>
                 <div className="enroll-content">
@@ -45,7 +36,16 @@ function Enroll(){
                 </div>
                 <Footer1/>
             </div>
-
+            <div className="enroll-sidebar">
+            <Sidebar
+                buttonState={{
+                    item1: false,
+                    item2: false,
+                    item3: true,
+                    item4: false,
+                    item5: false,
+                }} />
+            </div>      
 
                 
             </div>
