@@ -1,15 +1,13 @@
 .notifBox {
-
   background-color: white;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   align-items: center;
-
+  padding-top: 9.1%;
+  padding-bottom: 9.1%;
 }
 
 .notifBox .notif-rectangle {
-  margin-top: min(9.5%, 150px);
   width: 75%;
   height: fit-content;
   background: #00573f;
@@ -71,9 +69,3 @@
 
   color: #ffffff;
 }
-
-.notif-footer {
-  width: 100%;
-  margin-top: min(9.5%, 140px);
-}
-

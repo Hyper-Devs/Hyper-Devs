@@ -1,20 +1,23 @@
 .database-container{
   display: flex;
-  height: 100%;
+  flex-direction: column;
+  height: 100vh;
   width: 100%;
 }
-.database-default{
-  display:flex;
-  flex-direction: row-reverse;
-  height: 100%;
 
-}
-.database-content-container{
-  position: relative;
-  display: block;
-  flex-direction: row-reverse;
-  height: 100%;
+.database-content-container {
   width: 100%;
+  display: flex;
+}
+
+.database-content{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+  width: 100%;
+  flex: 1;
 
 }
 .page-title{
@@ -32,6 +35,3 @@
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   }
 
-  .database-footer {
-    margin-top: min(8%, 106px);
-  }

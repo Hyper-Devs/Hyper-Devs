@@ -1,14 +1,15 @@
 .override-container{
-    position: absolute;
     display: flex;
-    flex-direction: row-reverse;
-    height: 100%;
+    flex-direction: column;
+    height: 100vh;
     width: 100%;
-    overflow-y: hidden;
 }
 
+.override-content-container {
+    display: flex;
+    flex: 1;
+  }
+
 .override-content{
-    position: static;
-    height: 100vh;
     width: 100%;
 }

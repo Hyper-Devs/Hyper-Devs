@@ -14,7 +14,8 @@ function Database(){
     
     return(
     <div className="database-container">
-        <div className="database-default">
+        <div className="database-content-container">
+        <div>
         <Sidebar
                 buttonState={{
                     item1: false,
@@ -25,13 +26,13 @@ function Database(){
                 }} />
         </div>
         
-        <div className="database-content-container ">
-            
+        <div className="database-content"> 
             <Header2/>
                 <div className="page-title"><p>SYSTEM DATABASE</p></div>
             <DatabaseModifier/>
             <DatabaseResult/>
-            <div className="database-footer"><Footer1/></div>
+            <Footer1/>
+        </div>
         </div> 
     </div>
 
