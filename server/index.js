@@ -15,6 +15,28 @@ const db = mysql.createConnection({
   database: "gans prototype",
 });
 
+
+app.get("/", async (req, res) => {
+  const { login_id, login_password } = req.query;
+  const query = "SELECT * FROM `users` WHERE access_id = ? AND password = ?";
+  var authStatus; //201 = fail, 202 = success
+  db.query(query, [login_id, login_password], (err, data) => {
+    if (err) {
+      return res.json(err);
+    }
+    if(data.length == 1){
+      authStatus = 202
+    }
+    else if (data.length == 0){
+      authStatus = 201
+    }
+
+    return res
+      .status(authStatus)
+      .json(data);
+  });
+});
+
 //api for displaying all students
 app.get("/students", (req, res) => {
   const q = "SELECT * FROM students";
@@ -40,23 +62,53 @@ app.get("/students/:id", (req, res) => {
   });
 });
 
-app.get("/", async (req, res) => {
-  const { login_id, login_password } = req.query;
-  const query = "SELECT * FROM `users` WHERE access_id = ? AND password = ?";
-  var authStatus = 201; //201 = fail, 202 = success
-  db.query(query, [login_id, login_password], (err, data) => {
-    if (err) {
-      // console.log(err);
-      return res.json(err);
-    }
-    if(data.length > 0){
-      authStatus = 202
+//API for setting up the grade levels and sections in the Database page
+app.get("/enroll/available-rooms", async (request, response) => {
+  // for future improvements, the school year here must be flexible and not hard-coded 2023-2024
+  const query = "SELECT grade_level, section_name FROM `sections` WHERE school_year = '2023-2024'"
+  db.query(query, (error, data) => {
+    if(error) { return response.json(error); }
+
+    // the task here is to identify all of the grade levels and retrieve all of the sections associated with them
+    const rawData = data.map((pair) => [pair.grade_level, pair.section_name])
+    let gradeLevels = {}
+    let tempContainer = []
+    for (let i=0; i<rawData.length; i++ ){
+      if (!tempContainer.includes(rawData[i][0])){
+        tempContainer.push(rawData[i][0]);
+        gradeLevels[rawData[i][0]] = [];
+      }
+      if (!gradeLevels[rawData[i][0]].includes(rawData[i][1])){
+        gradeLevels[rawData[i][0]].push(rawData[i][1]);
+      }
     }
 
-    return res
-      .status(authStatus)
-      .json(data);
+    response.json(gradeLevels)
   });
+});
+
+//API for adding a student into the database 
+app.post("/enroll/new-student", (request, response)=>{
+  // issue: deal with duplicates
+  // another concern: add a mechanism where the server supplies some string when middle name is not given
+  const query = "INSERT INTO students (`first_name`, `middle_name`, `last_name`, `grade_level`, `section_name`, `parent_fn`, `parent_mn`, `parent_ln`, `relationship`, `contact_num`) VALUES (?)"
+  const values = [
+      request.body['student-first-name'],
+      request.body['student-middle-name'],
+      request.body['student-last-name'],
+      request.body['student-grade-level'],
+      request.body['student-section'],
+      request.body['guardian-first-name'],
+      request.body['guardian-middle-name'],
+      request.body['guardian-last-name'],
+      request.body['guardian-relationship'],
+      request.body['guardian-contact-number'],
+  ];
+
+  db.query(query, [values], (err, data)=>{
+      if(err) return response.json(err)
+      return response.json("Student has been enrolled succesfully")
+  })
 });
 
 //API for setting up the search filters in the Database page
@@ -129,49 +181,8 @@ app.get("/database/student-filter/student/:student_prim_info/:school_year/:grade
 
 
 
-//a potential scrap api
-app.post("/addstuds", (req, res) => {
-  const q = "INSERT INTO register(`firstname`, `lastname`, `username`, `year`, `mobile`, `password`) VALUES (?)";
 
-  const values = [
-    req.body.firstname,
-    req.body.lastname,
-    req.body.username,
-    req.body.year,
-    req.body.mobile,
-    req.body.password
-  ];
 
-  db.query(q, [values], (err, data) => {
-    if (err) return res.send(err);
-    return res.json("Student has been enrolled");
-  });
-});
-
-//api for adding a student into the database *requires actual testing*
-app.post("/new_student", (req, res)=>{
-  const q = "INSERT INTO enrolled_students (`id`, `first_name`, `middle_name`, `last_name`, `age`, `sex`, `birthdate`, `grade_level`, `section`, `parent_fn`, `parent_mn`, `parent_ln`, `relationship`, `contact_num`) VALUES (?)"
-  const values = [
-      req.body.id,
-      req.body.first_name,
-      req.body.middle_name,
-      req.body.last_name,
-      req.body.age,
-      req.body.sex,
-      req.body.birthdate,
-      req.body.grade_level,
-      req.body.section,
-      req.body.parent_fn,
-      req.body.parent_mn,
-      req.body.parent_ln,
-      req.body.relationship,
-      req.body.contact_num,
-  ];
-  db.query(q, [values], (err, data)=>{
-      if(err) return res.json(err)
-      return res.json("Student has been enrolled succesfully")
-  })
-})
 
 //a potential scrap api
 app.delete("/books/:id", (req, res) => {
