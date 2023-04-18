@@ -49,10 +49,6 @@ function App() {
             path="/profile"
             element={<Profile/>}
           />
-            {/* <Route 
-            path="/sass"
-            element={<Sass/>}
-          /> */}
         </Routes>
       </BrowserRouter>
     </div>
