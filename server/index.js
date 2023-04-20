@@ -12,7 +12,7 @@ const db = mysql.createConnection({
   host: "localhost",
   user: "root",
   password: "",
-  database: "gans prototype",
+  database: "gans_prototype",
 });
 
 
@@ -22,7 +22,7 @@ app.get("/", async (req, res) => {
   var authStatus; //201 = fail, 202 = success
   db.query(query, [login_id, login_password], (err, data) => {
     if (err) {
-      return res.json(err);
+      return res.json("Login Failed");
     }
     if(data.length == 1){
       authStatus = 202
