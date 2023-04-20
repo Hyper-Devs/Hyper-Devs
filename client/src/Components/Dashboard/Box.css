@@ -18,6 +18,10 @@
     border-radius: 10px;
 }
 
+.rectangle p {
+    margin: 0;
+}
+
 .rectangle1{
     position: relative;
     width: 100%;

@@ -30,7 +30,7 @@ function Box() {
     return (
         <div className='container'>
             <div className='first-container'> 
-                <p style={{padding: 15}}>Excuse a student</p>
+                <p>Excuse a student</p>
                 <div className='search-content'>
                     <form 
                         className='search-field' 
