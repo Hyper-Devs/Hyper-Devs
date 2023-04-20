@@ -4,8 +4,8 @@
   "description": "gans-prototype",
   "main": "index.js",
   "scripts": {
-    "test": "test"
-    "start": 
+    "test": "test",
+    "start":  "concurrently \"(cd server/ && npm run start)\" \"(cd client/ && npm run start)\""
   },
   "author": "",
   "license": "ISC",
