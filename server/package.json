@@ -7,7 +7,7 @@
   "scripts": {
     "start": "nodemon index.js",
     "dev": "nodemon server",
-    "test": "jest"
+    "test": "jest --watch"
   },
   "keywords": [],
   "author": "",
