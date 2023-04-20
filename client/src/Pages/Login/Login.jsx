@@ -4,54 +4,70 @@ import Footer from '../../Components/footer'
 import {FiHash} from 'react-icons/fi'
 import {FiKey} from 'react-icons/fi'
 import {FiLogIn} from 'react-icons/fi'
-import { Link } from 'react-router-dom'
 import axios from 'axios';
+import { Link, useNavigate } from 'react-router-dom'
 
 function Login() {
+
+  const [login_id, setLogin_id] = useState('')
+  const [login_password, setLogin_password] = useState('')
+  const [authStatus, setAuthStatus] = useState(false)
+
+  let navigate = useNavigate();
+
   function handleSubmit(e) {
     e.preventDefault();
+    axios.get('http://localhost:8800/', {
+                params : {
+                  login_id, 
+                  login_password,
+                }
+              })
+    .then(res => {console.log(res);
+
+    if(res.status == 202){setAuthStatus(true);
+    navigate('/dashboard');}
+    else if(res.status == 201){setAuthStatus(true)}})
+    .catch(err => console.log(err));
 
     // Read the form data
-    const form = e.target;
-    const formData = new FormData(form);
+    // const form = e.target;
+    // const formData = new FormData(form);
 
     // You can pass formData as a fetch body directly:
     //fetch('/some-api', { method: form.method, body: formData });
 
     // Or you can work with it as a plain object:
-    const formJson = Object.fromEntries(formData.entries());
+    // const formJson = Object.fromEntries(formData.entries());
 
 
-    console.log(formJson);
+    // console.log(formJson);
     // console.log(formJson['login-id']);
 
-    authUser(formJson);
+    // authUser(formJson);
   }
 
-  // const [login_id, setLogin_id] = useState([])
-  // const [login_password, setLogin_password] = useState([])
+  // const authUser = async (dataObs) => {
+  //     var login_id = dataObs['login-id'];
+  //     var login_password = dataObs['login-password'];
 
-  const [authStatus, setAuthStatus] = useState(false)
-  const authUser = async (dataObs) => {
-      var login_id = dataObs['login-id'];
-      var login_password = dataObs['login-password'];
+  //     try {
+  //         const result = await axios.get(`http://localhost:8800/`, {
+  //           params : {
+  //             login_id, 
+  //             login_password,
+  //           }
+  //         });
+          
+  //         // console.log(result)
+  //         setAuthStatus(false);
+  //         if(result.status == 201){setAuthStatus(true);}
+          
+  //     } catch (err) {
+  //         console.log(err);
+  //     }
+  // };
 
-      try {
-          const result = await axios.get(`http://localhost:8800/`, {
-            params : {
-              login_id, 
-              login_password,
-            }
-          });
-          
-          // console.log(result)
-          setAuthStatus(false);
-          if(result.status == 201){setAuthStatus(true);}
-          
-      } catch (err) {
-          console.log(err);
-      }
-  };
 
   return (
     <body id="login-page" data-testid="login-test">
@@ -73,21 +89,21 @@ function Login() {
                 <label>ID Number</label>
                 <div className="login-input-container">
                   <FiHash className="login-input-icon" color="#7A1315"/>
-                  <input name='login-id' type="text" />
+                  <input name='login-id' type="text"
+                  onChange={e => setLogin_id(e.target.value)}/>
                 </div>
 
                 <label>Password</label>
                 <div className="login-input-container">
                   <FiKey className="login-input-icon" color="#7A1315"/>
-                  <input name='login-password' type="password" />
+                  <input name='login-password' type="password" 
+                  onChange={e => setLogin_password(e.target.value)}/>
                 </div>
 
                 {authStatus && <p style={{color: 'red'}}>Access ID or password is incorrect</p>}
                 <div className="login-button">
                   <FiLogIn className="login-icon" color="#7A1315"/>
                   <button type='submit'>Login</button>
-                  {/* put a mechanism where the login button redirects to dashboard when the creds are correct */}
-                  {/* <a href = {'/dashboard'}> <button type='submit'>Login</button></a> */}
                 </div>
                 
                 
