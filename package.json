@@ -1,0 +1,15 @@
+{
+  "name": "hyper-devs-1",
+  "version": "1.0.0",
+  "description": "gans-prototype",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+    "start": 
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^8.0.1"
+  }
+}
