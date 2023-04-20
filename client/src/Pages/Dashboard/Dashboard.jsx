@@ -9,7 +9,7 @@ import Footer from '../../Components/footer'
 
 function Dashboard() {
   return (
-    <div className="dashboard-container">
+    <div className="dashboard-container" data-testid="dashboard-test">
       <div className="dashboard-content-container">
       <div>
       <Sidebar
