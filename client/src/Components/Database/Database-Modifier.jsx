@@ -28,7 +28,11 @@ function DatabaseModifier(){
     const [selectedSection, setSectionFilter] = useState("Select");
 
 
-    const handleChange = (event) => {setAccessType(event.target.value);};
+    // functions for setting up the search filters in the database page
+    function searchFieldEnter () {
+        if (hasEnteredSearch == false) { fetchStudentFilter(); }
+        setHasEnteredSearch(true)
+    }
 
     const fetchStudentFilter = async () => {
         try {
@@ -38,15 +42,6 @@ function DatabaseModifier(){
             console.log(err);
         }
     }
-
-    const fetchStudent = async (student_prim_info, school_year, grade_level, section) => {
-        try {
-            const result = await axios.get(`http://localhost:8800/database/student-filter/student/${student_prim_info}/${school_year}/${grade_level}/${section}`);
-            console.log(result)
-        } catch (error){
-            console.log(error)
-        }
-    };
 
     function updateSelectedSY(event){
         if (event.target.value != 'Select'){
@@ -64,27 +59,26 @@ function DatabaseModifier(){
             setSectionFilter(event.target.value);
     }
 
-    //updates the grade level options
     function updateGLStudentFilter(){
+        //updates the grade level options
         if (selectedSY != 'Select'){
             const grade_levels = Object.keys(studentFilter[selectedSY]);
             setSt_grade_level(grade_levels.map((grade_level) => ({value: grade_level, label: grade_level})))
         }
     }
 
-    //updates the sections options
     function updateSectionStudentFilter(){
+        //updates the sections options
         if (selectedGL != 'Select'){
             const sections = studentFilter[selectedSY][selectedGL];
             setSt_sections(sections.map((section) => ({value: section, label: section})))
         }
     }
 
-    function searchFieldEnter () {
-        if (hasEnteredSearch == false) { fetchStudentFilter(); }
-        setHasEnteredSearch(true)
-    }
+    const handleChange = (event) => {setAccessType(event.target.value);};
 
+
+    // functions for fetching the student from the database
     function handleSubmit(event) {
         event.preventDefault();
 
@@ -98,6 +92,15 @@ function DatabaseModifier(){
         const formJson = Object.fromEntries(formData.entries());
         fetchStudent(formJson['student-prim-info'], formJson['student-school-year'], formJson['student-grade-level'], formJson['student-section']);
     }
+
+    const fetchStudent = async (student_prim_info, school_year, grade_level, section) => {
+        try {
+            const result = await axios.get(`http://localhost:8800/database/student-filter/student/${student_prim_info}/${school_year}/${grade_level}/${section}`);
+            console.log(result)
+        } catch (error){
+            console.log(error)
+        }
+    };
 
 
     return(
@@ -320,6 +323,9 @@ function DatabaseModifier(){
                 </div>
             </div>
         </div>
-    )
+    );
 }
+
+
+
 export default DatabaseModifier
