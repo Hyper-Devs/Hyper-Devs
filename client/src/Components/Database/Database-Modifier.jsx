@@ -279,79 +279,36 @@ function DatabaseModifier(){
                                     </div>
 
                 </div>
-                <div className="row">
-                                        <div className="col-4">
-                                        <div class="input-group mb-1">
+                <div className="row mb-3">
+                                        <div className="col-4 px-4">
+                                        <div class="input-group">
                                             <label class="input-group-text" for="inputGroupSelect11">Access Type</label>
-                                            <select name = "ADaccesType" class="form-select" id="inputGroupSelect12">
+                                            <select class="form-select" id="inputGroupSelect12">
                                                 <option selected>Select</option>
                                                 <option value="ADBasicInformation">Basic Information</option>
                                                 <option value="ADOverrideLogs">Override Logs</option>
                                             </select>
                                         </div>
                                         </div>
-                                {accessType === "ADOverrideLogs" && 
-                                    <div className="col">
-                                        <div class="input-group mb-1">
-                                            <span class="input-group-text" id="from">Period Covered</span>
-                                            <span class="input-group-text" id="from">from</span>
-                                            <input 
-                                                name="period-covered-from-month" 
-                                                type="number" 
-                                                class="form-control" 
-                                                placeholder="mm" 
-                                                aria-label="mm" 
-                                                aria-describedby="from"
-                                            ></input>
-                                            <input 
-                                                name="period-covered-from-day"
-                                                type="number" 
-                                                class="form-control" 
-                                                placeholder="dd" 
-                                                aria-label="dd" 
-                                                aria-describedby="from"
-                                            ></input>
-                                            <input 
-                                                name="period-covered-from-year"
-                                                type="number" 
-                                                class="form-control" 
-                                                placeholder="yyyy" 
-                                                aria-label="yyyy" 
-                                                aria-describedby="from"
-                                            ></input>
+                                        <div className="col-8 px-4">
+                                            <div class="input-group ">
+                                                <span class="input-group-text" id="from">Period Covered</span>
+                                                <span class="input-group-text" id="from">from</span>
+                                                <input type="number" class="form-control" placeholder="mm" aria-label="mm" aria-describedby="from"></input>
+                                                <input type="number" class="form-control" placeholder="dd" aria-label="dd" aria-describedby="from"></input>
+                                                <input type="number" class="form-control" placeholder="yyyy" aria-label="yyyy" aria-describedby="from"></input>
 
-                                            <span class="input-group-text" id="to">to</span>
-                                            <input 
-                                                name="period-covered-to-month" 
-                                                type="number" 
-                                                class="form-control" 
-                                                placeholder="mm" 
-                                                aria-label="mm" 
-                                                aria-describedby="to"
-                                            ></input>
-                                            <input 
-                                                name="period-covered-to-day"
-                                                type="number" 
-                                                class="form-control" 
-                                                placeholder="dd" 
-                                                aria-label="dd" 
-                                                aria-describedby="to"
-                                            ></input>
-                                            <input 
-                                                name="period-covered-to-year"
-                                                type="number" 
-                                                class="form-control" 
-                                                placeholder="yyyy" 
-                                                aria-label="yyyy" 
-                                                aria-describedby="to"
-                                            ></input>
+                                                <span class="input-group-text" id="to">to</span>
+                                                <input type="number" class="form-control" placeholder="mm" aria-label="mm" aria-describedby="to"></input>
+                                                <input type="number" class="form-control" placeholder="dd" aria-label="dd" aria-describedby="to"></input>
+                                                <input type="number" class="form-control" placeholder="yyyy" aria-label="yyyy" aria-describedby="to"></input>
+                                            </div>
                                         </div>
-                                    </div>
-                                }
-                                <div className="row px-3">
+
+                    </div>
+                    <div className="row px-4">
                                     < button type="button" class="btn btn-success">Search Database</button>
                                 </div>  
-                    </div>
                 </div>
             </div>
         </div>

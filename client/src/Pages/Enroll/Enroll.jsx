@@ -25,7 +25,7 @@ function Enroll(){
                             </div>
                             <div class="col-8">
                                 {/* <BSNewSResults/> */}
-                                <EnrollBNewSYResults/>
+                                {/* <EnrollBNewSYResults/> */}
                                 <EnrollIndResult/>
                             </div>
                         </div>
