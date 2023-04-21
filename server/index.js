@@ -153,7 +153,7 @@ app.get("/database/student-filter/student/:student_prim_info/:school_year/:grade
     if (error) { return response.json(error); }
     
     //the task here is to further refine the query results by using the given ID or name
-    var searchVal, returnVal, studentPrimVal;
+    var searchVal, returnVal = [request.params.school_year, request.params.grade_level, request.params.section_name], studentPrimVal;
     const student_prim_info = request.params.student_prim_info;
     if (/^\d+$/.test(student_prim_info))                      //student_prim_info parameter is an ID  
       searchVal = 'id';     
@@ -175,44 +175,20 @@ app.get("/database/student-filter/student/:student_prim_info/:school_year/:grade
       }
     }
 
-    response.json(returnVal)
+    
+    return response.json(returnVal)
   });
 });
 
-
-
-
-
-
-
-
-
-//a potential scrap api
-app.delete("/books/:id", (req, res) => {
-  const bookId = req.params.id;
-  const q = " DELETE FROM books WHERE id = ? ";
-
-  db.query(q, [bookId], (err, data) => {
-    if (err) return res.send(err);
-    return res.json(data);
-  });
-});
-
-//api for deleting a student from the database *requires actual testing*
-app.delete("/enrolled_students/:id", (req,res)=>{
-  const studentID = req.params.id
-  const q = "DELETE FROM enrolled_students WHERE id = ?"
+//API for deleting a student from the database
+app.delete("/database/delete/:student_id", (req,res)=>{
+  const studentID = req.params.student_id
+  const q = "DELETE FROM students WHERE id = ?"
   db.query(q, [studentID], (err, data) =>{
       if(err) return res.json(err)
       return res.json("Student has been deleted succesfully")
   })
-})
-
-app.get("/users/:access_id", (request, response) => {
-  const accessId = request.params.access_id
-  const query = ""
 });
-
 
 app.put("/books/:id", (req, res) => {
   const bookId = req.params.id;
@@ -230,6 +206,10 @@ app.put("/books/:id", (req, res) => {
     return res.json(data);
   });
 });
+
+
+
+
 
 app.listen(8800, () => {
   console.log("Connected to backend.");
