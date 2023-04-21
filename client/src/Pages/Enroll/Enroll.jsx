@@ -13,7 +13,7 @@ import BSNewSResults from "../../Components/Enroll/Enroll-BNewS-Results"
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
 function Enroll(){
-    const [active, setActive] = useState('enrollBSNSR');
+    const [active, setActive] = useState('enrollIR');
 
     const handleButtonClick = (buttonId) => {
       setActive(buttonId)
