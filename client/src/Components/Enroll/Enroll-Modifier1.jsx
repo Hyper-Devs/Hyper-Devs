@@ -38,7 +38,7 @@ function EnrollModifier1(){
                         </div>
                     </div>
                 </div>
-                <div class="accordion" id="accordionPanelsStayOpenEnrollSettings">
+                {/* <div class="accordion" id="accordionPanelsStayOpenEnrollSettings">
                     <div class="accordion-item bg-secondary bg-opacity-10 border border-success ">
                         <h2 class="accordion-header">
                         <button class="accordion-button bg-success text-light collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
@@ -55,7 +55,7 @@ function EnrollModifier1(){
                         </div>
                         </div>
                     </div>
-                    </div>
+                    </div> */}
             </div>
         </div>
         </div>
