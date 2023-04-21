@@ -72,7 +72,7 @@ function EnrollModifier(){
         </div>
         </div>
         </div>
-        <div className="row ">
+        {/* <div className="row ">
             <div className="col"> 
                 <div className="row ">
                     <div className="row rounded-top bg-success pt-3"><p class="fs-5 fw-bold text-center text-light ">Enroll Settings</p></div>
@@ -102,7 +102,7 @@ function EnrollModifier(){
                 </div>
             </div>
         </div>
-        </div>
+        </div> */}
         </div>
     )
 }

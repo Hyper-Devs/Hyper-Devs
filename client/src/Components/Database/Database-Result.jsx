@@ -13,7 +13,7 @@ function DatabaseResult(){
                     <label class="input-group-text" for="inputGroupSelectAD1">Sort</label>
                     <select class="form-select" id="inputGroupSelectAD2">
                         <option selected>Select</option>
-                        <option value="ADBasicInformation">Alphabe tically</option>
+                        <option value="ADBasicInformation">Alphabetically</option>
                         <option value="ADOverrideLogs">Recent Logs</option>
                     </select>
                 </div>
