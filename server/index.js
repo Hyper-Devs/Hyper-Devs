@@ -13,7 +13,7 @@ const db = mysql.createConnection({
   host: "localhost",
   user: "root",
   password: "",
-  database: "gans_prototype",
+  database: "gans prototype",
 });
 
 
@@ -154,18 +154,23 @@ app.get("/database/student-filter/student/:student_prim_info/:school_year/:grade
 
   db.query(query, values, (error, data) => {
     if (error) { return response.json(error); }
-
+    
     //the task here is to further refine the query results by using the given ID or name
-    var searchVal, returnVal;
+    var searchVal, returnVal, studentPrimVal;
     const student_prim_info = request.params.student_prim_info;
-    if (/^\d+$/.test(student_prim_info))  searchVal = 'id';     //student_prim_info parameter is an ID  
-    else  searchVal = 'first_name'                              //student_prim_info parameter is a name
+    if (/^\d+$/.test(student_prim_info))                      //student_prim_info parameter is an ID  
+      searchVal = 'id';     
+    else                                                      //student_prim_info parameter is a name
+      searchVal = 'first_name'                
+      studentPrimVal = student_prim_info.toLowerCase()                  
 
     for(let i=0; i<data.length; i++){
       var testCases = [];
-      testCases.push(data[i][searchVal]+' '+data[i]['last_name'] == student_prim_info);
-      testCases.push(data[i]['last_name'] == student_prim_info);
-      testCases.push(data[i][searchVal] == student_prim_info);
+      testCases.push(data[i][searchVal].toLowerCase()+' '+data[i]['last_name'].toLowerCase() == studentPrimVal);
+      testCases.push(data[i]['last_name'].toLowerCase() == studentPrimVal);
+      
+      if (/^\d+$/.test(student_prim_info)) testCases.push(data[i][searchVal] == student_prim_info);
+      else testCases.push(data[i][searchVal].toLowerCase() == studentPrimVal);
 
       if (testCases.includes(true)){
         returnVal = data[i];
@@ -173,7 +178,7 @@ app.get("/database/student-filter/student/:student_prim_info/:school_year/:grade
       }
     }
 
-    return response.json(returnVal)
+    response.json(returnVal)
   });
 });
 
