@@ -1,0 +1,32 @@
+import express from "express";
+import mysql from "mysql";
+import cors from "cors";
+
+
+const router = express.Router();
+router.use(cors());
+router.use(express.json());
+
+const db = mysql.createConnection({
+    host: "localhost",
+    user: "root",
+    password: "",
+    database: "gans prototype",
+  });
+
+
+// api for displaying students using id
+router.get("/:student_id", (request, response) => {
+    const studentID = request.params.student_id
+    const query = "SELECT * FROM students WHERE id = ?";
+    db.query(query, [studentID], (err, data) => {
+      if (err) {
+        console.log(err);
+        return response.json(err);
+      }
+      return response.json(data);
+    });
+});
+
+
+export default router;
