@@ -4,8 +4,11 @@
     display: flex;
     align-items: center;
     flex-direction: column; 
+    overflow-y: auto;
+    margin-left: 0;
+    margin-right: 0;
     width: 100%;
-    height: 100%;
+    /* height: 100%; */
     background-color: white;
 }
 
@@ -20,7 +23,6 @@
     text-align: left;
     background: #00573F;
     color: white;
-    /* border: 3px solid #00573F; */
     justify-content: left;
     font-size: 27px;
     position: relative;
@@ -84,7 +86,7 @@
 .container button {
     position: relative;
     border-radius: 5px;
-    width: 60%;
+    width: 100%;
     height: 30%;
     font-weight: 700;
     font-size: 60%;
@@ -99,12 +101,28 @@
 
 .container .search-field{
     width: 60%;
-    height: 30%;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
     margin-bottom: 10px;
     margin-top: 10px;
+}
+
+.search-bar {
+    position: fit-content;
+    width: 100%;
+    margin: 10px;
+}
+  
+.search-bar input[type="text"] {
+  height: 100%;
+  width: 100%;
+  padding: 10px;
+  font-size: 60%;
+  background-color: #d9d9d9;
+  color:black;
 }
 
 .name,

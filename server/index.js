@@ -48,17 +48,21 @@ app.get("/students", (req, res) => {
 });
 
 // api for displaying students using id
-app.get("/students/:id", (req, res) => {
-  const studentID = req.params.id
-  const q = "SELECT * FROM students WHERE id = ?";
-  db.query(q, [studentID], (err, data) => {
+app.get("/override/:student_id", (request, response) => {
+  const studentID = request.params.student_id
+  const query = "SELECT * FROM students WHERE id = ?";
+  db.query(query, [studentID], (err, data) => {
     if (err) {
       console.log(err);
-      return res.json(err);
+      return response.json(err);
     }
-    return res.json(data);
+    return response.json(data);
   });
 });
+
+
+
+
 
 //API for setting up the grade levels and sections in the Database page
 app.get("/enroll/available-rooms", async (request, response) => {
@@ -87,27 +91,45 @@ app.get("/enroll/available-rooms", async (request, response) => {
 
 //API for adding a student into the database 
 app.post("/enroll/new-student", (request, response)=>{
-  // issue: deal with duplicates
-  // another concern: add a mechanism where the server supplies some string when middle name is not given
-  const query = "INSERT INTO students (`first_name`, `middle_name`, `last_name`, `grade_level`, `section_name`, `parent_fn`, `parent_mn`, `parent_ln`, `relationship`, `contact_num`) VALUES (?)"
-  const values = [
+  // suggestion: add a mechanism where the server supplies some string when middle name is not given
+  
+  const prelimQuery = "SELECT EXISTS(SELECT * FROM students WHERE first_name = ? AND last_name = ?) AS 'result'";
+  const prelimValues = [      
       request.body['student-first-name'],
-      request.body['student-middle-name'],
-      request.body['student-last-name'],
-      request.body['student-grade-level'],
-      request.body['student-section'],
-      request.body['guardian-first-name'],
-      request.body['guardian-middle-name'],
-      request.body['guardian-last-name'],
-      request.body['guardian-relationship'],
-      request.body['guardian-contact-number'],
+      request.body['student-last-name']
   ];
 
-  db.query(query, [values], (err, data)=>{
-      if(err) return response.json(err)
-      return response.json("Student has been enrolled succesfully")
-  })
+  db.query(prelimQuery, prelimValues, (err, data)=>{
+    if(err) return response.json(err)
+
+    if (data[0]['result'] == 0){
+      const query = "INSERT INTO students (`first_name`, `middle_name`, `last_name`, `grade_level`, `section_name`, `parent_fn`, `parent_mn`, `parent_ln`, `relationship`, `contact_num`) VALUES (?)"
+      const values = [
+          request.body['student-first-name'],
+          request.body['student-middle-name'],
+          request.body['student-last-name'],
+          request.body['student-grade-level'],
+          request.body['student-section'],
+          request.body['guardian-first-name'],
+          request.body['guardian-middle-name'],
+          request.body['guardian-last-name'],
+          request.body['guardian-relationship'],
+          request.body['guardian-contact-number'],
+      ];
+
+      db.query(query, [values], (err, data)=>{
+          if(err) return response.json(err)
+          return response.json("Student has been enrolled succesfully")
+      })
+    }
+    else
+      return response.json("Student already exists")
+  });
 });
+
+
+
+
 
 //API for setting up the search filters in the Database page
 app.get("/database/student-filter", async (request, response) => {
@@ -153,7 +175,7 @@ app.get("/database/student-filter/student/:student_prim_info/:school_year/:grade
     if (error) { return response.json(error); }
     
     //the task here is to further refine the query results by using the given ID or name
-    var searchVal, returnVal, studentPrimVal;
+    var searchVal, returnVal = "Student not found", studentPrimVal;
     const student_prim_info = request.params.student_prim_info;
     if (/^\d+$/.test(student_prim_info))                      //student_prim_info parameter is an ID  
       searchVal = 'id';     
@@ -175,61 +197,91 @@ app.get("/database/student-filter/student/:student_prim_info/:school_year/:grade
       }
     }
 
-    response.json(returnVal)
+    
+    return response.json(returnVal)
   });
 });
 
-
-
-
-
-
-
-
-
-//a potential scrap api
-app.delete("/books/:id", (req, res) => {
-  const bookId = req.params.id;
-  const q = " DELETE FROM books WHERE id = ? ";
-
-  db.query(q, [bookId], (err, data) => {
-    if (err) return res.send(err);
-    return res.json(data);
-  });
-});
-
-//api for deleting a student from the database *requires actual testing*
-app.delete("/enrolled_students/:id", (req,res)=>{
-  const studentID = req.params.id
-  const q = "DELETE FROM enrolled_students WHERE id = ?"
+//API for deleting a student from the database
+app.delete("/database/delete/:student_id", (req,res)=>{
+  const studentID = req.params.student_id
+  const q = "DELETE FROM students WHERE id = ?"
   db.query(q, [studentID], (err, data) =>{
       if(err) return res.json(err)
       return res.json("Student has been deleted succesfully")
   })
-})
-
-app.get("/users/:access_id", (request, response) => {
-  const accessId = request.params.access_id
-  const query = ""
 });
 
-
-app.put("/books/:id", (req, res) => {
-  const bookId = req.params.id;
-  const q = "UPDATE books SET `title`= ?, `desc`= ?, `price`= ?, `cover`= ? WHERE id = ?";
+//API for updating a student's section and grade level from the database
+app.put("/database/update/", (req, res) => {
+  const q = "UPDATE students SET `grade_level`= ?, `section_name`= ? WHERE id = ?";
 
   const values = [
-    req.body.title,
-    req.body.desc,
-    req.body.price,
-    req.body.cover,
+    req.body['grade_level'],
+    req.body['section_name'],
+    req.body['student_id']
   ];
 
-  db.query(q, [...values,bookId], (err, data) => {
+  db.query(q, values, (err, data) => {
     if (err) return res.send(err);
     return res.json(data);
   });
 });
+
+
+
+
+//api for deleting a section from the database  
+app.delete("/database/delete/:section_id", (req,res)=>{ //route still needs to be changed
+  const sectionID = req.params.section_id
+  const q = "DELETE FROM sections WHERE section_name = ? AND grade_level = ?"
+  db.query(q, [sectionID], (err, data) =>{
+      if(err) return res.json(err)
+      return res.json("Section has been deleted succesfully")
+  })
+})
+
+//api for changing a sections adviser
+app.put("/database/update/", (req,res)=>{ //route still needs to be changed
+  const q = "UPDATE sections SET section_teacher = ? WHERE section_name = ? AND grade_level = ?"
+  const values = [
+    req.body['section_teacher'],
+    req.body['section_name'],
+    req.body['grade_level']
+  ];
+
+  db.query(q, values, (err, data) =>{
+      if(err) return res.json(  err)
+      return res.json("Section Adviser has been updated succesfully")
+  })
+})
+
+//api for deleting a user from the database  
+app.delete("/database/delete/:user_id", (req,res)=>{ //route still needs to be changed
+  const userID = req.params.id
+  const q = "DELETE FROM users WHERE access_id = ?"
+  db.query(q, [userID], (err, data) =>{
+      if(err) return res.json(err)
+      return res.json("User has been deleted succesfully")
+  })
+})
+
+//api for changing a users password 
+app.put("/database/update/", (req,res)=>{ //route still needs to be changed
+  const q = "UPDATE users SET password = ? WHERE access_id = ?"
+  const values = [
+    req.body['password'],
+    req.body['access_id']
+  ];
+
+  db.query(q, values, (err, data) =>{
+      if(err) return res.json(  err)
+      return res.json("Password has been updated succesfully")
+  })
+})
+
+
+
 
 app.listen(8800, () => {
   console.log("Connected to backend.");
