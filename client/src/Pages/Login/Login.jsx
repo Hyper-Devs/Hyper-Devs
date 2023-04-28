@@ -78,7 +78,7 @@ function Login() {
             <h1>Gate Access Notification System</h1>
           </div>
 
-          <div className="form-container">
+          <div className="form-container" data-testid="login-form">
             <div className="login-bgi"></div>
 
             <div className="upcLogo"></div>
@@ -86,7 +86,7 @@ function Login() {
             <div className="loginForm">
               <form className='login-field' onSubmit={handleSubmit}>
 
-                <label>ID Number</label>
+                <label data-testid="id-field">ID Number</label>
                 <div className="login-input-container">
                   <FiHash className="login-input-icon" color="#7A1315"/>
                   <input name='login-id' type="text"
