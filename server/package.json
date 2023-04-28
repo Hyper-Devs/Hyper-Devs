@@ -7,7 +7,7 @@
   "scripts": {
     "start": "nodemon index.js",
     "dev": "nodemon server",
-    "test": "jest --watchAll"
+    "test": "jest --watchAll --maxWorkers 1"
   },
   "keywords": [],
   "author": "",
