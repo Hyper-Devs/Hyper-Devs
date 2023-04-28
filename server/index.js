@@ -230,5 +230,5 @@ app.listen(8800, () => {
   console.log("Connected to backend.");
 });
 
-module.exports=app;
-// export default app
+// module.exports=app;
+export default app;
