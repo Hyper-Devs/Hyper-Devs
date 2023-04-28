@@ -10,7 +10,7 @@ const db = mysql.createConnection({
   host: "localhost",
   user: "root",
   password: "",
-  database: "gans_prototype",
+  database: "gans prototype",
 });
 
 
@@ -229,3 +229,6 @@ app.put("/books/:id", (req, res) => {
 app.listen(8800, () => {
   console.log("Connected to backend.");
 });
+
+module.exports=app;
+// export default app
