@@ -13,7 +13,7 @@ import Footer1 from "../../Components/footer";
 function Database(){
     
     return(
-    <div className="database-container">
+    <div className="database-container" data-testid="dashboard-test">
         <div className="database-content-container">
         <div>
         <Sidebar
