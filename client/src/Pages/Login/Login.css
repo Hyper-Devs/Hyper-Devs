@@ -2,7 +2,6 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-
 }
 
 #login-page {
@@ -15,20 +14,27 @@
 }
 
 .login-content {
+  position: relative;
   height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .login-container {
+  position: relative;
+  width: 100%;
   display: flex;
-  justify-content: space-between;
   gap: 3%;
-  align-items: center;
+  justify-content: space-between;
+  flex: 1;
 }
 
 .title {
   position: relative;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   padding-left: 3%;
   color: white;
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -50,7 +56,7 @@
 .form-container {
   position: relative;
   width: 37.5%;
-  height: 80.6vh;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -85,18 +91,6 @@
   width: 60%;
 }
 
-.loginForm input{
-  position: relative;
-  float: right;
-  padding: 2%;
-  width: 100%;
-  border-width: 1px;
-  border-radius: 0 8px 8px 0;
-  font-family: Arial;
-  font-size: 1em;
-  background-color: #d9d9d9;
-}
-
 .loginForm label {
   position: relative;
   display: flex;
@@ -111,35 +105,46 @@
   border-style: solid;
   border-width: 1px;
   border-radius: 10px;
+  height: fit-content;
 }
 
-.login-input-icon {
-  height: 30px;
+.login-input-icons {
+  display: flex;
+  justify-content: center;
+  height: fit-content;
   width: 10%;
-  padding: 1%;
 }
 
-.login-icon {
-  height: 30px;
-  width: 10%;
-  padding: 1%;
+.loginForm input{
+  position: relative;
+  padding: 2%;
+  height: fit-content;
+  width: 100%;
+  border-width: 1px;
+  border-radius: 0 8px 8px 0;
+  font-family: Arial;
+  font-size: 1em;
+  background-color: #d9d9d9;
 }
 
 .login-button {
   background-color: white;
   position: relative;
+  height: fit-content;
   width: 100%;
-  margin-top: 5%;
+  margin-top: 8%;
   border-style: solid;
   border-width: 1px;
   border-radius: 10px;
   display: flex;
+  align-items: center;
 }
 
 .login-button button {
   background-color: #ffb81e;
   height: 100%;
   width: 100%;
+  padding: 1%;
   font-weight: 700;
   line-height: 31px;
   border-width: 1px;
@@ -165,8 +170,68 @@
   color: black;
 }
 
-.login-footer {
-  position: relative;
-  display: flex;
-  flex: 1;
+@media (max-width: 780px) {
+
+  .login-content {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .login-container {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 1;
+  }
+
+  .title {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    padding: 0;
+    text-align: center;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  }
+
+  .title h1 {
+    font-weight: 700;
+    font-size: 2rem;
+    line-height: 40px;
+  }
+  
+  .title h2 {
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 22px;
+    letter-spacing: 0.67rem;
+  }
+
+  .form-container {
+    display: flex;
+    height: 100%;
+    width: 100%;
+  }
+
+  .upcLogo {
+    position: relative;
+    background-image: url(../../Assets/upc_logo.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    width: 100%;
+    height: 25%;
+  }
+
+
+  .login-footer {
+    display: none;
+  }
+
 }
