@@ -1,14 +1,16 @@
 import './OvrContainer.css';
-import React, { useRef, useState } from 'react';
-import InputField from './SearchField';
+import React, { useState } from 'react';
 import axios from 'axios';
+import Footer from '../../Components/footer'
 
-function Box() {
+function OvrContainer() {
     const [students,setStudents] = useState([])
+    const [isVisible, setIsVisible] = useState(false);
+
     const fetchStudent = async (id) => {
         setStudents([]);
         try {
-            const res = await axios.get(`http://localhost:8800/students/${id}`);
+            const res = await axios.get(`http://localhost:8800/override/${id}`);
             if (res.data.length > 0){
                 setStudents(res.data)
             }
@@ -17,29 +19,34 @@ function Box() {
         }
     };
 
-    const nameForm = useRef(null);
-    const handleClickEvent = () => {
-        const form = nameForm.current;
-        fetchStudent(form['student-id'].value);
+    function handleSubmit(event) {
+        event.preventDefault();
+
+        const form = event.target;
+        const formData = new FormData(form);
+
+        const formJson = Object.fromEntries(formData.entries());
+        fetchStudent(formJson['input-field']);
         setIsVisible(true);
     }
-
-    const [isVisible, setIsVisible] = useState(false);
-    // const toggleVisibility = () => {setIsVisible(!isVisible);};
-
+    
     return (
         <div className='container'>
             <div className='first-container'> 
                 <p>Excuse a student</p>
                 <div className='search-content'>
-                    <form 
-                        className='search-field' 
-                        ref={nameForm}
-                    >
-                        <InputField name={'student-id'}/>
+                    <form className='search-field' onSubmit={handleSubmit}>
+                        <div className='search-bar'>
+                            <input 
+                                name='input-field'
+                                type="text" 
+                                class="form-control"
+                                placeholder='Enter student ID'
+                                required
+                            />
+                        </div>
+                        <button type='submit'>Search</button>
                     </form>
-
-                    <button onClick={handleClickEvent}>Search</button>     
                 </div>
             </div>
             {(students.length > 0) && isVisible &&          
@@ -72,8 +79,9 @@ function Box() {
                     <h2>Student does not exist</h2>
                 </div>
             }  
+            <Footer/>
       </div>
     )
 }
 
-export default Box;
+export default OvrContainer;

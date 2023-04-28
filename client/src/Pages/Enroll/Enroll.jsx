@@ -1,19 +1,23 @@
-// import "./Enroll.css"
+import "./Enroll.css"
+import React, {useState} from "react";
 import EnrollModifier from "../../Components/Enroll/Enroll-Modifier"
 import Header2 from "../../Components/Database/Header/Header2"
 import Footer1 from "../../Components/footer"
-import SideNavBar from "../../Components/Sidebar/Sidebar"
-import EnrollIndResult from "../../Components/Enroll/Enroll-Ind-Results"
-import EnrollResults from "../../Components/Enroll/Enroll-Results"
-import EnrollBNewSYResults from "../../Components/Enroll/Enroll-BNewSY-Results"
-
 import Sidebar from '../../Components/Sidebar/Sidebar'
 
+
+import EnrollIndResult from "../../Components/Enroll/Enroll-Ind-Results"
+import EnrollBNewSYResults from "../../Components/Enroll/Enroll-BNewSY-Results"
 import EnrollModifier1 from "../../Components/Enroll/Enroll-Modifier1"
 import BSNewSResults from "../../Components/Enroll/Enroll-BNewS-Results"
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
 function Enroll(){
+    const [active, setActive] = useState('enrollIR');
+
+    const handleButtonClick = (buttonId) => {
+      setActive(buttonId)
+    };
     return(
         <div className="enroll-container">
 
@@ -26,9 +30,12 @@ function Enroll(){
                                 <EnrollModifier1/>
                             </div>
                             <div class="col-8">
+                            {active == "enrollIR" && <EnrollIndResult onButtonClick={handleButtonClick} />}
+                            {active == "enrollBSNSR" && <BSNewSResults onButtonClick={handleButtonClick} />}
+                            {active == "enrollBNSYR" && <EnrollBNewSYResults onButtonClick={handleButtonClick} />}
                                 {/* <BSNewSResults/> */}
                                 {/* <EnrollBNewSYResults/> */}
-                                <EnrollIndResult/>
+                                {/* <EnrollIndResult/> */}
                             </div>
                         </div>
                         
