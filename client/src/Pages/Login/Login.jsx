@@ -88,21 +88,21 @@ function Login() {
 
                 <label data-testid="id-field">ID Number</label>
                 <div className="login-input-container">
-                  <FiHash className="login-input-icon" color="#7A1315"/>
+                  <div className="login-input-icons"><FiHash size={"1.5rem"} color="#7A1315"/></div>
                   <input name='login-id' type="text"
                   onChange={e => setLogin_id(e.target.value)}/>
                 </div>
 
                 <label>Password</label>
                 <div className="login-input-container">
-                  <FiKey className="login-input-icon" color="#7A1315"/>
+                <div className="login-input-icons"><FiKey size={"1.5rem"} color="#7A1315"/></div>
                   <input name='login-password' type="password" 
                   onChange={e => setLogin_password(e.target.value)}/>
                 </div>
 
                 {authStatus && <p style={{color: 'red'}}>Access ID or password is incorrect</p>}
                 <div className="login-button">
-                  <FiLogIn className="login-icon" color="#7A1315"/>
+                <div className="login-input-icons"><FiLogIn size={"1.5rem"} color="#7A1315"/></div>
                   <button type='submit'>Login</button>
                 </div>
                 
