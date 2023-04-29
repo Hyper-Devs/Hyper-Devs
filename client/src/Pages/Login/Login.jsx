@@ -79,7 +79,7 @@ function Login() {
           </div>
 
           <div className="form-container" data-testid="login-form">
-            <div className="login-bgi"></div>
+            <div className="login-bgi">
 
             <div className="upcLogo"></div>
 
@@ -110,6 +110,7 @@ function Login() {
                 <a className={'forgotPassword'} href="#">Forgot Password?</a>
               </form>
             </div>
+          </div>
           </div>
         </div>
         <div className="login-footer">
