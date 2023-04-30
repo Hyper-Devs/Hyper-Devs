@@ -1,8 +1,10 @@
+import axios from 'axios';
+import DatePicker from 'react-datepicker'
+import { useState } from "react";
+import "react-datepicker/dist/react-datepicker.css";
 import "./Database-Modifier.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
-import { useState, useRef, useEffect } from "react";
-import axios from 'axios';
 
 /*
 Backend Note
@@ -14,7 +16,7 @@ for the select option (i.e., grade level, section, school year)
 */
 
 function DatabaseModifier(){
-    const [accessType, setAccessType] = useState('Basic Information');
+    const [accessType, setAccessType] = useState('BasicInformation');
     const [hasEnteredSearch, setHasEnteredSearch] = useState(false);
 
     const [studentFilter, setStudentFilter] = useState("None");
@@ -27,7 +29,20 @@ function DatabaseModifier(){
     const [selectedGL, setGLFilter] = useState("Select");
     const [selectedSection, setSectionFilter] = useState("Select");
 
+    const [rangeStart, setRangeStart] = useState(new Date)
+    const defaultEndDate = new Date()
+    const [rangeEnd, setRangeEnd] = useState(defaultEndDate)
+    defaultEndDate.setDate(defaultEndDate.getDate() + 7)
 
+    const selectStartDate = (d) => {
+        setRangeStart(d)
+    }
+
+    const selectEndDate = (d) => {
+        setRangeEnd(d)
+    }
+
+    
     // functions for setting up the search filters in the database page
     function searchFieldEnter () {
         if (hasEnteredSearch == false) { fetchStudentFilter(); }
@@ -78,7 +93,8 @@ function DatabaseModifier(){
     const handleChange = (event) => {setAccessType(event.target.value);};
 
 
-    // functions for fetching the student from the database
+    // functions for fetching the student or admin from the database
+
     function handleSubmit(event) {
         event.preventDefault();
 
@@ -90,17 +106,78 @@ function DatabaseModifier(){
         // console.log(new URLSearchParams(formData).toString());
         // You can work with it as a plain object.
         const formJson = Object.fromEntries(formData.entries());
-        fetchStudent(formJson['student-prim-info'], formJson['student-school-year'], formJson['student-grade-level'], formJson['student-section']);
+        if (formJson["student-prim-info"] != '' || formJson['student-school-year'] != 'Select'){
+            fetchStudent(formJson);
+        }
+        else {
+            console.log("No information entered");
+        }       
     }
 
-    const fetchStudent = async (student_prim_info, school_year, grade_level, section) => {
+    function handleSubmitAdmin(event) {
+        event.preventDefault();
+
+        const form = event.target;
+        const formData = new FormData(form);
+        const formJson = Object.fromEntries(formData.entries());
+
+        var date_start = "01-01-2023"
+        var date_end = "01-01-2023"
+        if (Object.keys(formJson).includes('date-start')){
+            date_start = formJson['date-start'].replaceAll('/', '-')
+            date_end = formJson['date-end'].replaceAll('/', '-')
+        }
+        fetchAdminInfo(formJson['user-name'], formJson['user-position'], formJson['access-type'], date_start, date_end)
+    }
+
+    const fetchAdminInfo = async (user_name, user_position, access_mode, date_start, date_end) => {
         try {
-            const result = await axios.get(`http://localhost:8800/database/student-filter/student/${student_prim_info}/${school_year}/${grade_level}/${section}`);
+            const result = await axios.get(`http://localhost:8800/database/admin/override-logs/${user_name}/${user_position}/${access_mode}/${date_start}/${date_end}`);
+            console.log(result.data)
+        } catch (error){
+            console.log(error)
+        }
+    };
+
+    const fetchStudent = async (searchVal) => {
+        try {
+            var searchValExist = [
+                searchVal["student-prim-info"] != '',
+                searchVal['student-school-year'] != 'Select',
+                searchVal['student-grade-level'] != 'Select',
+                searchVal['student-section'] != 'Select',
+                Object.keys(searchVal).includes('access-type'),
+                Object.keys(searchVal).includes('date-start'),
+                Object.keys(searchVal).includes('date-end'),
+            ];
+            var result;
+            switch (JSON.stringify(searchValExist)){        
+                //calling different APIs for different functions
+                case JSON.stringify([true, true, true, true, true, false, false]):
+                    result = await axios.get(`http://localhost:8800/database/student-filter/student/${searchVal["student-prim-info"]}/${searchVal["student-school-year"]}/${searchVal["student-grade-level"]}/${searchVal["student-section"]}`);
+                    break
+                case JSON.stringify([false, true, false, false, true, false, false]):
+                    result = await axios.get(`http://localhost:8800/database/students/batch/${searchVal['student-school-year']}`)
+                    break
+                case JSON.stringify([false, true, true, false, true, false, false]):
+                    result = await axios.get(`http://localhost:8800/database/students/batch/${searchVal['student-school-year']}/${searchVal['student-grade-level']}`)
+                    break
+                case JSON.stringify([false, true, true, true, true, false, false]):
+                    result = await axios.get(`http://localhost:8800/database/students/batch/${searchVal['student-school-year']}/${searchVal['student-grade-level']}/${searchVal['student-section']}`)
+                    break
+                default:
+                    console.log("Error 404")
+            }
             console.log(result)
         } catch (error){
             console.log(error)
         }
     };
+
+
+
+
+
 
 
     return(
@@ -123,10 +200,10 @@ function DatabaseModifier(){
                                         type="text" 
                                         class="form-control" 
                                         placeholder="Enter Name or Number or Class" 
-                                        aria-label="StudentInfo" aria-describedby="basic-addonS2" 
+                                        aria-label="StudentInfo" 
+                                        aria-describedby="basic-addonS2" 
                                     >
                                     </input>
-
                                 </div>
                                 <div className="col">
                                     <div class="input-group mb-1">
@@ -136,8 +213,9 @@ function DatabaseModifier(){
                                             class="form-select" 
                                             id="inputGroupSelectS6"
                                             onClick={(e) => updateSelectedSY(e)}
+                                            required
                                         >
-                                            <option selected>Select</option>
+                                            <option selected >Select</option>
                                             {st_school_years.map(({ value, label }, index) => <option value={value} >{label}</option>)}
                                         </select>
                                     </div>
@@ -152,13 +230,12 @@ function DatabaseModifier(){
                                                 onClick={() => updateGLStudentFilter()}
                                                 onChange={(e) => updateSelectedGL(e)}
                                             >
-                                                <option selected>Select</option>
+                                                <option selected >Select</option>
                                                 {st_grade_level.map(({ value, label }, index) => <option value={value} >{label}</option>)}
                                             </select>
                                     </div>
                                 </div>
                                 <div className="col">
-                                    
                                     <div class="input-group mb-1">
                                         <label class="input-group-text" for="inputGroupSelectS3">Section</label>
                                         <select 
@@ -168,14 +245,11 @@ function DatabaseModifier(){
                                             onClick={() => updateSectionStudentFilter()}
                                             onChange={(e) => updateSelectedSection(e)}
                                         >
-
-
-                                            <option selected>Select</option>
+                                            <option selected >Select</option>
                                             {st_sections.map(({ value, label }, index) => <option value={value} >{label}</option>)}
                                         </select>
                                     </div>
                                 </div>
-                                
                             </div>  
                             <div className="row ">
                                 <div className="col-4">
@@ -188,13 +262,12 @@ function DatabaseModifier(){
                                             value={accessType}
                                             onChange={handleChange}
                                         >
-                                            {/* <option selected>Basic Information</option> */}
                                             <option value="BasicInformation">Basic Information</option>
-                                            <option value="Logs/Attendance">Logs/Attendace</option>
+                                            <option value="Attendance">Attendance</option>
                                         </select>
                                     </div>
                                 </div>
-                                {accessType === "Logs/Attendance" && 
+                                {accessType === "Attendance" && 
                                     <div className="col">
                                         <div class="input-group mb-1">
                                             <span class="input-group-text" id="from">Period Covered</span>
@@ -261,54 +334,79 @@ function DatabaseModifier(){
                 </div>
                 <div class="tab-pane fade" id="nav-admin" role="tabpanel" aria-labelledby="nav-admin-tab">
                     <div className="container-md ">
-                                <div className="row">
+                        <form onSubmit={handleSubmitAdmin}>
+                            <div className="row">
+                                <div class="input-group mb-1">
+                                    <span class="input-group-text" id="basic-addon1">#</span>
+                                    <input 
+                                        name="user-name"
+                                        type="text" 
+                                        class="form-control" 
+                                        placeholder="Enter Name or Position" 
+                                        aria-label="StudentInfo" 
+                                        aria-describedby="basic-addonS3"
+                                        required
+                                    ></input>
+                                </div>
+                                <div className="col">
                                     <div class="input-group mb-1">
-                                            <span class="input-group-text" id="basic-addon1">#</span>
-                                            <input type="text" class="form-control" placeholder="Enter Name or Position" aria-label="StudentInfo" aria-describedby="basic-addonS3"></input>
-                                        </div>
-                                        <div className="col">
-                                            <div class="input-group mb-1">
-                                                <label class="input-group-text" for="inputGroupSelectS9">Position</label>
-                                                    <select class="form-select" id="inputGroupSelectS10">
-                                                        <option selected>Select</option>
-                                                        <option value="AdminOp">Admin</option>
-                                                        <option value="FacultyOp">Faculty</option>
-                                                    </select>
-                                            </div>
+                                        <label class="input-group-text" for="inputGroupSelectS9">Position</label>
+                                        <select 
+                                            name="user-position"
+                                            class="form-select" 
+                                            id="inputGroupSelectS10" 
+                                            required
+                                        >
+                                            <option value="Admin">Admin</option>
+                                            <option value="Faculty">Faculty</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="row mb-3">
+                                <div className="col-4 px-4">
+                                    <div class="input-group">
+                                        <label class="input-group-text" for="inputGroupSelect11">Access Type</label>
+                                        <select 
+                                            name="access-type"
+                                            class="form-select" 
+                                            id="inputGroupSelect12" 
+                                            value={accessType}
+                                            onChange={handleChange}
+                                        >
+                                            <option value="BasicInformation">Basic Information</option>
+                                            <option value="Logs">Override Logs</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                {accessType === "Logs" &&
+                                    <div className="col-8 px-4">
+                                        <div class="input-group ">
+                                            <DatePicker
+                                                name="date-start"
+                                                selectsStart
+                                                selected={rangeStart}
+                                                startDate={rangeStart}
+                                                endDate={rangeEnd}
+                                                onChange={selectStartDate}
+                                            />
+                                            <DatePicker
+                                                name="date-end"
+                                                selectsEnd
+                                                selected={rangeEnd}
+                                                startDate={rangeStart}
+                                                endDate={rangeEnd}
+                                                onChange={selectEndDate}
+                                            />
                                         </div>
                                     </div>
-
-                </div>
-                <div className="row mb-3">
-                                        <div className="col-4 px-4">
-                                        <div class="input-group">
-                                            <label class="input-group-text" for="inputGroupSelect11">Access Type</label>
-                                            <select class="form-select" id="inputGroupSelect12">
-                                                <option selected>Select</option>
-                                                <option value="ADBasicInformation">Basic Information</option>
-                                                <option value="ADOverrideLogs">Override Logs</option>
-                                            </select>
-                                        </div>
-                                        </div>
-                                        <div className="col-8 px-4">
-                                            <div class="input-group ">
-                                                <span class="input-group-text" id="from">Period Covered</span>
-                                                <span class="input-group-text" id="from">from</span>
-                                                <input type="number" class="form-control" placeholder="mm" aria-label="mm" aria-describedby="from"></input>
-                                                <input type="number" class="form-control" placeholder="dd" aria-label="dd" aria-describedby="from"></input>
-                                                <input type="number" class="form-control" placeholder="yyyy" aria-label="yyyy" aria-describedby="from"></input>
-
-                                                <span class="input-group-text" id="to">to</span>
-                                                <input type="number" class="form-control" placeholder="mm" aria-label="mm" aria-describedby="to"></input>
-                                                <input type="number" class="form-control" placeholder="dd" aria-label="dd" aria-describedby="to"></input>
-                                                <input type="number" class="form-control" placeholder="yyyy" aria-label="yyyy" aria-describedby="to"></input>
-                                            </div>
-                                        </div>
-
+                                }   
+                            </div>
+                            <div className="row px-4">
+                                < button type="submit" class="btn btn-success">Search Database</button>
+                            </div>  
+                        </form>
                     </div>
-                    <div className="row px-4">
-                                    < button type="button" class="btn btn-success">Search Database</button>
-                                </div>  
                 </div>
             </div>
         </div>

@@ -50,41 +50,140 @@ router.get("/student-filter", async (request, response) => {
   
 //API for retrieving students in the Database page
 router.get("/student-filter/student/:student_prim_info/:school_year/:grade_level/:section_name", (request, response) => {
-const query = `SELECT students.id, students.first_name, students.middle_name, students.last_name, students.grade_level, students.section_name, sections.school_year
-            FROM students,sections
-            WHERE students.grade_level = sections.grade_level AND students.section_name = sections.section_name 
-            AND sections.school_year = ? AND students.grade_level = ? AND students.section_name = ?`;
-const values = [request.params.school_year, request.params.grade_level, request.params.section_name];
+  const query = `SELECT students.id, students.first_name, students.middle_name, students.last_name, students.grade_level, students.section_name, sections.school_year
+              FROM students,sections
+              WHERE students.grade_level = sections.grade_level AND students.section_name = sections.section_name 
+              AND sections.school_year = ? AND students.grade_level = ? AND students.section_name = ?`;
+  const values = [request.params.school_year, request.params.grade_level, request.params.section_name];
 
-db.query(query, values, (error, data) => {
-    if (error) { return response.json(error); }
-    
-    //the task here is to further refine the query results by using the given ID or name
-    var searchVal, returnVal = "Student not found", studentPrimVal;
-    const student_prim_info = request.params.student_prim_info;
-    if (/^\d+$/.test(student_prim_info))                      //student_prim_info parameter is an ID  
-    searchVal = 'id';     
-    else                                                      //student_prim_info parameter is a name
-    searchVal = 'first_name'                
-    studentPrimVal = student_prim_info.toLowerCase()                  
+  db.query(query, values, (error, data) => {
+      if (error) { return response.json(error); }
+      
+      //the task here is to further refine the query results by using the given ID or name
+      var searchVal, returnVal = "Student not found", studentPrimVal;
+      const student_prim_info = request.params.student_prim_info;
+      if (/^\d+$/.test(student_prim_info))                      //student_prim_info parameter is an ID  
+        searchVal = 'id';     
+      else                                                      //student_prim_info parameter is a name
+        searchVal = 'first_name'                
+        studentPrimVal = student_prim_info.toLowerCase()                  
 
-    for(let i=0; i<data.length; i++){
-    var testCases = [];
-    testCases.push(data[i][searchVal].toLowerCase()+' '+data[i]['last_name'].toLowerCase() == studentPrimVal);
-    testCases.push(data[i]['last_name'].toLowerCase() == studentPrimVal);
-    
-    if (/^\d+$/.test(student_prim_info)) testCases.push(data[i][searchVal] == student_prim_info);
-    else testCases.push(data[i][searchVal].toLowerCase() == studentPrimVal);
+      for(let i=0; i<data.length; i++){
+        var testCases = [];
+        testCases.push(data[i][searchVal].toLowerCase()+' '+data[i]['last_name'].toLowerCase() == studentPrimVal);
+        testCases.push(data[i]['last_name'].toLowerCase() == studentPrimVal);
+        
+        if (/^\d+$/.test(student_prim_info)) testCases.push(data[i][searchVal] == student_prim_info);
+        else testCases.push(data[i][searchVal].toLowerCase() == studentPrimVal);
 
-    if (testCases.includes(true)){
-        returnVal = data[i];
-        break;
-    }
-    }
+        if (testCases.includes(true)){
+            returnVal = data[i];
+            break;
+        }
+      }
 
-    
-    return response.json(returnVal)
+      
+      return response.json(returnVal)
+  });
 });
+
+
+
+//API for retrieving all students in a school year
+router.get("/students/batch/:school_year", (request, response) => {
+  const query = `SELECT students.id, students.first_name, students.middle_name, students.last_name, students.grade_level, students.section_name, sections.school_year
+                  FROM students,sections
+                  WHERE students.grade_level = sections.grade_level AND students.section_name = sections.section_name 
+                  AND sections.school_year = ?`;
+  const values = [request.params.school_year];
+
+  db.query(query, values, (error, data) => {
+    if (error) { return response.json(error); }
+    return response.json(data)
+  });
+});
+
+//API for retrieving all students in a grade level
+router.get("/students/batch/:school_year/:grade_level", (request, response) => {
+  const query = `SELECT students.id, students.first_name, students.middle_name, students.last_name, students.grade_level, students.section_name, sections.school_year
+                  FROM students,sections
+                  WHERE students.grade_level = sections.grade_level AND students.section_name = sections.section_name 
+                  AND sections.school_year = ? AND students.grade_level = ?`;
+  const values = [request.params.school_year, request.params.grade_level];
+
+  db.query(query, values, (error, data) => {
+    if (error) { return response.json(error); }
+    return response.json(data)
+  });
+});
+
+//API for retrieving all students in a section
+router.get("/students/batch/:school_year/:grade_level/:section", (request, response) => {
+  const query = `SELECT students.id, students.first_name, students.middle_name, students.last_name, students.grade_level, students.section_name, sections.school_year
+                  FROM students,sections
+                  WHERE students.grade_level = sections.grade_level AND students.section_name = sections.section_name 
+                  AND sections.school_year = ? AND students.grade_level = ? AND students.section_name = ?`;
+  const values = [request.params.school_year, request.params.grade_level, request.params.section];
+
+  db.query(query, values, (error, data) => {
+    if (error) { return response.json(error); }
+    return response.json(data)
+  });
+});
+
+
+
+//API for retrieving users or logs in the Database page
+router.get("/admin/override-logs/:admin_name/:position/:access_mode/:date_from/:date_to", (request, response) => {
+  const values = [request.params.admin_name, request.params.position]
+  const query = `SELECT *
+                FROM (SELECT Overrider_Name, Position, Student_Name, Reason, Date
+                  FROM users, override_logs
+                  WHERE override_logs.Overrider_Name = users.name) AS results
+                WHERE results.Overrider_Name = ? && results.Position = ?`;
+
+  db.query(query, values, (error, data) => {
+    if (error) { return response.json(error); }
+
+    // the task here is to further refine the query results
+    if (data.length <= 0) { return response.json("No record found") }
+
+    var returnVal;
+    if (request.params.access_mode == "BasicInformation"){          //mode: returns basic info regarding the searched user
+      returnVal = {
+        overrider_name : request.params.admin_name,
+        overrider_position : request.params.position,
+        overrider_total_logs : data.length
+      }
+      return response.json(returnVal)
+    }
+    else{                                                           //mode: returns overriding logs regarding the searched user
+      // determines the set of dates (inclusive) given the date range
+      const startDate = new Date(request.params.date_from);
+      const endDate = new Date(request.params.date_to);
+      const dateRange = [];
+      
+      var newStartDate = startDate
+      newStartDate.setDate(newStartDate.getDate()+1)
+      for (let d = startDate; d <= endDate; d.setDate(d.getDate() + 1)) {
+        dateRange.push(new Date(d));
+      }
+      var newEndDate = startDate
+      newEndDate.setDate(newEndDate.getDate())
+      dateRange.push(newEndDate)
+      
+      // checks if the dates returned by the server is within the requested date range
+      returnVal = [];
+      for (var i=0; i<dateRange.length; i++){
+        for (var j=0; j<data.length; j++)
+          if (dateRange[i].toString() === data[j]['Date'].toString()){
+            returnVal.push(data[j])
+          }
+      }
+
+      return response.json(returnVal)
+    }
+  });
 });
 
 //API for deleting a student from the database
@@ -112,10 +211,18 @@ db.query(q, values, (err, data) => {
     return res.json(data);
 });
 });
+
+
+
+
   
-  
-  
-  
+
+
+
+
+
+
+
 //api for deleting a section from the database  
 router.delete("/delete/:section_id", (req,res)=>{ //route still needs to be changed
 const sectionID = req.params.section_id
