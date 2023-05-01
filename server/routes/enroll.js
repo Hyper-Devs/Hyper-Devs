@@ -1,18 +1,6 @@
-import express from "express";
-import mysql from "mysql";
-import cors from "cors";
-
-
+const express = require('express');
+const db = require('../database.js').databaseConnection;
 const router = express.Router();
-router.use(cors());
-router.use(express.json());
-
-const db = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "",
-  database: "gans prototype",
-});
 
 
 //API for setting up the grade levels and sections in the Database page
@@ -78,5 +66,4 @@ db.query(prelimQuery, prelimValues, (err, data)=>{
 });
 });
 
-
-export default router;
+module.exports=router;

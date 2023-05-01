@@ -1,7 +1,6 @@
-import express from "express";
-import cors from "cors";
-import routes from './routes/index.js';
-
+const express = require('express');
+const cors = require('cors');
+const routes = require('./routes/index.js');
 
 const app = express();
 app.use(cors());
@@ -9,9 +8,7 @@ app.use(express.json());
 app.use('', routes);
 
 
-app.listen(8800, () => {
-  console.log("Connected to backend.");
+app.listen(8800, async () => {
 });
 
-// module.exports=app;
-export default app 
+module.exports=app;

@@ -1,19 +1,6 @@
-import express from "express";
-import mysql from "mysql";
-import cors from "cors";
-
-
+const express = require('express');
+const db = require('../database.js').databaseConnection;
 const router = express.Router();
-router.use(cors());
-router.use(express.json());
-
-const db = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "",
-    database: "gans prototype",
-  });
-
 
 // api for displaying students using id
 router.get("/:student_id", (request, response) => {
@@ -28,5 +15,4 @@ router.get("/:student_id", (request, response) => {
     });
 });
 
-
-export default router;
+module.exports = router;
