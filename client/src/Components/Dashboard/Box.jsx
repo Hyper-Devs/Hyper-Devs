@@ -17,6 +17,7 @@ function Box() {
                         <div className='Day'>08</div>
                         <div className='Year'>2023</div>
                     </div>
+                    <div className="clock-box">
                     <div className="rectangle2">
                         <div className='clock'><Clocks/></div>
                         <div className='entrance-exit'>
@@ -36,6 +37,7 @@ function Box() {
                                 EXIT
                             </div>
                         </div>
+                    </div>
                     </div>
                 </div>
             </div>

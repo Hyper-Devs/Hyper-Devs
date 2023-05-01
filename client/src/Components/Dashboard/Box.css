@@ -10,6 +10,9 @@
 }
 
 .rectangle{
+    position: relative;
+    display: flex;
+    flex-direction: column;
     width: 75%;
     text-align: center;
     background: #FFFFFF;
@@ -26,7 +29,6 @@
     width: 100%;
     display: flex;
     align-items: center;
-    gap: min(15%, 170px);
     background-color: transparent;
     border-top: 3px solid #00573F;
 }
@@ -34,12 +36,26 @@
 .rectangle2{
     position: relative;
     display: flex;
+    align-items: center;
     flex-direction: column;
     gap: 10px;
     background-color: transparent;
 }
 
+.clock-box {
+    position: relative;
+    display: flex;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    outline: red dashed 1px;
+}
+
 .clock {
+    position: relative;
+    display: flex;
+    justify-content: center;
     width: 100%;
     border-radius: 10px;
     background: #00573F;

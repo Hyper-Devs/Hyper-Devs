@@ -15,4 +15,20 @@ router.get("/:student_id", (request, response) => {
     });
 });
 
+router.post("/logs", (request, response) => {
+  const query = "INSERT INTO override_logs (`Overrider_Name`, `Student_Name`, `Reason`, `Date`) VALUES (?)"
+  const values = [
+      request.body['overrider-name'],
+      request.body['student-name'],
+      request.body['override-reason'],
+      request.body['override-date'],
+  ];
+
+  db.query(query, [values], (err, data)=>{
+      if(err) return response.json(err)
+      return response.json("Override action recorded succesfully")
+  });
+
+});
+
 module.exports = router;

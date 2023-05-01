@@ -25,3 +25,7 @@ body{
       border-radius: 0;
       color:#D9D9D9;
   }
+
+.input-group {
+  flex-wrap: nowrap;
+}

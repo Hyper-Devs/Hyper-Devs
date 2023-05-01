@@ -30,40 +30,39 @@ router.get("/available-rooms", async (request, response) => {
   
 //API for adding a student into the database 
 router.post("/new-student", (request, response)=>{
-// suggestion: add a mechanism where the server supplies some string when middle name is not given
+  // suggestion: add a mechanism where the server supplies some string when middle name is not given
+  const prelimQuery = "SELECT EXISTS(SELECT * FROM students WHERE first_name = ? AND last_name = ?) AS 'result'";
+  const prelimValues = [      
+      request.body['student-first-name'],
+      request.body['student-last-name']
+  ];
 
-const prelimQuery = "SELECT EXISTS(SELECT * FROM students WHERE first_name = ? AND last_name = ?) AS 'result'";
-const prelimValues = [      
-    request.body['student-first-name'],
-    request.body['student-last-name']
-];
+  db.query(prelimQuery, prelimValues, (err, data)=>{
+      if(err) return response.json(err)
 
-db.query(prelimQuery, prelimValues, (err, data)=>{
-    if(err) return response.json(err)
+      if (data[0]['result'] == 0){
+        const query = "INSERT INTO students (`first_name`, `middle_name`, `last_name`, `grade_level`, `section_name`, `parent_fn`, `parent_mn`, `parent_ln`, `relationship`, `contact_num`) VALUES (?)"
+        const values = [
+            request.body['student-first-name'],
+            request.body['student-middle-name'],
+            request.body['student-last-name'],
+            request.body['student-grade-level'],
+            request.body['student-section'],
+            request.body['guardian-first-name'],
+            request.body['guardian-middle-name'],
+            request.body['guardian-last-name'],
+            request.body['guardian-relationship'],
+            request.body['guardian-contact-number'],
+        ];
 
-    if (data[0]['result'] == 0){
-    const query = "INSERT INTO students (`first_name`, `middle_name`, `last_name`, `grade_level`, `section_name`, `parent_fn`, `parent_mn`, `parent_ln`, `relationship`, `contact_num`) VALUES (?)"
-    const values = [
-        request.body['student-first-name'],
-        request.body['student-middle-name'],
-        request.body['student-last-name'],
-        request.body['student-grade-level'],
-        request.body['student-section'],
-        request.body['guardian-first-name'],
-        request.body['guardian-middle-name'],
-        request.body['guardian-last-name'],
-        request.body['guardian-relationship'],
-        request.body['guardian-contact-number'],
-    ];
-
-    db.query(query, [values], (err, data)=>{
-        if(err) return response.json(err)
-        return response.json("Student has been enrolled succesfully")
-    })
-    }
-    else
-    return response.json("Student already exists")
-});
+        db.query(query, [values], (err, data)=>{
+            if(err) return response.json(err)
+            return response.json("Student has been enrolled succesfully")
+        })
+      }
+      else
+        return response.json("Student already exists")
+  });
 });
 
 module.exports=router;
