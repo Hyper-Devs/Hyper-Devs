@@ -5,29 +5,21 @@ import Sidebar from '../../Components/Sidebar/Sidebar'
 import PageTitle from '../../Components/PageTitle'
 import Box from '../../Components/Dashboard/Box'
 import Footer from '../../Components/footer'
-
+import NewSidebar from "../../Components/Sidebar/NewSidebar";
 
 function Dashboard() {
   return (
     <div className="dashboard-container" data-testid="dashboard-test">
       <div className="dashboard-content-container">
       <div>
-      <Sidebar
-        buttonState={{
-          item1: true,
-          item2: false,
-          item3: false,
-          item4: false,
-          item5: false,
-        }}
-      />
+      <NewSidebar />
       </div>
 
       <div className="dashboard-content">
         <Header />
         <PageTitle pageName={"Dashboard"}/>
         <Box />
-        <Footer />
+        {/* <Footer /> */}
       </div>
       </div>
     </div>

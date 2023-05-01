@@ -1,7 +1,7 @@
 import "./Database-Modifier.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
-import { useState, useRef, useEffect } from "react";
+import { useState} from "react";
 import axios from 'axios';
 
 /*
@@ -30,7 +30,7 @@ function DatabaseModifier(){
 
     // functions for setting up the search filters in the database page
     function searchFieldEnter () {
-        if (hasEnteredSearch == false) { fetchStudentFilter(); }
+        if (hasEnteredSearch === false) { fetchStudentFilter(); }
         setHasEnteredSearch(true)
     }
 
@@ -44,24 +44,24 @@ function DatabaseModifier(){
     }
 
     function updateSelectedSY(event){
-        if (event.target.value != 'Select'){
+        if (event.target.value !== 'Select'){
             setSYFilter(event.target.value);
         }
     }
 
     function updateSelectedGL(event){
-        if (event.target.value != 'Select')
+        if (event.target.value !== 'Select')
             setGLFilter(event.target.value);
     }
 
     function updateSelectedSection(event){
-        if (event.target.value != 'Select')
+        if (event.target.value !== 'Select')
             setSectionFilter(event.target.value);
     }
 
     function updateGLStudentFilter(){
         //updates the grade level options
-        if (selectedSY != 'Select'){
+        if (selectedSY !== 'Select'){
             const grade_levels = Object.keys(studentFilter[selectedSY]);
             setSt_grade_level(grade_levels.map((grade_level) => ({value: grade_level, label: grade_level})))
         }
@@ -69,7 +69,7 @@ function DatabaseModifier(){
 
     function updateSectionStudentFilter(){
         //updates the sections options
-        if (selectedGL != 'Select'){
+        if (selectedGL !== 'Select'){
             const sections = studentFilter[selectedSY][selectedGL];
             setSt_sections(sections.map((section) => ({value: section, label: section})))
         }
