@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const routes = require('./routes/index.js');
-import twilio from 'twilio';
+const twilio = require('twilio');
 
 const accountSID = 'ACce43b4fdda36553a50eda2b9b2715277';
 const authToken = '998814625f7567851b4edf36bcb87dd3';
