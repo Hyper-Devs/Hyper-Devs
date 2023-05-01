@@ -10,6 +10,7 @@ import Enrollment from "./Pages/Enrollment/Enrollment"
 import Database from "./Pages/Database/Database";
 import Profile from "./Pages/Profile/Profile";
 import Enroll from "./Pages/Enroll/Enroll";
+import Message from "./Pages/Text messaging/Message";
 // import Sass from "./Pages/sass-doc/sass"
 
 function App() {
@@ -28,6 +29,10 @@ function App() {
           <Route
             path='/override'
             element={<Override/>}
+          />
+          <Route
+            path='/message'
+            element={<Message/>}
           />
           <Route
             path='notification'
