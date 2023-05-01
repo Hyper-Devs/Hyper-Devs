@@ -20,7 +20,7 @@ function DatabaseResult(){
             </div>
         </div>
         <div className="row mb-5">
-            RESULTS WILL SHOW HERE
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque dolorem provident laudantium ex nam! Laborum suscipit delectus, eveniet impedit dignissimos facilis deserunt ipsam ut sint rem nobis, temporibus adipisci velit repudiandae, consequatur error voluptates. Consequatur, voluptates commodi labore molestiae id neque cupiditate accusantium laborum dolorum modi amet, perspiciatis iste incidunt harum vel ex aperiam quas eos illum quidem nihil sit a maiores. Soluta quidem labore suscipit sapiente officiis, assumenda nam doloribus? Animi recusandae velit, minus vel laboriosam repudiandae maxime, sint temporibus obcaecati optio ducimus natus harum nobis fugit iste totam voluptatum. Vitae eos optio adipisci minus, ipsum non. Nam, dolores.
         </div>
     </div>
     </div>
