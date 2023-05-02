@@ -13,11 +13,12 @@ import BSNewSResults from "../../Components/Enroll/Enroll-BNewS-Results"
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
 function Enroll(){
-    const [active, setActive] = useState('enrollIR');
+    const [active, setActive] = useState('');
 
-    const handleButtonClick = (buttonId) => {
-      setActive(buttonId)
+    const handleEnrollmentOption = (type) => {
+        setActive(type)
     };
+
     return(
         <div className="enroll-container">
 
@@ -27,12 +28,12 @@ function Enroll(){
                 <div class="container-fluid">
                         <div class="row">
                             <div class="col-4">
-                                <EnrollModifier1/>
+                                <EnrollModifier1 onEnrollTypeChange={handleEnrollmentOption}/>
                             </div>
                             <div class="col-8">
-                            {active === "enrollIR" && <EnrollIndResult onButtonClick={handleButtonClick} />}
-                            {active === "enrollBSNSR" && <BSNewSResults onButtonClick={handleButtonClick} />}
-                            {active === "enrollBNSYR" && <EnrollBNewSYResults onButtonClick={handleButtonClick} />}
+                            {active === "enrollIR" && <EnrollIndResult/>}
+                            {active === "enrollBSNSR" && <BSNewSResults/>}
+                            {active === "enrollBNSYR" && <EnrollBNewSYResults/>}
                                 {/* <BSNewSResults/> */}
                                 {/* <EnrollBNewSYResults/> */}
                                 {/* <EnrollIndResult/> */}
