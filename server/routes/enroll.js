@@ -1,21 +1,16 @@
-import express from "express";
-import mysql from "mysql";
-import cors from "cors";
-import fileUpload from "express-fileupload";
-import csv from "csv-parser";
-import fs from "fs";
-
+// import express from "express";
+// import mysql from "mysql";
+// import cors from "cors";
+// import fileUpload from "express-fileupload";
+// import csv from "csv-parser";
+// import fs from "fs";
+const express = require('express');
+const db = require('../database.js').databaseConnection;
 const router = express.Router();
-router.use(cors());
-router.use(express.json());
+const fileUpload = require('express-fileupload');
+const csv = require('csv-parser');
+const fs = require('fs');
 router.use(fileUpload());
-
-const db = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "",
-  database: "gans prototype",
-});
 
 
 //API for setting up the grade levels and sections in the Database page
@@ -124,4 +119,4 @@ router.post("/batch/new-student", (request, response) => {
   });
 });
 
-export default router;
+module.exports=router;
