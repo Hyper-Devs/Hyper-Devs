@@ -20,7 +20,7 @@ export const SidebarData = [
     {
         title: "Enrollment",
         icon: <PersonAddIcon/>,
-        link: "/enrollment"
+        link: "/enroll"
     },
     {
         title: "Database",
