@@ -16,16 +16,34 @@ app.use('', routes);
 
 // Twilio API
 app.get('/message', (req, res) => {
-  // console.log("this is working")
-  const { recipient, textMessage } = req.query
+  const { recipient, status } = req.query
+  var textMessage;
+  // console.log("Text Message:")
+  // console.log(req.query)
 
   // Send text message
+  if(status == 1){
+    textMessage = "Student tapped in"
+  }
+  else if(status == 2){
+    textMessage = "Student tapped out"
+  }
+  else if(status ==3){
+    textMessage = "Student got permission"
+  }
   client.messages.create({
     body: textMessage,
     to: "+63"+recipient,
     from: '+16072702153'
-  }).then((message) =>  console.log(message.body, "Message sent succesfully!"))
-  .catch(error => console.log(error, "Message failed to send!"));
+  }).then((message) => {
+    console.log(message),
+    res.write(message.body), 
+    res.write("\nMessage sent succesfully!"),
+    res.end()
+  })
+  .catch(error => {
+    console.log(error),
+    res.send("\nMessage failed to send!")});
 })
 
 
