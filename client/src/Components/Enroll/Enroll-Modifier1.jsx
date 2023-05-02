@@ -1,11 +1,24 @@
-import React from "react";
+import {React, useState} from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
 
-function EnrollModifier1(props){
-    const handleClick = (buttonId) => {
-        props.onButtonClick(buttonId);
+function EnrollModifier1({onEnrollTypeChange}){
+
+    // const handleClick = (buttonId) => {
+    //     return buttonId;
+    // };
+
+    const individualEnroll = () => {
+        onEnrollTypeChange('enrollIR');
     };
+    const batchNS = () => {
+        onEnrollTypeChange('enrollBSNSR');
+    };
+    const batchNY = () => {
+        onEnrollTypeChange('enrollBNSYR');
+    };
+    
+
     return(
         <div className="container-fluid p-3">
             <div className="row">
@@ -20,7 +33,7 @@ function EnrollModifier1(props){
                         <div id="panelsStayOpen-collapseStudentOption" class="accordion-collapse collapse show">
                         <div class="accordion-body">
                             <div class="d-grid gap-1 mb-2">
-                                <button class="btn btn-secondary btn-outline-success text-light borders " type="button" onClick={() => handleClick('enrollIR')}>Individual Enroll</button>
+                                <button class="btn btn-secondary btn-outline-success text-light borders " type="button" onClick={individualEnroll}>Individual Enroll</button>
                             </div>
                             <div class="accordion-item bg-secondary bg-opacity-10 border border-success rounded">
                                 <h2 class="accordion-header">
@@ -31,8 +44,8 @@ function EnrollModifier1(props){
                                 <div id="panelsStayOpen-collapseStudentBatchOption" class="accordion-collapse collapse">
                                     <div class="accordion-body">
                                         <div class="d-grid gap-2">
-                                            <button class="btn btn-secondary btn-outline-success text-light borders " type="button" onClick={() => handleClick('enrollBNSYR')}>New Students</button>
-                                            <button class="btn btn-secondary btn-outline-success text-light borders " type="button" onClick={() => handleClick('enrollBNSYR')}>New School Year</button>
+                                            <button class="btn btn-secondary btn-outline-success text-light borders " type="button" onClick={batchNS}>New Students</button>
+                                            <button class="btn btn-secondary btn-outline-success text-light borders " type="button" onClick={batchNY}>New School Year</button>
                                         </div>
                                     </div>
                                 </div>
