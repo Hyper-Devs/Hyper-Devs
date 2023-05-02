@@ -1,6 +1,21 @@
-const express = require('express');
-const db = require('../database.js').databaseConnection;
+import express from "express";
+import mysql from "mysql";
+import cors from "cors";
+import fileUpload from "express-fileupload";
+import csv from "csv-parser";
+import fs from "fs";
+
 const router = express.Router();
+router.use(cors());
+router.use(express.json());
+router.use(fileUpload());
+
+const db = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  password: "",
+  database: "gans prototype",
+});
 
 
 //API for setting up the grade levels and sections in the Database page
@@ -65,4 +80,48 @@ router.post("/new-student", (request, response)=>{
   });
 });
 
-module.exports=router;
+//API for adding students by batch
+router.post("/batch/new-student", (request, response) => {
+  if (!request.files) { return response.status(400).send("No files were uploaded."); }
+
+  const file = request.files;
+  const path = "./fileUploads/" + file['file']['name'];
+  const extensionName = file['file']['mimetype'];
+  const allowedExtension = ['text/csv'];
+
+  if(!allowedExtension.includes(extensionName)){ return response.status(422).send("Invalid file type"); }
+
+  file['file']['mv'](path, (err) => {
+    if (err) { return response.status(500).send(err); }
+
+    const results = [];
+    fs.createReadStream(path)
+      .pipe(csv())
+      .on('data', (data) => results.push(data))
+      .on('end', () => {
+        //limit of INSERT statement is 1000 - implement this in file handling
+
+        const query = "INSERT INTO students (`first_name`, `middle_name`, `last_name`, `grade_level`, `section_name`, `parent_fn`, `parent_mn`, `parent_ln`, `relationship`, `contact_num`) VALUES ?"
+        const values = results.map(row => [
+          row['student-first-name'],
+          row['student-middle-name'],
+          row['student-last-name'],
+          row['student-grade-level'],
+          row['student-section'],
+          row['guardian-first-name'],
+          row['guardian-middle-name'],
+          row['guardian-last-name'],
+          row['guardian-relationship'],
+          row['guardian-contact-number']
+        ]);
+
+        db.query(query, [values], (err, data)=>{
+          if(err) return response.json(err)
+          return response.json("Batch enroll successful")
+        });
+      });
+    //return response.send({ status: "success", path: path });
+  });
+});
+
+export default router;

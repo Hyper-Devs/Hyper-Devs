@@ -2,6 +2,27 @@ const express = require('express');
 const db = require('../database.js').databaseConnection;
 const router = express.Router();
 
+router.use(cors());
+router.use(express.json());
+
+const db = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  password: "",
+  database: "gans prototype",
+});
+
+function stringInputConditioner (string) {
+  var newString = string[0].toUpperCase();
+  var newChar;
+  for (var i=1; i<string.length; i++){
+    if (string[i].match(/[a-z]/i))
+      string[i].toLowerCase;
+      newString = newString + string[i].toLowerCase();
+  }
+  return newString;
+};
+
 //API for setting up the search filters in the Database page
 router.get("/student-filter", async (request, response) => {
     const query = "SELECT * FROM `sections`"
@@ -121,29 +142,29 @@ router.get("/students/batch/:school_year/:grade_level/:section", (request, respo
 
 //API for retrieving users or logs in the Database page
 router.get("/admin/override-logs/:admin_name/:position/:access_mode/:date_from/:date_to", (request, response) => {
-  const values = [request.params.admin_name, request.params.position]
+  const values = [stringInputConditioner(request.params.admin_name), request.params.position]
   const query = `SELECT *
                 FROM (SELECT Overrider_Name, Position, Student_Name, Reason, Date
                   FROM users, override_logs
                   WHERE override_logs.Overrider_Name = users.name) AS results
                 WHERE results.Overrider_Name = ? && results.Position = ?`;
 
-  db.query(query, values, (error, data) => {
+  db.query(query, values, (error, data) => {  
     if (error) { return response.json(error); }
 
     // the task here is to further refine the query results
     if (data.length <= 0) { return response.json("No record found") }
 
     var returnVal;
-    if (request.params.access_mode == "BasicInformation"){          //mode: returns basic info regarding the searched user
+    if (request.params.access_mode == "BasicInformation"){                //mode: returns basic info regarding the searched user
       returnVal = {
-        overrider_name : request.params.admin_name,
+        overrider_name : stringInputConditioner(request.params.admin_name),
         overrider_position : request.params.position,
         overrider_total_logs : data.length
       }
       return response.json(returnVal)
     }
-    else{                                                           //mode: returns overriding logs regarding the searched user
+    else{                                                                 //mode: returns overriding logs regarding the searched user
       // determines the set of dates (inclusive) given the date range
       const startDate = new Date(request.params.date_from);
       const endDate = new Date(request.params.date_to);

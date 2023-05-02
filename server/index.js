@@ -13,6 +13,7 @@ app.use(express.json());
 app.use('', routes);
 
 
+
 // Twilio API
 app.get('/message', (req, res) => {
   // console.log("this is working")
@@ -26,6 +27,8 @@ app.get('/message', (req, res) => {
   }).then((message) =>  console.log(message.body, "Message sent succesfully!"))
   .catch(error => console.log(error, "Message failed to send!"));
 })
+
+
 
 
 
