@@ -1,8 +1,8 @@
 .database-container{
-  display: flex;
-  flex-direction: column;
   height: 100vh;
   width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .database-content-container {
@@ -12,10 +12,10 @@
 
 .database-content{
   position: relative;
-  display: flex;
+  /* display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  height: 100vh;
+  justify-content: space-between; */
+  height: 100%;
   width: 100%;
   flex: 1;
 

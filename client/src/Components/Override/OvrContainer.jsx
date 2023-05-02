@@ -79,7 +79,6 @@ function OvrContainer() {
                     <h2>Student does not exist</h2>
                 </div>
             }  
-            <Footer/>
       </div>
     )
 }

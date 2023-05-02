@@ -1,105 +1,50 @@
-.sidebar-header,
-.sidebar-heading,
-.sidebar-menu,
-.menu-item,
-.sidebar-footer {
-	display: grid;
+.newsidebar-container{
+    height: 100%;
+    width: 250px;
+    background-color: #8E1437;
 }
 
-.arrow-right-hovered,
-.sidebar-menu-item-hovered1,
-.sidebar-menu-item-hovered2,
-.sidebar-menu-item-hovered3,
-.sidebar-menu-item-hovered4,
-.sidebar-menu-item-hovered5 {
-	filter: brightness(0) saturate(100%) invert(100%) sepia(4%) saturate(0%) hue-rotate(342deg) brightness(106%) contrast(106%);
-	color: white;
+.newsidebar-header{
+    height: 200px;
+    width: 100%;
+    display: grid;
+    place-items: center;
 }
 
-.sidebar-container {
-	position: relative;
-	background-color: #8E1437;
-	width: 350px;
-	height: 100vh;
-	transition: 0.4s;
+.sidebar-list{
+    height: auto;
+    padding: 0;
+    width: 100%;
 }
 
-.sidebar-heading {
-	width: 230px;
-	height: 230px;
-	color: yellow;
-	transition: 0.4s;
-	display: flex;
-	align-items: center; 
-	justify-content: center;
-	margin: 30px;
+.sidebar-list .items{
+    width: 100%;
+    height: 60px;
+    padding-left: 7%;
+    list-style-type: none;
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    color: white;
+    justify-content: center;
+    align-items: center;
 }
 
-.sidebar-heading-profile {
-	width: 170px;
-	margin-bottom: 20px;
-	transition: 0.4s;
+.items #icon{
+    flex: 30%;
+    display: grid;
+    place-items: center;
 }
 
-.sidebar-menu {
-	grid-template-rows: repeat(5, 1fr);
-	margin-top: 30px;
-	margin-left: 20px;
+.items #title{
+    flex: 70%;
 }
 
-.sidebar-menu-item {
-	height: 50px;
-	width: 50px;
-	display: flex;
-	color: #FFB81E;
-	text-decoration: none;
-	text-transform: none;
-	margin: auto 40px 40px;
-	padding-bottom: 15px;
-	transition: 1s;
+.sidebar-list .items:hover{
+    cursor: pointer;
+    color: #FFB81E;
 }
 
-.sidebar-footer {
-	width: 100%;
-	height: 200px;
-	position: absolute;
-	bottom: 0;
-	grid-template-rows: 1fr;
-	grid-template-columns: 2fr 1fr;
-	margin: 0 0 0 40px;
-	padding-bottom: 20px;
+.sidebar-list #active{
+    color: #FFB81E;
 }
-
-.arrow-right {
-	width: 50px;
-	margin: auto 20px 50px;
-	margin-top: 100px;
-}
-
-
-
-
-
-/* not expanded sidebar styles */
-.sidebar-container-NX {
-	width: 90px;
-}
-
-.sidebar-heading-NX {
-	width: 90px;
-	margin: 30px 0px 30px 0px;
-}
-
-.sidebar-heading-profile-NX {
-	width: 100%;
-	padding: 10px
-}
-
-.sidebar-menu-item-NX {
-	margin: auto 0 40px 5px;
-}
-
-.sidebar-footer-NX {
-	margin: 0 0 0 0;
-}
-

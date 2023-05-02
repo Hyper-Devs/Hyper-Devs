@@ -15,16 +15,7 @@ function Database(){
     return(
     <div className="database-container" data-testid="dashboard-test">
         <div className="database-content-container">
-        <div>
-        <Sidebar
-                buttonState={{
-                    item1: false,
-                    item2: true,
-                    item3: false,
-                    item4: false,
-                    item5: false,
-                }} />
-        </div>
+        <div><Sidebar/></div>
         
         <div className="database-content"> 
             <Header2/>
@@ -37,6 +28,6 @@ function Database(){
     </div>
 
 
-        )
+        );
 }
 export default Database

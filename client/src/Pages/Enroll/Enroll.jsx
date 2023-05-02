@@ -1,6 +1,6 @@
 import "./Enroll.css"
 import React, {useState} from "react";
-import EnrollModifier from "../../Components/Enroll/Enroll-Modifier"
+// import EnrollModifier from "../../Components/Enroll/Enroll-Modifier"
 import Header2 from "../../Components/Database/Header/Header2"
 import Footer1 from "../../Components/footer"
 import Sidebar from '../../Components/Sidebar/Sidebar'
@@ -30,9 +30,9 @@ function Enroll(){
                                 <EnrollModifier1/>
                             </div>
                             <div class="col-8">
-                            {active == "enrollIR" && <EnrollIndResult onButtonClick={handleButtonClick} />}
-                            {active == "enrollBSNSR" && <BSNewSResults onButtonClick={handleButtonClick} />}
-                            {active == "enrollBNSYR" && <EnrollBNewSYResults onButtonClick={handleButtonClick} />}
+                            {active === "enrollIR" && <EnrollIndResult onButtonClick={handleButtonClick} />}
+                            {active === "enrollBSNSR" && <BSNewSResults onButtonClick={handleButtonClick} />}
+                            {active === "enrollBNSYR" && <EnrollBNewSYResults onButtonClick={handleButtonClick} />}
                                 {/* <BSNewSResults/> */}
                                 {/* <EnrollBNewSYResults/> */}
                                 {/* <EnrollIndResult/> */}

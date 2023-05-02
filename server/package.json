@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "Gate Access Notification System server",
   "main": "index.js",
-  "type": "module",
   "scripts": {
     "start": "nodemon index.js",
     "dev": "nodemon server",

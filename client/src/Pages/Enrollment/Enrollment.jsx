@@ -35,18 +35,11 @@ function Enrollment() {
                     {active === "enStud-batch-incoming-result" && <EnrollBatchStudentIncomingResult onButtonClick={handleButtonClick} />}
                     {active === "enStud-batch-new-result" && <EnrollBatchStudentIncomingResult onButtonClick={handleButtonClick} />}
                     
-                    {/*<Footer/> */}
+                    <Footer/>
                 </div>
             </div>
 
-            <Sidebar
-                buttonState={{
-                    item1: false,
-                    item2: false,
-                    item3: true,
-                    item4: false,
-                    item5: false,
-                }} />
+            <Sidebar/>
         </div>
     )
 }
