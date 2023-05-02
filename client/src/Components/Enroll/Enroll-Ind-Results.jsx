@@ -12,6 +12,8 @@ function EnrollIndResult(){
     const [sectionOptions, setSectionOptions] = useState([]);
     const [selectedSY, setSYFilter] = useState("Select");
 
+    const [file, setFile] = useState(null)
+
 
     // functions for setting up the grade levels and sections options
     function enrollFormEnter () {
@@ -51,6 +53,31 @@ function EnrollIndResult(){
         const formJson = Object.fromEntries(formData.entries());
 
         addStudent(formJson)
+    };
+
+    function handleFileInputChange(e) {
+        setFile(e.target.files[0]);
+    };
+
+    function handleFileUpload(event) {
+        event.preventDefault();
+
+        const formData = new FormData();
+        formData.append('csv', file);
+
+        addStudents(formData)
+    };
+
+    const addStudents = async (batchFile) => {
+        try {
+            const result = await axios.post(`http://localhost:8800/enroll/batch/new-student`, batchFile, {
+                headers: {
+                'Content-Type': 'multipart/form-data'
+              }});
+            console.log(result)
+        } catch (error){
+            console.log(error)
+        }
     };
 
     const addStudent = async (studentInfo) => {
@@ -184,20 +211,31 @@ function EnrollIndResult(){
                                 ></input>
                             </div>
                         </div>
-                        <div className="row">
-                            <label for="SInfo" class="form-label text-center text-success">or </label>
-                        </div>
-                        <div className="row p-3 mb-2 border border-success rounded"> 
-                            <label for="SInfo" class="form-label text-center text-success">UPLOAD STUDENT INFORMATION</label>
+                            <div className="row">
+                                <button type="submit" class="btn btn-success">Enroll Student</button>
+                            </div>
+                    </form>
+                    <div className="row">
+                        <label for="SInfo" class="form-label text-center text-success">or </label>
+                    </div>
+                    <div className="row p-3 mb-2 border border-success rounded"> 
+                        <label for="SInfo" class="form-label text-center text-success">UPLOAD STUDENT INFORMATION</label>
+                        <form onSubmit={handleFileUpload}>
                             <div class="input-group mb-3">
                                 <label class="input-group-text" for="inputGroupFile01">Upload</label>
-                                <input type="file" class="form-control bg-success bg-opacity-50" id="inputGroupFile01"></input>
+                                <input 
+                                    onChange={handleFileInputChange} 
+                                    type="file" 
+                                    name="batch-enroll-file" 
+                                    class="form-control bg-success bg-opacity-50" 
+                                    id="inputGroupFile01" 
+                                    accept="application/csv,text/csv">  
+                                     
+                                </input>
+                                <button type="submit" class="btn btn-success">Enroll Student</button>
                             </div>
-                        </div>
-                        <div className="row">
-                            <button type="submit" class="btn btn-success">Enroll Student</button>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

@@ -82,45 +82,77 @@ router.post("/new-student", (request, response)=>{
 
 //API for adding students by batch
 router.post("/batch/new-student", (request, response) => {
-  if (!request.files) { return response.status(400).send("No files were uploaded."); }
+  //checks if the user uploaded any file
+  if (!request.files){ return response.status(400).send("No files were uploaded."); }
 
-  const file = request.files;
-  const path = "./fileUploads/" + file['file']['name'];
-  const extensionName = file['file']['mimetype'];
+  const file = request.files['csv'];
+  const path = "./fileUploads/" + file['name'];
+  const extensionName = file['mimetype'];
   const allowedExtension = ['text/csv'];
 
+
+  //checks if the user uploaded other file type aside from CSV
   if(!allowedExtension.includes(extensionName)){ return response.status(422).send("Invalid file type"); }
 
-  file['file']['mv'](path, (err) => {
+
+  //traverses the CSV file
+  file['mv'](path, (err) => {
     if (err) { return response.status(500).send(err); }
 
-    const results = [];
+    var keys;
+    var results = [];
     fs.createReadStream(path)
       .pipe(csv())
+      .on('headers', (headerList) => { keys = headerList; })
       .on('data', (data) => results.push(data))
       .on('end', () => {
-        //limit of INSERT statement is 1000 - implement this in file handling
+        
+        const acceptedKeys = [
+          'student-first-name',
+          'student-middle-name',
+          'student-last-name',
+          'student-grade-level',
+          'student-section',
+          'guardian-first-name',
+          'guardian-middle-name',
+          'guardian-last-name',
+          'guardian-relationship',
+          'guardian-contact-number'
+        ]
 
-        const query = "INSERT INTO students (`first_name`, `middle_name`, `last_name`, `grade_level`, `section_name`, `parent_fn`, `parent_mn`, `parent_ln`, `relationship`, `contact_num`) VALUES ?"
-        const values = results.map(row => [
-          row['student-first-name'],
-          row['student-middle-name'],
-          row['student-last-name'],
-          row['student-grade-level'],
-          row['student-section'],
-          row['guardian-first-name'],
-          row['guardian-middle-name'],
-          row['guardian-last-name'],
-          row['guardian-relationship'],
-          row['guardian-contact-number']
-        ]);
+        //checks if the user uploaded the correct CSV file template
+        if (JSON.stringify(acceptedKeys) != JSON.stringify(keys)) { return response.status(520).send("Wrong file template!"); }
 
-        db.query(query, [values], (err, data)=>{
-          if(err) return response.json(err)
-          return response.json("Batch enroll successful")
-        });
+
+        //limit of INSERT statement is 1000 - not tested for 1000 CSV values
+        var temp = results;
+        for (var i=0; i<results.length; i++){
+          if (results.length > 999){ temp = results.slice(999) }
+          
+          const query = "INSERT INTO students (`first_name`, `middle_name`, `last_name`, `grade_level`, `section_name`, `parent_fn`, `parent_mn`, `parent_ln`, `relationship`, `contact_num`) VALUES ?"
+          const values = temp.map(row => [
+            row['student-first-name'],
+            row['student-middle-name'],
+            row['student-last-name'],
+            row['student-grade-level'],
+            row['student-section'],
+            row['guardian-first-name'],
+            row['guardian-middle-name'],
+            row['guardian-last-name'],
+            row['guardian-relationship'],
+            row['guardian-contact-number']
+          ]);
+
+          db.query(query, [values], (err, data)=>{
+            if(err) return response.json(err)
+            return response.json("Batch enroll successful")
+          });
+
+          i += temp.length;
+          results = results.slice(999,results.length);
+          temp = results;
+        };
       });
-    //return response.send({ status: "success", path: path });
   });
 });
 
