@@ -15,8 +15,6 @@ function Notification() {
 
   return (
     <div className="notification-container">
-      <div className="notification-content-container">
-      <div>
       <Sidebar
         buttonState = {{
         item1: false,
@@ -26,15 +24,17 @@ function Notification() {
         item5: false
         }}
       />
+      <div className="notification-content-container">
+      <div>
       </div>
       <div className="notification-content">
         <PageTitle pageName={"Notification"}/>
-        <div className="notif-box-container">
+        
         {active == "notifBox" && <NotificationBox onButtonClick={handleButtonClick} />}
         {active === "msgContext" && <MessageContext onButtonClick={handleButtonClick} />}
+        
         </div>
         <Footer /> 
-      </div>
       </div>
     </div>
   );

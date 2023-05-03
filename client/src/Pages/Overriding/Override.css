@@ -1,15 +1,21 @@
 .override-container{
-    display: flex;
-    flex-direction: column;
-    height: 100%;
+    height: 100vh;
     width: 100%;
+    display: flex;
 }
 
 .override-content-container {
+    height: 100vh;
+    width: 100%;
     display: flex;
+    flex-direction: column;
     flex: 1;
   }
 
 .override-content{
+    position: relative;
+    display: flex;
+    flex-direction: column;
     width: 100%;
+    flex: 1;
 }
