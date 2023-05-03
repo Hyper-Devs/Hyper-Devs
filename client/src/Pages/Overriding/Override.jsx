@@ -9,15 +9,13 @@ import Footer from '../../Components/footer';
 function Override() {
   return (
     <div className='override-container'>
+      <Sidebar/>
       <div className="override-content-container">
-        <div>
-          <Sidebar/>
-        </div>
         <div className='override-content' >
           <PageTitle pageName={"Override"} />
           <OvrContainer />
+          </div>
           <Footer />
-        </div>
       </div>
     </div>
   );

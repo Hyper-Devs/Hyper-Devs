@@ -18,7 +18,6 @@ function Box() {
                         <div className='Year'>2023</div>
                     </div>
                     <div className="clock-box">
-                    <div className="rectangle2">
                         <div className='clock'><Clocks/></div>
                         <div className='entrance-exit'>
                             <div className='icon-boxes'>
@@ -36,7 +35,6 @@ function Box() {
                                 <div/>
                                 EXIT
                             </div>
-                        </div>
                     </div>
                     </div>
                 </div>

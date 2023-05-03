@@ -4,7 +4,6 @@
     display: flex;
     align-items: center;
     flex-direction: column; 
-    overflow-y: auto;
     margin-left: 0;
     margin-right: 0;
     width: 100%;
