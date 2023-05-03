@@ -1,10 +1,10 @@
 .notifBox {
   background-color: white;
   display: flex;
+  height: 100%;
   flex-direction: column;
   align-items: center;
-  padding-top: 9.1%;
-  padding-bottom: 9.1%;
+  justify-content: space-around;
 }
 
 .notifBox .notif-rectangle {
