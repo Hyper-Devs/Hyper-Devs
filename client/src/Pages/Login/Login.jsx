@@ -113,9 +113,7 @@ function Login() {
           </div>
           </div>
         </div>
-        <div className="login-footer">
         <Footer />
-        </div>
       </div>
     </body>
   );
