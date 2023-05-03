@@ -1,8 +1,9 @@
-import "./Enroll-Ind-Results.css"
+import axios from 'axios';
 import { useState } from "react";
+import "./Enroll-Ind-Results.css"
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
-import axios from 'axios';
+
 
 function EnrollIndResult(){
     const [hasEnteredEnrollForm, setHasEnteredEnrollForm] = useState(false);
@@ -11,8 +12,6 @@ function EnrollIndResult(){
     const gradeLevelOptions = gradeLevels.map((gradelevel) => ({value: gradelevel, label: gradelevel}))
     const [sectionOptions, setSectionOptions] = useState([]);
     const [selectedSY, setSYFilter] = useState("Select");
-
-    const [file, setFile] = useState(null)
 
 
     // functions for setting up the grade levels and sections options
@@ -53,31 +52,6 @@ function EnrollIndResult(){
         const formJson = Object.fromEntries(formData.entries());
 
         addStudent(formJson)
-    };
-
-    function handleFileInputChange(e) {
-        setFile(e.target.files[0]);
-    };
-
-    function handleFileUpload(event) {
-        event.preventDefault();
-
-        const formData = new FormData();
-        formData.append('csv', file);
-
-        addStudents(formData)
-    };
-
-    const addStudents = async (batchFile) => {
-        try {
-            const result = await axios.post(`http://localhost:8800/enroll/batch/new-student`, batchFile, {
-                headers: {
-                'Content-Type': 'multipart/form-data'
-              }});
-            console.log(result)
-        } catch (error){
-            console.log(error)
-        }
     };
 
     const addStudent = async (studentInfo) => {
@@ -215,10 +189,6 @@ function EnrollIndResult(){
                                 <button type="submit" class="btn btn-success">Enroll Student</button>
                             </div>
                     </form>
-                    <div className="row">
-                        <label for="SInfo" class="form-label text-center text-success">or </label>
-                    </div>
-
                 </div>
             </div>
         </div>
