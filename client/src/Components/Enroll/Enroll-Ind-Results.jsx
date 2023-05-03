@@ -218,24 +218,7 @@ function EnrollIndResult(){
                     <div className="row">
                         <label for="SInfo" class="form-label text-center text-success">or </label>
                     </div>
-                    <div className="row p-3 mb-2 border border-success rounded"> 
-                        <label for="SInfo" class="form-label text-center text-success">UPLOAD STUDENT INFORMATION</label>
-                        <form onSubmit={handleFileUpload}>
-                            <div class="input-group mb-3">
-                                <label class="input-group-text" for="inputGroupFile01">Upload</label>
-                                <input 
-                                    onChange={handleFileInputChange} 
-                                    type="file" 
-                                    name="batch-enroll-file" 
-                                    class="form-control bg-success bg-opacity-50" 
-                                    id="inputGroupFile01" 
-                                    accept="application/csv,text/csv">  
-                                     
-                                </input>
-                                <button type="submit" class="btn btn-success">Enroll Student</button>
-                            </div>
-                        </form>
-                    </div>
+
                 </div>
             </div>
         </div>
