@@ -13,8 +13,9 @@ function Dashboard() {
       <Sidebar />
       <div className="dashboard-content-container">
       <div className="dashboard-content">
-        <Header />
         <Header2/>
+        <Header />
+        
         <PageTitle pageName={"Dashboard"}/>
         <Box />
         </div>

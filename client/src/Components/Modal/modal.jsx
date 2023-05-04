@@ -20,8 +20,8 @@ function Modal({ title, body }) {
 
   return (
     <div>
-      <button type="button" className="btn btn-primary" onClick={handleOpenModal}>
-        Launch demo modal
+      <button type="button" className="btn btn-success" onClick={handleOpenModal}>
+       Demo Modal Button
       </button>
 
       <div className={`modal fade ${showModal ? 'show' : ''}`} tabIndex="-1" role="dialog" aria-labelledby="Modal" aria-modal="true" style={{ display: `${showModal ? 'block' : 'none'}` }} data-bs-backdrop="static" data-bs-keyboard="false">
