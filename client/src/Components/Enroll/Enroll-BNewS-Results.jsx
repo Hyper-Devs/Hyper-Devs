@@ -2,11 +2,14 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
 import { useState } from "react";
 import axios from 'axios';
+
+
+
 function BSNewSResults(){
     const [file, setFile] = useState(null)
     
-    function handleFileInputChange(e) {
-        setFile(e.target.files[0]);
+    function handleFileInputChange(event) {
+        setFile(event.target.files[0]);
     };
 
     function handleFileUpload(event) {
@@ -16,29 +19,21 @@ function BSNewSResults(){
         formData.append('csv', file);
 
         addStudents(formData)
-        const addStudents = async (batchFile) => {
-            try {
-                const result = await axios.post(`http://localhost:8800/enroll/batch/new-student`, batchFile, {
-                    headers: {
-                    'Content-Type': 'multipart/form-data'
-                  }});
-                console.log(result)
-            } catch (error){
-                console.log(error)
-            }
-        };
-    
-        const addStudent = async (studentInfo) => {
-            try {
-                const result = await axios.post(`http://localhost:8800/enroll/new-student`, studentInfo);
-                console.log(result)
-            } catch (error){
-                console.log(error)
-            }
-        };
-    
-    
     };
+
+    const addStudents = async (batchFile) => {
+        try {
+            const result = await axios.post(`http://localhost:8800/enroll/batch/new-student`, batchFile, {
+                headers: {
+                'Content-Type': 'multipart/form-data'
+                }});
+            console.log(result)
+        } catch (error){
+            console.log(error)
+        }
+    };
+
+
     return(
         <div className="container-fluid p-3">
             <div className="row">
