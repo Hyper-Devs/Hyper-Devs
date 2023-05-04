@@ -5,6 +5,7 @@ import Sidebar from '../../Components/Sidebar/Sidebar'
 import PageTitle from '../../Components/PageTitle'
 import Box from '../../Components/Dashboard/Box'
 import Footer from '../../Components/footer'
+import Header2 from "../../Components/Database/Header/Header2";
 
 function Dashboard() {
   return (
@@ -13,6 +14,7 @@ function Dashboard() {
       <div className="dashboard-content-container">
       <div className="dashboard-content">
         <Header />
+        <Header2/>
         <PageTitle pageName={"Dashboard"}/>
         <Box />
         </div>

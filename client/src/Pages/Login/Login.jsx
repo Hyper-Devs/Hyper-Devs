@@ -1,72 +1,60 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Login.css";
 import Footer from '../../Components/footer'
 import {FiHash} from 'react-icons/fi'
 import {FiKey} from 'react-icons/fi'
 import {FiLogIn} from 'react-icons/fi'
 import axios from 'axios';
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 function Login() {
 
   const [login_id, setLogin_id] = useState('')
   const [login_password, setLogin_password] = useState('')
   const [authStatus, setAuthStatus] = useState(false)
+  const [user, setUser] = useState()
 
   let navigate = useNavigate();
 
-  function handleSubmit(e) {
+  // Checks if there is a user session that is stored in the local storage that did not logout
+  // If there is, set it as the current user
+  useEffect(() => {
+    const loggedInUser = localStorage.getItem("isLoggedin");
+    if (loggedInUser) {
+      const foundUser = JSON.parse(loggedInUser);
+      setUser(foundUser);
+    }
+  }, []);
+
+  const handleSubmit = async e => {
     e.preventDefault();
-    axios.get('http://localhost:8800/', {
+    const user = {login_id, login_password};
+    await axios.get('http://localhost:8800/', {
                 params : {
                   login_id, 
                   login_password,
                 }
-              })
+              }, user)
     .then(res => {console.log(res);
+      
+    if(res.status === 202){
+      setAuthStatus(true);
 
-    if(res.status == 202){setAuthStatus(true);
-    navigate('/dashboard');}
-    else if(res.status == 201){setAuthStatus(true)}})
-    .catch(err => console.log(err));
+      // Store current user session in the local storage to allow login persistence
+      setUser(res.data)
+      localStorage.setItem("isLoggedin", JSON.stringify(res.data));
+      console.log(res.data)
+    }
+    else if(res.status === 201){setAuthStatus(true)}})
+    .catch(err => console.log(err))
+    }
+  
 
-    // Read the form data
-    // const form = e.target;
-    // const formData = new FormData(form);
-
-    // You can pass formData as a fetch body directly:
-    //fetch('/some-api', { method: form.method, body: formData });
-
-    // Or you can work with it as a plain object:
-    // const formJson = Object.fromEntries(formData.entries());
-
-
-    // console.log(formJson);
-    // console.log(formJson['login-id']);
-
-    // authUser(formJson);
+  // If a user is already logged in, redirect the user to the dashboard
+  // To access the login page, and login a separate user, the current user must first logout, otherwise it will just be redirected to the dashboard
+  if (user){
+    navigate('/dashboard')
   }
-
-  // const authUser = async (dataObs) => {
-  //     var login_id = dataObs['login-id'];
-  //     var login_password = dataObs['login-password'];
-
-  //     try {
-  //         const result = await axios.get(`http://localhost:8800/`, {
-  //           params : {
-  //             login_id, 
-  //             login_password,
-  //           }
-  //         });
-          
-  //         // console.log(result)
-  //         setAuthStatus(false);
-  //         if(result.status == 201){setAuthStatus(true);}
-          
-  //     } catch (err) {
-  //         console.log(err);
-  //     }
-  // };
 
 
   return (
