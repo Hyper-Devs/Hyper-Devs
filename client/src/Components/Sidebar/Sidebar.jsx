@@ -5,6 +5,7 @@ import { SidebarData } from "./SidebarData"
 function NewSidebar() {
   return (
     <div className='newsidebar-container'>
+      <div className='newsidebar-content'>
       <div className='newsidebar-header'>
         <img src="icons/Profile Icon.svg" alt="" srcset="" />
       </div>
@@ -24,6 +25,7 @@ function NewSidebar() {
           );
         })}
       </ul>
+      </div>
     </div >
   );
 }

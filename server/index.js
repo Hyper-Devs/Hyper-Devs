@@ -18,19 +18,23 @@ app.use('', routes);
 app.get('/message', (req, res) => {
   const { recipient, status } = req.query
   var textMessage;
-  // console.log("Text Message:")
-  // console.log(req.query)
+  
+  const showdate = new Date();
+  var dt = showdate.getMonth()+'/'+showdate.getDate()+'/'+showdate.getFullYear();
+  var time = showdate.getHours()+':'+showdate.getMinutes()+':'+showdate.getSeconds();
+
 
   // Send text message
   if(status == 1){
-    textMessage = "Student tapped in"
+    textMessage = "Student tapped in at " + dt +', ' + time
   }
   else if(status == 2){
-    textMessage = "Student tapped out"
+    textMessage = "Student tapped out at " + dt + ', ' + time
   }
-  else if(status ==3){
-    textMessage = "Student got permission"
+  else if(status == 3){
+    textMessage = "Student got permission to leave school at " + dt + ', ' + time
   }
+
   client.messages.create({
     body: textMessage,
     to: "+63"+recipient,

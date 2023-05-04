@@ -4,12 +4,15 @@ import React, {useState} from "react";
 import Header2 from "../../Components/Database/Header/Header2"
 import Footer1 from "../../Components/footer"
 import Sidebar from '../../Components/Sidebar/Sidebar'
-
+import Modal from "../../Components/Modal/modal";
 
 import EnrollIndResult from "../../Components/Enroll/Enroll-Ind-Results"
 import EnrollBNewSYResults from "../../Components/Enroll/Enroll-BNewSY-Results"
 import EnrollModifier1 from "../../Components/Enroll/Enroll-Modifier1"
 import BSNewSResults from "../../Components/Enroll/Enroll-BNewS-Results"
+
+
+
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
 function Enroll(){
@@ -29,6 +32,7 @@ function Enroll(){
                         <div class="row">
                             <div class="col-4">
                                 <EnrollModifier1 onEnrollTypeChange={handleEnrollmentOption}/>
+                                <Modal/>
                             </div>
                             <div class="col-8">
                             {active === "enrollIR" && <EnrollIndResult/>}

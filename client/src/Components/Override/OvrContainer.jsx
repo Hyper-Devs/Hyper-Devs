@@ -31,12 +31,12 @@ function OvrContainer() {
     }
     
     return (
-        <div className='container'>
-            <div className='first-container'> 
+        <div className='ovr-container'>
+            <div className='ovr-content'>
+            <div className='search-content-container'> 
                 <p>Excuse a student</p>
                 <div className='search-content'>
                     <form className='search-field' onSubmit={handleSubmit}>
-                        <div className='search-bar'>
                             <input 
                                 name='input-field'
                                 type="text" 
@@ -44,14 +44,13 @@ function OvrContainer() {
                                 placeholder='Enter student ID'
                                 required
                             />
-                        </div>
                         <button type='submit'>Search</button>
                     </form>
                 </div>
             </div>
             {(students.length > 0) && isVisible &&          
                 <div className='search-result'>
-                    <h2 style={{color: '#00573F', margin: 10, fontFamily: "Playfair Display", fontWeight: 900}}><b>STUDENT INFORMATION</b></h2>
+                    <h2 style={{color: '#00573F',  fontFamily: "Playfair Display", fontWeight: 900}}><b>STUDENT INFORMATION</b></h2>
                     <div className='student-details'>
                         <div className='name-id-block'>
                             <div className="name">Name: {students[0].first_name}</div>
@@ -79,6 +78,7 @@ function OvrContainer() {
                     <h2>Student does not exist</h2>
                 </div>
             }  
+            </div>
       </div>
     )
 }

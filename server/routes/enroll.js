@@ -1,15 +1,11 @@
-// import express from "express";
-// import mysql from "mysql";
-// import cors from "cors";
-// import fileUpload from "express-fileupload";
-// import csv from "csv-parser";
-// import fs from "fs";
 const express = require('express');
+const fs = require('fs');
+const csv = require('csv-parser');
+const fileUpload = require('express-fileupload');
+
+
 const db = require('../database.js').databaseConnection;
 const router = express.Router();
-const fileUpload = require('express-fileupload');
-const csv = require('csv-parser');
-const fs = require('fs');
 router.use(fileUpload());
 
 

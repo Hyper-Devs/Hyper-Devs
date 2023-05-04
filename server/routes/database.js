@@ -124,7 +124,9 @@ router.get("/students/batch/:school_year/:grade_level/:section", (request, respo
 
   db.query(query, values, (error, data) => {
     if (error) { return response.json(error); }
-    return response.json(data)
+    return response
+      .json(data)
+      .status
   });
 });
 
