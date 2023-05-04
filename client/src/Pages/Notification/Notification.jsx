@@ -15,18 +15,8 @@ function Notification() {
 
   return (
     <div className="notification-container">
-      <Sidebar
-        buttonState = {{
-        item1: false,
-        item2: false,
-        item3: false,
-        item4: true,
-        item5: false
-        }}
-      />
+      <Sidebar/>
       <div className="notification-content-container">
-      <div>
-      </div>
       <div className="notification-content">
         <PageTitle pageName={"Notification"}/>
         
