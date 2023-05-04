@@ -3,6 +3,8 @@ import "./Database-Result.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import EditIcon from '@mui/icons-material/Edit';
+import CircleIcon from '@mui/icons-material/Circle';
 
 function DatabaseResult(props) {
 
@@ -49,16 +51,21 @@ function DatabaseResult(props) {
                 </div>
                 <div className="row mb-5 m-3">
                     <div className="dbresult-header">
-                        <p>Name</p>
-                        <p>Email</p>
-                        <p>Status</p>
+                        <p className="dbheader-name">Name</p>
+                        <p className="dbheader-grade-section">Grade&Section</p>
+                        <p className="dbheader-status">Status</p>
+                        <p className="dbheader-actions">Actions</p>
                     </div>
                     <ul className="dbResult-list"> 
                         {searchResult.map(item => (
                             <li key={item.id} 
-                                className="dbItems">
-                                <div id='profileIcon'><AccountCircleIcon/></div>
-                                <div id="displayName">{item.first_name} {item.last_name}</div>
+                                className="dbItems"
+                                id={(item.id)%2 === 0 ? 'dbItems-even' : ''}>
+                                <div id='profileIcon'><AccountCircleIcon fontSize="large"/></div>
+                                <div id="displayName">{item.first_name} {item.middle_name} {item.last_name}</div>
+                                <div id="displayEmail">{item.grade_level}-{item.section_name}</div>
+                                <div id="displayStatus"><CircleIcon color="success"/></div>
+                                <div id="action-icon"><EditIcon/></div>
                             </li>
                         ))}
                     </ul>
