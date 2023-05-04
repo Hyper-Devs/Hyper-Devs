@@ -24,11 +24,11 @@ function Modal({ title, body }) {
         Launch demo modal
       </button>
 
-      <div className={`modal fade ${showModal ? 'show' : ''}`} tabIndex="-1" role="dialog" aria-labelledby="exampleModal" aria-modal="true" style={{ display: `${showModal ? 'block' : 'none'}` }} data-bs-backdrop="static" data-bs-keyboard="false">
+      <div className={`modal fade ${showModal ? 'show' : ''}`} tabIndex="-1" role="dialog" aria-labelledby="Modal" aria-modal="true" style={{ display: `${showModal ? 'block' : 'none'}` }} data-bs-backdrop="static" data-bs-keyboard="false">
         <div className="modal-dialog ">
           <div className="modal-content">
             <div className="modal-header">
-              <h1 className="modal-title fs-5" id="exampleModalLabel">{title}</h1>
+              <h1 className="modal-title fs-5" id="ModalLabel">{title}</h1>
               <button type="button" className="btn-close" onClick={handleCloseModal} aria-label="Close"></button>
             </div>
             <div className="modal-body">

@@ -5,7 +5,7 @@ import NotificationBox from "../../Components/Notification/notificationBox";
 import MessageContext from "../../Components/Notification/messageContext";
 import PageTitle from "../../Components/PageTitle";
 import Footer from '../../Components/footer'
-
+import Header2 from "../../Components/Database/Header/Header2";
 function Notification() {
   const [active, setActive] = useState("notifBox");
 
@@ -18,7 +18,8 @@ function Notification() {
       <Sidebar/>
       <div className="notification-content-container">
       <div className="notification-content">
-        <PageTitle pageName={"Notification"}/>
+        <Header2/>
+        {/* <PageTitle pageName={"Notification"}/> */}
         
         {active == "notifBox" && <NotificationBox onButtonClick={handleButtonClick} />}
         {active === "msgContext" && <MessageContext onButtonClick={handleButtonClick} />}
