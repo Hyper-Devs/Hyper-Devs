@@ -12,17 +12,18 @@
 
 .ovr-content {
     height: 100%;
-    width: 50%;
+    width: 90%;
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    gap: 50px;
+    padding: 50px;
 }
 
 .ovr-container .search-content-container{
     display: flex;
     flex-direction: column;
     position: relative;
-    height: 40%;
+    height: 200px;
     width: 100%;
     text-align: left;
     background: #00573F;
@@ -33,7 +34,7 @@
 }
 
 .ovr-container .search-content-container p {
-    padding: 15px;
+    padding: 10px;
     margin: 0;
 }
 
@@ -184,3 +185,8 @@
     width: 80%;
 }
 
+.student-details button {
+    width: 80%;
+    margin-top: 10px;
+    font-size: 1rem;
+}
