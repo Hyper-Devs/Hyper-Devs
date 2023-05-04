@@ -17,7 +17,6 @@ router.get("/", async (req, res) => {
       else if (data.length == 0){
         authStatus = 201
       }
-  
       return res
         .status(authStatus)
         .json(data);

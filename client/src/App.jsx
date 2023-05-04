@@ -1,5 +1,4 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
 import Login from './Pages/Login/Login';
 import Dashboard from './Pages/Dashboard/Dashboard';
 import Override from './Pages/Overriding/Override';
@@ -8,7 +7,7 @@ import Enrollment from "./Pages/Enrollment/Enrollment"
 import Database from "./Pages/Database/Database";
 import Profile from "./Pages/Profile/Profile";
 import Enroll from "./Pages/Enroll/Enroll";
-import Message from "./Pages/Text messaging/Message";
+import IsAuthenticated from "./Components/IsAuthenticated";
 // import Sass from "./Pages/sass-doc/sass"
 
 function App() {
@@ -17,40 +16,36 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route
-            exact path='/'
+            path='/'
             element={<Login/>}
           />
           <Route
             path='/dashboard'
-            element={<Dashboard/>}
+            element={<IsAuthenticated><Dashboard/></IsAuthenticated>}
           />
           <Route
             path='/override'
-            element={<Override/>}
-          />
-          <Route
-            path='/message'
-            element={<Message/>}
+            element={<IsAuthenticated><Override/></IsAuthenticated>}
           />
           <Route
             path='notification'
-            element={<Notification/>}
+            element={<IsAuthenticated><Notification/></IsAuthenticated>}
           />
           <Route 
             path="/enrollment"
-            element={<Enrollment/>}
+            element={<IsAuthenticated><Enrollment/></IsAuthenticated>}
           />
           <Route 
             path="/enroll"
-            element={<Enroll/>}
+            element={<IsAuthenticated><Enroll/></IsAuthenticated>}
           />
           <Route 
             path="/database"
-            element={<Database/>}
+            element={<IsAuthenticated><Database/></IsAuthenticated>}
           />
-            <Route 
+          <Route 
             path="/profile"
-            element={<Profile/>}
+            element={<IsAuthenticated><Profile/></IsAuthenticated>}
           />
         </Routes>
       </BrowserRouter>

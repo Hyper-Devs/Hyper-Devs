@@ -7,6 +7,7 @@ const express = require('express');
 const databaseRoutes = require('./database.js');
 const enrollRoutes = require('./enroll.js');
 const overrideRoutes = require('./override.js');
+const loginRoutes = require('./login.js');
 
 
 const router = express.Router();
@@ -14,5 +15,6 @@ const router = express.Router();
 router.use('/database', databaseRoutes);
 router.use('/enroll', enrollRoutes);
 router.use('/override', overrideRoutes);
+router.use('/', loginRoutes);
 
 module.exports = router;

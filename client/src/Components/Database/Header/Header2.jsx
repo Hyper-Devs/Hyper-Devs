@@ -5,9 +5,19 @@ import {BsPerson} from 'react-icons/bs'
 import {IoPersonCircleSharp} from 'react-icons/io5'
 import {FiLogOut} from 'react-icons/fi'
 import {AiOutlineLeft} from 'react-icons/ai'
+import { useNavigate } from "react-router-dom";
 
 
 function Header2(){
+
+    let navigate = useNavigate();
+
+    const handleLogout = () => {
+    localStorage.clear();
+    navigate('/');
+    
+    };
+
     return(
         <div className="header2-container">
             <div className="title-container">UPHS Gate Access Notification System</div>
@@ -19,7 +29,7 @@ function Header2(){
                         <li><div className="profile-name"><IoPersonCircleSharp className="IoPersonCircleSharp" size={"22px"}/>Noreen M.</div></li>
                         <li><button class="dropdown-item" type="button"><AiOutlineLeft className="AiOutlineLeft"/>Account Settings</button></li>
                         <li><hr class="dropdown-divider"/></li>
-                        <li><button class="dropdown-item" type="button"><FiLogOut className="FiLogOut"/>Logout</button></li>
+                        <li><button onClick={handleLogout} class="dropdown-item" type="button"><FiLogOut className="FiLogOut"/>Logout</button></li>
                     </ul>
                 </div>
         </div>
