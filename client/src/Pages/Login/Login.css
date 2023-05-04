@@ -82,7 +82,8 @@
   background-size: contain;
   background-position: center;
   width: 100%;
-  height: 40%;
+  height: 250px;
+  margin: 20px 0 10px 0;
 }
 
 .loginForm {
@@ -159,7 +160,7 @@
 .loginForm .forgotPassword {
   position: relative;
   float: right;
-  padding-top: 2%;
+  padding-top: 1%;
   text-decoration: none;
   font-style: italic;
   color: #686868;
