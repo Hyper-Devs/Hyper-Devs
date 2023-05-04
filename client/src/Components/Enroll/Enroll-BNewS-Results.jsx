@@ -6,7 +6,7 @@ import axios from 'axios';
 
 
 function BSNewSResults(){
-    const [file, setFile] = useState(null)
+    const [file, setFile] = useState(null);
     
     function handleFileInputChange(event) {
         setFile(event.target.files[0]);
