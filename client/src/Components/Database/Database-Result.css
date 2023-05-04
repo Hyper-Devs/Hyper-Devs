@@ -1,0 +1,61 @@
+.dbResult-box{
+    display: grid;
+    align-items: center;
+    background-color: aqua;
+}
+
+.dbResultbox-list {
+    display: flex;
+
+}
+
+.dbResult-list {
+    height: auto;
+    padding: 0;
+    width: 100%;
+}
+
+.dbResult-list .dbItems {
+    width: 100%;
+    height: 60px;
+    list-style-type: none;
+    margin-bottom: 2px;
+    display: flex;
+    flex-direction: row;
+    color: black;
+    /* border: 2px solid gray; */
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+.dbItems #profileIcon{
+    margin-left: 20px;
+    margin-right: 20px;
+    display: grid;
+    place-items: center;
+}
+
+.dbItems #displayName{
+    flex: 70%;
+    font-size: 15px;
+}
+
+.dbItems:hover {
+    background-color: rgb(183, 180, 180);
+}
+
+.dbresult-header {
+    height: 50px;
+    width: 100%;
+    background-color: rgb(233, 232, 232);
+    border-radius: 5px;
+    display: flex;
+    flex-direction: row;
+    place-items: center;
+    justify-content: space-around;
+}
+
+p{
+    margin-bottom: 0;
+}

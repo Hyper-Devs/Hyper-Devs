@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import "./Database.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
@@ -11,6 +12,7 @@ import Header2 from "../../Components/Database/Header/Header2";
 import Footer1 from "../../Components/footer";
 
 function Database(){
+    const [searchResult, setSearchResult] = useState('');
     
     return(
     <div className="database-container" data-testid="dashboard-test">
@@ -19,8 +21,8 @@ function Database(){
         <div className="database-content"> 
             <Header2/>
                 <div className="page-title"><p>SYSTEM DATABASE</p></div>
-            <DatabaseModifier/>
-            <DatabaseResult/>
+            <DatabaseModifier setSearchResult={setSearchResult} />
+            <DatabaseResult searchResult={searchResult} />
             </div>
             <Footer1/>
         </div> 

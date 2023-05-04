@@ -1,10 +1,12 @@
-import axios from 'axios';
+ import axios from 'axios';
 import DatePicker from 'react-datepicker'
 import { useState } from "react";
 import "react-datepicker/dist/react-datepicker.css";
 import "./Database-Modifier.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
+import DatabaseResult from "../../Components/Database/Database-Result";
+
 
 /*
 Backend Note
@@ -15,7 +17,7 @@ implement a mechanism where the data can be retrieved from the local storage
 for the select option (i.e., grade level, section, school year)
 */
 
-function DatabaseModifier(){
+function DatabaseModifier(props){
     const [accessType, setAccessType] = useState('BasicInformation');
     const [hasEnteredSearch, setHasEnteredSearch] = useState(false);
 
@@ -33,6 +35,8 @@ function DatabaseModifier(){
     const defaultEndDate = new Date()
     const [rangeEnd, setRangeEnd] = useState(defaultEndDate)
     defaultEndDate.setDate(defaultEndDate.getDate() + 7)
+
+    const [studentResult, setStudentResult] = useState('');
 
     const selectStartDate = (d) => {
         setRangeStart(d)
@@ -168,11 +172,15 @@ function DatabaseModifier(){
                 default:
                     console.log("Error 404")
             }
-            console.log(result)
+            setStudentResult(result.data)
+            // console.log(result.data)
         } catch (error){
             console.log(error)
         }
     };
+
+    props.setSearchResult(studentResult);
+
 
 
 
@@ -409,6 +417,7 @@ function DatabaseModifier(){
                     </div>
                 </div>
             </div>
+            {/* {studentResult && <DatabaseResult studentResult={ studentResult }/>} */}
         </div>
     );
 }
