@@ -6,7 +6,7 @@
 // import app from './index.js';
 
 const request = require("supertest");
-const app = require("./index");
+const app = require("./app");
 
 describe('API endpoints status code', () => {
     test('connected to mysql; should return a 200 status code', async () => {

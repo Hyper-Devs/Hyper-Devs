@@ -10,26 +10,22 @@ import { useNavigate } from "react-router-dom";
 
 function Header2(){
 
-    let navigate = useNavigate();
-
-    const handleLogout = () => {
-    localStorage.clear();
-    navigate('/');
-    
-    };
+    const handleLogoutClick = () => {
+        window.location.replace("/")
+    }
 
     return(
         <div className="header2-container">
             <div className="title-container">UPHS Gate Access Notification System</div>
-                <div class="btn-group">
-                    <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <div className="btn-group">
+                    <button className="btn btn-light dropdown-toggle" type="button" aria-label="Dropdown-Menu" data-bs-toggle="dropdown" aria-expanded="false">
                     <BsPerson size="30px"/>
                     </button>
-                    <ul class="dropdown-menu">
-                        <li><div className="profile-name"><IoPersonCircleSharp className="IoPersonCircleSharp" size={"22px"}/>Noreen M.</div></li>
-                        <li><button class="dropdown-item" type="button"><AiOutlineLeft className="AiOutlineLeft"/>Account Settings</button></li>
-                        <li><hr class="dropdown-divider"/></li>
-                        <li><button onClick={handleLogout} class="dropdown-item" type="button"><FiLogOut className="FiLogOut"/>Logout</button></li>
+                    <ul className="dropdown-menu" data-testid="dropdown-menu">
+                        <li><div className="profile-name" data-testid="profile-button"><IoPersonCircleSharp className="IoPersonCircleSharp" size={"22px"}/>Noreen M.</div></li>
+                        <li><button className="dropdown-item" type="button" aria-label="account-setting"><AiOutlineLeft className="AiOutlineLeft"/>Account Settings</button></li>
+                        <li><hr className="dropdown-divider"/></li>
+                        <li><button className="dropdown-item" type="button" onClick={handleLogoutClick} aria-label="ddLogoutButton"><FiLogOut className="FiLogOut"/>Logout</button></li>
                     </ul>
                 </div>
         </div>
