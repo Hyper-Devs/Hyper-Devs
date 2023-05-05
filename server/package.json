@@ -7,7 +7,7 @@
     "start": "nodemon index.js",
     "dev": "nodemon server",
     "test": "jest --forceExit",
-    "logs": "npm run start | grep 'Connected to backend using port 8800"
+    "logs": "npm run start | grep 'Connected to backend using port 8800.'"
   },
   "keywords": [],
   "author": "",

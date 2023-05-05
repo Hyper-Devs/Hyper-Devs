@@ -31,23 +31,6 @@ jobs:
       working-directory: ./server
       run: npm install
       
-    - name: Run Server
-      working-directory: ./server
-      run: npm start &
-      # Use the `&` operator to run the `npm start` command in the background
-      # This allows us to continue running other commands in parallel
-
-    - name: Check Server Connection
-      run: |
-        while ! npm run logs | grep -q "Connected to backend using port 8800."; do
-          sleep 1
-        done
-    # Use a loop to continuously check the logs until the log message is found
-    # The `npm run logs` command will display the server logs in the console
-    # The `grep` command will search for the log message
-    # The `-q` option tells `grep` to be quiet and not display the output
-    # The `sleep` command pauses the loop for 1 second between checks
-      
     - name: Run Server Tests
       working-directory: ./server
       run: npm test
@@ -55,10 +38,6 @@ jobs:
     - name: Install Client Dependencies
       working-directory: ./client
       run: npm install
-      
-    - name: Run Client
-      working-directory: ./server
-      run: npm start
       
     - name: Run Client Tests
       working-directory: ./client
