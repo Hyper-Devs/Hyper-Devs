@@ -14,7 +14,6 @@ function Login() {
   const [authStatus, setAuthStatus] = useState(false)
   const [user, setUser] = useState()
 
-  let navigate = useNavigate();
 
   // Checks if there is a user session that is stored in the local storage that did not logout
   // If there is, set it as the current user
@@ -53,12 +52,12 @@ function Login() {
   // If a user is already logged in, redirect the user to the dashboard
   // To access the login page, and login a separate user, the current user must first logout, otherwise it will just be redirected to the dashboard
   if (user){
-    navigate('/dashboard')
+    window.location.replace('/dashboard')
   }
 
 
   return (
-    <body id="login-page" data-testid="login-test">
+    <div id="login-page" data-testid="login-test">
       <div className="login-content">
         <div className="login-container">
           <div className="title">
@@ -77,14 +76,14 @@ function Login() {
                 <label data-testid="id-field">ID Number</label>
                 <div className="login-input-container">
                   <div className="login-input-icons"><FiHash size={"1.5rem"} color="#7A1315"/></div>
-                  <input name='login-id' type="text"
+                  <input name='login-id' type="text" data-testid="username-field"
                   onChange={e => setLogin_id(e.target.value)}/>
                 </div>
 
                 <label>Password</label>
                 <div className="login-input-container">
                 <div className="login-input-icons"><FiKey size={"1.5rem"} color="#7A1315"/></div>
-                  <input name='login-password' type="password" 
+                  <input name='login-password' type="password" data-testid="password-field" 
                   onChange={e => setLogin_password(e.target.value)}/>
                 </div>
 
@@ -103,7 +102,7 @@ function Login() {
         </div>
         <Footer />
       </div>
-    </body>
+    </div>
   );
 }
 
