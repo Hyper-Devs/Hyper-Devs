@@ -1,50 +1,61 @@
 .newsidebar-container{
     height: 100%;
-    width: 250px;
-    background-color: #8E1437;
+    width: 15%;
+    background-color: transparent;
 }
 
 .newsidebar-content{
     position: fixed;
     height: 100%;
-    width: 250px;
+    width: 15%;
     background-color: #8E1437;
+    display: flex;
+    flex-direction: column;
 }
 
 .newsidebar-header{
-    height: 200px;
+    height: 25%;
     width: 100%;
-    display: grid;
-    place-items: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.newsidebar-header img {
+    height: 80%;
+    width: 80%;
 }
 
 .sidebar-list{
-    height: auto;
-    padding: 0;
+    position: relative;
+    height: 100%;
     width: 100%;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
 }
 
 .sidebar-list .items{
     width: 100%;
-    height: 60px;
-    padding-left: 7%;
+    height: 100%;
+    gap: 10%;
     list-style-type: none;
     margin: 0;
     display: flex;
-    flex-direction: row;
-    color: white;
-    justify-content: center;
     align-items: center;
+    color: white;
 }
 
 .items #icon{
-    flex: 30%;
-    display: grid;
-    place-items: center;
+    display: flex;
+    flex: 5%;
+    justify-content: flex-end;
 }
 
 .items #title{
-    flex: 70%;
+    flex: 50%;
 }
 
 .sidebar-list .items:hover{
@@ -54,4 +65,58 @@
 
 .sidebar-list #active{
     color: #FFB81E;
+}
+
+
+
+@media (max-width: 850px) {
+
+    .items #title{
+        font-size: 0.8rem;
+    }
+
+    .items #icon{
+        flex: 20%;
+    }
+
+    .sidebar-list .items{
+        gap: 8px;
+    }
+
+}
+
+@media (max-width: 650px) {
+
+    .items #title{
+        font-size: 0.6rem;
+    }
+
+    .sidebar-list .items{
+        gap: 5px;
+    }
+
+}
+
+@media (max-width: 550px) {
+
+    .items #title{
+        font-size: 0.6rem;
+    }
+
+    .sidebar-list .items{
+        gap: 0;
+    }
+
+}
+
+@media (max-width: 450px) {
+
+    .items #title{
+        display: none;
+    }
+
+    .items #icon{
+        justify-content: center;
+    }
+
 }
