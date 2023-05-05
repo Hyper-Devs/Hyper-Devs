@@ -46,7 +46,7 @@ function Login() {
         }
         else if (res.status === 201) { setAuthStatus(true) }
       })
-      .catch(err => console.log(err))
+      .catch(err => (err))
   }
 
 
