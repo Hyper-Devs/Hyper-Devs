@@ -82,7 +82,7 @@
   background-size: contain;
   background-position: center;
   width: 100%;
-  height: 250px;
+  height: 200px;
   margin: 20px 0 10px 0;
 }
 
@@ -260,4 +260,17 @@
     border-radius: 10px 10px 0 0;
   }
 
+}
+
+@media (max-width: 650px) {
+  .title h1 {
+    font-size: 1rem;
+    line-height: 40px;
+  }
+  
+  .title h2 {
+    font-size: 0.5rem;
+    line-height: 20px;
+    letter-spacing: 0.3rem;
+  }
 }
