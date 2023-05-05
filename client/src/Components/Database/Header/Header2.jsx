@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 function Header2(){
 
     const handleLogoutClick = () => {
+        localStorage.clear()
         window.location.replace("/")
     }
 
