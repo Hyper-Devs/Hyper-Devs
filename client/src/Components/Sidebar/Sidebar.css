@@ -1,61 +1,50 @@
 .newsidebar-container{
     height: 100%;
-    width: 15%;
-    background-color: transparent;
+    width: 250px;
+    background-color: #8E1437;
 }
 
 .newsidebar-content{
     position: fixed;
     height: 100%;
-    width: 15%;
+    width: 250px;
     background-color: #8E1437;
-    display: flex;
-    flex-direction: column;
 }
 
 .newsidebar-header{
-    height: 25%;
+    height: 200px;
     width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.newsidebar-header img {
-    height: 80%;
-    width: 80%;
+    display: grid;
+    place-items: center;
 }
 
 .sidebar-list{
-    position: relative;
-    height: 100%;
-    width: 100%;
+    height: auto;
     padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
+    width: 100%;
 }
 
 .sidebar-list .items{
     width: 100%;
-    height: 100%;
-    gap: 10%;
+    height: 60px;
+    padding-left: 7%;
     list-style-type: none;
     margin: 0;
     display: flex;
-    align-items: center;
+    flex-direction: row;
     color: white;
+    justify-content: center;
+    align-items: center;
 }
 
 .items #icon{
-    display: flex;
-    flex: 5%;
-    justify-content: flex-end;
+    flex: 30%;
+    display: grid;
+    place-items: center;
 }
 
 .items #title{
-    flex: 50%;
+    flex: 70%;
 }
 
 .sidebar-list .items:hover{
@@ -65,58 +54,4 @@
 
 .sidebar-list #active{
     color: #FFB81E;
-}
-
-
-
-@media (max-width: 850px) {
-
-    .items #title{
-        font-size: 0.8rem;
-    }
-
-    .items #icon{
-        flex: 20%;
-    }
-
-    .sidebar-list .items{
-        gap: 8px;
-    }
-
-}
-
-@media (max-width: 650px) {
-
-    .items #title{
-        font-size: 0.6rem;
-    }
-
-    .sidebar-list .items{
-        gap: 5px;
-    }
-
-}
-
-@media (max-width: 550px) {
-
-    .items #title{
-        font-size: 0.6rem;
-    }
-
-    .sidebar-list .items{
-        gap: 0;
-    }
-
-}
-
-@media (max-width: 450px) {
-
-    .items #title{
-        display: none;
-    }
-
-    .items #icon{
-        justify-content: center;
-    }
-
 }
