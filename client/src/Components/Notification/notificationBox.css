@@ -36,35 +36,25 @@
   padding: 15px;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  gap: 10px;
   background-color: white;
   border-radius: 10px;
   border-top-right-radius: 0;
   border-top-left-radius: 0;
 }
 
-.notifBox .notif-rectangle3 .notif-button-container {
-  display: flex;
-  margin-left: 35%;
-  margin-top: 1%;
-  margin-bottom: 1%;
-  width: 30%;
-  border-radius: 10px;
-}
-
 .notifBox .notif-rectangle3 button {
-  margin-top: 0;
-  margin-bottom: 0;
-  left: 0;
   padding: 10px;
   height: 100%;
-  width: 100%;
+  width: fit-content;
   border-radius: 10px;
   background-color: #00573f;
 
   font-family: "Cambria";
   font-style: normal;
   font-weight: 400;
-  font-size: 32px;
+  font-size: 1.5rem;
   line-height: 38px;
 
   color: #ffffff;

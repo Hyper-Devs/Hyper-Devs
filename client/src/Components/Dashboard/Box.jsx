@@ -31,9 +31,8 @@ function Box() {
                            
                             
                             <div className='text'>
-                                ENTRANCE
-                                <div/>
-                                EXIT
+                               <div className='text-control'> ENTRANCE </div>
+                               <div className='text-control'> EXIT </div>    
                             </div>
                     </div>
                     </div>
