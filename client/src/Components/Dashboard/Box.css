@@ -189,7 +189,7 @@
     }
 
     .entrance-exit .text {
-        font-size: 1.2rem;
+        font-size: 1rem;
     }
 
 }
@@ -209,4 +209,11 @@
         padding-left: 15px;
         padding-right: 15px;
     }
+}
+
+@media (max-width: 250px) {
+    .entrance-exit .text {
+        font-size: 0.5rem;
+    }
+
 }
