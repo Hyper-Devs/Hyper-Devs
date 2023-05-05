@@ -8,7 +8,7 @@ import bell from '../../Assets/Vector.png'
 
 function Box() {
     return (
-        <div className='LiveBox'>
+        <div className='LiveBox' data-testid="box-test">
             <div className='rectangle'>
                 <p style={{fontSize: 32}}>Live RFID Access</p>
                 <div className='rectangle1'>
