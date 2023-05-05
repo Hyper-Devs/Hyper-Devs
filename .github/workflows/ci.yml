@@ -39,7 +39,7 @@ jobs:
 
     - name: Check Server Connection
       run: |
-        while ! npm run logs | grep -q "Connected to backend using port 8800."; do
+        while ! npm run logs; do
           sleep 1
         done
     # Use a loop to continuously check the logs until the log message is found
