@@ -55,3 +55,27 @@
 .sidebar-list #active{
     color: #FFB81E;
 }
+
+@media (max-width: 450px) {
+
+    .newsidebar-container{
+        width: 20%;
+    }
+    
+    .newsidebar-content{
+        width: 20%;
+    }
+    
+    .newsidebar-header img{
+        height: 30%;
+    }
+
+    .items #title{
+        display: none;
+    }
+
+    .items #icon{
+        justify-content: center;
+    }
+
+}
