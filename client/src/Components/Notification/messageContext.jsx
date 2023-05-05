@@ -12,7 +12,7 @@ function messageContext(props) {
       <div className="notif-message-rectangle">
         <div className="notif-message-header">
         <p>Context Message</p>
-        <button onClick={() => handleClick('notifBox')}><AiOutlineLeft/></button>
+        <button onClick={() => handleClick('notifBox')}><AiOutlineLeft/>BACK</button>
         </div>
         <div className="notif-message-rectangle2">
           <div className="notif-message-rectangle3">
