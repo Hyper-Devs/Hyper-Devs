@@ -175,20 +175,9 @@
 
 }
 
-@media (max-width: 650px) {
-
-    .entrance-exit .text {
-        font-size: 1rem;
-    }
-
-}
 
 @media (max-width: 550px) {
 
-    .clock-box {
-        padding-left: 0;
-        padding-right: 0;
-    }
 
     .icon-boxes img{
         height: 10px;
@@ -200,13 +189,24 @@
     }
 
     .entrance-exit .text {
-        font-size: 0.8rem;
+        font-size: 1.2rem;
     }
 
 }
 
 @media (max-width: 450px) {
-    .rectangle{
-        width: 100%;
+    .entrance-exit .text {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 350px) {
+    .entrance-exit .text {
+        font-size: 0.5rem;
+    }
+
+    .clock-box {
+        padding-left: 15px;
+        padding-right: 15px;
     }
 }
