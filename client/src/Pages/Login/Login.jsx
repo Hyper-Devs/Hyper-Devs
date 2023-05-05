@@ -42,7 +42,7 @@ function Login() {
           // Store current user session in the local storage to allow login persistence
           setUser(res.data)
           localStorage.setItem("isLoggedin", JSON.stringify(res.data));
-          console.log(res.data)
+          // console.log(res.data)
         }
         else if (res.status === 201) { setAuthStatus(true) }
       })
