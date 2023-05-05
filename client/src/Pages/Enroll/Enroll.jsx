@@ -48,18 +48,7 @@ function Enroll(){
                 </div>
                 <Footer1/>
             </div>
-            <div className="enroll-sidebar">
-            <Sidebar
-                buttonState={{
-                    item1: false,
-                    item2: false,
-                    item3: true,
-                    item4: false,
-                    item5: false,
-                }} />
-            </div>      
-
-                
+            <Sidebar/>
             </div>
             
 

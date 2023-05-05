@@ -7,7 +7,7 @@ function NewSidebar() {
     <div className='newsidebar-container'>
       <div className='newsidebar-content'>
       <div className='newsidebar-header'>
-        <img src="icons/Profile Icon.svg" alt="" srcset="" />
+        <img src="icons/Profile Icon.svg" alt="Profile Icon" srcset="" />
       </div>
       <ul className='sidebar-list'>
         {SidebarData.map((val, key) => {
