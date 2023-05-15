@@ -1,13 +1,13 @@
 .newsidebar-container{
     height: 100%;
-    width: 250px;
+    width: 15%;
     background-color: #8E1437;
 }
 
 .newsidebar-content{
     position: fixed;
     height: 100%;
-    width: 250px;
+    width: 15%;
     background-color: #8E1437;
 }
 
@@ -54,4 +54,88 @@
 
 .sidebar-list #active{
     color: #FFB81E;
+}
+
+@media (max-width: 950px) {
+    
+    .newsidebar-header{
+        height:  150px;
+    }
+
+    .newsidebar-header img{
+        width: 70%;
+    }
+
+    .sidebar-list .items{
+        padding-left: 0;
+    }
+
+    .items #title{
+        display: none;
+    }
+
+    .items #icon{
+        justify-content: center;
+    }
+
+}
+
+@media (max-width: 850px) {
+    
+    .newsidebar-header{
+        height: 100px;
+    }
+
+    .newsidebar-header img{
+        width: 70%;
+    }
+
+}
+
+@media (max-width: 750px) {
+    
+    .sidebar-list .items{
+        height: 43px;
+    }
+
+}
+
+@media (max-width: 550px) {
+    
+    .newsidebar-header {
+        height: 80px;
+    }
+
+    .newsidebar-header img{
+        width: 70%;
+    }
+
+    .sidebar-list .items{
+        height: 36px;
+    }
+
+}
+
+@media (max-width: 450px) {
+
+    .newsidebar-header {
+        height: 60px;
+    }
+
+    .sidebar-list .items{
+        height: 25px;
+    }
+
+}
+
+@media (max-width: 350px) {
+
+    .newsidebar-header {
+        height: 40px;
+    }
+
+    .sidebar-list .items{
+        height: 22px;
+    }
+
 }

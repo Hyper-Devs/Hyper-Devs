@@ -3,12 +3,12 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 10%;
-    padding-bottom: 10%;
+    padding-top: 5%;
+    padding-bottom: 5%;
   }
   
   .notif-message-box .notif-message-rectangle {
-    width: 75%;
+    width: 1000px;
     height: fit-content;
     background: #00573f;
     border: 3px solid #00573f;
@@ -30,7 +30,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 5%;
+    padding-right: 10px;
+    width: 120px;
     border-radius: 10px;
     margin-top: 1%;
     margin-bottom: 1%;

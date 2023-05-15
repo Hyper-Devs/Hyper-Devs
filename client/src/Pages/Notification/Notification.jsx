@@ -19,7 +19,7 @@ function Notification() {
       <div className="notification-content-container">
       <div className="notification-content">
         <Header2/>
-        {/* <PageTitle pageName={"Notification"}/> */}
+        <PageTitle pageName={"Notification"}/>
         
         {active == "notifBox" && <NotificationBox onButtonClick={handleButtonClick} />}
         {active === "msgContext" && <MessageContext onButtonClick={handleButtonClick} />}

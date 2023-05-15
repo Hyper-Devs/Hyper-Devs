@@ -23,29 +23,29 @@ function EnrollModifier1({onEnrollTypeChange}){
         <div className="container-fluid p-3">
             <div className="row">
                 <div className="col bg-secondary bg-opacity-25 p-3 rounded border border-success">
-                <div class="accordion mb-3" id="accordionPanelsStayOpenEnrollOptions">
-                    <div class="accordion-item bg-secondary bg-opacity-10 border border-success">
-                        <h2 class="accordion-header">
-                        <button class="accordion-button bg-success text-light" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseStudentOption" aria-expanded="true" aria-controls="panelsStayOpen-collapseStudentOption">
+                <div className="accordion mb-3" id="accordionPanelsStayOpenEnrollOptions">
+                    <div className="accordion-item bg-secondary bg-opacity-10 border border-success">
+                        <h2 className="accordion-header">
+                        <button className="accordion-button bg-success text-light" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseStudentOption" aria-expanded="true" aria-controls="panelsStayOpen-collapseStudentOption">
                         Enroll Option
                         </button>
                         </h2>
-                        <div id="panelsStayOpen-collapseStudentOption" class="accordion-collapse collapse show">
-                        <div class="accordion-body">
-                            <div class="d-grid gap-1 mb-2">
-                                <button class="btn btn-secondary btn-outline-success text-light borders " type="button" onClick={individualEnroll}>Individual Enroll</button>
+                        <div id="panelsStayOpen-collapseStudentOption" className="accordion-collapse collapse show">
+                        <div className="accordion-body">
+                            <div className="d-grid gap-1 mb-2">
+                                <button className="btn btn-secondary btn-outline-success text-light borders " type="button" onClick={individualEnroll}>Individual Enroll</button>
                             </div>
-                            <div class="accordion-item bg-secondary bg-opacity-10 border border-success rounded">
-                                <h2 class="accordion-header">
-                                <button class="accordion-button bg-success text-light  collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseStudentBatchOption" aria-expanded="false" aria-controls="panelsStayOpen-collapseStudentBatchOption">
+                            <div className="accordion-item bg-secondary bg-opacity-10 border border-success rounded">
+                                <h2 className="accordion-header">
+                                <button className="accordion-button bg-success text-light  collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseStudentBatchOption" aria-expanded="false" aria-controls="panelsStayOpen-collapseStudentBatchOption">
                                     Batch Enroll
                                 </button>
                                 </h2>
-                                <div id="panelsStayOpen-collapseStudentBatchOption" class="accordion-collapse collapse">
-                                    <div class="accordion-body">
-                                        <div class="d-grid gap-2">
-                                            <button class="btn btn-secondary btn-outline-success text-light borders " type="button" onClick={batchNS}>New Students</button>
-                                            <button class="btn btn-secondary btn-outline-success text-light borders " type="button" onClick={batchNY}>New School Year</button>
+                                <div id="panelsStayOpen-collapseStudentBatchOption" className="accordion-collapse collapse">
+                                    <div className="accordion-body">
+                                        <div className="d-grid gap-2">
+                                            <button className="btn btn-secondary btn-outline-success text-light borders " type="button" onClick={batchNS}>New Students</button>
+                                            <button className="btn btn-secondary btn-outline-success text-light borders " type="button" onClick={batchNY}>New School Year</button>
                                         </div>
                                     </div>
                                 </div>

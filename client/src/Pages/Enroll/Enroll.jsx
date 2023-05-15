@@ -23,18 +23,18 @@ function Enroll(){
     };
 
     return(
-        <div className="enroll-container">
+        <div className="enroll-container" data-testid='enroll-container'>
 
             <div className="enroll-default">
                 <Header2/>
                 <div className="enroll-content">
-                <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-4">
+                <div className="container-fluid">
+                        <div className="row">
+                            <div className="col-4">
                                 <EnrollModifier1 onEnrollTypeChange={handleEnrollmentOption}/>
                                 <Modal/>
                             </div>
-                            <div class="col-8">
+                            <div className="col-8">
                             {active === "enrollIR" && <EnrollIndResult/>}
                             {active === "enrollBSNSR" && <BSNewSResults/>}
                             {active === "enrollBNSYR" && <EnrollBNewSYResults/>}
@@ -48,18 +48,7 @@ function Enroll(){
                 </div>
                 <Footer1/>
             </div>
-            <div className="enroll-sidebar">
-            <Sidebar
-                buttonState={{
-                    item1: false,
-                    item2: false,
-                    item3: true,
-                    item4: false,
-                    item5: false,
-                }} />
-            </div>      
-
-                
+            <Sidebar/>
             </div>
             
 
