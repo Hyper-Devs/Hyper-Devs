@@ -33,6 +33,7 @@ function OvrContainer() {
     return (
         <div className='ovr-container'>
             <div className='ovr-content'>
+            <div className='title-container'><p>Override Page</p></div>
             <div className='search-content-container'> 
                 <p>Excuse a student</p>
                 <div className='search-content'>
@@ -50,22 +51,20 @@ function OvrContainer() {
             </div>
             {(students.length > 0) && isVisible &&          
                 <div className='search-result'>
-                    <h2 style={{color: '#00573F',  fontFamily: "Playfair Display", fontWeight: 900}}><b>STUDENT INFORMATION</b></h2>
+                    <h2 style={{color: '#00573F',  fontFamily: "Cambria", fontWeight: 900}}><b>STUDENT INFORMATION</b></h2>
                     <div className='student-details'>
                         <div className='name-id-block'>
                             <div className="name">Name: {students[0].first_name}</div>
                             <div className="id">ID no.: {students[0].id}</div>
                         </div>
                         <div className='addtl-info-block'>
-                            <div className="sex">Sex: {students[0].sex}</div>
-                            <div className="age">Age: {students[0].age}</div>
                             <div className="gradeLevel">Grade Level: {students[0].grade_level}</div>
                             <div className="section">Section: {students[0].section}</div>
                         </div>
                         <div className='input-fields-block'>
-                            <h1>Reason:</h1>
+                            <label>Reason</label>
                             <input className='reason-input'/>
-                            <h1>Overriding Admin</h1>
+                            <label>Overriding Admin</label>
                             <input className='reason-input ovrAdmin-input'/>
                             
                         </div>
