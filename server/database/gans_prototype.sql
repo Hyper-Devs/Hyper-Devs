@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 04, 2023 at 07:22 PM
+-- Generation Time: May 18, 2023 at 02:22 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -41,16 +41,16 @@ CREATE TABLE `attendance_log` (
 --
 
 INSERT INTO `attendance_log` (`id`, `sID`, `sName`, `time_in`, `time_out`, `date`) VALUES
-(1, 1003, 'John Mynar Laquinta', '01:30:02', '02:45:45', '2023-03-21'),
-(2, 1002, 'Jonas Rosales', '03:35:20', '05:20:02', '2023-03-23'),
-(3, 1001, 'Jun Hunt', '04:30:53', '05:30:53', '2023-04-06'),
-(4, 1001, 'Jun Hunt', '09:20:01', '10:31:02', '2023-04-26'),
-(5, 1004, 'Jackie Chan', '07:30:00', '09:02:02', '2023-04-18'),
-(6, 1005, 'Optimus Prime', '03:31:43', '05:26:29', '2023-04-27'),
-(7, 1003, 'John Mynar Laquinta', '02:21:29', '03:36:43', '2023-04-27'),
-(8, 1002, 'Jonas Rosales', '04:45:32', '05:30:56', '2023-04-27'),
-(9, 1003, 'Jun Hunt', '12:30:23', '01:56:29', '2023-04-28'),
-(10, 1006, 'Juan Cruz', '04:23:05', '05:46:23', '2023-04-29');
+(1, 6, 'John Mynar Laquinta', '01:30:02', '02:45:45', '2023-03-21'),
+(2, 1, 'Jonas Rosales', '03:35:20', '05:20:02', '2023-03-23'),
+(3, 29, 'Jun Hunt', '04:30:53', '05:30:53', '2023-04-06'),
+(4, 29, 'Jun Hunt', '09:20:01', '10:31:02', '2023-04-26'),
+(5, 15, 'Jackie Chan', '07:30:00', '09:02:02', '2023-04-18'),
+(6, 9, 'Optimus Prime', '03:31:43', '05:26:29', '2023-04-27'),
+(7, 6, 'John Mynar Laquinta', '02:21:29', '03:36:43', '2023-04-27'),
+(8, 1, 'Jonas Rosales', '04:45:32', '05:30:56', '2023-04-27'),
+(9, 29, 'Jun Hunt', '12:30:23', '01:56:29', '2023-04-28'),
+(10, 5, 'Juan Cruz', '04:23:05', '05:46:23', '2023-04-29');
 
 -- --------------------------------------------------------
 
@@ -146,29 +146,26 @@ INSERT INTO `students` (`id`, `first_name`, `middle_name`, `last_name`, `grade_l
 (2, 'Zenno', 'Drake', 'Doja', '9', 'Commodity', 'Myra', 'Bato', 'Limpada', 'Mother', 2147483647),
 (3, 'Mynar', 'Laquinta', 'John', '10', 'Mlue', 'Joana', 'Mynar', 'Laquinta', 'Mother', 2147483647),
 (4, 'John', 'Cedic', 'Laquinta', '11', 'Einstein', 'Man', 'Woman', 'Human', 'Parent', 2147483647),
-(5, 'Juan', 'Dela', 'Cruz', '10', 'Reynbow', 'Juanito', 'Juanita', 'Cruz', 'parent', 909090),
-(6, 'John Mynar', 'Cemine', 'Laquinta', '10', 'Reynbow', 'Jack', 'The', 'Reaper', 'Friend', 12345678),
+(5, 'Juan', 'Dela', 'Cruz', '11', 'Kolmogorov', 'Juanito', 'Juanita', 'Cruz', 'parent', 909090),
+(6, 'John Mynar', 'Cemine', 'Laquinta', '11', 'Kolmogorov', 'Jack', 'The', 'Reaper', 'Friend', 12345678),
 (9, 'Optimus', 'Optimas', 'Prime', '9', 'Supply', 'Quintessa', 'The', 'Deceiver', 'Maker of Transformers kuno', 900001242),
-(10, 'John', 'Fookin', 'Wick', '10', 'Reynbow', 'Jaime', 'Kingslayer', 'Lannister', 'Ward', 99999),
+(10, 'John', 'Fookin', 'Wick', '11', 'Kolmogorov', 'Jaime', 'Kingslayer', 'Lannister', 'Ward', 99999),
 (11, 'Jack', 'The', 'Sparrow', '11', 'Einstein', 'Jackie', 'Boy', 'Boy', 'Uncle', 9000012),
-(12, 'John', 'Fookin', 'Wick', '10', 'Reynbow', 'Jaime', 'Kingslayer', 'Lannister', 'Ward', 99999),
-(15, 'Jackie', 'Swan', 'Chan', '10', 'Reynbow', 'Uncle', '', 'Roger', 'Uncle', 9999888),
+(12, 'John', 'Fookin', 'Wick', '11', 'Kolmogorov', 'Jaime', 'Kingslayer', 'Lannister', 'Ward', 99999),
+(15, 'Jackie', 'Swan', 'Chan', '11', 'Kolmogorov', 'Uncle', '', 'Roger', 'Uncle', 9999888),
 (17, 'John', 'Doe', 'Dee', '11', 'Kolmogorov', 'Jean', '', 'Dove', 'Guardian', 999999),
-(22, 'John', 'Fookin', 'Wick', '10', 'Reynbow', 'Jaime', 'Kingslayer', 'Lannister', 'Ward', 99999),
-(23, 'Jaime', 'Fookin', 'Wick', '10', 'Reynbow', 'Jaime', 'Kingslayer', 'Lannister', 'Ward', 99999),
+(22, 'John', 'Fookin', 'Wick', '11', 'Kolmogorov', 'Jaime', 'Kingslayer', 'Lannister', 'Ward', 99999),
+(23, 'Jaime', 'Fookin', 'Wick', '11', 'Kolmogorov', 'Jaime', 'Kingslayer', 'Lannister', 'Ward', 99999),
 (25, 'Juanito', 'Fookin', 'Wick', '10', 'Reynbow', 'Jaime', 'Kingslayer', 'Lannister', 'Ward', 99999),
 (26, 'Gustavo', 'Fookin', 'Wick', '10', 'Reynbow', 'Jaime', 'Kingslayer', 'Lannister', 'Ward', 99999),
 (27, 'Megatron', 'Cyberpunk', 'Decepticon', '11', 'Kolmogorov', 'Quintessa', 'The', 'Deceiver', 'Maker of Transformers kuno', 900001242),
 (28, 'Jamess', 'Fookin', 'Wick', '10', 'Reynbow', 'Jaime', 'Kingslayer', 'Lannister', 'Ward', 99999),
 (29, 'Jun', '', 'Hunt', '11', 'Einstein', 'Jose', '', 'Pina', 'Father', 999999),
 (30, 'Nick', 'Fookin', 'Wick', '10', 'Reynbow', 'Jaime', 'Kingslayer', 'Lannister', 'Ward', 99999),
-(79, 'Daemon', '', 'Targaryen', '10', 'Mink', 'Viserys I', '', 'Targaryen', 'Brother', 2147483647),
-(80, 'Maegor', '', 'Targaryen', '12', 'Sunday', 'Aegon I', '', 'Targaryen', 'Father', 2147483647),
-(81, 'Daeron', '', 'Targaryen', '10', 'Reynbow', 'Aegon', '', 'Targaryen', 'Ancestor', 912345678),
-(82, 'Daemon', '', 'Targaryen', '10', 'Mink', 'Viserys I', '', 'Targaryen', 'Brother', 2147483647),
-(83, 'Maegor', '', 'Targaryen', '12', 'Sunday', 'Aegon I', '', 'Targaryen', 'Father', 2147483647),
-(84, 'Daemon', '', 'Targaryen', '10', 'Mink', 'Viserys I', '', 'Targaryen', 'Brother', 9123456),
-(85, 'Maegor', '', 'Targaryen', '12', 'Sunday', 'Aegon I', '', 'Targaryen', 'Father', 9876543);
+(92, 'Jon', '', 'Snow', '8', 'Awake', 'Rhaegar', '', 'Targaryen', 'Father', 912112123),
+(93, 'Ramsay', '', 'Snow', '12', 'Break', 'Roose', '', 'Bolton', 'Father', 912112123),
+(98, 'Daemon', '', 'Targaryen', '12', 'Break', 'Viserys I', '', 'Targaryen', 'Brother', 9123456),
+(99, 'Maegor', '', 'Targaryen', '12', 'Break', 'Aegon I', '', 'Targaryen', 'Father', 9876543);
 
 -- --------------------------------------------------------
 
@@ -179,7 +176,7 @@ INSERT INTO `students` (`id`, `first_name`, `middle_name`, `last_name`, `grade_l
 CREATE TABLE `users` (
   `id` int(50) NOT NULL,
   `name` varchar(50) NOT NULL,
-  `position` varchar(50) NOT NULL,
+  `role` varchar(50) NOT NULL,
   `access_id` int(50) NOT NULL,
   `password` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
@@ -188,12 +185,12 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `position`, `access_id`, `password`) VALUES
+INSERT INTO `users` (`id`, `name`, `role`, `access_id`, `password`) VALUES
 (1, 'Joshamee Gibbs', 'Admin', 111001, 'black_pearl'),
 (2, 'Noreen Mercado', 'Admin', 111002, 'upamingmahal'),
 (3, 'Alan Quezon', 'Admin', 111003, 'comscienjoyer'),
 (4, 'Betty Lee', 'Admin', 111004, 'lahuglahugan'),
-(5, 'Peterson Malakas', 'Head Teacher', 111005, 'wheresmypolvoron');
+(5, 'Peterson Malakas', 'User', 111005, 'wheresmypolvoron');
 
 --
 -- Indexes for dumped tables
@@ -256,7 +253,7 @@ ALTER TABLE `sections`
 -- AUTO_INCREMENT for table `students`
 --
 ALTER TABLE `students`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
 
 --
 -- AUTO_INCREMENT for table `users`

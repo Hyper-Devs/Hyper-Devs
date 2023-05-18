@@ -26,10 +26,10 @@ app.get('/message', (req, res) => {
 
   // Send text message
   if(status == 1){
-    textMessage = "Student tapped in at " + dt +', ' + time
+    textMessage = "\nGreetings! Mr./Ms. Tan, your child entered\nthe school campus today " + dt + " at " + time + "\n" + " Thank you so much! \n This is an auto-generated text message from University of the Philippines High-School" 
   }
   else if(status == 2){
-    textMessage = "Student tapped out at " + dt + ', ' + time
+    textMessage = "\nGreetings! Mr./Ms. Tan, your child exited\nthe school campus today " + dt + " at " + time + "\n" + " Thank you so much! \n This is an auto-generated text message from University of the Philippines High-School"
   }
   else if(status == 3){
     textMessage = "Student got permission to leave school at " + dt + ', ' + time
