@@ -12,11 +12,10 @@ function messageContext(props) {
       <div className="notif-message-rectangle">
         <div className="notif-message-header">
         <p>Context Message</p>
-        <button onClick={() => handleClick('notifBox')}><AiOutlineLeft/>BACK</button>
+        <button onClick={() => handleClick('notifBox')}><AiOutlineLeft size={"1.3rem"}/>BACK</button>
         </div>
         <div className="notif-message-rectangle2">
           <div className="notif-message-rectangle3">
-            <div className="notif-message-rectangle4">
                 <p>Notification Format</p>
             <div className="notif-message-rectangle5"><p>Greetings! Mr./Ms. [Last Name], your child ["enter"/"exit"]
                 <br/>the school campus toady [MM/DD/YYY] at [00:00:00].
@@ -29,7 +28,6 @@ function messageContext(props) {
             <div className="notif-update-button">
               <button>Update</button>
             </div>
-          </div>
           </div>
         </div>
       </div>
