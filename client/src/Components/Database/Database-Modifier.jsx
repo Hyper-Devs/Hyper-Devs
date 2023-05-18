@@ -99,18 +99,23 @@ function DatabaseModifier(props){
 
     // functions for fetching the student or admin from the database
 
-    function handleSubmit(event) {
+    function handleSubmitStudent(event) {
         event.preventDefault();
 
         const form = event.target;
         const formData = new FormData(form);
-        // You can pass formData as a fetch body directly:
-        // fetch('/some-api', { method: form.method, body: formData });
-        // You can generate a URL out of it, as the browser does by default:
-        // console.log(new URLSearchParams(formData).toString());
-        // You can work with it as a plain object.
         const formJson = Object.fromEntries(formData.entries());
+
         if (formJson["student-prim-info"] != '' || formJson['student-school-year'] != 'Select'){
+            var date_start = "01-01-2023"
+            var date_end = "01-01-2023"
+            if (Object.keys(formJson).includes('date-start')){
+                date_start = formJson['date-start'].replaceAll('/', '-')
+                date_end = formJson['date-end'].replaceAll('/', '-')
+
+                formJson['date-start'] = date_start;
+                formJson['date-end'] = date_end;
+            }
             fetchStudent(formJson);
         }
         else {
@@ -160,6 +165,9 @@ function DatabaseModifier(props){
                 case JSON.stringify([true, true, true, true, true, false, false]):
                     result = await axios.get(`http://localhost:8800/database/student-filter/student/${searchVal["student-prim-info"]}/${searchVal["student-school-year"]}/${searchVal["student-grade-level"]}/${searchVal["student-section"]}`);
                     break
+                case JSON.stringify([true, true, true, true, true, true, true]):
+                    result = await axios.get(`http://localhost:8800/database/student-filter/student/${searchVal["student-prim-info"]}/${searchVal["student-school-year"]}/${searchVal["student-grade-level"]}/${searchVal["student-section"]}/${searchVal["date-start"]}/${searchVal["date-end"]}`);
+                    break
                 case JSON.stringify([false, true, false, false, true, false, false]):
                     result = await axios.get(`http://localhost:8800/database/students/batch/${searchVal['student-school-year']}`)
                     break
@@ -173,7 +181,11 @@ function DatabaseModifier(props){
                     console.log("Error 404")
             }
             setStudentResult(result.data)
-            // console.log(result.data)
+            console.log(result.data) 
+            // note to james: in rendering the output, consider outputs where time in, time out and date are included. 
+            // coz nag add ko new API for attendance logs
+            // this is for the attendance logs
+            
         } catch (error){
             console.log(error)
         }
@@ -199,7 +211,7 @@ function DatabaseModifier(props){
             <div class="tab-content " id="nav-tabContent" onMouseOver={searchFieldEnter}>
                 <div class="tab-pane fade show active" id="nav-student" role="tabpanel" aria-labelledby="nav-student-tab">
                     <div className="container-md ">
-                        <form onSubmit={handleSubmit}>
+                        <form onSubmit={handleSubmitStudent}>
                             <div className="row">
                                 <div class="input-group mb-1">
                                     <span class="input-group-text  " id="basic-addonS1">#</span>
@@ -278,58 +290,22 @@ function DatabaseModifier(props){
                                 {accessType === "Attendance" && 
                                     <div className="col">
                                         <div class="input-group mb-1">
-                                            <span class="input-group-text" id="from">Period Covered</span>
-                                            <span class="input-group-text" id="from">from</span>
-                                            <input 
-                                                name="period-covered-from-month" 
-                                                type="number" 
-                                                class="form-control" 
-                                                placeholder="mm" 
-                                                aria-label="mm" 
-                                                aria-describedby="from"
-                                            ></input>
-                                            <input 
-                                                name="period-covered-from-day"
-                                                type="number" 
-                                                class="form-control" 
-                                                placeholder="dd" 
-                                                aria-label="dd" 
-                                                aria-describedby="from"
-                                            ></input>
-                                            <input 
-                                                name="period-covered-from-year"
-                                                type="number" 
-                                                class="form-control" 
-                                                placeholder="yyyy" 
-                                                aria-label="yyyy" 
-                                                aria-describedby="from"
-                                            ></input>
-
-                                            <span class="input-group-text" id="to">to</span>
-                                            <input 
-                                                name="period-covered-to-month" 
-                                                type="number" 
-                                                class="form-control" 
-                                                placeholder="mm" 
-                                                aria-label="mm" 
-                                                aria-describedby="to"
-                                            ></input>
-                                            <input 
-                                                name="period-covered-to-day"
-                                                type="number" 
-                                                class="form-control" 
-                                                placeholder="dd" 
-                                                aria-label="dd" 
-                                                aria-describedby="to"
-                                            ></input>
-                                            <input 
-                                                name="period-covered-to-year"
-                                                type="number" 
-                                                class="form-control" 
-                                                placeholder="yyyy" 
-                                                aria-label="yyyy" 
-                                                aria-describedby="to"
-                                            ></input>
+                                            <DatePicker
+                                                    name="date-start"
+                                                    selectsStart
+                                                    selected={rangeStart}
+                                                    startDate={rangeStart}
+                                                    endDate={rangeEnd}
+                                                    onChange={selectStartDate}
+                                                />
+                                            <DatePicker
+                                                name="date-end"
+                                                selectsEnd
+                                                selected={rangeEnd}
+                                                startDate={rangeStart}
+                                                endDate={rangeEnd}
+                                                onChange={selectEndDate}
+                                            />
                                         </div>
                                     </div>
                                 }
