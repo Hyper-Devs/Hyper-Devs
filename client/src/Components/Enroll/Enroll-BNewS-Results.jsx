@@ -27,9 +27,9 @@ function BSNewSResults(){
                 headers: {
                 'Content-Type': 'multipart/form-data'
                 }});
-            console.log(result)
+            console.log(result.data)
         } catch (error){
-            console.log(error)
+            console.log(error.response)
         }
     };
 

@@ -12,9 +12,9 @@ function Override() {
     <div className='override-container'>
       <Sidebar/>
       <div className="override-content-container">
+        <Header2/>
         <div className='override-content' >
-          <Header2/>
-          <PageTitle pageName={"Override"} />
+          {/* <PageTitle pageName={"Override"} /> */}
           <OvrContainer />
           </div>
           <Footer />

@@ -45,7 +45,7 @@ router.get("/student-filter", async (request, response) => {
     });
 });
   
-//API for retrieving students in the Database page
+//API for retrieving student's information
 router.get("/student-filter/student/:student_prim_info/:school_year/:grade_level/:section_name", (request, response) => {
   const query = `SELECT students.id, students.first_name, students.middle_name, students.last_name, students.grade_level, students.section_name, sections.school_year
               FROM students,sections
@@ -83,6 +83,76 @@ router.get("/student-filter/student/:student_prim_info/:school_year/:grade_level
       return response.json(returnVal)
   });
 });
+
+//API for retrieving a student's attendance logs
+router.get("/student-filter/student/:student_prim_info/:school_year/:grade_level/:section_name/:date_start/:date_end", (request, response) => {
+  const query = `SELECT students.id, students.first_name, students.last_name, attendance_log.time_in, attendance_log.time_out, attendance_log.date
+                  FROM students, sections, attendance_log
+                  WHERE students.grade_level = sections.grade_level AND students.section_name = sections.section_name AND students.id = attendance_log.sID
+                  AND sections.school_year = ? AND students.grade_level = ? AND students.section_name = ?`;
+  const values = [request.params.school_year, request.params.grade_level, request.params.section_name];
+
+  db.query(query, values, (error, data) => {
+      if (error) { return response.json(error); }
+      
+      //the task here is to further refine the query results by using the given ID or name
+      var searchVal, studentPrimVal, logs = [];
+      const student_prim_info = request.params.student_prim_info;
+      if (/^\d+$/.test(student_prim_info))                      //student_prim_info parameter is an ID  
+        searchVal = 'id';     
+      else                                                      //student_prim_info parameter is a name
+        searchVal = 'first_name'                
+        studentPrimVal = student_prim_info.toLowerCase()                  
+      
+      // 1st Phase of Results Refinement
+      // loop through the SQL query results and find the intended student using the primary info
+      for(let i=0; i<data.length; i++){
+        var testCases = [];
+        testCases.push(data[i][searchVal].toLowerCase()+' '+data[i]['last_name'].toLowerCase() == studentPrimVal);
+        testCases.push(data[i]['last_name'].toLowerCase() == studentPrimVal);
+        
+        if (/^\d+$/.test(student_prim_info)) testCases.push(data[i][searchVal] == student_prim_info);
+        else testCases.push(data[i][searchVal].toLowerCase() == studentPrimVal);
+
+        if (testCases.includes(true)){
+            logs.push(data[i]);
+        }
+      }
+      
+      // 2nd Phase of Results Refinement
+      // isolate the attendance logs that are under the requested date range
+  
+      // determines the set of dates (inclusive) given the date range
+      const startDate = new Date(request.params.date_start);
+      const endDate = new Date(request.params.date_end);
+      const dateRange = [];
+      
+      // generates the dates under the date range
+      var newStartDate = startDate
+      newStartDate.setDate(newStartDate.getDate()+1)
+      for (let d = startDate; d <= endDate; d.setDate(d.getDate() + 1)) {
+        dateRange.push(new Date(d));
+      }
+      var newEndDate = startDate
+      newEndDate.setDate(newEndDate.getDate())
+      dateRange.push(newEndDate)
+      
+      // checks if the dates returned by the server is within the requested date range
+      returnVal = [];
+      for (var i=0; i<dateRange.length; i++){
+        for (var j=0; j<logs.length; j++)
+          if (dateRange[i].toString() === logs[j]['date'].toString()){
+            returnVal.push(logs[j])
+          }
+      }
+
+      if (logs != [])
+        return response.json(returnVal)
+      else
+        return response.json("No attendance logs found")
+  });
+});
+
 
 
 
@@ -132,7 +202,7 @@ router.get("/students/batch/:school_year/:grade_level/:section", (request, respo
 
 
 
-//API for retrieving users or logs in the Database page
+//API for retrieving users or their override logs
 router.get("/admin/override-logs/:admin_name/:position/:access_mode/:date_from/:date_to", (request, response) => {
   const values = [stringInputConditioner(request.params.admin_name), request.params.position]
   const query = `SELECT *
@@ -156,7 +226,7 @@ router.get("/admin/override-logs/:admin_name/:position/:access_mode/:date_from/:
       }
       return response.json(returnVal)
     }
-    else{                                                                 //mode: returns overriding logs regarding the searched user
+    else if (request.params.access_mode == "Logs"){                       //mode: returns overriding logs regarding the searched user
       // determines the set of dates (inclusive) given the date range
       const startDate = new Date(request.params.date_from);
       const endDate = new Date(request.params.date_to);
