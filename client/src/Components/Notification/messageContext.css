@@ -3,12 +3,12 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 5%;
-    padding-bottom: 5%;
+    padding-top: 3%;
+    padding-bottom: 3%;
   }
   
   .notif-message-box .notif-message-rectangle {
-    width: 1000px;
+    width: 80%;
     height: fit-content;
     background: #00573f;
     border: 3px solid #00573f;
@@ -22,25 +22,32 @@
   .notif-message-header {
     display: flex;
     justify-content: space-between;
+    
   }
 
-  .notif-message-rectangle button {
+  .notif-message-header p{
+    margin-top: 1%;
+    margin-bottom: 1%;
+    margin-left: 3%;
+  }
+ 
+  .notif-message-header button {
     background-color: white;
     color: #00573f;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-right: 10px;
-    width: 120px;
     border-radius: 10px;
     margin-top: 1%;
     margin-bottom: 1%;
     margin-right: 3%;
+    font-size: 1.5rem;
+    padding: 0 10px 0 10px;
   }
   
   .notif-message-box .notif-message-rectangle p {
-    margin: 1% 0 1% 3%;
     color: white;
+    font-size: 1.5rem;
   }
   
   .notif-message-box .notif-message-rectangle2 {
@@ -55,24 +62,16 @@
     padding: 15px;
     display: flex;
     flex-direction: column;
+    gap: 15px;
+    align-items: center;
     background-color: white;
     border-radius: 10px;
     border-top-right-radius: 0;
     border-top-left-radius: 0;
   }
 
-  .notif-message-box .notif-message-rectangle4 {
-    height: fit-content;
-    padding: 15px 100px 15px 100px;
-    display: flex;
-    flex-direction: column;
-    background-color: white;
-    border-radius: 10px;
-    border: 3px solid #00573F;
-  }
-
   .notif-message-box .notif-message-rectangle5 {
-    padding: 15px;
+    padding: 1%;
     display: flex;
     background-color: white;
     border-radius: 10px;
@@ -93,14 +92,14 @@
     margin-left: 0;
   }
 
-.notif-message-box .notif-update-button button {
+  .notif-message-rectangle3 button {
   background-color: #00573f;
   color: white;
   display: inline-block;
   justify-content: center;
-  margin-top: 3%;
-  margin-left: 35%;
-  width: 30%;
   border-radius: 10px;
-  padding: 5px;
+  font-size: 1.5rem;
+  height: fit-content;
+  padding: 0 10px 0 10px;
+  margin: 0;
 }
