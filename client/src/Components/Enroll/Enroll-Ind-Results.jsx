@@ -57,7 +57,7 @@ function EnrollIndResult(){
     const addStudent = async (studentInfo) => {
         try {
             const result = await axios.post(`http://localhost:8800/enroll/new-student`, studentInfo);
-            console.log(result)
+            console.log(result.data)
         } catch (error){
             console.log(error)
         }

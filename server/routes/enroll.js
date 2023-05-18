@@ -147,4 +147,22 @@ router.post("/batch/new-student", (request, response) => {
   });
 });
 
+//API for student migration
+router.put("/batch/student-migration", (request, response) => {
+  const query = `INSERT INTO students (id, grade_level, section_name) 
+              VALUES ? 
+              ON DUPLICATE KEY UPDATE 
+                grade_level = VALUES(grade_level), 
+                section_name = VALUES(section_name);`;
+
+  const newGL = request.body['new-student-grade-level'];
+  const newS = request.body['new-student-section'];
+  const values = request.body['rowsToUpdate'].map(student => [student.sId, newGL, newS]);
+
+  db.query(query, [values], (err, data)=>{
+    if(err) return response.json(err)
+    return response.json("Student migration successful")
+  });
+});
+
 module.exports=router;

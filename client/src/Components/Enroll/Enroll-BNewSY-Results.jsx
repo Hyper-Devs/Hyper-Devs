@@ -71,13 +71,40 @@ function EnrollBNewSYResults(){
         }
     };
 
+    function handleRemove(index) {
+        const newItems = [...studentVal];
+        newItems.splice(index, 1);
+        setStudentVal(newItems);
+    };
+
+    function handleStudentUpdate(event) {
+        event.preventDefault();
+
+        const form = event.target;
+        const formData = new FormData(form);
+        const formJson = Object.fromEntries(formData.entries());
+
+        var newObj = {"rowsToUpdate": studentVal, "new-student-grade-level": formJson["new-student-grade-level"], "new-student-section": formJson["new-student-section"]}
+        updateStudents(newObj)
+    };
+
+    const updateStudents = async (inputObject) => {
+        try {
+            const response = await axios.put(`http://localhost:8800/enroll/batch/student-migration`, inputObject);
+            if (response.status == 200){
+                console.log(response.data)
+            }
+        } catch (err) {
+            console.log(err);
+        }
+    };
 
     return(
         <div className="container-fluid p-3" onMouseOver={enrollFormEnter}>
             <div className="row">
                 <div className="col px-5 py-3 border border-success rounded bg-secondary bg-opacity-10 ">
                     <div className="row bg-success bg-opacity-50 border border-success rounded-top p-3">
-                    <p class="h5 fw-bold text-center text-black">Previous Class</p>
+                        <p class="h5 fw-bold text-center text-black">Previous Class</p>
                         <div class="input-group">
                             <label class="input-group-text " for="inputGroupBNewSYGrade">Grade</label>
                             <select 
@@ -113,41 +140,58 @@ function EnrollBNewSYResults(){
                                         <li class="list-group-item">
                                             <input class="form-check-input me-1" type="checkbox" value={sId} id={id}></input>
                                             <label class="form-check-label" for="name1">{name}</label>
+                                            <button style={{ position: "absolute", right: 0 , margin_right:5}} onClick={() => handleRemove(index)}>Remove</button>
                                         </li>
                                     )
                                 }
                             </ul>
                         }
                     </div>
+
+                    <form onSubmit={handleStudentUpdate}>
                     <div className="row bg-success bg-opacity-50 border border-success rounded-top p-3">
-                    <p class="h5 fw-bold text-center text-black">Updated Class</p>
+                        <p class="h5 fw-bold text-center text-black">Updated Class</p>
                         <div class="input-group">
                             <label class="input-group-text " for="inputGroupBNewSYGradeNew">Grade</label>
-                            <select class="form-select bg-success bg-opacity-25" id="inputGroupBNewSYGradeNew">
+                            <select 
+                                name="new-student-grade-level"
+                                class="form-select bg-success bg-opacity-25" 
+                                id="inputGroupBNewSYGrade"
+                                onClick={(e) => updateSelectedSY(e)}
+                                onChange={(e) => updateSelectedGL(e)}
+                                required
+                            >
                                 <option selected>Select</option>
-                                <option value="7">7</option>
-                                <option value="8">8</option>
-                                <option value="9">9</option>
-                                <option value="10">10</option>
-                                <option value="11">11</option>
-                                <option value="12">12</option>
+                                {gradeLevelOptions.map(({ value, label }, index) => <option value={value} >{label}</option>)}
                             </select>
+
                             <label class="input-group-text " for="inputGroupBNewSYSectionNew">Section</label>
-                            <select class="form-select bg-success bg-opacity-25" id="inputGroupBNewSYSectionNew">
+                            <select 
+                                name="new-student-section"
+                                class="form-select bg-success bg-opacity-25" 
+                                id="inputGroupSelect01"
+                                onClick={() => updateGLStudentFilter()}
+                                onChange={(e) => updateSelectedSection(e)}
+                                required
+                            >
                                 <option selected>Select</option>
-                                <option value="---">---</option>
+                                {sectionOptions.map(({ value, label }, index) => <option value={value} >{label}</option>)}
                             </select>
                         </div>
                     </div>
                     <div className="row p-3 border border-success rounded-bottom mb-1 "> 
                         <div className="col-fluid">
-                        <div class="d-grid gap-2">
-                            <button class="btn btn-success" type="button">Update Class List</button>
-                        </div>
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-success" type="submit">Update Class List</button>
+                            </div>
                         </div>
                     </div>
+                    </form>
+
+
+
                     <div className="row">
-                    <label for="SInfo" class="form-label text-center text-success">or </label>
+                        <label for="SInfo" class="form-label text-center text-success">or </label>
                     </div>
                     <div className="row p-3 mb-2 border border-success rounded"> 
                         <label for="SInfo" class="form-label text-center text-success">UPLOAD CLASS LIST</label>
