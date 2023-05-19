@@ -4,7 +4,8 @@
   height: 100%;
   flex-direction: column;
   align-items: center;
-  justify-content: space-around;
+  padding-top: 20px;
+  /* justify-content: space-around; */
 }
 
 .notifBox .notif-rectangle {
@@ -33,6 +34,7 @@
 }
 
 .notifBox .notif-rectangle3 {
+  width: 100%;
   padding: 15px;
   display: flex;
   flex-direction: column;
@@ -47,7 +49,7 @@
 .notifBox .notif-rectangle3 button {
   padding: 10px;
   height: 100%;
-  width: fit-content;
+  width: 200px;
   border-radius: 10px;
   background-color: #00573f;
 
