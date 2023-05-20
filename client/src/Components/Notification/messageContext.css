@@ -41,13 +41,13 @@
     margin-top: 1%;
     margin-bottom: 1%;
     margin-right: 3%;
-    font-size: 1.5rem;
+    font-size: 20px;
     padding: 0 10px 0 10px;
   }
   
   .notif-message-box .notif-message-rectangle p {
     color: white;
-    font-size: 1.5rem;
+    font-size: 20px;
   }
   
   .notif-message-box .notif-message-rectangle2 {
@@ -98,7 +98,8 @@
   display: inline-block;
   justify-content: center;
   border-radius: 10px;
-  font-size: 1.5rem;
+  font-size:20px;
+  width: 200px;
   height: fit-content;
   padding: 0 10px 0 10px;
   margin: 0;
