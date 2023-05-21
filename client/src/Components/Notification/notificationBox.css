@@ -36,7 +36,7 @@
 
 .notifBox .notif-rectangle3 {
   width: 100%;
-  padding: 15px;
+  padding: 15px 35% 15px 35%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -50,9 +50,9 @@
 .notifBox .notif-rectangle3 button {
   padding: 10px;
   height: 100%;
-  width: 200px;
+  width: 100%;
   border-radius: 10px;
-  background-color: #00573f;
+  background-color: #198754;
 
   font-family: "Cambria";
   font-style: normal;
@@ -61,4 +61,17 @@
   line-height: 38px;
 
   color: #ffffff;
+}
+
+.notifBox .notif-rectangle3 button:hover {
+  background-color: #157347;
+}
+
+
+@media (max-width: 650px) {
+
+  .notifBox .notif-rectangle3 {
+    padding: 15px 10% 15px 10%;
+  }
+
 }
