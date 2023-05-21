@@ -44,6 +44,10 @@
     font-size: 20px;
     padding: 0 10px 0 10px;
   }
+
+  .notif-message-header button:hover {
+    background-color: #e3e2e1;
+  }
   
   .notif-message-box .notif-message-rectangle p {
     color: white;
@@ -93,7 +97,7 @@
   }
 
   .notif-message-rectangle3 button {
-  background-color: #00573f;
+  background-color: #198754;
   color: white;
   display: inline-block;
   justify-content: center;
@@ -103,4 +107,8 @@
   height: fit-content;
   padding: 0 10px 0 10px;
   margin: 0;
-}
+  }
+
+  .notif-message-rectangle3 button:hover {
+    background-color: #157347;
+  }

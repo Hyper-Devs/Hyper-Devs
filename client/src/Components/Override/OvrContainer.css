@@ -104,13 +104,13 @@
     height: 40px;
     font-weight: 700;
     font-size: 60%;
-    background-color: #00573F;
+    background-color: #198754;
     color: white;
     cursor: pointer;
   }
     
 .ovr-container button:hover {
-    background-color: #008861;
+    background-color: #157347;
 } 
 
 .ovr-container .search-field{
