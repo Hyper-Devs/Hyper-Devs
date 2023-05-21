@@ -1,4 +1,6 @@
-import React from 'react';
+import './globalmodal.css';
+
+import React, { useEffect, useRef } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
 
@@ -8,31 +10,43 @@ function GlobalModal({ showModal, title, body, onClose, showRetry, onSaveChanges
   };
 
   const handleSaveChanges = () => {
-    onSaveChanges();
+    // Handle the save changes action
+    console.log('Save changes');
   };
 
   const handleRetry = () => {
     onRetry();
   };
 
+  const modalRef = useRef(null);
+
+  useEffect(() => {
+    if (showModal) {
+      modalRef.current.focus();
+    }
+  }, [showModal]);
+
   return (
-    <div className={`modal ${showModal ? 'show' : ''}`} style={{ display: showModal ? 'block' : 'none' }}>
-      <div className="modal-dialog">
-        <div className="modal-content">
-          <div className="modal-header bg-success ">
-            <h1 className="modal-title fs-4 text-center">{title}</h1>
-            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={handleClose}></button>
-          </div>
-          <div className="modal-body">
-            {body}
-          </div>
-          <div className="modal-footer">
-            {showRetry ? (
-              <button type="button" className="btn btn-success" onClick={handleRetry}>Retry</button>
-            ) : (
-              <button type="button" className="btn btn-success" onClick={handleSaveChanges}>Save changes</button>
-            )}
-            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" onClick={handleClose}>Close</button>
+    <div>
+      {showModal && <div className="modal-overlay"></div>}
+      <div className={`modal ${showModal ? 'show' : ''}`} style={{ display: showModal ? 'block' : 'none' }}>
+        <div className="modal-dialog" ref={modalRef}>
+          <div className="modal-content">
+            <div className="modal-header bg-success ">
+              <h1 className="modal-title fs-4 text-center text-light">{title}</h1>
+              <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={handleClose}></button>
+            </div>
+            <div className="modal-body">
+              {body}
+            </div>
+            <div className="modal-footer">
+              {showRetry ? (
+                <button type="button" className="btn btn-success" onClick={handleRetry}>Retry</button>
+              ) : (
+                <button type="button" className="btn btn-success" onClick={handleSaveChanges}>Save changes</button>
+              )}
+              <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" onClick={handleClose}>Close</button>
+            </div>
           </div>
         </div>
       </div>
