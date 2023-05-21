@@ -3,12 +3,16 @@ import { useEffect } from "react";
 
 
 
-function IsAuthenticated ({children}){
+function IsAdmin ({children}){
     let navigate = useNavigate();
     const user = localStorage.getItem("isLoggedin");
     const userRole = JSON.parse(user)
     useEffect(()=>{if (user === null) {
       navigate('/');
+    }
+    else if (userRole[0].role === 'User'){
+      navigate('/dashboard');
+      // popup or modal // "You do not have access to this page"
     }
     },[]) 
     return(
@@ -16,4 +20,4 @@ function IsAuthenticated ({children}){
     )
   }
 
-export default IsAuthenticated;
+export default IsAdmin;
