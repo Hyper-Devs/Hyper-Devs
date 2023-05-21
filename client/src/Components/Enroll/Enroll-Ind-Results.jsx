@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useState } from "react";
 import "./Enroll-Ind-Results.css"
+import GlobalModal from '../Modal/globalmodal';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
 
@@ -13,6 +14,14 @@ function EnrollIndResult(){
     const [sectionOptions, setSectionOptions] = useState([]);
     const [selectedSY, setSYFilter] = useState("Select");
 
+    const [isLoading, setIsLoading] = useState(false);
+    const [showModal, setShowModal] = useState(false);
+    const [titleModal, setTitleModal] = useState('');
+    const [bodyModal, setBodyModal] = useState('');
+
+    const handleCloseModal = () => {
+        setShowModal(false);
+    };
 
     // functions for setting up the grade levels and sections options
     function enrollFormEnter () {
@@ -55,11 +64,31 @@ function EnrollIndResult(){
     };
 
     const addStudent = async (studentInfo) => {
+        setIsLoading(true);
+
+        // Simulating server processing time
+        setTimeout(() => {
+          setIsLoading(false);
+          // Handle the server response here
+        }, 2000); // Assuming 2 seconds for processing
+
         try {
             const result = await axios.post(`http://localhost:8800/enroll/new-student`, studentInfo);
-            console.log(result.data)
+            if (result.status == 210){
+                setTitleModal("Enrollment success");
+                setBodyModal(result.data)
+                setShowModal(true)
+            }
+            else{
+                setTitleModal("Enrollment unsuccessful");
+                setBodyModal(result.data);
+                setShowModal(true);
+            }
+
         } catch (error){
-            console.log(error)
+            setTitleModal("Internal Error");
+            setBodyModal("An error occured. Refresh the page");
+            setShowModal(true);
         }
     };
 
@@ -71,7 +100,15 @@ function EnrollIndResult(){
                     <form onSubmit={handleSubmit}>
                         <div class="input-group mb-2">
                             <button class="btn btn-success" type="button" id="SIDnumber">Generate ID Number</button>
-                            <input type="text" class="form-control" placeholder="or Enter an ID Number" aria-label="SIDnumber" aria-describedby="SIDnumber"></input>
+                            <input 
+                                name="student-rfid"
+                                type="text" 
+                                class="form-control" 
+                                placeholder="or Enter an ID Number" 
+                                aria-label="SIDnumber" 
+                                aria-describedby="SIDnumber"
+                                required
+                            ></input>
                         </div>
                         <div className="row p-3 border border-success rounded mb-2">
                             <label for="SInfo" class="form-label text-center text-success">STUDENT'S INFORMATION</label>
@@ -114,7 +151,7 @@ function EnrollIndResult(){
                                                 onClick={(e) => updateSelectedSY(e)}
                                             >
                                                 <option selected>Select</option>
-                                                {gradeLevelOptions.map(({ value, label }, index) => <option value={value} >{label}</option>)}
+                                                {gradeLevelOptions.map(({ value, label }) => <option value={value} >{label}</option>)}
                                             </select>
                                         <label class="input-group-text" for="inputGroupSelect01">Section</label>
                                             <select 
@@ -124,7 +161,7 @@ function EnrollIndResult(){
                                                 onClick={() => updateGLStudentFilter()}
                                             >
                                                 <option selected>Select</option>
-                                                {sectionOptions.map(({ value, label }, index) => <option value={value} >{label}</option>)}
+                                                {sectionOptions.map(({ value, label }) => <option value={value} >{label}</option>)}
                                             </select>
                                     </div>
                                 </div>                   
@@ -186,11 +223,22 @@ function EnrollIndResult(){
                             </div>
                         </div>
                             <div className="row">
-                                <button type="submit" class="btn btn-success">Enroll Student</button>
+                                <button type="submit" disabled={isLoading} class="btn btn-success">{isLoading ? 'Loading...' : 'Enroll'}</button>
                             </div>
                     </form>
                 </div>
             </div>
+            {showModal && (
+                <GlobalModal
+                showModal={showModal}
+                title={titleModal}
+                body={bodyModal}
+                onClose={handleCloseModal}
+                // showRetry={!enrollmentStatus && enrollmentError}          // Show "Retry" button only when there is an enrollment error
+                // onSaveChanges={handleRetry}                               // Retry enrollment when "Save changes" button is clicked
+                // onRetry={handleRetry}                                     // Retry enrollment when "Retry" button is clicked
+                />
+            )}
         </div>
     )
 }

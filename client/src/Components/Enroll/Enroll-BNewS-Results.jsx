@@ -4,12 +4,21 @@ import GlobalModal from "../Modal/globalmodal";
 
 function BSNewSResults() {
   const [file, setFile] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [titleModal, setTitleModal] = useState('');
+  const [bodyModal, setBodyModal] = useState('');
   const [showModal, setShowModal] = useState(false); // State to control the visibility of the modal
-  const [enrollmentSuccess, setEnrollmentSuccess] = useState(false); // State to track enrollment success
+
+  const [enrollmentStatus, setEnrollmentStatus] = useState(''); // State to track enrollment success
   const [enrollmentError, setEnrollmentError] = useState(false); // State to track enrollment error
 
   function handleFileInputChange(event) {
-    setFile(event.target.files[0]);
+    if (event.target.files[0]){
+      setIsLoading(false);
+      setFile(event.target.files[0]);
+    }
+    else
+      setIsLoading(true)
   }
 
   function handleFileUpload(event) {
@@ -22,19 +31,42 @@ function BSNewSResults() {
   }
 
   const addStudents = async (batchFile) => {
+    setIsLoading(true);
+
+    // Simulating server processing time
+    setTimeout(() => {
+      setIsLoading(false);
+      // Handle the server response here
+    }, 2000); // Assuming 2 seconds for processing
+
     try {
       const result = await axios.post(`http://localhost:8800/enroll/batch/new-student`, batchFile, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
       });
-      console.log(result.data);
-      setEnrollmentSuccess(true); // Set enrollment success to true
-      setShowModal(true); // Show the modal after successful enrollment
+      if ([210,220].includes(result.status)){
+        setTitleModal("Request processed successfully");
+      }
+      else if ([400,410,420].includes(result.status)){
+        setTitleModal("Request processed unsuccessfully");
+      }
+      else {
+        setTitleModal("Error");
+      }
+      setBodyModal(result.data)
+      setShowModal(true);   
+
     } catch (error) {
-      console.log(error.response);
-      setEnrollmentError(true); // Set enrollment error to true
-      setShowModal(true); // Show the modal after enrollment error
+      if ([400,410,420].includes(error.response['status'])){
+        setTitleModal("Request processed unsuccessfully");
+        setBodyModal(error.response['data'])
+      }
+      else{
+        setTitleModal("Error")
+        setBodyModal("An error occurred")
+      }
+      setShowModal(true);
     }
   };
 
@@ -65,7 +97,7 @@ function BSNewSResults() {
                     id="inputGroupFile01"
                     accept="application/csv,text/csv"
                   />
-                  <button type="submit" className="btn btn-success">Enroll Student</button>
+                  <button type="submit" disabled={isLoading} className="btn btn-success">Enroll</button>
                 </div>
               </form>
             </div>
@@ -75,12 +107,9 @@ function BSNewSResults() {
       {showModal && (
         <GlobalModal
           showModal={showModal}
-          title={enrollmentSuccess ? "New Students Batch Enroll" : "Enrollment Error"}
-          body={enrollmentSuccess ? "Enrollment successful!" : "Enrollment failed. Please try again."}
+          title={titleModal}
+          body={bodyModal}
           onClose={handleCloseModal}
-          showRetry={!enrollmentSuccess && enrollmentError} // Show "Retry" button only when there is an enrollment error
-          onSaveChanges={handleRetry} // Retry enrollment when "Save changes" button is clicked
-          onRetry={handleRetry} // Retry enrollment when "Retry" button is clicked
         />
       )}
     </div>
