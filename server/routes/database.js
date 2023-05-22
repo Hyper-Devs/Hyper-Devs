@@ -13,6 +13,35 @@ function stringInputConditioner (string) {
   return newString;
 };
 
+function outputConditioner (student_prim_infoo, results) {
+  var searchVal, returnVal = "Student not found", studentPrimVal;
+  const student_prim_info = student_prim_infoo;
+  if (/^\d+$/.test(student_prim_info)){                      //student_prim_info parameter is an ID  
+    searchVal = 'id'; 
+  }   
+  else{                                                      //student_prim_info parameter is a name
+    searchVal = 'first_name'                
+    studentPrimVal = student_prim_info.toLowerCase()                  
+  }
+
+  for(let i=0; i<results.length; i++){
+    var testCases = [];
+
+    if (/^\d+$/.test(student_prim_info)) testCases.push(results[i][searchVal] == student_prim_info);
+    else {
+      testCases.push(results[i][searchVal].toLowerCase() == studentPrimVal);
+      testCases.push(results[i][searchVal].toLowerCase()+' '+results[i]['last_name'].toLowerCase() == studentPrimVal);
+      testCases.push(results[i]['last_name'].toLowerCase() == studentPrimVal);
+    }
+  
+
+    if (testCases.includes(true)){
+        returnVal = results[i];
+        return returnVal;
+    }
+  }
+}
+
 //API for setting up the search filters in the Database page
 router.get("/student-filter", async (request, response) => {
     const query = "SELECT * FROM `sections`"
@@ -45,7 +74,45 @@ router.get("/student-filter", async (request, response) => {
     });
 });
   
-//API for retrieving student's information
+
+
+
+
+//API for retrieving student's information [with only one search filters - sec mode]
+router.get("/student-filter/student/:student_prim_info/:school_year", (request, response) => {
+  const query = `SELECT students.id, students.first_name, students.middle_name, students.last_name, students.grade_level, students.section_name, sections.school_year
+              FROM students,sections
+              WHERE students.grade_level = sections.grade_level AND students.section_name = sections.section_name 
+              AND sections.school_year = ?`;
+  const values = [request.params.school_year];
+
+  db.query(query, values, (error, data) => {
+      if (error) { return response.json(error); }
+      
+      //the task here is to further refine the query results by using the given ID or name
+      const value = outputConditioner(request.params.student_prim_info, data);
+      return response.status(220).json(value)
+  });
+});
+
+//API for retrieving student's information [with only two search filters - third mode]
+router.get("/student-filter/student/:student_prim_info/:school_year/:grade_level", (request, response) => {
+  const query = `SELECT students.id, students.first_name, students.middle_name, students.last_name, students.grade_level, students.section_name, sections.school_year
+              FROM students,sections
+              WHERE students.grade_level = sections.grade_level AND students.section_name = sections.section_name 
+              AND sections.school_year = ? AND students.grade_level = ?`;
+  const values = [request.params.school_year, request.params.grade_level];
+
+  db.query(query, values, (error, data) => {
+      if (error) { return response.json(error); }
+      
+      //the task here is to further refine the query results by using the given ID or name
+      const value = outputConditioner(request.params.student_prim_info, data);
+      return response.json(value)
+  });
+});
+
+//API for retrieving student's information [with all three search filters - default mode]
 router.get("/student-filter/student/:student_prim_info/:school_year/:grade_level/:section_name", (request, response) => {
   const query = `SELECT students.id, students.first_name, students.middle_name, students.last_name, students.grade_level, students.section_name, sections.school_year
               FROM students,sections
@@ -57,34 +124,12 @@ router.get("/student-filter/student/:student_prim_info/:school_year/:grade_level
       if (error) { return response.json(error); }
       
       //the task here is to further refine the query results by using the given ID or name
-      var searchVal, returnVal = "Student not found", studentPrimVal;
-      const student_prim_info = request.params.student_prim_info;
-      if (/^\d+$/.test(student_prim_info))                      //student_prim_info parameter is an ID  
-        searchVal = 'id';     
-      else                                                      //student_prim_info parameter is a name
-        searchVal = 'first_name'                
-        studentPrimVal = student_prim_info.toLowerCase()                  
-
-      for(let i=0; i<data.length; i++){
-        var testCases = [];
-        testCases.push(data[i][searchVal].toLowerCase()+' '+data[i]['last_name'].toLowerCase() == studentPrimVal);
-        testCases.push(data[i]['last_name'].toLowerCase() == studentPrimVal);
-        
-        if (/^\d+$/.test(student_prim_info)) testCases.push(data[i][searchVal] == student_prim_info);
-        else testCases.push(data[i][searchVal].toLowerCase() == studentPrimVal);
-
-        if (testCases.includes(true)){
-            returnVal = data[i];
-            break;
-        }
-      }
-
-      
-      return response.json(returnVal)
+      const value = outputConditioner(request.params.student_prim_info, data);
+      return response.json(value)
   });
 });
 
-//API for retrieving a student's attendance logs
+//API for retrieving a student's attendance logs - exclusive only to one student
 router.get("/student-filter/student/:student_prim_info/:school_year/:grade_level/:section_name/:date_start/:date_end", (request, response) => {
   const query = `SELECT students.id, students.first_name, students.last_name, attendance_log.time_in, attendance_log.time_out, attendance_log.date
                   FROM students, sections, attendance_log
@@ -108,11 +153,12 @@ router.get("/student-filter/student/:student_prim_info/:school_year/:grade_level
       // loop through the SQL query results and find the intended student using the primary info
       for(let i=0; i<data.length; i++){
         var testCases = [];
-        testCases.push(data[i][searchVal].toLowerCase()+' '+data[i]['last_name'].toLowerCase() == studentPrimVal);
-        testCases.push(data[i]['last_name'].toLowerCase() == studentPrimVal);
-        
-        if (/^\d+$/.test(student_prim_info)) testCases.push(data[i][searchVal] == student_prim_info);
-        else testCases.push(data[i][searchVal].toLowerCase() == studentPrimVal);
+        if (/^\d+$/.test(student_prim_info)) testCases.push(results[i][searchVal] == student_prim_info);
+        else {
+          testCases.push(results[i][searchVal].toLowerCase() == studentPrimVal);
+          testCases.push(results[i][searchVal].toLowerCase()+' '+results[i]['last_name'].toLowerCase() == studentPrimVal);
+          testCases.push(results[i]['last_name'].toLowerCase() == studentPrimVal);
+        }
 
         if (testCases.includes(true)){
             logs.push(data[i]);

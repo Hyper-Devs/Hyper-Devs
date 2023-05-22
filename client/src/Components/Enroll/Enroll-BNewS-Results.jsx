@@ -60,7 +60,13 @@ function BSNewSResults() {
     } catch (error) {
       if ([400,410,420].includes(error.response['status'])){
         setTitleModal("Request processed unsuccessfully");
-        setBodyModal(error.response['data'])
+        var bodyValue = <div style={{display: "flex",  flexDirection: "row", justifyContent: "right"}}>
+                          <p style={{marginRight: "5px"}}><i>Wrong file template. Download template</i></p>
+                          <a href="#" onClick={downloadFile}>here</a>
+                        </div>;
+        if (error.response['status'] != 420) { bodyValue = error.response['data']}
+        setBodyModal(bodyValue)
+
       }
       else{
         setTitleModal("Error")
@@ -78,6 +84,23 @@ function BSNewSResults() {
     setEnrollmentError(false);
     setShowModal(false);
   };
+
+  function downloadFile() {
+    axios({
+      url: 'http://localhost:8800/enroll/download/new-template',
+      method: 'GET',
+      responseType: 'blob',
+    }).then(response => {
+        // save the file locally
+        const url = window.URL.createObjectURL(new Blob([response.data]));
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', 'Enrollment CSV Template.csv');
+        document.body.appendChild(link);
+        link.click();
+        link.parentNode.removeChild(link);
+      });
+  }
 
   return (
     <div className="container-fluid p-3">
@@ -98,6 +121,7 @@ function BSNewSResults() {
                     accept="application/csv,text/csv"
                   />
                   <button type="submit" disabled={isLoading} className="btn btn-success">Enroll</button>
+                  
                 </div>
               </form>
             </div>
