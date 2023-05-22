@@ -1,10 +1,11 @@
- import axios from 'axios';
+import axios from 'axios';
 import DatePicker from 'react-datepicker'
 import { useState } from "react";
 import "react-datepicker/dist/react-datepicker.css";
 import "./Database-Modifier.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
+import GlobalModal from '../Modal/globalmodal';
 import DatabaseResult from "../../Components/Database/Database-Result";
 
 
@@ -30,6 +31,11 @@ function DatabaseModifier(props){
     const [selectedSY, setSYFilter] = useState("Select");
     const [selectedGL, setGLFilter] = useState("Select");
     const [selectedSection, setSectionFilter] = useState("Select");
+    
+    const [titleModal, setTitleModal] = useState('');
+    const [bodyModal, setBodyModal] = useState('');
+    const [showModal, setShowModal] = useState(false); // State to control the visibility of the modal
+  
 
     const [rangeStart, setRangeStart] = useState(new Date)
     const defaultEndDate = new Date()
@@ -96,6 +102,11 @@ function DatabaseModifier(props){
 
     const handleChange = (event) => {setAccessType(event.target.value);};
 
+    const handleCloseModal = () => {
+        setShowModal(false);
+    };
+    
+
 
     // functions for fetching the student or admin from the database
 
@@ -119,7 +130,9 @@ function DatabaseModifier(props){
             fetchStudent(formJson);
         }
         else {
-            console.log("No information entered");
+            setTitleModal("Request processed successfully");
+            setBodyModal("No information entered")
+            setShowModal(true)
         }       
     }
 
@@ -161,9 +174,18 @@ function DatabaseModifier(props){
             ];
             var result;
             switch (JSON.stringify(searchValExist)){        
-                //calling different APIs for different functions
+                //calling different APIs for different search functions
                 case JSON.stringify([true, true, true, true, true, false, false]):
+                    // mode for checking 
                     result = await axios.get(`http://localhost:8800/database/student-filter/student/${searchVal["student-prim-info"]}/${searchVal["student-school-year"]}/${searchVal["student-grade-level"]}/${searchVal["student-section"]}`);
+                    break
+                case JSON.stringify([true, true, false, false, true, false, false]):
+                    // check all students in a school year
+                    result = await axios.get(`http://localhost:8800/database/student-filter/student/${searchVal["student-prim-info"]}/${searchVal["student-school-year"]}`);
+                    break
+                case JSON.stringify([true, true, true, false, true, false, false]):
+                    // check all students in a school year and grade level 
+                    result = await axios.get(`http://localhost:8800/database/student-filter/student/${searchVal["student-prim-info"]}/${searchVal["student-school-year"]}/${searchVal["student-grade-level"]}`);
                     break
                 case JSON.stringify([true, true, true, true, true, true, true]):
                     result = await axios.get(`http://localhost:8800/database/student-filter/student/${searchVal["student-prim-info"]}/${searchVal["student-school-year"]}/${searchVal["student-grade-level"]}/${searchVal["student-section"]}/${searchVal["date-start"]}/${searchVal["date-end"]}`);
@@ -178,10 +200,21 @@ function DatabaseModifier(props){
                     result = await axios.get(`http://localhost:8800/database/students/batch/${searchVal['student-school-year']}/${searchVal['student-grade-level']}/${searchVal['student-section']}`)
                     break
                 default:
-                    console.log("Error 404")
+                    result = "Input error"
             }
-            setStudentResult(result.data)
-            console.log(result.data) 
+            if (result != "Input error"){
+                setStudentResult(result.data)
+                if (result.data)
+                    console.log(result.data)
+                    // display data here
+                else
+                    console.log("No data exists")
+            }
+            else {
+                setTitleModal("Request processed successfully");
+                setBodyModal("Input error. Try again")
+                setShowModal(true)
+            }
             // note to james: in rendering the output, consider outputs where time in, time out and date are included. 
             // coz nag add ko new API for attendance logs
             // this is for the attendance logs
@@ -393,7 +426,14 @@ function DatabaseModifier(props){
                     </div>
                 </div>
             </div>
-            {/* {studentResult && <DatabaseResult studentResult={ studentResult }/>} */}
+            {showModal && (
+                <GlobalModal
+                showModal={showModal}
+                title={titleModal}
+                body={bodyModal}
+                onClose={handleCloseModal}
+                />
+            )};
         </div>
     );
 }

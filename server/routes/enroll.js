@@ -10,10 +10,10 @@ const csv = require('csv-parser');
 const express = require('express');
 const fileUpload = require('express-fileupload');
 
-
 const db = require('../database.js').databaseConnection;
 const router = express.Router();
 router.use(fileUpload());
+
 
 
 //API for setting up the grade level and section filters in the Database page
@@ -39,6 +39,13 @@ router.get("/available-rooms", async (request, response) => {
   
       response.json(gradeLevels)
     });
+});
+
+router.get('/download/new-template', (req, res) => {
+  const file = fs.readFileSync('./outgoingFiles/EnrollmentTemplate.csv');
+  res.setHeader('Content-Type', 'application/csv');
+  res.setHeader('Content-Disposition', 'attachment; filename=EnrollmentTemplate.csv');
+  res.send(file);
 });
   
 //API for adding a student into the database 
@@ -74,7 +81,7 @@ router.post("/batch/new-student", (request, response) => {
   if (!request.files){ return response.status(400).send("No files were uploaded."); }
 
   const file = request.files['csv'];
-  const path = "./fileUploads/" + file['name'];
+  const path = "./incomingFiles/" + file['name'];
   const extensionName = file['mimetype'];
   const allowedExtension = ['text/csv'];
 
@@ -112,39 +119,44 @@ router.post("/batch/new-student", (request, response) => {
         //checks if the user uploaded the correct CSV file template
         if (JSON.stringify(acceptedKeys) != JSON.stringify(keys)) { return response.status(420).send("Wrong file template!"); }
 
+        db.query("SELECT id FROM `students`;", (err, data)=>{
+          if (err) {return response.status(500).send("An error occurred. Refresh page")}
 
-        //limit of INSERT statement is 1000 - not tested for 1000 CSV values
-        var temp = results, flag = 0;
-        for (var i=0; i<results.length; i++){
-          if (results.length > 999){ temp = results.slice(999) }
-          
-          const query = "INSERT IGNORE INTO students (`id`, `first_name`, `middle_name`, `last_name`, `grade_level`, `section_name`, `parent_fn`, `parent_mn`, `parent_ln`, `relationship`, `contact_num`) VALUES ?"
-          const values = temp.map(row => [
-            row['student-rfid'],
-            row['student-first-name'],
-            row['student-middle-name'],
-            row['student-last-name'],
-            row['student-grade-level'],
-            row['student-section'],
-            row['guardian-first-name'],
-            row['guardian-middle-name'],
-            row['guardian-last-name'],
-            row['guardian-relationship'],
-            row['guardian-contact-number']
-          ]);
+          const existingIds = data.map((item => ''+item.id));
+          const newIds = results.map((item => item['student-rfid']));
 
-          db.query(query, [values], (err, data)=>{
-            if (err) {return response.status(500).send("An error occurred. Refresh page")}
+          //limit of INSERT statement is 1000 - not tested for 1000 CSV values
+          var temp = results, flag = 0;
+          for (var i=0; i<results.length; i++){
+            if (results.length > 999){ temp = results.slice(999) }
+            
+            const query = "INSERT IGNORE INTO students (`id`, `first_name`, `middle_name`, `last_name`, `grade_level`, `section_name`, `parent_fn`, `parent_mn`, `parent_ln`, `relationship`, `contact_num`) VALUES ?"
+            const values = temp.map(row => [
+              row['student-rfid'],
+              row['student-first-name'],
+              row['student-middle-name'],
+              row['student-last-name'],
+              row['student-grade-level'],
+              row['student-section'],
+              row['guardian-first-name'],
+              row['guardian-middle-name'],
+              row['guardian-last-name'],
+              row['guardian-relationship'],
+              row['guardian-contact-number']
+            ]);
+            
+            db.query(query, [values], (err, data)=>{
+              if (err) {return response.status(500).send("An error occurred. Refresh page")}
+            });                                                                                             
 
-            if (data['affectedRows'] > 0 && flag == 0) {flag = 1}
-          });                                                                                             
+            i += temp.length;
+            results = results.slice(999,results.length);
+            temp = results;
+          };
 
-          i += temp.length;
-          results = results.slice(999,results.length);
-          temp = results;
-        };
-        if (flag == 1) {return response.status(210).send("Batch enroll successful")}
-        else {return response.status(220).send("No changes made")} 
+          if (!newIds.every(val => existingIds.includes(val))) {return response.status(210).send("Batch enroll successful")}
+          else {return response.status(220).send("No changes made")} 
+        }); 
       });
   });
 });
