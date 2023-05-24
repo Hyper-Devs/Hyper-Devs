@@ -10,6 +10,7 @@ function IsAuthenticated ({children}){
     const [showModal, setShowModal] = useState(false); // State to control the visibility of the modal
 
     const handleCloseModal = () => {
+      // navigate('/');
       setShowModal(false);
       navigate('/');
     };

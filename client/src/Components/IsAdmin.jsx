@@ -11,6 +11,7 @@ function IsAdmin ({children}){
     const [showModal, setShowModal] = useState(false); // State to control the visibility of the modal
 
     const handleCloseModal = () => {
+      // navigate('/dashboard');
       setShowModal(false);
       navigate('/dashboard');
     };
