@@ -5,7 +5,8 @@ import 'bootstrap/dist/js/bootstrap.min.js';
 import { BsPerson } from 'react-icons/bs';
 import { IoPersonCircleSharp } from 'react-icons/io5';
 import { FiLogOut } from 'react-icons/fi';
-import { AiOutlineLeft } from 'react-icons/ai';
+import { FiKey } from 'react-icons/fi';
+import { FiSettings } from 'react-icons/fi';
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 
@@ -71,7 +72,7 @@ function Header2() {
               data-bs-toggle="modal"
               data-bs-target="#AccSettModal" 
             >
-              <AiOutlineLeft className="AiOutlineLeft" />
+              <FiSettings className="FiSettings" />
               Account Settings
             </button>
           </li>
@@ -119,14 +120,14 @@ function Header2() {
                             <div class="card card-body">
                             <div class="input-group mb-3">
                                 <span class="input-group-text" id="old-pass">
-                                <img class = "mx-auto d-block" src="Assets/Vectors/Key.png" alt="Key Icon" srcSet="" />
+                                <FiKey class = "mx-auto d-block"/>
                                 </span>
                                 <input type="text" class="form-control" placeholder="Enter Current Password" aria-label="OldPass" aria-describedby="old-pass" 
                                 onChange={e => setoldPassword(e.target.value)}></input>
                             </div>
                             <div class="input-group mb-3">
                                 <span class="input-group-text" id="new-pass">
-                                <img class = "mx-auto d-block" src="/Vectors/Key.png" alt="Key Icon" srcSet="" />
+                                <FiKey class = "mx-auto d-block"/>
                                 </span>
                                 <input type="text" class="form-control" placeholder="Enter New Password" aria-label="NewPass" aria-describedby="new-pass" 
                                 onChange={e => setnewPassword(e.target.value)}></input>
