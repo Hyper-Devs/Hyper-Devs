@@ -4,8 +4,8 @@ import React, {useState} from "react";
 import Header2 from "../../Components/Database/Header/Header2"
 import Footer1 from "../../Components/footer"
 import Sidebar from '../../Components/Sidebar/Sidebar'
-import Modal from "../../Components/Modal/modal";
 import GlobalModal from "../../Components/Modal/globalmodal";
+import AccSett from "../../Components/Modal/accountsettingsmodal";
 
 import EnrollIndResult from "../../Components/Enroll/Enroll-Ind-Results"
 import EnrollBNewSYResults from "../../Components/Enroll/Enroll-BNewSY-Results"
@@ -33,8 +33,9 @@ function Enroll(){
                         <div className="row">
                             <div className="col-4">
                                 <EnrollModifier1 onEnrollTypeChange={handleEnrollmentOption}/>
-                                {/* <Modal/> */}
                                 <GlobalModal/>
+                                <AccSett/>
+                                
                             </div>
                             <div className="col-8">
                             {active === "enrollIR" && <EnrollIndResult/>}
