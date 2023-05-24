@@ -378,11 +378,11 @@ db.query(q, [userID], (err, data) =>{
 
 
 //api for changing a users password 
-router.put("/update-password", (req,res)=>{ 
-const { newPassword, oldPassword } = req.query
+router.post("/update-password", (req,res)=>{ 
+const { newPassword, oldPassword } = req.body
 const query = "UPDATE users SET password = ? WHERE password = ?"
-// // const values = [ req.body['password'], req.body['access_id']];
 db.query(query, [newPassword, oldPassword], (err, data) =>{
+    
     if(err) return res.send("Server Error!")
     return res.send("Password updated succesfully!")
   });
