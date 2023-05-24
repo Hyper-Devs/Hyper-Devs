@@ -57,6 +57,9 @@
     margin-top: -2%;
 }
 
+.modal-header{
+    background-color: #8E1437;
+}
 @media (max-width: 700px) {
 
     .header2-container .title-container {
