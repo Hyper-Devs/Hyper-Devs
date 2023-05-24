@@ -1,18 +1,37 @@
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
-
+import { useEffect, useState } from "react";
+import GlobalModal from '../Components/Modal/globalmodal';
 
 
 function IsAuthenticated ({children}){
+
+    const [titleModal, setTitleModal] = useState('');
+    const [bodyModal, setBodyModal] = useState('');
+    const [showModal, setShowModal] = useState(false); // State to control the visibility of the modal
+
+    const handleCloseModal = () => {
+      setShowModal(false);
+      navigate('/');
+    };
+
     let navigate = useNavigate();
     const user = localStorage.getItem("isLoggedin");
-    const userRole = JSON.parse(user)
     useEffect(()=>{if (user === null) {
-      navigate('/');
+      setTitleModal("Unauthorized Access.");
+      setBodyModal("Please Login to access the page!")
+      setShowModal(true)
     }
     },[]) 
     return(
-      <>{user && children}</>
+      <div>
+        <GlobalModal
+            showModal={showModal}
+            title={titleModal}
+            body={bodyModal}
+            onClose={handleCloseModal}
+        />
+        <>{user && children}</>
+      </div>
     )
   }
 
