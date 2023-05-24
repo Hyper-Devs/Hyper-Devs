@@ -8,12 +8,39 @@ import { FiLogOut } from 'react-icons/fi';
 import { FiKey } from 'react-icons/fi';
 import { FiSettings } from 'react-icons/fi';
 import { useNavigate } from "react-router-dom";
+import axios from 'axios';
 
 function Header2() {
+
+  const [oldPassword, setoldPassword] = useState('')
+  const [newPassword, setnewPassword] = useState('')
+
   const handleLogoutClick = () => {
     localStorage.clear();
     window.location.replace("/");
   };
+
+
+  const onSubmit = async e =>{
+    e.preventDefault();
+    const data = { newPassword, oldPassword };
+    fetch('http://localhost:8800/database/update-password',{
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+
+    }).then(res =>{
+      if(res.ok){
+        console.log("Password updated successfully!")
+      } else {
+        console.log("Failed to update Password!")
+      }
+    }).catch(err =>{
+      console.log("Error updating password: ", err)
+    });
+  }
 
   return (
     <div className="header2-container">
@@ -95,15 +122,17 @@ function Header2() {
                                 <span class="input-group-text" id="old-pass">
                                 <FiKey class = "mx-auto d-block"/>
                                 </span>
-                                <input type="text" class="form-control" placeholder="Enter Current Password" aria-label="OldPass" aria-describedby="old-pass"></input>
+                                <input type="text" class="form-control" placeholder="Enter Current Password" aria-label="OldPass" aria-describedby="old-pass" 
+                                onChange={e => setoldPassword(e.target.value)}></input>
                             </div>
                             <div class="input-group mb-3">
                                 <span class="input-group-text" id="new-pass">
                                 <FiKey class = "mx-auto d-block"/>
                                 </span>
-                                <input type="text" class="form-control" placeholder="Enter New Password" aria-label="NewPass" aria-describedby="new-pass"></input>
+                                <input type="text" class="form-control" placeholder="Enter New Password" aria-label="NewPass" aria-describedby="new-pass" 
+                                onChange={e => setnewPassword(e.target.value)}></input>
                             </div>
-                            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#ChangePassModal">
+                            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#ChangePassModal" onClick={onSubmit}>
                             Save Changes
                             </button>
                             </div>
@@ -125,7 +154,7 @@ function Header2() {
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                Add validation whether change password is succes or not.
+                Password successfully changed!
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
