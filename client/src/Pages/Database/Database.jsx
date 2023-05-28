@@ -15,18 +15,18 @@ function Database(){
     const [searchResult, setSearchResult] = useState('');
     
     return(
-    <div className="database-container" data-testid="dashboard-test">
-        <Sidebar/>
-        <div className="database-content-container">
-        <div className="database-content"> 
-            <Header2/>
-                <div className="page-title"><p>SYSTEM DATABASE</p></div>
-            <DatabaseModifier setSearchResult={setSearchResult} />
-            <DatabaseResult searchResult={searchResult} />
-            </div>
-            <Footer1/>
-        </div> 
-    </div>
+        <div className="database-container" data-testid="dashboard-test">
+            <Sidebar/>
+            <div className="database-content-container">
+            <div className="database-content"> 
+                <Header2/>
+                    <div className="page-title"><p>SYSTEM DATABASE</p></div>
+                <DatabaseModifier setSearchResult={setSearchResult}/>
+                <DatabaseResult searchResult={searchResult}/>
+                </div>
+                <Footer1/>
+            </div> 
+        </div>
 
 
         );

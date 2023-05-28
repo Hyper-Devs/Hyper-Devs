@@ -39,6 +39,57 @@
 }
 
 .dbItems #displayName{
+    flex: 10%;
+    font-size: 15px;
+    display: grid;
+    place-items: center;
+}
+
+.dbItems #displayPosition{
+    flex: 20%;
+    font-size: 15px;
+    display: grid;
+    place-items: center;
+}
+
+.dbItems #displayStudent{
+    flex: 20%;
+    font-size: 15px;
+    display: grid;
+    place-items: center;
+}
+
+.dbItems #displayReason{
+    flex: 20%;
+    font-size: 15px;
+    display: grid;
+    place-items: center;
+}
+
+.dbItems #displayDate{
+    flex: 20%;
+    font-size: 15px;
+    display: grid;
+    place-items: center;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.dbItems #displayName{
     flex: 35%;
     font-size: 15px;
     display: grid;
@@ -60,6 +111,27 @@
 }
 
 .dbItems #action-icon{
+    flex: 10%;
+    font-size: 15px;
+    display: grid;
+    place-items: center;
+}
+
+.dbItems #displayTimeIn{
+    flex: 35%;
+    font-size: 15px;
+    display: grid;
+    place-items: center;
+}
+
+.dbItems #displayTimeOut{
+    flex: 20%;
+    font-size: 15px;
+    display: grid;
+    place-items: center;
+}
+
+.dbItems #displayDate{
     flex: 10%;
     font-size: 15px;
     display: grid;
@@ -106,6 +178,33 @@ p{
 }
 
 .dbresult-header .dbheader-actions {
+    position: relative;
+    left: 78%;
+}
+
+
+.dbresult-header .dbheader-position {
+    position: relative;
+    left: 48.5%;
+}
+
+.dbresult-header .dbheader-logs {
+    position: relative;
+    left: 68%;
+}
+
+
+.dbresult-header .dbheader-time-in {
+    position: relative;
+    left: 48.5%;
+}
+
+.dbresult-header .dbheader-time-out {
+    position: relative;
+    left: 68%;
+}
+
+.dbresult-header .dbheader-date {
     position: relative;
     left: 78%;
 }

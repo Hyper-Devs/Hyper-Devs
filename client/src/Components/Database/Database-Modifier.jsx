@@ -1,10 +1,11 @@
 import axios from 'axios';
-import DatePicker from 'react-datepicker'
 import { useState } from "react";
+import DatePicker from 'react-datepicker'
 import "react-datepicker/dist/react-datepicker.css";
-import "./Database-Modifier.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
+
+import "./Database-Modifier.css";
 import GlobalModal from '../Modal/globalmodal';
 import DatabaseResult from "../../Components/Database/Database-Result";
 
@@ -42,7 +43,7 @@ function DatabaseModifier(props){
     const [rangeEnd, setRangeEnd] = useState(defaultEndDate)
     defaultEndDate.setDate(defaultEndDate.getDate() + 7)
 
-    const [studentResult, setStudentResult] = useState('');
+    const [searchResult, setSearchResult] = useState('');
 
     const selectStartDate = (d) => {
         setRangeStart(d)
@@ -100,6 +101,7 @@ function DatabaseModifier(props){
         }
     }
 
+    
     const handleChange = (event) => {setAccessType(event.target.value);};
 
     const handleCloseModal = () => {
@@ -156,6 +158,7 @@ function DatabaseModifier(props){
         try {
             const result = await axios.get(`http://localhost:8800/database/admin/override-logs/${user_name}/${user_position}/${access_mode}/${date_start}/${date_end}`);
             console.log(result.data)
+            setSearchResult(result.data)
         } catch (error){
             console.log(error)
         }
@@ -175,10 +178,6 @@ function DatabaseModifier(props){
             var result;
             switch (JSON.stringify(searchValExist)){        
                 //calling different APIs for different search functions
-                case JSON.stringify([true, true, true, true, true, false, false]):
-                    // mode for checking 
-                    result = await axios.get(`http://localhost:8800/database/student-filter/student/${searchVal["student-prim-info"]}/${searchVal["student-school-year"]}/${searchVal["student-grade-level"]}/${searchVal["student-section"]}`);
-                    break
                 case JSON.stringify([true, true, false, false, true, false, false]):
                     // check all students in a school year
                     result = await axios.get(`http://localhost:8800/database/student-filter/student/${searchVal["student-prim-info"]}/${searchVal["student-school-year"]}`);
@@ -187,8 +186,9 @@ function DatabaseModifier(props){
                     // check all students in a school year and grade level 
                     result = await axios.get(`http://localhost:8800/database/student-filter/student/${searchVal["student-prim-info"]}/${searchVal["student-school-year"]}/${searchVal["student-grade-level"]}`);
                     break
-                case JSON.stringify([true, true, true, true, true, true, true]):
-                    result = await axios.get(`http://localhost:8800/database/student-filter/student/${searchVal["student-prim-info"]}/${searchVal["student-school-year"]}/${searchVal["student-grade-level"]}/${searchVal["student-section"]}/${searchVal["date-start"]}/${searchVal["date-end"]}`);
+                case JSON.stringify([true, true, true, true, true, false, false]):
+                    // mode for checking 
+                    result = await axios.get(`http://localhost:8800/database/student-filter/student/${searchVal["student-prim-info"]}/${searchVal["student-school-year"]}/${searchVal["student-grade-level"]}/${searchVal["student-section"]}`);
                     break
                 case JSON.stringify([false, true, false, false, true, false, false]):
                     result = await axios.get(`http://localhost:8800/database/students/batch/${searchVal['student-school-year']}`)
@@ -199,16 +199,16 @@ function DatabaseModifier(props){
                 case JSON.stringify([false, true, true, true, true, false, false]):
                     result = await axios.get(`http://localhost:8800/database/students/batch/${searchVal['student-school-year']}/${searchVal['student-grade-level']}/${searchVal['student-section']}`)
                     break
+                case JSON.stringify([true, true, true, true, true, true, true]):
+                    result = await axios.get(`http://localhost:8800/database/student-filter/student/${searchVal["student-prim-info"]}/${searchVal["student-school-year"]}/${searchVal["student-grade-level"]}/${searchVal["student-section"]}/${searchVal["date-start"]}/${searchVal["date-end"]}`);
+                    break
                 default:
                     result = "Input error"
             }
+
             if (result != "Input error"){
-                setStudentResult(result.data)
-                if (result.data)
-                    console.log(result.data)
-                    // display data here
-                else
-                    console.log("No data exists")
+                if (result.data != [null]){ setSearchResult(result.data) }
+                else{ setSearchResult([]) }
             }
             else {
                 setTitleModal("Request processed successfully");
@@ -224,7 +224,7 @@ function DatabaseModifier(props){
         }
     };
 
-    props.setSearchResult(studentResult);
+    props.setSearchResult(searchResult);
 
 
 
@@ -269,7 +269,7 @@ function DatabaseModifier(props){
                                             required
                                         >
                                             <option selected >Select</option>
-                                            {st_school_years.map(({ value, label }, index) => <option value={value} >{label}</option>)}
+                                            {st_school_years.map(({ value, label }) => <option value={value} >{label}</option>)}
                                         </select>
                                     </div>
                                 </div>
@@ -284,7 +284,7 @@ function DatabaseModifier(props){
                                                 onChange={(e) => updateSelectedGL(e)}
                                             >
                                                 <option selected >Select</option>
-                                                {st_grade_level.map(({ value, label }, index) => <option value={value} >{label}</option>)}
+                                                {st_grade_level.map(({ value, label }) => <option value={value} >{label}</option>)}
                                             </select>
                                     </div>
                                 </div>
@@ -299,7 +299,7 @@ function DatabaseModifier(props){
                                             onChange={(e) => updateSelectedSection(e)}
                                         >
                                             <option selected >Select</option>
-                                            {st_sections.map(({ value, label }, index) => <option value={value} >{label}</option>)}
+                                            {st_sections.map(({ value, label }  ) => <option value={value} >{label}</option>)}
                                         </select>
                                     </div>
                                 </div>
