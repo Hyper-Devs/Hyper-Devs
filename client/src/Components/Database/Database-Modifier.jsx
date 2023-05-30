@@ -1,26 +1,18 @@
 import axios from 'axios';
+import { useState, useEffect } from "react";
 import DatePicker from 'react-datepicker'
-import { useState } from "react";
 import "react-datepicker/dist/react-datepicker.css";
-import "./Database-Modifier.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
+
+import "./Database-Modifier.css";
 import GlobalModal from '../Modal/globalmodal';
 import DatabaseResult from "../../Components/Database/Database-Result";
 
 
-/*
-Backend Note
-
-implement a mechanism where the data can be retrieved from the local storage
-(instead of retrieving it directly from the database everytime the school year option is switched
- which can take time)
-for the select option (i.e., grade level, section, school year)
-*/
 
 function DatabaseModifier(props){
     const [accessType, setAccessType] = useState('BasicInformation');
-    const [hasEnteredSearch, setHasEnteredSearch] = useState(false);
 
     const [studentFilter, setStudentFilter] = useState("None");
     const school_years = Object.keys(studentFilter);
@@ -42,29 +34,18 @@ function DatabaseModifier(props){
     const [rangeEnd, setRangeEnd] = useState(defaultEndDate)
     defaultEndDate.setDate(defaultEndDate.getDate() + 7)
 
-    const [studentResult, setStudentResult] = useState('');
+    const [searchResult, setSearchResult] = useState('');
 
-    const selectStartDate = (d) => {
-        setRangeStart(d)
-    }
 
-    const selectEndDate = (d) => {
-        setRangeEnd(d)
-    }
-
-    
     // functions for setting up the search filters in the database page
-    function searchFieldEnter () {
-        if (hasEnteredSearch === false) { fetchStudentFilter(); }
-        setHasEnteredSearch(true)
-    }
-
     const fetchStudentFilter = async () => {
         try {
             const response = await axios.get(`http://localhost:8800/database/student-filter`);
             setStudentFilter(response.data);
         } catch (err) {
-            console.log(err);
+            setTitleModal("Refresh page!");
+            setBodyModal("An error occurred")
+            setShowModal(true)
         }
     }
 
@@ -100,12 +81,10 @@ function DatabaseModifier(props){
         }
     }
 
-    const handleChange = (event) => {setAccessType(event.target.value);};
+    useEffect(() => {
+        fetchStudentFilter();
+    }, []);
 
-    const handleCloseModal = () => {
-        setShowModal(false);
-    };
-    
 
 
     // functions for fetching the student or admin from the database
@@ -155,9 +134,11 @@ function DatabaseModifier(props){
     const fetchAdminInfo = async (user_name, user_position, access_mode, date_start, date_end) => {
         try {
             const result = await axios.get(`http://localhost:8800/database/admin/override-logs/${user_name}/${user_position}/${access_mode}/${date_start}/${date_end}`);
-            console.log(result.data)
+            setSearchResult(result.data)
         } catch (error){
-            console.log(error)
+            setTitleModal("Request processed unsuccessfully");
+            setBodyModal("An error occurred")
+            setShowModal(true)
         }
     };
 
@@ -175,20 +156,14 @@ function DatabaseModifier(props){
             var result;
             switch (JSON.stringify(searchValExist)){        
                 //calling different APIs for different search functions
-                case JSON.stringify([true, true, true, true, true, false, false]):
-                    // mode for checking 
-                    result = await axios.get(`http://localhost:8800/database/student-filter/student/${searchVal["student-prim-info"]}/${searchVal["student-school-year"]}/${searchVal["student-grade-level"]}/${searchVal["student-section"]}`);
-                    break
                 case JSON.stringify([true, true, false, false, true, false, false]):
-                    // check all students in a school year
                     result = await axios.get(`http://localhost:8800/database/student-filter/student/${searchVal["student-prim-info"]}/${searchVal["student-school-year"]}`);
                     break
                 case JSON.stringify([true, true, true, false, true, false, false]):
-                    // check all students in a school year and grade level 
                     result = await axios.get(`http://localhost:8800/database/student-filter/student/${searchVal["student-prim-info"]}/${searchVal["student-school-year"]}/${searchVal["student-grade-level"]}`);
                     break
-                case JSON.stringify([true, true, true, true, true, true, true]):
-                    result = await axios.get(`http://localhost:8800/database/student-filter/student/${searchVal["student-prim-info"]}/${searchVal["student-school-year"]}/${searchVal["student-grade-level"]}/${searchVal["student-section"]}/${searchVal["date-start"]}/${searchVal["date-end"]}`);
+                case JSON.stringify([true, true, true, true, true, false, false]):
+                    result = await axios.get(`http://localhost:8800/database/student-filter/student/${searchVal["student-prim-info"]}/${searchVal["student-school-year"]}/${searchVal["student-grade-level"]}/${searchVal["student-section"]}`);
                     break
                 case JSON.stringify([false, true, false, false, true, false, false]):
                     result = await axios.get(`http://localhost:8800/database/students/batch/${searchVal['student-school-year']}`)
@@ -199,37 +174,49 @@ function DatabaseModifier(props){
                 case JSON.stringify([false, true, true, true, true, false, false]):
                     result = await axios.get(`http://localhost:8800/database/students/batch/${searchVal['student-school-year']}/${searchVal['student-grade-level']}/${searchVal['student-section']}`)
                     break
+                case JSON.stringify([true, true, true, true, true, true, true]):
+                    result = await axios.get(`http://localhost:8800/database/student-filter/student/${searchVal["student-prim-info"]}/${searchVal["student-school-year"]}/${searchVal["student-grade-level"]}/${searchVal["student-section"]}/${searchVal["date-start"]}/${searchVal["date-end"]}`);
+                    break
                 default:
                     result = "Input error"
             }
+
             if (result != "Input error"){
-                setStudentResult(result.data)
-                if (result.data)
-                    console.log(result.data)
-                    // display data here
-                else
-                    console.log("No data exists")
+                if (result.data != null){
+                    setSearchResult(result.data) }
+                else{ setSearchResult([]) }
             }
             else {
                 setTitleModal("Request processed successfully");
                 setBodyModal("Input error. Try again")
                 setShowModal(true)
             }
-            // note to james: in rendering the output, consider outputs where time in, time out and date are included. 
-            // coz nag add ko new API for attendance logs
-            // this is for the attendance logs
             
         } catch (error){
-            console.log(error)
+            setTitleModal("Request processed unsuccessfully");
+            setBodyModal("An error occurred")
+            setShowModal(true)
+            //console.log(error)
         }
     };
 
-    props.setSearchResult(studentResult);
+    props.setSearchResult(searchResult);
 
 
+    
+    const handleChange = (event) => {setAccessType(event.target.value);};
 
+    const handleCloseModal = () => {
+        setShowModal(false);
+    };
 
+    const selectStartDate = (d) => {
+        setRangeStart(d)
+    }
 
+    const selectEndDate = (d) => {
+        setRangeEnd(d)
+    }
 
 
 
@@ -241,7 +228,7 @@ function DatabaseModifier(props){
                     <button class="nav-link text-black" id="nav-admin-tab" data-bs-toggle="tab" data-bs-target="#nav-admin" type="button" role="tab" aria-controls="nav-admin" aria-selected="false">Admin Information</button>
                 </div>
             </nav>
-            <div class="tab-content " id="nav-tabContent" onMouseOver={searchFieldEnter}>
+            <div class="tab-content " id="nav-tabContent">
                 <div class="tab-pane fade show active" id="nav-student" role="tabpanel" aria-labelledby="nav-student-tab">
                     <div className="container-md ">
                         <form onSubmit={handleSubmitStudent}>
@@ -269,7 +256,7 @@ function DatabaseModifier(props){
                                             required
                                         >
                                             <option selected >Select</option>
-                                            {st_school_years.map(({ value, label }, index) => <option value={value} >{label}</option>)}
+                                            {st_school_years.map(({ value, label }) => <option value={value} >{label}</option>)}
                                         </select>
                                     </div>
                                 </div>
@@ -284,7 +271,7 @@ function DatabaseModifier(props){
                                                 onChange={(e) => updateSelectedGL(e)}
                                             >
                                                 <option selected >Select</option>
-                                                {st_grade_level.map(({ value, label }, index) => <option value={value} >{label}</option>)}
+                                                {st_grade_level.map(({ value, label }) => <option value={value} >{label}</option>)}
                                             </select>
                                     </div>
                                 </div>
@@ -299,7 +286,7 @@ function DatabaseModifier(props){
                                             onChange={(e) => updateSelectedSection(e)}
                                         >
                                             <option selected >Select</option>
-                                            {st_sections.map(({ value, label }, index) => <option value={value} >{label}</option>)}
+                                            {st_sections.map(({ value, label }  ) => <option value={value} >{label}</option>)}
                                         </select>
                                     </div>
                                 </div>

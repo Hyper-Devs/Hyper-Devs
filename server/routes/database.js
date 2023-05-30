@@ -3,19 +3,25 @@ const db = require('../database.js').databaseConnection;
 const router = express.Router();
 
 function stringInputConditioner (string) {
-  var newString = string[0].toUpperCase();
-  var newChar;
-  for (var i=1; i<string.length; i++){
-    if (string[i].match(/[a-z]/i))
-      string[i].toLowerCase;
-      newString = newString + string[i].toLowerCase();
+  if (string[0].match(/[a-z]/i)){
+    var newString = string[0].toUpperCase();
+    var newChar;
+    for (var i=1; i<string.length; i++){
+      if (string[i].match(/[a-z]/i))
+        string[i].toLowerCase;
+        newString = newString + string[i].toLowerCase();
+    }
+    return newString;
   }
-  return newString;
+  else {
+    return string
+  }
 };
 
-function outputConditioner (student_prim_infoo, results) {
+function outputConditioner (student_prim_infoo, results, mode) {
   var searchVal, returnVal = "Student not found", studentPrimVal;
   const student_prim_info = student_prim_infoo;
+  var logs = []
   if (/^\d+$/.test(student_prim_info)){                      //student_prim_info parameter is an ID  
     searchVal = 'id'; 
   }   
@@ -34,13 +40,15 @@ function outputConditioner (student_prim_infoo, results) {
       testCases.push(results[i]['last_name'].toLowerCase() == studentPrimVal);
     }
   
-
     if (testCases.includes(true)){
         returnVal = results[i];
-        return returnVal;
+        if (mode == "attendance-logs" || mode == "student-info") logs.push(results[i])
+        else return returnVal;
     }
   }
-}
+  if ((mode == "attendance-logs" || mode == "student-info") && logs.length > 0) return logs
+  else return null
+};
 
 //API for setting up the search filters in the Database page
 router.get("/student-filter", async (request, response) => {
@@ -90,8 +98,11 @@ router.get("/student-filter/student/:student_prim_info/:school_year", (request, 
       if (error) { return response.json(error); }
       
       //the task here is to further refine the query results by using the given ID or name
-      const value = outputConditioner(request.params.student_prim_info, data);
-      return response.status(220).json(value)
+      if (data != [null]){
+        const value = outputConditioner(request.params.student_prim_info, data, "student-info");
+        return response.status(220).json([{mode: "student-basic-info", values: value}])
+      }
+      else return response.json([])
   });
 });
 
@@ -107,8 +118,13 @@ router.get("/student-filter/student/:student_prim_info/:school_year/:grade_level
       if (error) { return response.json(error); }
       
       //the task here is to further refine the query results by using the given ID or name
-      const value = outputConditioner(request.params.student_prim_info, data);
-      return response.json(value)
+      if (data != [null]){
+        const value = outputConditioner(request.params.student_prim_info, data, "student-info");
+        console.log(value)
+        return response.json([{mode: "student-basic-info", values: value}])
+      }
+      else
+        return response.json([])
   });
 });
 
@@ -124,8 +140,12 @@ router.get("/student-filter/student/:student_prim_info/:school_year/:grade_level
       if (error) { return response.json(error); }
       
       //the task here is to further refine the query results by using the given ID or name
-      const value = outputConditioner(request.params.student_prim_info, data);
-      return response.json(value)
+      if (data != [null]){
+        const value = outputConditioner(request.params.student_prim_info, data, "student-info");
+        return response.json([{mode: "student-basic-info", values: value}])
+      }
+      else
+        return response.json([])
   });
 });
 
@@ -139,35 +159,15 @@ router.get("/student-filter/student/:student_prim_info/:school_year/:grade_level
 
   db.query(query, values, (error, data) => {
       if (error) { return response.json(error); }
-      
-      //the task here is to further refine the query results by using the given ID or name
-      var searchVal, studentPrimVal, logs = [];
-      const student_prim_info = request.params.student_prim_info;
-      if (/^\d+$/.test(student_prim_info))                      //student_prim_info parameter is an ID  
-        searchVal = 'id';     
-      else                                                      //student_prim_info parameter is a name
-        searchVal = 'first_name'                
-        studentPrimVal = student_prim_info.toLowerCase()                  
-      
-      // 1st Phase of Results Refinement
-      // loop through the SQL query results and find the intended student using the primary info
-      for(let i=0; i<data.length; i++){
-        var testCases = [];
-        if (/^\d+$/.test(student_prim_info)) testCases.push(results[i][searchVal] == student_prim_info);
-        else {
-          testCases.push(results[i][searchVal].toLowerCase() == studentPrimVal);
-          testCases.push(results[i][searchVal].toLowerCase()+' '+results[i]['last_name'].toLowerCase() == studentPrimVal);
-          testCases.push(results[i]['last_name'].toLowerCase() == studentPrimVal);
-        }
 
-        if (testCases.includes(true)){
-            logs.push(data[i]);
-        }
-      }
+      // 1st Phase of Results Refinement
+      // refine the query results by using the given ID or name
+      const logs = outputConditioner(request.params.student_prim_info, data, "attendance-logs");
+      if (logs == null) { return response.json("No attendance logs found"); }
+
       
       // 2nd Phase of Results Refinement
       // isolate the attendance logs that are under the requested date range
-  
       // determines the set of dates (inclusive) given the date range
       const startDate = new Date(request.params.date_start);
       const endDate = new Date(request.params.date_end);
@@ -192,10 +192,8 @@ router.get("/student-filter/student/:student_prim_info/:school_year/:grade_level
           }
       }
 
-      if (logs != [])
-        return response.json(returnVal)
-      else
-        return response.json("No attendance logs found")
+      if (logs != []) return response.json([{mode: "student-attendance-logs", values: returnVal}])
+      else return response.json("No attendance logs found")
   });
 });
 
@@ -212,7 +210,7 @@ router.get("/students/batch/:school_year", (request, response) => {
 
   db.query(query, values, (error, data) => {
     if (error) { return response.json(error); }
-    return response.json(data)
+    return response.json([{mode: "student-basic-info", values: data}])
   });
 });
 
@@ -226,7 +224,7 @@ router.get("/students/batch/:school_year/:grade_level", (request, response) => {
 
   db.query(query, values, (error, data) => {
     if (error) { return response.json(error); }
-    return response.json(data)
+    return response.json([{mode: "student-basic-info", values: data}])
   });
 });
 
@@ -240,9 +238,7 @@ router.get("/students/batch/:school_year/:grade_level/:section", (request, respo
 
   db.query(query, values, (error, data) => {
     if (error) { return response.json(error); }
-    return response
-      .json(data)
-      .status
+    return response.json([{mode: "student-basic-info", values: data}])
   });
 });
 
@@ -252,7 +248,7 @@ router.get("/students/batch/:school_year/:grade_level/:section", (request, respo
 router.get("/admin/override-logs/:admin_name/:position/:access_mode/:date_from/:date_to", (request, response) => {
   const values = [stringInputConditioner(request.params.admin_name), request.params.position]
   const query = `SELECT *
-                FROM (SELECT Overrider_Name, Position, Student_Name, Reason, Date
+                FROM (SELECT overrider_name, position, student_name, overriding_reason, overriding_date
                   FROM users, override_logs
                   WHERE override_logs.Overrider_Name = users.name) AS results
                 WHERE results.Overrider_Name = ? && results.Position = ?`;
@@ -260,17 +256,16 @@ router.get("/admin/override-logs/:admin_name/:position/:access_mode/:date_from/:
   db.query(query, values, (error, data) => {  
     if (error) { return response.json(error); }
 
-    // the task here is to further refine the query results
-    if (data.length <= 0) { return response.json("No record found") }
-
-    var returnVal;
+    // the task here is to further refine the query result
+    var returnVal = null;
     if (request.params.access_mode == "BasicInformation"){                //mode: returns basic info regarding the searched user
-      returnVal = {
-        overrider_name : stringInputConditioner(request.params.admin_name),
-        overrider_position : request.params.position,
-        overrider_total_logs : data.length
-      }
-      return response.json(returnVal)
+      if (data.length > 0)
+        returnVal = [{
+          overrider_name : stringInputConditioner(request.params.admin_name),
+          overrider_position : request.params.position,
+          overrider_total_logs : data.length
+        }]
+      return response.json([{mode: "override-basic-info", values: returnVal}])
     }
     else if (request.params.access_mode == "Logs"){                       //mode: returns overriding logs regarding the searched user
       // determines the set of dates (inclusive) given the date range
@@ -288,45 +283,45 @@ router.get("/admin/override-logs/:admin_name/:position/:access_mode/:date_from/:
       dateRange.push(newEndDate)
       
       // checks if the dates returned by the server is within the requested date range
-      returnVal = [];
-      for (var i=0; i<dateRange.length; i++){
-        for (var j=0; j<data.length; j++)
-          if (dateRange[i].toString() === data[j]['Date'].toString()){
-            returnVal.push(data[j])
-          }
+      if (data.length > 0){
+        returnVal = [];
+        for (var i=0; i<dateRange.length; i++){
+          for (var j=0; j<data.length; j++)
+            if (dateRange[i].toString() === data[j]['overriding_date'].toString()){
+              returnVal.push(data[j])
+            }
+        }
       }
-
-      return response.json(returnVal)
+      return response.json([{mode: "override-logs", values: returnVal}])
     }
   });
 });
 
 //API for deleting a student from the database
 router.delete("/delete/:student_id", (req,res)=>{
-const studentID = req.params.student_id
-const q = "DELETE FROM students WHERE id = ?"
-db.query(q, [studentID], (err, data) =>{
-    if(err) return res.json(err)
-    return res.json("Student has been deleted succesfully")
-})
+  const studentID = req.params.student_id
+  const q = "DELETE FROM students WHERE id = ?"
+  db.query(q, [studentID], (err, data) =>{
+      if(err) return res.json(err)
+      return res.json("Student has been deleted succesfully")
+  })
 });
 
 //API for updating a student's section and grade level from the database
 router.put("/update", (req, res) => {
-const q = "UPDATE students SET `grade_level`= ?, `section_name`= ? WHERE id = ?";
+  const q = "UPDATE students SET `grade_level`= ?, `section_name`= ? WHERE id = ?";
 
-const values = [
-    req.body['grade_level'],
-    req.body['section_name'],
-    req.body['student_id']
-];
+  const values = [
+      req.body['grade_level'],
+      req.body['section_name'],
+      req.body['student_id']
+  ];
 
-db.query(q, values, (err, data) => {
-    if (err) return res.send(err);
-    return res.json(data);
+  db.query(q, values, (err, data) => {
+      if (err) return res.send(err);
+      return res.json(data);
+  });
 });
-});
-
 
 
 
@@ -340,44 +335,45 @@ db.query(q, values, (err, data) => {
 
 //api for deleting a section from the database  
 router.delete("/delete/:section_id", (req,res)=>{ //route still needs to be changed
-const sectionID = req.params.section_id
-const q = "DELETE FROM sections WHERE section_name = ? AND grade_level = ?"
-db.query(q, [sectionID], (err, data) =>{
-    if(err) return res.json(err)
-    return res.json("Section has been deleted succesfully")
-})
-})
+  const sectionID = req.params.section_id
+  const q = "DELETE FROM sections WHERE section_name = ? AND grade_level = ?"
+  db.query(q, [sectionID], (err, data) =>{
+      if(err) return res.json(err)
+      return res.json("Section has been deleted succesfully")
+  });
+});
 
 //api for changing a sections adviser
 router.put("/update", (req,res)=>{ //route still needs to be changed
-const q = "UPDATE sections SET section_teacher = ? WHERE section_name = ? AND grade_level = ?"
-const values = [
-    req.body['section_teacher'],
-    req.body['section_name'],
-    req.body['grade_level']
-];
+  const q = "UPDATE sections SET section_teacher = ? WHERE section_name = ? AND grade_level = ?"
+  const values = [
+      req.body['section_teacher'],
+      req.body['section_name'],
+      req.body['grade_level']
+  ];
 
-db.query(q, values, (err, data) =>{
-    if(err) return res.json(  err)
-    return res.json("Section Adviser has been updated succesfully")
-})
+  db.query(q, values, (err, data) =>{
+      if(err) return res.json(  err)
+      return res.json("Section Adviser has been updated succesfully")
+  })
 })
 
 //api for deleting a user from the database  
 router.delete("/delete/:user_id", (req,res)=>{ //route still needs to be changed
-const userID = req.params.id
-const q = "DELETE FROM users WHERE access_id = ?"
-db.query(q, [userID], (err, data) =>{
-    if(err) return res.json(err)
-    return res.json("User has been deleted succesfully")
-})
-})
+  const userID = req.params.id
+  const q = "DELETE FROM users WHERE access_id = ?"
+  db.query(q, [userID], (err, data) =>{
+      if(err) return res.json(err)
+      return res.json("User has been deleted succesfully")
+  });
+});
 
 
 
 
 
 //api for changing a users password 
+
 // router.post("/update-password", (req,res)=>{ 
 // const { newPassword, oldPassword, access_id } = req.body
 // const query = "UPDATE users SET password = ? WHERE password = ? AND access_id = ?"

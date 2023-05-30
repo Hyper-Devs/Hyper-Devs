@@ -151,14 +151,14 @@ function Header2() {
                                 <span class="input-group-text" id="old-pass">
                                 <FiKey class = "mx-auto d-block"/>
                                 </span>
-                                <input type="text" class="form-control" placeholder="Enter Current Password" aria-label="OldPass" aria-describedby="old-pass" 
+                                <input type="password" class="form-control" placeholder="Enter Current Password" aria-label="OldPass" aria-describedby="old-pass" 
                                 onChange={e => setoldPassword(e.target.value)}></input>
                             </div>
                             <div class="input-group mb-3">
                                 <span class="input-group-text" id="new-pass">
                                 <FiKey class = "mx-auto d-block"/>
                                 </span>
-                                <input type="text" class="form-control" placeholder="Enter New Password" aria-label="NewPass" aria-describedby="new-pass" 
+                                <input type="password" class="form-control" placeholder="Enter New Password" aria-label="NewPass" aria-describedby="new-pass" 
                                 onChange={e => setnewPassword(e.target.value)}></input>
                             </div>
                             <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#ChangePassModal" onClick={onSubmit}>
