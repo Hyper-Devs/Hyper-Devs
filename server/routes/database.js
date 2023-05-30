@@ -378,13 +378,44 @@ db.query(q, [userID], (err, data) =>{
 
 
 //api for changing a users password 
-router.post("/update-password", (req,res)=>{ 
-const { newPassword, oldPassword } = req.body
-const query = "UPDATE users SET password = ? WHERE password = ?"
-db.query(query, [newPassword, oldPassword], (err, data) =>{
+// router.post("/update-password", (req,res)=>{ 
+// const { newPassword, oldPassword, access_id } = req.body
+// const query = "UPDATE users SET password = ? WHERE password = ? AND access_id = ?"
+// db.query(query, [newPassword, oldPassword, access_id], (err, data) =>{
     
-    if(err) return res.send("Server Error!")
-    return res.send("Password updated succesfully!")
+//     if(err){
+//       return res.send("Server Error!")
+//     } 
+//     return res
+//       .send("Password updated succesfully!");
+//   });
+// });
+
+router.post("/update-password", (req, res) => {
+  const { newPassword, oldPassword, access_id } = req.body;
+  const selectQuery = "SELECT password FROM users WHERE access_id = ?";
+  db.query(selectQuery, [access_id], (err, result) => {
+    if (err) {
+      return res.status(500).send("Server Error!");
+    }
+    if (result.length === 0) {
+      return res.status(404).send("User not found!");
+    }
+    
+    const dbPassword = result[0].password;
+    if (dbPassword !== oldPassword) {
+      return res.status(401).send("Old password is incorrect!");
+    }
+    const updateQuery = "UPDATE users SET password = ? WHERE access_id = ?";
+    db.query(updateQuery, [newPassword, access_id], (err, data) => {
+      if (err) {
+        return res.status(500).send("Server Error!");
+      }
+      if (data.affectedRows === 0) {
+        return res.status(500).send("Password update failed!");
+      }
+      return res.status(200).send("Password updated successfully!");
+    });
   });
 });
 
