@@ -1,38 +1,74 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import "./messageContext.css";
-import Footer from '../../Components/footer'
+import Footer from '../footer'
 import {AiOutlineLeft} from 'react-icons/ai'
+import GlobalModal from '../Modal/globalmodal';
 
-function messageContext(props) {
-    const handleClick = (buttonId) => {
-        props.onButtonClick(buttonId);
+function MessageContext(props) {
+  const titleModal = 'Notification Page'
+  const bodyModal = 'Message content has been succesfully updated!'
+  const [showModal, setShowModal] = useState(false); // State to control the visibility of the modal
+
+    const handleCloseModal = () => {
+      setShowModal(false);
     };
+
+    const initialContent = localStorage.getItem('content') || 'Greetings! Mr./Ms. [Last Name], your child ["enter"/"exit"]\nthe school campus today [MM/DD/YYYY] at [00:00:00].\n\nAlso, [important school announcements can be added in this part of the message].\n\nThank you so much!\n\nThis is an auto-generated text message from [Name of School].';
+    const[content, setContent] = useState(initialContent);
+    
+    useEffect(() => {
+      // Save the current content to local storage
+      localStorage.setItem('content', content);
+    }, [content]);
+
+    const handleContentChange = (e) => {
+      setContent(e.target.value);
+    };
+  
+
+    const handleClick = (buttonId, e) => {
+        e.preventDefault();
+        // Save the updated content to local storage
+        localStorage.setItem('content', content);
+        if (buttonId == 'update'){
+          setShowModal(true)
+        } else {
+          props.onButtonClick(buttonId);
+        }
+    };
+
+
   return (
     <div className="notif-message-box">
       <div className="notif-message-rectangle">
         <div className="notif-message-header">
         <p>Message Content</p>
-        <button onClick={() => handleClick('notifBox')}><AiOutlineLeft size={"1.3rem"}/>Back</button>
+        <button onClick={(e) => handleClick('notifBox', e)}><AiOutlineLeft size={"1.3rem"}/>Back</button>
         </div>
         <div className="notif-message-rectangle2">
           <div className="notif-message-rectangle3">
                 <p>Notification Format</p>
-            <div className="notif-message-rectangle5"><p>Greetings! Mr./Ms. [Last Name], your child ["enter"/"exit"]
-                <br/>the school campus toady [MM/DD/YYY] at [00:00:00].
-                <br/>
-                <br/>Also, [important school announcements can be added in this part of the message].
-                <br/>
-                <br/>Thank you so much!
-                <br/>
-                <br/>This is an auto-generated text message from [Name of School].</p></div>
+            <textarea
+              className="notif-message-rectangle5"
+              value={content}
+              onChange={handleContentChange}
+              />
             <div className="notif-update-button">
-              <button>Update</button>
+              <button onClick={(e) => handleClick('update', e)}>Update</button>
             </div>
           </div>
         </div>
+      </div>
+      <div>
+      <GlobalModal
+        showModal={showModal}
+        title={titleModal}
+        body={bodyModal}
+        onClose={handleCloseModal}
+      />
       </div>
     </div>
   );
 }
 
-export default messageContext;
+export default MessageContext;
