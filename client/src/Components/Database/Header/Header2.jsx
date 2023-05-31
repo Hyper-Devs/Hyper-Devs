@@ -67,7 +67,7 @@ function Header2() {
 
     }).catch(err =>{
       console.log("Error updating password! ")
-      setmessage("Error updating password! ")
+      setmessage("Internal Error occured. Refresh the page.")
     });
   }
 

@@ -214,11 +214,13 @@ function EnrollIndResult(){
                                 <span class="input-group-text bg-success bg-opacity-25">+63</span>
                                 <input 
                                     name="guardian-contact-number"
-                                    type="number" 
+                                    type="text" 
                                     class="form-control" 
                                     placeholder="9XXXXXXXXXX" 
                                     aria-label="PRelationship" 
                                     aria-describedby="PRelationship" 
+                                    title='Please enter exactly 10 digits'
+                                    pattern="[0-9]{10}"
                                     required
                                 ></input>
                             </div>
