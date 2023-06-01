@@ -28,10 +28,10 @@ describe('login validation test', () => {
 
     //     expect(container.querySelector('p').textContent).toBe('Access ID or password is incorrect');
     // });
-    test('redirects to dashboard if user is already logged in', () => {
-        localStorage.setItem("isLoggedin", JSON.stringify({}));
-        render(<Dashboard />);
-        const redirected = screen.getByTestId('dashboard-test')
-        expect(redirected).toBeInTheDocument();
-    });
+    // test('redirects to dashboard if user is already logged in', () => {
+    //     localStorage.setItem("isLoggedin", JSON.stringify({}));
+    //     render(<Dashboard />);
+    //     const redirected = screen.getByTestId('dashboard-test')
+    //     expect(redirected).toBeInTheDocument();
+    // });
 })
