@@ -122,18 +122,18 @@ function Header2() {
         </ul>
       </div>
 
-          <div class="modal fade" id="AccSettModal" tabindex="-1" aria-labelledby="AccSettModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5 text-light" id="AccSettModalLabel">Account Settings</h1>
-                    <button type="button" class="btn-close " data-bs-dismiss="modal" aria-label="Close"></button>
+          <div className="modal fade" id="AccSettModal" tabIndex="-1" aria-labelledby="AccSettModalLabel" aria-hidden="true">
+            <div className="modal-dialog">
+                <div className="modal-content">
+                <div className="modal-header">
+                    <h1 className="modal-title fs-5 text-light" id="AccSettModalLabel">Account Settings</h1>
+                    <button type="button" className="btn-close " data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
+                <div className="modal-body">
                     <div className="row">
                         <div className="col text-center"></div>'
                         <div className="row-4">
-                            <img class = "mx-auto d-block" src="icons/Profile Icon.svg" alt="Profile Icon" srcSet="" />
+                            <img className = "mx-auto d-block" src="icons/Profile Icon.svg" alt="Profile Icon" srcSet="" />
                         </div>
                         <div className="row text-center"> <h3>Norren Mercado</h3></div>
                         <div className="row text-center"> <h5>Secretary</h5></div>
@@ -142,26 +142,26 @@ function Header2() {
                             <div className="col p-2 border rounded-end"></div>
                         </div>
                         <div className="row px-5 pt-3">
-                        <button class="btn btn-success" type="button" data-bs-toggle="collapse" data-bs-target="#ChangePassCollapse" aria-expanded="false" aria-controls="ChangePassCollapse">
+                        <button className="btn btn-success" type="button" data-bs-toggle="collapse" data-bs-target="#ChangePassCollapse" aria-expanded="false" aria-controls="ChangePassCollapse">
                             Change Password
                         </button>
-                        <div class="collapse pt-1 p-0" id="ChangePassCollapse">
-                            <div class="card card-body">
-                            <div class="input-group mb-3">
-                                <span class="input-group-text" id="old-pass">
-                                <FiKey class = "mx-auto d-block"/>
+                        <div className="collapse pt-1 p-0" id="ChangePassCollapse">
+                            <div className="card card-body">
+                            <div className="input-group mb-3">
+                                <span className="input-group-text" id="old-pass">
+                                <FiKey className = "mx-auto d-block"/>
                                 </span>
-                                <input type="password" class="form-control" placeholder="Enter Current Password" aria-label="OldPass" aria-describedby="old-pass" 
+                                <input type="password" className="form-control" placeholder="Enter Current Password" aria-label="OldPass" aria-describedby="old-pass" 
                                 onChange={e => setoldPassword(e.target.value)}></input>
                             </div>
-                            <div class="input-group mb-3">
-                                <span class="input-group-text" id="new-pass">
-                                <FiKey class = "mx-auto d-block"/>
+                            <div className="input-group mb-3">
+                                <span className="input-group-text" id="new-pass">
+                                <FiKey className = "mx-auto d-block"/>
                                 </span>
-                                <input type="password" class="form-control" placeholder="Enter New Password" aria-label="NewPass" aria-describedby="new-pass" 
+                                <input type="password" className="form-control" placeholder="Enter New Password" aria-label="NewPass" aria-describedby="new-pass" 
                                 onChange={e => setnewPassword(e.target.value)}></input>
                             </div>
-                            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#ChangePassModal" onClick={onSubmit}>
+                            <button type="button" className="btn btn-success" data-bs-toggle="modal" data-bs-target="#ChangePassModal" onClick={onSubmit}>
                             Save Changes
                             </button>
                             </div>
@@ -169,24 +169,24 @@ function Header2() {
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <div className="modal-footer">
+                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
                 </div>
             </div>
             </div>
-            <div class="modal fade" id="ChangePassModal" tabindex="-1" aria-labelledby="ChangePassModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                <div class="modal-header bg-success">
-                    <h1 class="modal-title fs-5 text-light " id="ChangePassModalLabel">Change Password</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div className="modal fade" id="ChangePassModal" tabIndex="-1" aria-labelledby="ChangePassModalLabel" aria-hidden="true">
+            <div className="modal-dialog">
+                <div className="modal-content">
+                <div className="modal-header bg-success">
+                    <h1 className="modal-title fs-5 text-light " id="ChangePassModalLabel">Change Password</h1>
+                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
+                <div className="modal-body">
                 {message}
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <div className="modal-footer">
+                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
                 </div>
             </div>
