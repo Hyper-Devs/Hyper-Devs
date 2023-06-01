@@ -99,7 +99,8 @@ function DatabaseResult(props) {
                             <div id="displayName">{student.first_name} {student.middle_name} {student.last_name}</div>
                             <div id="displayEmail">{student.grade_level}-{student.section_name}</div>
                             <div id="displayStatus"><CircleIcon color="success"/></div>
-                            <div id="action-icon"><EditIcon/></div>
+                            {/* <div id="action-icon"><EditIcon/></div> */}
+                            <button id="action-icon" data-bs-toggle= "modal" data-bs-target="#editDBModal" ><EditIcon/></button>
                         </li>
                     ))}
                 </ul>
@@ -179,7 +180,7 @@ function DatabaseResult(props) {
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
+                        <button type="button" class="btn btn-success">Save changes</button>
                     </div>
                     </div>
                 </div>
