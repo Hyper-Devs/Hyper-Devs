@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import GlobalModal from "../Modal/globalmodal";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
@@ -8,7 +8,6 @@ function EnrollBNewSYResults(){
     const [selectedGL, setGLFilter] = useState("Select");
     const [selectedSection, setSectionFilter] = useState("Select");
 
-    const [hasEnteredEnrollForm, setHasEnteredEnrollForm] = useState(false);
     const [availSections, setAvailSections] = useState({})
     const gradeLevels = Object.keys(availSections);
     const gradeLevelOptions = gradeLevels.map((gradelevel) => ({value: gradelevel, label: gradelevel}))
@@ -20,23 +19,42 @@ function EnrollBNewSYResults(){
     const [titleModal, setTitleModal] = useState('');
     const [bodyModal, setBodyModal] = useState('');
 
-    const handleCloseModal = () => {
-        setShowModal(false);
-    };
-    
-    function revertInputFields(){
-        document.querySelector('#inputGroupBNewSYGrade').value = 'Select';
-        document.querySelector('#inputGroupSelect01').value = 'Select';
-        setStudentVal([]);
-        document.forms['migrationForm']['new-student-grade-level'].value = 'Select';
-        document.forms['migrationForm']['new-student-section'].value = 'Select';
-    };
 
 
-    const onClick = () => {
-        fetchStudents(selectedGL, selectedSection);
+    // functions for setting up the search filters in the Enroll page
+    const fetchStudents = async (gradeLevel, section) => {
+        try {
+            //once again, fix this so the school year is not hard coded
+            const response = await axios.get(`http://localhost:8800/database/students/batch/${'2023-2024'}/${gradeLevel}/${section}`);
+            if (response.status == 200){
+                var students = response.data[0]['values'].map((student) => ({id: "name1", sId: student.id, name: student.first_name+" "+student.last_name}))
+                setStudentVal(students);
+            }
+        } catch (err) {
+            console.log(err)
+            setTitleModal("Request processed unsuccessfully");
+            setBodyModal("An error occurred")
+            setShowModal(true)
+        }
     };
-    
+
+    const fetchAvailRooms = async () => {
+        try {
+            const response = await axios.get(`http://localhost:8800/enroll/available-rooms`);
+            setAvailSections(response.data)
+        } catch (err) {
+            console.log(err);
+            setTitleModal("Request processed unsuccessfully");
+            setBodyModal("An error occurred")
+            setShowModal(true)
+        }
+    };
+
+    function updateSelectedSY(event){
+        if (event.target.value != 'Select')
+            setSYFilter(event.target.value);
+    };
+
     function updateSelectedGL(event){
         if (event.target.value !== 'Select')
             setGLFilter(event.target.value);
@@ -47,39 +65,6 @@ function EnrollBNewSYResults(){
             setSectionFilter(event.target.value);
     }
 
-    function enrollFormEnter () {
-        if (hasEnteredEnrollForm == false) { fetchAvailRooms(); }
-        setHasEnteredEnrollForm(true)
-    };
-
-    const fetchStudents = async (gradeLevel, section) => {
-        try {
-            //once again, fix this so the school year is not hard coded
-            const response = await axios.get(`http://localhost:8800/database/students/batch/${'2023-2024'}/${gradeLevel}/${section}`);
-            if (response.status == 200){
-                var students = response.data.map((student) => ({id: "name1", sId: student.id, name: student.first_name+" "+student.last_name}))
-                setStudentVal(students);
-            }
-        } catch (err) {
-            console.log(err);
-        }
-    };
-
-    const fetchAvailRooms = async () => {
-        try {
-            const response = await axios.get(`http://localhost:8800/enroll/available-rooms`);
-            setAvailSections(response.data)
-        } catch (err) {
-            console.log(err);
-        }
-    };
-
-    function updateSelectedSY(event){
-        if (event.target.value != 'Select'){
-            setSYFilter(event.target.value);
-        }
-    };
-
     function updateGLStudentFilter(){
         if (selectedSY != 'Select'){
             const sections = availSections[selectedSY];
@@ -87,16 +72,14 @@ function EnrollBNewSYResults(){
         }
     };
 
-    function handleRemove(index) {
-        const newItems = [...studentVal];
-        newItems.splice(index, 1);
-        setStudentVal(newItems);
-    };
+    useEffect(() => {
+        fetchAvailRooms();
+    }, []);
 
 
-
-
+    // functions for updating of the students' grade & section for a new AY
     function handleStudentUpdate(event) {
+        console.log(studentVal)
         event.preventDefault();
 
         const form = event.target;
@@ -134,18 +117,42 @@ function EnrollBNewSYResults(){
                 setShowModal(true);
             }
         } catch (err) {
-            console.log(err);
+            setTitleModal("Request processed unsuccessfully");
+            setBodyModal("An error occurred")
+            setShowModal(true)
         }
+    };
+
+
+    //Miscellaneous functions
+    function handleRemove(index) {
+        const newItems = [...studentVal];
+        newItems.splice(index, 1);
+        setStudentVal(newItems);
+    };
+
+    const handleCloseModal = () => {
+        setShowModal(false);
+    };
+    
+    function revertInputFields(){
+        document.querySelector('#inputGroupBNewSYGrade').value = 'Select';
+        document.querySelector('#inputGroupSelect01').value = 'Select';
+        setStudentVal([]);
+        document.forms['migrationForm']['new-student-grade-level'].value = 'Select';
+        document.forms['migrationForm']['new-student-section'].value = 'Select';
+    };
+
+    const onClick = () => {
+        fetchStudents(selectedGL, selectedSection);
     };
 
 
 
 
 
-
-
     return(
-        <div className="container-fluid p-3" onMouseOver={enrollFormEnter}>
+        <div className="container-fluid p-3">
             <div className="row">
                 <div className="col px-5 py-3 border border-success rounded bg-secondary bg-opacity-10 ">
                     <div className="row bg-success bg-opacity-50 border border-success rounded-top p-3">
@@ -254,9 +261,6 @@ function EnrollBNewSYResults(){
                 title={titleModal}
                 body={bodyModal}
                 onClose={handleCloseModal}
-                // showRetry={!enrollmentStatus && enrollmentError}          // Show "Retry" button only when there is an enrollment error
-                // onSaveChanges={handleRetry}                               // Retry enrollment when "Save changes" button is clicked
-                // onRetry={handleRetry}                                     // Retry enrollment when "Retry" button is clicked
                 />
             )}
         </div>
