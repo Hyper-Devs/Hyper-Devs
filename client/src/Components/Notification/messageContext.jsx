@@ -37,6 +37,26 @@ function MessageContext(props) {
         }
     };
 
+    // const recipient = '9761013401'; // example recipient phone number
+    // const messageContent = localStorage.getItem('content'); // retrieve content from localStorage
+
+    // fetch('/message', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json'
+    //   },
+    //   body: JSON.stringify({ recipient: recipient, content: messageContent })
+    // })
+    // .then(response => {
+    //   if (response.ok) {
+    //     console.log('Message sent successfully!');
+    //   } else {
+    //     console.error('Message failed to send:', response.statusText);
+    //   }
+    // })
+    // .catch(error => {
+    //   console.error('Error sending message:', error);
+    // });
 
   return (
     <div className="notif-message-box">
