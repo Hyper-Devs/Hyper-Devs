@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Header2.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
@@ -14,6 +14,8 @@ function Header2() {
 
   const [oldPassword, setoldPassword] = useState('')
   const [newPassword, setnewPassword] = useState('')
+  const [access_id, setaccess_id] = useState('')
+  const [message, setmessage] = useState('')
 
   const handleLogoutClick = () => {
     localStorage.clear();
@@ -21,9 +23,29 @@ function Header2() {
   };
 
 
+  useEffect(() => {
+    const user = localStorage.getItem("isLoggedin");
+    const userID = JSON.parse(user)
+    if (user) {
+      const id = userID[0].access_id
+      setaccess_id(id);
+    }
+  }, []);
+
+
+
   const onSubmit = async e =>{
     e.preventDefault();
-    const data = { newPassword, oldPassword };
+    if (newPassword.length < 8){
+      setmessage("Password must at leastb be 8 characters long!")
+      return
+    }
+    const passwordRegex =/(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/;
+    if (!passwordRegex.test(newPassword)) {
+    setmessage("Password must contain at least one uppercase letter, one lowercase letter, and one digit.");
+    return
+  }
+    const data = { newPassword, oldPassword, access_id };
     fetch('http://localhost:8800/database/update-password',{
       method: 'POST',
       headers: {
@@ -34,11 +56,18 @@ function Header2() {
     }).then(res =>{
       if(res.ok){
         console.log("Password updated successfully!")
+        setmessage("Password updated succesfully!")
+      } else if (res.status === 401)  {
+        console.log("Old password does not match! Try again.")
+        setmessage("Old password does not match! Try again.")
       } else {
-        console.log("Failed to update Password!")
+        console.log("Password update failed!")
+        setmessage("Password update failed!")
       }
+
     }).catch(err =>{
-      console.log("Error updating password: ", err)
+      console.log("Error updating password! ")
+      setmessage("Internal Error occured. Refresh the page.")
     });
   }
 
@@ -154,7 +183,7 @@ function Header2() {
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                Password successfully changed!
+                {message}
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

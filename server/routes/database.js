@@ -42,11 +42,11 @@ function outputConditioner (student_prim_infoo, results, mode) {
   
     if (testCases.includes(true)){
         returnVal = results[i];
-        if (mode == "attendance-logs") logs.push(results[i])
+        if (mode == "attendance-logs" || mode == "student-info") logs.push(results[i])
         else return returnVal;
     }
   }
-  if (mode == "attendance-logs" && logs.length > 0) return logs
+  if ((mode == "attendance-logs" || mode == "student-info") && logs.length > 0) return logs
   else return null
 };
 
@@ -100,7 +100,7 @@ router.get("/student-filter/student/:student_prim_info/:school_year", (request, 
       //the task here is to further refine the query results by using the given ID or name
       if (data != [null]){
         const value = outputConditioner(request.params.student_prim_info, data, "student-info");
-        return response.status(220).json([{mode: "student-basic-info", values: [value]}])
+        return response.status(220).json([{mode: "student-basic-info", values: value}])
       }
       else return response.json([])
   });
@@ -120,7 +120,8 @@ router.get("/student-filter/student/:student_prim_info/:school_year/:grade_level
       //the task here is to further refine the query results by using the given ID or name
       if (data != [null]){
         const value = outputConditioner(request.params.student_prim_info, data, "student-info");
-        return response.json([{mode: "student-basic-info", values: [value]}])
+        console.log(value)
+        return response.json([{mode: "student-basic-info", values: value}])
       }
       else
         return response.json([])
@@ -141,7 +142,7 @@ router.get("/student-filter/student/:student_prim_info/:school_year/:grade_level
       //the task here is to further refine the query results by using the given ID or name
       if (data != [null]){
         const value = outputConditioner(request.params.student_prim_info, data, "student-info");
-        return response.json([{mode: "student-basic-info", values: [value]}])
+        return response.json([{mode: "student-basic-info", values: value}])
       }
       else
         return response.json([])
@@ -255,20 +256,16 @@ router.get("/admin/override-logs/:admin_name/:position/:access_mode/:date_from/:
   db.query(query, values, (error, data) => {  
     if (error) { return response.json(error); }
 
-    // the task here is to further refine the query results
-    if (data.length <= 0) { return response.json("No record found") }
-
-    //data = outputConditioner(request.params.admin_name, data)
-
-    var returnVal;
+    // the task here is to further refine the query result
+    var returnVal = null;
     if (request.params.access_mode == "BasicInformation"){                //mode: returns basic info regarding the searched user
-      returnVal = {
-        mode : "override-basic-info",
-        overrider_name : stringInputConditioner(request.params.admin_name),
-        overrider_position : request.params.position,
-        overrider_total_logs : data.length
-      }
-      return response.json([{mode: "override-basic-info", values: [returnVal]}])
+      if (data.length > 0)
+        returnVal = [{
+          overrider_name : stringInputConditioner(request.params.admin_name),
+          overrider_position : request.params.position,
+          overrider_total_logs : data.length
+        }]
+      return response.json([{mode: "override-basic-info", values: returnVal}])
     }
     else if (request.params.access_mode == "Logs"){                       //mode: returns overriding logs regarding the searched user
       // determines the set of dates (inclusive) given the date range
@@ -286,14 +283,15 @@ router.get("/admin/override-logs/:admin_name/:position/:access_mode/:date_from/:
       dateRange.push(newEndDate)
       
       // checks if the dates returned by the server is within the requested date range
-      returnVal = [];
-      for (var i=0; i<dateRange.length; i++){
-        for (var j=0; j<data.length; j++)
-          if (dateRange[i].toString() === data[j]['overriding_date'].toString()){
-            returnVal.push(data[j])
-          }
+      if (data.length > 0){
+        returnVal = [];
+        for (var i=0; i<dateRange.length; i++){
+          for (var j=0; j<data.length; j++)
+            if (dateRange[i].toString() === data[j]['overriding_date'].toString()){
+              returnVal.push(data[j])
+            }
+        }
       }
-
       return response.json([{mode: "override-logs", values: returnVal}])
     }
   });
@@ -375,13 +373,45 @@ router.delete("/delete/:user_id", (req,res)=>{ //route still needs to be changed
 
 
 //api for changing a users password 
-router.post("/update-password", (req,res)=>{ 
-  const { newPassword, oldPassword } = req.body
-  const query = "UPDATE users SET password = ? WHERE password = ?"
-  db.query(query, [newPassword, oldPassword], (err, data) =>{
-      
-      if(err) return res.send("Server Error!")
-      return res.send("Password updated succesfully!")
+
+// router.post("/update-password", (req,res)=>{ 
+// const { newPassword, oldPassword, access_id } = req.body
+// const query = "UPDATE users SET password = ? WHERE password = ? AND access_id = ?"
+// db.query(query, [newPassword, oldPassword, access_id], (err, data) =>{
+    
+//     if(err){
+//       return res.send("Server Error!")
+//     } 
+//     return res
+//       .send("Password updated succesfully!");
+//   });
+// });
+
+router.post("/update-password", (req, res) => {
+  const { newPassword, oldPassword, access_id } = req.body;
+  const selectQuery = "SELECT password FROM users WHERE access_id = ?";
+  db.query(selectQuery, [access_id], (err, result) => {
+    if (err) {
+      return res.status(500).send("Server Error!");
+    }
+    if (result.length === 0) {
+      return res.status(404).send("User not found!");
+    }
+    
+    const dbPassword = result[0].password;
+    if (dbPassword !== oldPassword) {
+      return res.status(401).send("Old password is incorrect!");
+    }
+    const updateQuery = "UPDATE users SET password = ? WHERE access_id = ?";
+    db.query(updateQuery, [newPassword, access_id], (err, data) => {
+      if (err) {
+        return res.status(500).send("Server Error!");
+      }
+      if (data.affectedRows === 0) {
+        return res.status(500).send("Password update failed!");
+      }
+      return res.status(200).send("Password updated successfully!");
+    });
   });
 });
 

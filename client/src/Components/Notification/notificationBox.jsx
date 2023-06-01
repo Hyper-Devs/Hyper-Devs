@@ -12,7 +12,7 @@ function notificationBox(props) {
         <p>Notification Access</p>
         <div className="notif-rectangle2">
           <div className="notif-rectangle3">
-              <button>Subscription Status</button>
+              {/* <button>Subscription Status</button> */}
               <button onClick={() => handleClick('msgContext')}>Message Context</button>
           </div>
         </div>

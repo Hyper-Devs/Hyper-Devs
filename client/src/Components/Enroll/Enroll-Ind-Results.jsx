@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./Enroll-Ind-Results.css"
 import GlobalModal from '../Modal/globalmodal';
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -24,17 +24,14 @@ function EnrollIndResult(){
     };
 
     // functions for setting up the grade levels and sections options
-    function enrollFormEnter () {
-        if (hasEnteredEnrollForm == false) { fetchAvailRooms(); }
-        setHasEnteredEnrollForm(true)
-    };
-
     const fetchAvailRooms = async () => {
         try {
             const response = await axios.get(`http://localhost:8800/enroll/available-rooms`);
             setAvailSections(response.data)
         } catch (err) {
-            console.log(err);
+            setTitleModal("Request processed unsuccessfully");
+            setBodyModal("An error occurred")
+            setShowModal(true)
         }
     };
 
@@ -50,6 +47,10 @@ function EnrollIndResult(){
             setSectionOptions(sections.map((section) => ({value: section, label: section})))
         }
     };
+
+    useEffect(() => {
+        fetchAvailRooms();
+    }, []);
 
 
     // functions for handling the posting of the student information
@@ -94,7 +95,7 @@ function EnrollIndResult(){
 
 
     return (
-        <div className="container-fluid p-3" onMouseOver={enrollFormEnter}>
+        <div className="container-fluid p-3">
             <div className="row">
                 <div className="col border border-success rounded bg-secondary bg-opacity-25 px-5 py-3"> 
                     <form onSubmit={handleSubmit}>
@@ -213,11 +214,13 @@ function EnrollIndResult(){
                                 <span class="input-group-text bg-success bg-opacity-25">+63</span>
                                 <input 
                                     name="guardian-contact-number"
-                                    type="number" 
+                                    type="text" 
                                     class="form-control" 
                                     placeholder="9XXXXXXXXXX" 
                                     aria-label="PRelationship" 
                                     aria-describedby="PRelationship" 
+                                    title='Please enter exactly 10 digits'
+                                    pattern="[0-9]{10}"
                                     required
                                 ></input>
                             </div>
@@ -234,9 +237,6 @@ function EnrollIndResult(){
                 title={titleModal}
                 body={bodyModal}
                 onClose={handleCloseModal}
-                // showRetry={!enrollmentStatus && enrollmentError}          // Show "Retry" button only when there is an enrollment error
-                // onSaveChanges={handleRetry}                               // Retry enrollment when "Save changes" button is clicked
-                // onRetry={handleRetry}                                     // Retry enrollment when "Retry" button is clicked
                 />
             )}
         </div>
