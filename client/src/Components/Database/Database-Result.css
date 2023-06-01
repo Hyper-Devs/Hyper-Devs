@@ -110,6 +110,15 @@ p{
     left: 78%;
 }
 
+button {
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+}
+
 /* .dbresult-header #dbheader-name {
     flex: 52.5%;
     display: grid;
