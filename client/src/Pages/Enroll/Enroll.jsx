@@ -26,6 +26,7 @@ function Enroll(){
 
             <div className="enroll-default">
                 <Header2/>
+                <div className="page-title"><p>Enrollment Page</p></div>
                 <div className="enroll-content">
                 <div className="container-fluid">
                         <div className="row">

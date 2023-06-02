@@ -62,12 +62,11 @@ function MessageContext(props) {
     <div className="notif-message-box">
       <div className="notif-message-rectangle">
         <div className="notif-message-header">
-        <p>Message Content</p>
-        <button onClick={(e) => handleClick('notifBox', e)}><AiOutlineLeft size={"1.3rem"}/>Back</button>
+        <p>Notification Message</p>
         </div>
         <div className="notif-message-rectangle2">
           <div className="notif-message-rectangle3">
-                <p>Notification Format</p>
+                <p>Message Format</p>
             <textarea
               className="notif-message-rectangle5"
               value={content}

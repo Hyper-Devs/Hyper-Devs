@@ -7,11 +7,13 @@ import PageTitle from "../../Components/PageTitle";
 import Footer from '../../Components/footer'
 import Header2 from "../../Components/Database/Header/Header2";
 function Notification() {
+  {/*
   const [active, setActive] = useState("notifBox");
 
   const handleButtonClick = (buttonId) => {
     setActive(buttonId)
   };
+  */}
 
   return (
     <div className="notification-container">
@@ -19,11 +21,13 @@ function Notification() {
       <div className="notification-content-container">
       <div className="notification-content">
         <Header2/>
-        <PageTitle pageName={"Notification"}/>
-        
+        <div className="page-title"><p>Notification Page</p></div>
+        <MessageContext/>
+  {/*
         {active == "notifBox" && <NotificationBox onButtonClick={handleButtonClick} />}
         {active === "msgContext" && <MessageContext onButtonClick={handleButtonClick} />}
-        
+  */}
+
         </div>
         <Footer /> 
       </div>

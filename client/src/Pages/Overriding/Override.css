@@ -18,4 +18,5 @@
     flex-direction: column;
     width: 100%;
     flex: 1;
+    background-color: transparent;
 }
