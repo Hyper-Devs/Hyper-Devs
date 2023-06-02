@@ -15,7 +15,7 @@ import BSNewSResults from "../../Components/Enroll/Enroll-BNewS-Results"
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
 function Enroll(){
-    const [active, setActive] = useState('');
+    const [active, setActive] = useState('enrollIR');
 
     const handleEnrollmentOption = (type) => {
         setActive(type)
