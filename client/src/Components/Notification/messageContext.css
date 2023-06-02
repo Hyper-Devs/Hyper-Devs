@@ -4,6 +4,7 @@
     flex-direction: column;
     align-items: center;
     padding-top: 2%;
+    padding-bottom: 1%;
   }
   
   .notif-message-box .notif-message-rectangle {
@@ -21,13 +22,10 @@
   .notif-message-header {
     display: flex;
     justify-content: space-between;
-    
   }
 
   .notif-message-header p{
-    margin-top: 1%;
-    margin-bottom: 1%;
-    margin-left: 3%;
+    padding-left: 3%;
   }
  
   .notif-message-header button {
@@ -62,10 +60,9 @@
   }
   
   .notif-message-box .notif-message-rectangle3 {
-    padding: 15px;
+    padding: 0 15px 15px 15px;
     display: flex;
     flex-direction: column;
-    gap: 15px;
     align-items: center;
     background-color: white;
     border-radius: 10px;
@@ -74,11 +71,11 @@
   }
 
   .notif-message-box .notif-message-rectangle5 {
-    padding: 1%;
     display: flex;
+    height: 23rem;
     width: 100%;
+    padding: 0 3% 0 3%;
     background-color: white;
-    border-radius: 10px;
     border: solid #00573F;
   }
 
@@ -89,12 +86,6 @@
     margin-left: 0;
   }
 
-  .notif-message-box .notif-message-rectangle5 p{
-    color: #00573F;
-    font-weight: 400;
-    text-align: center;
-    margin-left: 0;
-  }
 
   .notif-message-rectangle3 button {
   background-color: #198754;
