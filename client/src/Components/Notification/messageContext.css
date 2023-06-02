@@ -1,10 +1,9 @@
 .notif-message-box {
-    background-color: white;
+    background-color: transparent;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 3%;
-    padding-bottom: 3%;
+    padding-top: 2%;
   }
   
   .notif-message-box .notif-message-rectangle {
