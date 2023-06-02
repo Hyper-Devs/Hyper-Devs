@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Database-Result.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
@@ -6,9 +6,10 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import EditIcon from '@mui/icons-material/Edit';
 import CircleIcon from '@mui/icons-material/Circle';
 
+
 function DatabaseResult(props) {
     const { searchResult } = props;
-    
+    const [selectedStudent, setSelectedStudent]=useState(null);
 
     if (!Array.isArray(searchResult)) {
         return (
@@ -82,7 +83,10 @@ function DatabaseResult(props) {
                 </div>
     }
 
-    function displayStudentInfo(data){
+    function displayStudentInfo(data) {
+        const handleEditClick = (student) => {
+          setSelectedStudent(student);
+        };
         return <div className="row mb-6 m-3">
                 <div className="dbresult-header">
                     <p className="dbheader-name">Name</p>
@@ -100,7 +104,7 @@ function DatabaseResult(props) {
                             <div id="displayEmail">{student.grade_level}-{student.section_name}</div>
                             <div id="displayStatus"><CircleIcon color="success"/></div>
                             {/* <div id="action-icon"><EditIcon/></div> */}
-                            <button id="action-icon" data-bs-toggle= "modal" data-bs-target="#editDBModal" ><EditIcon/></button>
+                            <button id="action-icon" data-bs-toggle= "modal" data-bs-target="#editDBModal" onClick={() => handleEditClick(student)} ><EditIcon/></button>
                         </li>
                     ))}
                 </ul>
@@ -176,7 +180,28 @@ function DatabaseResult(props) {
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        ...
+                    {selectedStudent && (
+                        <div>
+                            <div className="row p-3 ms-3">
+                                <div className="row border border-secondary bg-success"><p class="text-center text-light">Student Name</p></div>
+                                <div className="row border border-secondary">
+                                    <div className="col-4 border-end border-secondary"><p class="text-start">First Name :</p></div>
+                                    <div className="col "> {selectedStudent.first_name} </div>
+                                </div>
+                                <div className="row border border-secondary">
+                                    <div className="col-4 border-end border-secondary"><p class="text-start">Middle Name :</p></div>
+                                    <div className="col "> {selectedStudent.first_name} </div>
+                                </div>
+                                <div className="row border border-secondary">
+                                    <div className="col-4 border-end border-secondary"><p class="text-start">Last Name :</p></div>
+                                    <div className="col "> {selectedStudent.first_name} </div>
+                                </div>
+                            </div>
+                        <p>Student Name: {selectedStudent.first_name} {selectedStudent.middle_name} {selectedStudent.last_name}</p>
+                        <p>Grade and Section: {selectedStudent.grade_level}-{selectedStudent.section_name}</p>
+                        {/* Add more information here */}
+                        </div>
+                    )}
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
