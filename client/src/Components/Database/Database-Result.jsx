@@ -183,20 +183,74 @@ function DatabaseResult(props) {
                     {selectedStudent && (
                         <div>
                             <div className="row p-3 ms-3">
-                                <div className="row border border-secondary bg-success"><p class="text-center text-light">Student Name</p></div>
-                                <div className="row border border-secondary">
-                                    <div className="col-4 border-end border-secondary"><p class="text-start">First Name :</p></div>
-                                    <div className="col "> {selectedStudent.first_name} </div>
-                                </div>
-                                <div className="row border border-secondary">
-                                    <div className="col-4 border-end border-secondary"><p class="text-start">Middle Name :</p></div>
-                                    <div className="col "> {selectedStudent.first_name} </div>
-                                </div>
-                                <div className="row border border-secondary">
-                                    <div className="col-4 border-end border-secondary"><p class="text-start">Last Name :</p></div>
-                                    <div className="col "> {selectedStudent.first_name} </div>
+                                <div className="col me-4">
+                                    <div className="row border border-secondary bg-success">
+                                        <div className="col"> <p class="text-center text-light">Student Name</p> </div>
+                                        <div className="col-1">
+                                        <button id="action-icon"><EditIcon/></button>
+                                        </div>
+                                    </div>
+                                    <div className="row border border-secondary">
+                                        <div className="col-4 border-end border-secondary"><p class="text-start">First Name :</p></div>
+                                        <div className="col "> {selectedStudent.first_name} </div>
+                                    </div>
+                                    <div className="row border border-secondary">
+                                        <div className="col-4 border-end border-secondary"><p class="text-start">Middle Name :</p></div>
+                                        <div className="col ">{selectedStudent.middle_name}</div>
+                                    </div>
+                                    <div className="row border border-secondary">
+                                        <div className="col-4 border-end border-secondary"><p class="text-start">Last Name :</p></div>
+                                        <div className="col ">  {selectedStudent.last_name} </div>
+                                    </div>
                                 </div>
                             </div>
+
+                            <div className="row p-3 ms-3">
+                                <div className="col me-4">
+                                    <div className="row border border-secondary bg-success">
+                                        <div className="col"> <p class="text-center text-light">Grade & Section</p> </div>
+                                        <div className="col-1">
+                                        <button id="action-icon"><EditIcon/></button>
+                                        </div>
+                                    </div>
+                                    <div className="row border border-secondary">
+                                        <div className="col-4 border-end border-secondary"><p class="text-start">Status :</p></div>
+                                        <div className="col ">#</div>
+                                    </div>
+                                    <div className="row border border-secondary">
+                                        <div className="col-4 border-end border-secondary"><p class="text-start">Grade Level :</p></div>
+                                        <div className="col "> {selectedStudent.grade_level}</div>
+                                    </div>
+                                    <div className="row border border-secondary">
+                                        <div className="col-4 border-end border-secondary"><p class="text-start">Section :</p></div>
+                                        <div className="col ">{selectedStudent.section_name}</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="row p-3 ms-3">
+                                <div className="col me-4">
+                                    <div className="row border border-secondary bg-success">
+                                        <div className="col"> <p class="text-center text-light">Contact Information</p> </div>
+                                        <div className="col-1">
+                                        <button id="action-icon"><EditIcon/></button>
+                                        </div>
+                                    </div>
+                                    <div className="row border border-secondary">
+                                        <div className="col-4 border-end border-secondary"><p class="text-start">Contact Name:</p></div>
+                                        <div className="col">{selectedStudent.parent_fn} {selectedStudent.parent_mn} {selectedStudent.parent_ln}</div>
+                                    </div>
+                                    <div className="row border border-secondary">
+                                        <div className="col-4 border-end border-secondary"><p class="text-start">Relationship:</p></div>
+                                        <div className="col "> {selectedStudent.guardian_relationship}</div>
+                                    </div>
+                                    <div className="row border border-secondary">
+                                        <div className="col-4 border-end border-secondary"><p class="text-start">Contact No.:</p></div>
+                                        <div className="col ">{selectedStudent.contact_num}</div>
+                                    </div>
+                                </div>
+                            </div>
+
                         <p>Student Name: {selectedStudent.first_name} {selectedStudent.middle_name} {selectedStudent.last_name}</p>
                         <p>Grade and Section: {selectedStudent.grade_level}-{selectedStudent.section_name}</p>
                         {/* Add more information here */}
