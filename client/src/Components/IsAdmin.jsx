@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import GlobalModal from '../Components/Modal/globalmodal';
-import Dashboard from "../Pages/Dashboard/Dashboard";
+import jwt_decode from 'jwt-decode';
 
 
 function IsAdmin ({children}){
@@ -11,19 +11,21 @@ function IsAdmin ({children}){
     const [showModal, setShowModal] = useState(false); // State to control the visibility of the modal
 
     const handleCloseModal = () => {
-      // navigate('/dashboard');
       setShowModal(false);
       navigate('/dashboard');
     };
 
     let navigate = useNavigate();
-    const user = localStorage.getItem("isLoggedin");
-    const userRole = JSON.parse(user)
-    useEffect(()=>{if (user === null) {
-      navigate('/');
-    }
-    else if (userRole[0].role === 'User'){
-      setTitleModal("Unauthorized Access.");
+
+    const token = localStorage.getItem("accessToken");
+    const decodedToken = jwt_decode(token);
+    console.log(token, decodedToken)
+
+    useEffect(()=>{
+      if (token === null || decodedToken.role === null || decodedToken.role === undefined) {
+        navigate('/');
+    } else if (decodedToken.role !== 'Admin'){
+      setTitleModal("Access Denied.");
       setBodyModal("You do not have access to this page! If required, please contact another user with higher authorization.")
       setShowModal(true)
     }
@@ -37,7 +39,7 @@ function IsAdmin ({children}){
             body={bodyModal}
             onClose={handleCloseModal}
         />
-        <>{user && children}</>
+        <>{token && children}</>
       </div>
     )
   }
