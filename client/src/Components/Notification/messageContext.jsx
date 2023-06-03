@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import "./messageContext.css";
-import Footer from '../footer'
-import {AiOutlineLeft} from 'react-icons/ai'
+// import Footer from '../footer'
+// import {AiOutlineLeft} from 'react-icons/ai'
 import GlobalModal from '../Modal/globalmodal';
 
 function MessageContext(props) {
@@ -30,7 +30,7 @@ function MessageContext(props) {
         e.preventDefault();
         // Save the updated content to local storage
         localStorage.setItem('content', content);
-        if (buttonId == 'update'){
+        if (buttonId === 'update'){
           setShowModal(true)
         } else {
           props.onButtonClick(buttonId);
