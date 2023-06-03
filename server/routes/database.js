@@ -325,12 +325,28 @@ router.put("/update", (req, res) => {
 
 
 
-  
-
-
-
-
-
+// Get user name and role by access_id
+router.get('/get-user/:access_id', async (req, res) => {
+    const { access_id } = req.params;
+    const q = "SELECT * FROM users WHERE access_id = ?";
+    db.query(q, [access_id], (err, result) =>{
+      if(err){
+        console.err(err.message);
+        res.status(500).send('Server error');
+      } else {
+        if (result.length === 0) {
+          res.status(404).send('User not found');
+        } else {
+          const user = result[0];
+          const userData = {
+            name: user.name,
+            position: user.position
+          };
+          return res.json(userData);
+        }
+      }
+  });
+});
 
 
 //api for deleting a section from the database  
