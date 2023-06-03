@@ -7,7 +7,6 @@ import { IoPersonCircleSharp } from 'react-icons/io5';
 import { FiLogOut } from 'react-icons/fi';
 import { FiKey } from 'react-icons/fi';
 import { FiSettings } from 'react-icons/fi';
-import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 
 function Header2() {
@@ -16,11 +15,22 @@ function Header2() {
   const [newPassword, setnewPassword] = useState('')
   const [access_id, setaccess_id] = useState('')
   const [message, setmessage] = useState('')
+  const [userData, setUserData] = useState({});
 
   const handleLogoutClick = () => {
     localStorage.clear();
     window.location.replace("/");
   };
+
+
+  // useEffect(() => {
+  //   const user = localStorage.getItem("isLoggedin");
+  //   const userID = JSON.parse(user)
+  //   if (user) {
+  //     const id = userID[0].access_id
+  //     setaccess_id(id);
+  //   }
+  // }, []);
 
 
   useEffect(() => {
@@ -29,9 +39,16 @@ function Header2() {
     if (user) {
       const id = userID[0].access_id
       setaccess_id(id);
+  
+      axios.get(`http://localhost:8800/database/get-user/${id}`)
+        .then(response => {
+          setUserData(response.data);
+        })
+        .catch(error => {
+          console.log(error);
+        });
     }
-  }, []);
-
+  }, [access_id]);
 
 
   const onSubmit = async e =>{
@@ -90,7 +107,8 @@ function Header2() {
           <li>
             <div className="profile-name" data-testid="profile-button">
               <IoPersonCircleSharp className="IoPersonCircleSharp" size={"22px"} />
-              Noreen M.
+              {/* Noreen M. */}
+              {userData.name || "User"}
             </div>
           </li>
           <li>

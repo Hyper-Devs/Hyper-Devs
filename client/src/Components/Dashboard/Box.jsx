@@ -26,12 +26,12 @@ function Box() {
                         <div className='clock'><Clocks/></div>
                         <div className='entrance-exit'>
                             <div className='icon-boxes'>
-                                <img src={circle1}/>
-                                <img src={circle2}/>
+                                <img src={circle1} alt='White Circle'/>
+                                <img src={circle2} alt='Green Circle'/>
                             </div>
                             <div className='icon-boxes'>
-                                <img src={bell}/>
-                                <img src={bell}/>
+                                <img src={bell} alt='Bell'/>
+                                <img src={bell} alt='Bell'/>
                             </div>
                            
                             
