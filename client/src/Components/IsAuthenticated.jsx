@@ -10,13 +10,13 @@ function IsAuthenticated ({children}){
     const [showModal, setShowModal] = useState(false); // State to control the visibility of the modal
 
     const handleCloseModal = () => {
-      // navigate('/');
       setShowModal(false);
       navigate('/');
     };
 
     let navigate = useNavigate();
-    const user = localStorage.getItem("isLoggedin");
+    // const user = localStorage.getItem("isLoggedin");
+    const user = localStorage.getItem("accessToken");
     useEffect(()=>{if (user === null) {
       setTitleModal("Unauthorized Access.");
       setBodyModal("Please Login to access the page!")

@@ -40,11 +40,11 @@ function GlobalModal({ showModal, title, body, onClose, showRetry, onSaveChanges
               {body}
             </div>
             <div className="modal-footer">
-              {showRetry ? (
+              {/* {showRetry ? (
                 <button type="button" className="btn btn-success" onClick={handleRetry}>Retry</button>
               ) : (
                 <button type="button" className="btn btn-success" onClick={handleSaveChanges}>Save changes</button>
-              )}
+              )} */}
               <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" onClick={handleClose}>Close</button>
             </div>
           </div>

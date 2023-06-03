@@ -351,7 +351,8 @@ router.get('/get-user/:access_id', async (req, res) => {
           const user = result[0];
           const userData = {
             name: user.name,
-            position: user.position
+            position: user.position,
+            role: user.role
           };
           return res.json(userData);
         }

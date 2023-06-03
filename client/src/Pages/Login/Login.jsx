@@ -12,53 +12,79 @@ function Login() {
   const [login_id, setLogin_id] = useState('')
   const [login_password, setLogin_password] = useState('')
   const [authStatus, setAuthStatus] = useState(false)
-  const [user, setUser] = useState()
+  // const [user, setUser] = useState()
+  const [isUserExist, setIsUserExist] = useState(false)
+  const navigate = useNavigate();
 
+  // useEffect(() => {
+  //   const loggedInUser = localStorage.getItem("isLoggedin");
+  //   if (loggedInUser) {
+  //     const foundUser = JSON.parse(loggedInUser);
+  //     setUser(foundUser);
+  //   }
+  // }, []);
+
+  // const handleSubmit = async e => {
+  //   e.preventDefault();
+  //   const user = { login_id, login_password };
+  //   await axios.get('http://localhost:8800/', {
+  //     params: {
+  //       login_id,
+  //       login_password,
+  //     }
+  //   }, user)
+  //     .then(res => {
+  //       // console.log(res);
+
+  //       if (res.status === 202) {
+  //         // setAuthStatus(true);
+  //         // Store current user session in the local storage to allow login persistence
+  //         setUser(res.data)
+  //         localStorage.setItem("isLoggedin", JSON.stringify(res.data));
+  //         // console.log(res.data)
+  //       }
+  //       else if (res.status === 201) { setAuthStatus(true) }
+  //     })
+  //     .catch(err => (err))
+  // }
 
   // Checks if there is a user session that is stored in the local storage that did not logout
   // If there is, set it as the current user
   useEffect(() => {
-    const loggedInUser = localStorage.getItem("isLoggedin");
-    if (loggedInUser) {
-      const foundUser = JSON.parse(loggedInUser);
-      setUser(foundUser);
+    const accessToken = localStorage.getItem("accessToken");
+    if (accessToken) {
+      axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;  
+      setIsUserExist(true)
     }
   }, []);
 
   const handleSubmit = async e => {
     e.preventDefault();
     const user = { login_id, login_password };
-    await axios.get('http://localhost:8800/', {
-      params: {
-        login_id,
-        login_password,
-      }
-    }, user)
+    await axios.post('http://localhost:8800/login', user)
       .then(res => {
-        // console.log(res);
-
-        if (res.status === 202) {
-          // setAuthStatus(true);
-          // Store current user session in the local storage to allow login persistence
-          setUser(res.data)
-          localStorage.setItem("isLoggedin", JSON.stringify(res.data));
-          // console.log(res.data)
-        }
-        else if (res.status === 201) { setAuthStatus(true) }
+        if (res.status === 200) {
+          // Store the access token in local storage to allow login persistence
+          localStorage.setItem("accessToken", res.data.accessToken);
+          // Redirect the user to the dashboard
+          navigate('/dashboard');
+        } 
       })
-      .catch(err => (err))
-  }
-
+      .catch(err => {
+        console.error('Password incorrect!', err.message);
+        setAuthStatus(true);
+      });
+  };
 
   // If a user is already logged in, redirect the user to the dashboard
   // To access the login page, and login a separate user, the current user must first logout, otherwise it will just be redirected to the dashboard
-  if (user) {
+  if (isUserExist) {
     window.location.replace('/dashboard')
   }
-
-
+ 
   return (
-    <div id="login-page" data-testid="login-test">
+    <>
+    { isUserExist === false &&  <div id="login-page" data-testid="login-test">
       <div className="login-content">
         <div className="login-container">
           <div className="title">
@@ -103,7 +129,7 @@ function Login() {
         </div>
         <Footer />
       </div>
-    </div>
+    </div>}</>
   );
 }
 
