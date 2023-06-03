@@ -45,17 +45,13 @@ function BSNewSResults() {
           'Content-Type': 'multipart/form-data'
         }
       });
-      if ([210,220].includes(result.status)){
-        setTitleModal("Request processed successfully");
-      }
-      else if ([400,410,420].includes(result.status)){
-        setTitleModal("Request processed unsuccessfully");
-      }
-      else {
-        setTitleModal("Error");
-      }
+      if ([210,220].includes(result.status)){ setTitleModal("Request processed successfully"); }
+      else if ([400,410,420].includes(result.status)){ setTitleModal("Request processed unsuccessfully"); }
+      else { setTitleModal("Error"); }
+
       setBodyModal(result.data)
       setShowModal(true);   
+      revertInputField()
 
     } catch (error) {
       if ([400,410,420].includes(error.response['status'])){
@@ -101,6 +97,10 @@ function BSNewSResults() {
         link.parentNode.removeChild(link);
       });
   }
+
+  function revertInputField(){
+    document.querySelector('#inputGroupFile01').value = '';
+  };
 
   return (
     <div className="container-fluid p-3">

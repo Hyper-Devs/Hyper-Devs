@@ -125,7 +125,9 @@
 .name,
 .id,
 .gradeLevel,
-.section{
+.section,
+.class-time-in,
+.class-time-out{
     background-color: white;
     border-style: solid;
     border-width: 1px;
@@ -166,23 +168,15 @@
     background-color: rgb(0, 0, 0);
 }
 
-/* .sex{
-    width: 17%;
-    height: 100%;
-} */
-
-/* .age{
-    width: 17%;
-    height: 100%;
-} */
-
-.gradeLevel{
-    width: 50%;
+.gradeLevel,
+.section{
+    width: 20%;
     height: 100%;
 }
 
-.section{
-    width: 50%;
+.class-time-in,
+.class-time-out{
+    width: 30%;
     height: 100%;
 }
 

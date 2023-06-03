@@ -420,7 +420,7 @@ function DatabaseModifier(props){
                 body={bodyModal}
                 onClose={handleCloseModal}
                 />
-            )};
+            )}
         </div>
     );
 }
