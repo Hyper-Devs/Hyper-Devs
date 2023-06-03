@@ -5,7 +5,6 @@ const router = express.Router();
 function stringInputConditioner (string) {
   if (string[0].match(/[a-z]/i)){
     var newString = string[0].toUpperCase();
-    var newChar;
     for (var i=1; i<string.length; i++){
       if (string[i].match(/[a-z]/i))
         string[i].toLowerCase;
@@ -22,9 +21,7 @@ function outputConditioner (student_prim_infoo, results, mode) {
   var searchVal, returnVal = "Student not found", studentPrimVal;
   const student_prim_info = student_prim_infoo;
   var logs = []
-  if (/^\d+$/.test(student_prim_info)){                      //student_prim_info parameter is an ID  
-    searchVal = 'id'; 
-  }   
+  if (/^\d+$/.test(student_prim_info)){ searchVal = 'id'; }   
   else{                                                      //student_prim_info parameter is a name
     searchVal = 'first_name'                
     studentPrimVal = student_prim_info.toLowerCase()                  
@@ -88,7 +85,7 @@ router.get("/student-filter", async (request, response) => {
 
 //API for retrieving student's information [with only one search filters - sec mode]
 router.get("/student-filter/student/:student_prim_info/:school_year", (request, response) => {
-  const query = `SELECT students.id, students.first_name, students.middle_name, students.last_name, students.grade_level, students.section_name, sections.school_year
+  const query = `SELECT students.id, students.first_name, students.middle_name, students.last_name, students.grade_level, students.section_name, sections.school_year, students.parent_fn, students.parent_mn, students.parent_ln, students.relationship, students.contact_num
               FROM students,sections
               WHERE students.grade_level = sections.grade_level AND students.section_name = sections.section_name 
               AND sections.school_year = ?`;
@@ -108,7 +105,7 @@ router.get("/student-filter/student/:student_prim_info/:school_year", (request, 
 
 //API for retrieving student's information [with only two search filters - third mode]
 router.get("/student-filter/student/:student_prim_info/:school_year/:grade_level", (request, response) => {
-  const query = `SELECT students.id, students.first_name, students.middle_name, students.last_name, students.grade_level, students.section_name, sections.school_year
+  const query = `SELECT students.id, students.first_name, students.middle_name, students.last_name, students.grade_level, students.section_name, sections.school_year, students.parent_fn, students.parent_mn, students.parent_ln, students.relationship, students.contact_num
               FROM students,sections
               WHERE students.grade_level = sections.grade_level AND students.section_name = sections.section_name 
               AND sections.school_year = ? AND students.grade_level = ?`;
@@ -130,7 +127,7 @@ router.get("/student-filter/student/:student_prim_info/:school_year/:grade_level
 
 //API for retrieving student's information [with all three search filters - default mode]
 router.get("/student-filter/student/:student_prim_info/:school_year/:grade_level/:section_name", (request, response) => {
-  const query = `SELECT students.id, students.first_name, students.middle_name, students.last_name, students.grade_level, students.section_name, sections.school_year
+  const query = `SELECT students.id, students.first_name, students.middle_name, students.last_name, students.grade_level, students.section_name, sections.school_year, students.parent_fn, students.parent_mn, students.parent_ln, students.relationship, students.contact_num
               FROM students,sections
               WHERE students.grade_level = sections.grade_level AND students.section_name = sections.section_name 
               AND sections.school_year = ? AND students.grade_level = ? AND students.section_name = ?`;
@@ -202,7 +199,7 @@ router.get("/student-filter/student/:student_prim_info/:school_year/:grade_level
 
 //API for retrieving all students in a school year
 router.get("/students/batch/:school_year", (request, response) => {
-  const query = `SELECT students.id, students.first_name, students.middle_name, students.last_name, students.grade_level, students.section_name, sections.school_year
+  const query = `SELECT students.id, students.first_name, students.middle_name, students.last_name, students.grade_level, students.section_name, sections.school_year, students.parent_fn, students.parent_mn, students.parent_ln, students.relationship, students.contact_num
                   FROM students,sections
                   WHERE students.grade_level = sections.grade_level AND students.section_name = sections.section_name 
                   AND sections.school_year = ?`;
@@ -216,7 +213,7 @@ router.get("/students/batch/:school_year", (request, response) => {
 
 //API for retrieving all students in a grade level
 router.get("/students/batch/:school_year/:grade_level", (request, response) => {
-  const query = `SELECT students.id, students.first_name, students.middle_name, students.last_name, students.grade_level, students.section_name, sections.school_year
+  const query = `SELECT students.id, students.first_name, students.middle_name, students.last_name, students.grade_level, students.section_name, sections.school_year, students.parent_fn, students.parent_mn, students.parent_ln, students.relationship, students.contact_num
                   FROM students,sections
                   WHERE students.grade_level = sections.grade_level AND students.section_name = sections.section_name 
                   AND sections.school_year = ? AND students.grade_level = ?`;
@@ -230,7 +227,7 @@ router.get("/students/batch/:school_year/:grade_level", (request, response) => {
 
 //API for retrieving all students in a section
 router.get("/students/batch/:school_year/:grade_level/:section", (request, response) => {
-  const query = `SELECT students.id, students.first_name, students.middle_name, students.last_name, students.grade_level, students.section_name, sections.school_year
+  const query = `SELECT students.id, students.first_name, students.middle_name, students.last_name, students.grade_level, students.section_name, sections.school_year, students.parent_fn, students.parent_mn, students.parent_ln, students.relationship, students.contact_num
                   FROM students,sections
                   WHERE students.grade_level = sections.grade_level AND students.section_name = sections.section_name 
                   AND sections.school_year = ? AND students.grade_level = ? AND students.section_name = ?`;
@@ -324,7 +321,29 @@ router.put("/update", (req, res) => {
 });
 
 
+//API for updating a student's information from the database
+router.put("/students/edit-student", (request, response) => {
+  var query = "UPDATE students SET ";
+  var values = [];
+  for (var key in request.body){
+    if (request.body[key] != "" && key != "student-id"){
+      query += key + "=" + '?' + ","
+      values.push(request.body[key]);
+    };
+  };
+  if (query[query.length - 1] == ',') {query = query.substring(0, query.length - 1)}
+  query += "WHERE id = ?"
+  values.push(request.body['student-id'])
 
+  db.query(query, values, (error, data) => {
+    if (error) return response.send(error)
+    
+    if (data['affectedRows'] == 1){
+      return response.status(210).send("Student editing successful")
+    }
+    return response.json(data)
+  })
+});
   
 
 

@@ -6,6 +6,7 @@
 
 
 const fs = require('fs');
+const axios = require('axios');
 const csv = require('csv-parser');
 const express = require('express');
 const fileUpload = require('express-fileupload');
@@ -14,6 +15,17 @@ const db = require('../database.js').databaseConnection;
 const router = express.Router();
 router.use(fileUpload());
 
+
+
+async function getAvailRooms () {
+  try{
+    const result = await axios.get('http://localhost:8800/enroll/available-rooms');
+    return result.data;
+
+  } catch (error){
+    console.log(error)
+  }
+}
 
 
 //API for setting up the grade level and section filters in the Database page
@@ -48,6 +60,9 @@ router.get('/download/new-template', (req, res) => {
   res.send(file);
 });
   
+
+
+
 //API for adding a student into the database 
 router.post("/new-student", (request, response)=>{
   // suggestion: add a mechanism where the server supplies some string when middle name is not given
@@ -76,7 +91,7 @@ router.post("/new-student", (request, response)=>{
 });
 
 //API for adding students by batch
-router.post("/batch/new-student", (request, response) => {
+router.post("/batch/new-student", async (request, response) => {
   //checks if the user uploaded any file
   if (!request.files){ return response.status(400).send("No files were uploaded."); }
 
@@ -119,14 +134,23 @@ router.post("/batch/new-student", (request, response) => {
         //checks if the user uploaded the correct CSV file template
         if (JSON.stringify(acceptedKeys) != JSON.stringify(keys)) { return response.status(420).send("Wrong file template!"); }
 
-        db.query("SELECT id FROM `students`;", (err, data)=>{
+        db.query("SELECT id FROM `students`;", async (err, data)=>{
           if (err) {return response.status(500).send("An error occurred. Refresh page")}
 
-          const existingIds = data.map((item => ''+item.id));
-          const newIds = results.map((item => item['student-rfid']));
 
+          // checks if the entries' grade level and section exist in the current AY
+          const newResults = [];
+          const existingRooms = await getAvailRooms();
+          for (var i=0; i<results.length; i++){
+            if ((existingRooms.hasOwnProperty(results[i]['student-grade-level']) && existingRooms[results[i]['student-grade-level']].includes(results[i]['student-section']))){
+              newResults.push(results[i])
+            }
+          }
+
+          const existingIds = data.map((item => ''+item.id));
+          const newIds = newResults.map((item => item['student-rfid']));
           //limit of INSERT statement is 1000 - not tested for 1000 CSV values
-          var temp = results, flag = 0;
+          var temp = newResults;
           for (var i=0; i<results.length; i++){
             if (results.length > 999){ temp = results.slice(999) }
             
@@ -178,5 +202,7 @@ router.put("/batch/student-migration", (request, response) => {
     return response.status(210).send("Student migration successful")
   });
 });
+
+
 
 module.exports=router;
