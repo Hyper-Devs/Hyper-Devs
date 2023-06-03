@@ -232,10 +232,10 @@ function DatabaseResult(props) {
                 </div>
                 {
                     (searchResult[0]['values'] == null || searchResult[0]['values'].length <= 0) ? displayNoData() :
-                    searchResult[0]['mode'] == 'student-basic-info' ? displayStudentInfo(searchResult[0]['values']) : 
-                    searchResult[0]['mode'] == 'student-attendance-logs' ? displayStudentLogs(searchResult[0]['values']) :
-                    searchResult[0]['mode'] == 'override-basic-info' ? displayAdminBasicInfo(searchResult[0]['values']) :
-                    searchResult[0]['mode'] == 'override-logs' ? displayAdminLogs(searchResult[0]['values']) :
+                    searchResult[0]['mode'] === 'student-basic-info' ? displayStudentInfo(searchResult[0]['values']) : 
+                    searchResult[0]['mode'] === 'student-attendance-logs' ? displayStudentLogs(searchResult[0]['values']) :
+                    searchResult[0]['mode'] === 'override-basic-info' ? displayAdminBasicInfo(searchResult[0]['values']) :
+                    searchResult[0]['mode'] === 'override-logs' ? displayAdminLogs(searchResult[0]['values']) :
                     <p>No data available</p>
                 }
             </div>
