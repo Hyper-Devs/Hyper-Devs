@@ -23,32 +23,22 @@ function Header2() {
   };
 
 
-  // useEffect(() => {
-  //   const user = localStorage.getItem("isLoggedin");
-  //   const userID = JSON.parse(user)
-  //   if (user) {
-  //     const id = userID[0].access_id
-  //     setaccess_id(id);
-  //   }
-  // }, []);
-
-
   useEffect(() => {
     const user = localStorage.getItem("isLoggedin");
     const userID = JSON.parse(user)
     if (user) {
       const id = userID[0].access_id
       setaccess_id(id);
-  
+
       axios.get(`http://localhost:8800/database/get-user/${id}`)
-        .then(response => {
-          setUserData(response.data);
-        })
-        .catch(error => {
-          console.log(error);
-        });
+      .then((res) => {
+        setUserData(res.data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
     }
-  }, [access_id]);
+  }, []);
 
 
   const onSubmit = async e =>{
@@ -153,8 +143,8 @@ function Header2() {
                         <div className="row-4">
                             <img className = "mx-auto d-block" src="icons/Profile Icon.svg" alt="Profile Icon" srcSet="" />
                         </div>
-                        <div className="row text-center"> <h3>Norren Mercado</h3></div>
-                        <div className="row text-center"> <h5>Secretary</h5></div>
+                        <div className="row text-center"> <h3>{userData.name || "User"}</h3></div>
+                        <div className="row text-center"> <h5>{userData.position || "Role"}</h5></div>
                         <div className="row px-5"> 
                             <div className="col-4 p-2 rounded-start bg-success text-center text-light">Access Type</div>
                             <div className="col p-2 border rounded-end"></div>
