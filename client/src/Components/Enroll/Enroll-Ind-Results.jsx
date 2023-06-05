@@ -36,13 +36,13 @@ function EnrollIndResult(){
     };
 
     function updateSelectedSY(event){
-        if (event.target.value != 'Select'){
+        if (event.target.value !== 'Select'){
             setSYFilter(event.target.value);
         }
     };
 
     function updateGLStudentFilter(){
-        if (selectedSY != 'Select'){
+        if (selectedSY !== 'Select'){
             const sections = availSections[selectedSY];
             setSectionOptions(sections.map((section) => ({value: section, label: section})))
         }
@@ -75,7 +75,7 @@ function EnrollIndResult(){
 
         try {
             const result = await axios.post(`http://localhost:8800/enroll/new-student`, studentInfo);
-            if (result.status == 210){
+            if (result.status === 210){
                 setTitleModal("Enrollment success");
                 setBodyModal(result.data)
                 setShowModal(true)

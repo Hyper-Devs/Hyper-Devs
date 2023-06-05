@@ -26,7 +26,7 @@ function EnrollBNewSYResults(){
         try {
             //once again, fix this so the school year is not hard coded
             const response = await axios.get(`http://localhost:8800/database/students/batch/${'2023-2024'}/${gradeLevel}/${section}`);
-            if (response.status == 200){
+            if (response.status === 200){
                 var students = response.data[0]['values'].map((student) => ({id: "name1", sId: student.id, name: student.first_name+" "+student.last_name}))
                 setStudentVal(students);
             }
@@ -51,7 +51,7 @@ function EnrollBNewSYResults(){
     };
 
     function updateSelectedSY(event){
-        if (event.target.value != 'Select')
+        if (event.target.value !== 'Select')
             setSYFilter(event.target.value);
     };
 
@@ -66,7 +66,7 @@ function EnrollBNewSYResults(){
     }
 
     function updateGLStudentFilter(){
-        if (selectedSY != 'Select'){
+        if (selectedSY !== 'Select'){
             const sections = availSections[selectedSY];
             setSectionOptions(sections.map((section) => ({value: section, label: section})))
         }
@@ -87,12 +87,12 @@ function EnrollBNewSYResults(){
         const formJson = Object.fromEntries(formData.entries());
 
         const inputValidity = [
-            studentVal != [], 
-            formJson["new-student-grade-level"] != 'Select', 
-            formJson["new-student-section"] != 'Select'
+            studentVal !== [], 
+            formJson["new-student-grade-level"] !== 'Select', 
+            formJson["new-student-section"] !== 'Select'
         ];
 
-        if (inputValidity.every(i=>i==true)){
+        if (inputValidity.every(i=>i===true)){
             var newObj = {"rowsToUpdate": studentVal, "new-student-grade-level": formJson["new-student-grade-level"], "new-student-section": formJson["new-student-section"]}
             updateStudents(newObj)
             revertInputFields();
@@ -106,7 +106,7 @@ function EnrollBNewSYResults(){
     const updateStudents = async (inputObject) => {
         try {
             const response = await axios.put(`http://localhost:8800/enroll/batch/student-migration`, inputObject);
-            if (response.status == 210){
+            if (response.status === 210){
                 setTitleModal("Migration success");
                 setBodyModal("The selected student/s have been successfully enrolled to the next level.");
                 setShowModal(true);
