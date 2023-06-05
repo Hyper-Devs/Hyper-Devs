@@ -30,8 +30,8 @@ function GlobalModal({ showModal, title, body, onClose, showRetry, onSaveChanges
     <div>
       {showModal && <div className="modal-overlay"></div>}
       <div className={`modal ${showModal ? 'show' : ''}`} style={{ display: showModal ? 'block' : 'none' }}>
-        <div className="modal-dialog modal-sm modal-dialog-centered" ref={modalRef}>
-          <div className="modal-content" style={{ width: '500px' }}>
+        <div className="modal-dialog modal-dialog-centered" ref={modalRef}>
+          <div className="modal-content" style={{ width: '800px' }}>
             <div className="modal-header bg-success ">
               <h1 className="modal-title fs-4 text-center text-light">{title}</h1>
               <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={handleClose}></button>
