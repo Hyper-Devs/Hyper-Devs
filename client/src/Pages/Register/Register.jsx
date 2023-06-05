@@ -145,5 +145,5 @@ function Register() {
     </div>
   );
 }
-
+// Just me getting github achievements
 export default Register;
