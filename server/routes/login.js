@@ -23,7 +23,19 @@ const jwt = require('jsonwebtoken');
 //     });
 //   });
 
+// Register user
+router.post("/register", async (req, res) => {
+  const { register_name, register_id, register_password, register_position, register_role } = req.body;
+  const query = "INSERT INTO `users` (name, position, access_id, password, role) VALUES (?, ?, ?, ?, ?)";
+  db.query(query, [register_name, register_position, register_id, register_password, register_role], (err, data) => {
+    if (err) {
+      return res.status(500).json({ error: "Internal server error" });
+    }
+    return res.status(201).json("User successfully registered!");
+  });
+});
 
+// Login User
 router.post("/login", async (req, res) => {
   const { login_id, login_password } = req.body;
   const query = "SELECT * FROM `users` WHERE access_id = ? AND password = ?";
