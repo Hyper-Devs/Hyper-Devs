@@ -40,7 +40,7 @@ function GlobalModal({ showModal, title, body, onClose, showRetry, onSaveChanges
               <ul>
                 <li>(1) Search multiple students using school year</li>
                 <li>(2) Search multiple students using school year and grade level (e.g., <i>2023-2024 & 7</i>)</li>
-                <li>(3) Search multiple students using school year, grade level, and section (e.g., <i>2023-2024 7-O</i>)</li>
+                <li>(3) Search multiple students using school year, grade level, and section (e.g., <i>2023-2024 7-Obedient</i>)</li>
               </ul>
             </div>
             <div className="modal-footer">
