@@ -335,6 +335,16 @@ router.put("/students/edit-student", (request, response) => {
   query += "WHERE id = ?"
   values.push(request.body['student-id'])
 
+  db.query(query, values, (error, data) => {
+    if (error) return response.send(error)
+    
+    if (data['affectedRows'] == 1){
+      return response.status(210).send("Student editing successful")
+    }
+    return response.json(data)
+  })
+});
+
 
 // Get user name and role by access_id
 router.get('/get-user/:access_id', async (req, res) => {
