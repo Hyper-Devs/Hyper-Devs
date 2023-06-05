@@ -25,7 +25,7 @@ function Enrollment() {
             <div className="enroll-page">
                 <div className="enroll-page-title" ><p>System Enroll</p></div>
                 <div className="enroll-components">
-                    {active == "start" && <EnrollBox onButtonClick={handleButtonClick} />}
+                    {active === "start" && <EnrollBox onButtonClick={handleButtonClick} />}
                     {active === "enStud" && <EnrollStudentBox onButtonClick={handleButtonClick} />}
                     {active === "enAdm" && <EnrollanAdminBox onButtonClick={handleButtonClick} />}
                     {active === "enStud-indi" && <EnrollaStudentBox />}
