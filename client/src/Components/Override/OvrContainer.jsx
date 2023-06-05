@@ -1,18 +1,23 @@
-import './OvrContainer.css';
-import React, { useState } from 'react';
 import axios from 'axios';
-import Footer from '../../Components/footer'
+import React, { useState } from 'react';
+import TimePicker from 'react-time-picker';
+import './OvrContainer.css';
+
+
 
 function OvrContainer() {
     const [students,setStudents] = useState([])
+    const [value, onChange] = useState('10:00');
     const [isVisible, setIsVisible] = useState(false);
+    const currentUser = JSON.parse(localStorage.getItem("isLoggedin"))[0]['name'];
 
     const fetchStudent = async (id) => {
         setStudents([]);
         try {
-            const res = await axios.get(`http://localhost:8800/override/${id}`);
-            if (res.data.length > 0){
-                setStudents(res.data)
+            const response = await axios.get(`http://localhost:8800/override/${id}`);
+            if (response.data.length > 0){
+                console.log(response.data)
+                setStudents(response.data)
             }
         } catch (err) {
             console.log(err);
@@ -49,23 +54,28 @@ function OvrContainer() {
                     </form>
                 </div>
             </div>
-            {(students.length > 0) && isVisible &&          
+            {/* {(students.length > 0) && isVisible &&          
                 <div className='search-result'>
                     <h2 style={{color: '#00573F',  fontFamily: "Cambria", fontWeight: 900}}><b>STUDENT INFORMATION</b></h2>
                     <div className='student-details'>
                         <div className='name-id-block'>
-                            <div className="name">Name: {students[0].first_name}</div>
+                            <div className="name">Name: {students[0].first_name + " " + students[0].last_name}</div>
                             <div className="id">ID no.: {students[0].id}</div>
                         </div>
                         <div className='addtl-info-block'>
                             <div className="gradeLevel">Grade Level: {students[0].grade_level}</div>
-                            <div className="section">Section: {students[0].section}</div>
+                            <div className="section">Section: {students[0].section_name}</div>
+                            <div className="class-time-in">Class Start: {students[0].start_time}</div>
+                            <div className="class-time-out">Class End: {students[0].end_time}</div>
                         </div>
                         <div className='input-fields-block'>
                             <label>Reason</label>
                             <input className='reason-input'/>
                             <label>Overriding Admin</label>
-                            <input className='reason-input ovrAdmin-input'/>
+                            <input 
+                                className='reason-input ovrAdmin-input'
+                                value = {currentUser}
+                            />
                             
                         </div>
                         <button style={{height: 40, }}>Override</button>
@@ -76,7 +86,7 @@ function OvrContainer() {
                 <div className='search-result'>
                     <h2>Student does not exist</h2>
                 </div>
-            }  
+            }   */}
             </div>
       </div>
     )
