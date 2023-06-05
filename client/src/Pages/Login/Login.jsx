@@ -121,7 +121,8 @@ function Login() {
                   </div>
 
 
-                  <a className={'forgotPassword'} href="#">Forgot Password?</a>
+                  {/* <a className={'forgotPassword'} href="#">Forgot Password?</a> */}
+                  <button onClick={() => navigate('/register')} type='button'>Register</button>
                 </form>
               </div>
             </div>

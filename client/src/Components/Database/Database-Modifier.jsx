@@ -100,7 +100,7 @@ function DatabaseModifier(props){
         const formData = new FormData(form);
         const formJson = Object.fromEntries(formData.entries());
 
-        if (formJson["student-prim-info"] != '' || formJson['student-school-year'] != 'Select'){
+        if (formJson["student-prim-info"] !== '' || formJson['student-school-year'] !== 'Select'){
             var date_start = "01-01-2023"
             var date_end = "01-01-2023"
             if (Object.keys(formJson).includes('date-start')){
@@ -149,10 +149,10 @@ function DatabaseModifier(props){
     const fetchStudent = async (searchVal) => {
         try {
             var searchValExist = [
-                searchVal["student-prim-info"] != '',
-                searchVal['student-school-year'] != 'Select',
-                searchVal['student-grade-level'] != 'Select',
-                searchVal['student-section'] != 'Select',
+                searchVal["student-prim-info"] !== '',
+                searchVal['student-school-year'] !== 'Select',
+                searchVal['student-grade-level'] !== 'Select',
+                searchVal['student-section'] !== 'Select',
                 Object.keys(searchVal).includes('access-type'),
                 Object.keys(searchVal).includes('date-start'),
                 Object.keys(searchVal).includes('date-end'),
@@ -185,7 +185,7 @@ function DatabaseModifier(props){
                     result = "Input error"
             }
 
-            if (result != "Input error"){
+            if (result !== "Input error"){
                 if (result.data != null){
                     setSearchResult(result.data) }
                 else{ setSearchResult([]) }

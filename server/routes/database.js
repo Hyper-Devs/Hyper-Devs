@@ -345,7 +345,6 @@ router.put("/students/edit-student", (request, response) => {
   })
 });
 
-
 // Get user name and role by access_id
 router.get('/get-user/:access_id', async (req, res) => {
     const { access_id } = req.params;
@@ -449,8 +448,8 @@ router.post("/update-password", (req, res) => {
         return res.status(500).send("Password update failed!");
       }
       return res.status(200).send("Password updated successfully!");
+      });
     });
   });
-});
 
 module.exports = router;
