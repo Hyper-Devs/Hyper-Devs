@@ -1,12 +1,14 @@
 import axios from 'axios';
 import { useState, useEffect } from "react";
 import DatePicker from 'react-datepicker'
+import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import "react-datepicker/dist/react-datepicker.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
 
 import "./Database-Modifier.css";
 import GlobalModal from '../Modal/globalmodal';
+import HowToModal from '../Modal/how-to-modal'
 import DatabaseResult from "../../Components/Database/Database-Result";
 
 
@@ -27,6 +29,8 @@ function DatabaseModifier(props){
     const [titleModal, setTitleModal] = useState('');
     const [bodyModal, setBodyModal] = useState('');
     const [showModal, setShowModal] = useState(false); // State to control the visibility of the modal
+
+    const [showHowToModal, setShowHowToModal] = useState(false); // State to control the visibility of the modal
   
 
     const [rangeStart, setRangeStart] = useState(new Date)
@@ -202,21 +206,15 @@ function DatabaseModifier(props){
 
     props.setSearchResult(searchResult);
 
-
+    const handleOpenModal = () => {setShowHowToModal(true);};
     
     const handleChange = (event) => {setAccessType(event.target.value);};
 
-    const handleCloseModal = () => {
-        setShowModal(false);
-    };
+    const handleCloseModal = () => { setShowModal(false); };
 
-    const selectStartDate = (d) => {
-        setRangeStart(d)
-    }
+    const selectStartDate = (d) => { setRangeStart(d) }
 
-    const selectEndDate = (d) => {
-        setRangeEnd(d)
-    }
+    const selectEndDate = (d) => { setRangeEnd(d) }
 
 
 
@@ -226,6 +224,7 @@ function DatabaseModifier(props){
                 <div class="nav nav-tabs border border-success-subtle" id="nav-tab" role="tablist">
                     <button class="nav-link active text-black" id="nav-student-tab" data-bs-toggle="tab" data-bs-target="#nav-student" type="button" role="tab" aria-controls="nav-student" aria-selected="true">Student Information</button>
                     <button class="nav-link text-black" id="nav-admin-tab" data-bs-toggle="tab" data-bs-target="#nav-admin" type="button" role="tab" aria-controls="nav-admin" aria-selected="false">Admin Information</button>
+                    <HelpOutlineIcon style={{position:'relative', marginTop: 7, color: 'white'}} type="button" onClick={handleOpenModal}></HelpOutlineIcon>
                 </div>
             </nav>
             <div class="tab-content " id="nav-tabContent">
@@ -418,6 +417,14 @@ function DatabaseModifier(props){
                 showModal={showModal}
                 title={titleModal}
                 body={bodyModal}
+                onClose={handleCloseModal}
+                />
+            )}
+            {showHowToModal && (
+                <HowToModal 
+                showModal={showHowToModal}
+                title={'stuff'}
+                body={'stuff'}
                 onClose={handleCloseModal}
                 />
             )}
