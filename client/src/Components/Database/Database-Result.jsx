@@ -262,7 +262,7 @@ function DatabaseResult(props) {
                                                             name='first_name'
                                                             type="text" 
                                                             class="form-control" 
-                                                            placeholder={selectedStudent.first_name}
+                                                            defaultValue={selectedStudent.first_name}
                                                             aria-label="StudentFN" 
                                                             aria-describedby="StudentFN"
                                                         >
@@ -274,7 +274,7 @@ function DatabaseResult(props) {
                                                             name='middle_name'
                                                             type="text" 
                                                             class="form-control" 
-                                                            placeholder={selectedStudent.middle_name}
+                                                            defaultValue={selectedStudent.middle_name}
                                                             aria-label="StudentMN" 
                                                             aria-describedby="StudentMN"
                                                         >
@@ -286,7 +286,7 @@ function DatabaseResult(props) {
                                                             name='last_name'
                                                             type="text" 
                                                             class="form-control" 
-                                                            placeholder={selectedStudent.last_name}
+                                                            defaultValue={selectedStudent.last_name}
                                                             aria-label="StudentLN" 
                                                             aria-describedby="StudentLN"
                                                         >
@@ -307,7 +307,7 @@ function DatabaseResult(props) {
                                                             name='status'
                                                             type="text" 
                                                             class="form-control" 
-                                                            placeholder="#"
+                                                            defaultValue="#"
                                                             aria-label="StudentStatus" aria-describedby="StudentStatus"
                                                         >
                                                         </input>
@@ -318,7 +318,7 @@ function DatabaseResult(props) {
                                                             name='grade_level'
                                                             type="text" 
                                                             class="form-control" 
-                                                            placeholder={selectedStudent.grade_level}
+                                                            defaultValue={selectedStudent.grade_level}
                                                             aria-label="StudentGL" 
                                                             aria-describedby="StudentGL"
                                                         >
@@ -330,7 +330,7 @@ function DatabaseResult(props) {
                                                             name='section_name'
                                                             type="text" 
                                                             class="form-control" 
-                                                            placeholder={selectedStudent.section_name}
+                                                            defaultValue={selectedStudent.section_name}
                                                             aria-label="StudentSec" 
                                                             aria-describedby="StudentSec"
                                                         >
@@ -351,7 +351,7 @@ function DatabaseResult(props) {
                                                             name='parent_fn'
                                                             type="text" 
                                                             class="form-control" 
-                                                            placeholder={selectedStudent.parent_fn}
+                                                            defaultValue={selectedStudent.parent_fn}
                                                             aria-label="StudentPFN" 
                                                             aria-describedby="StudentPFN"
                                                         >
@@ -363,7 +363,7 @@ function DatabaseResult(props) {
                                                             name='parent_ln'
                                                             type="text" 
                                                             class="form-control" 
-                                                            placeholder={selectedStudent.parent_ln}
+                                                            defaultValue={selectedStudent.parent_ln}
                                                             aria-label="StudentPLN" 
                                                             aria-describedby="StudentPLN"
                                                         >
@@ -375,7 +375,7 @@ function DatabaseResult(props) {
                                                             name='relationship'
                                                             type="text" 
                                                             class="form-control" 
-                                                            placeholder= {selectedStudent.relationship} 
+                                                            defaultValue= {selectedStudent.relationship} 
                                                             aria-label="StudentRel" 
                                                             aria-describedby="StudentRel"
                                                         >
@@ -387,7 +387,7 @@ function DatabaseResult(props) {
                                                             name='contact-num'
                                                             type="text" 
                                                             class="form-control" 
-                                                            placeholder={selectedStudent.contact_num}
+                                                            defaultValue={selectedStudent.contact_num}
                                                             aria-label="StudentCN" 
                                                             aria-describedby="StudentCN"
                                                         >
