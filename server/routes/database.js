@@ -369,6 +369,20 @@ router.get('/get-user/:access_id', async (req, res) => {
   });
 });
 
+// Check if access_id exists in the database
+router.get('/check-access-id/:access_id', async (req, res) => {
+  const { access_id } = req.params;
+  const q = "SELECT COUNT(*) AS count FROM users WHERE access_id = ?";
+  db.query(q, [access_id], (err, result) =>{
+    if(err){
+      console.err(err.message);
+      res.status(500).send('Server error');
+    } else {
+      const count = result[0].count;
+      return res.json({ exists: count > 0 });
+    }
+  });
+});
 
 //api for deleting a section from the database  
 router.delete("/delete/:section_id", (req,res)=>{ //route still needs to be changed
@@ -410,19 +424,6 @@ router.delete("/delete/:user_id", (req,res)=>{ //route still needs to be changed
 
 
 //api for changing a users password 
-
-// router.post("/update-password", (req,res)=>{ 
-// const { newPassword, oldPassword, access_id } = req.body
-// const query = "UPDATE users SET password = ? WHERE password = ? AND access_id = ?"
-// db.query(query, [newPassword, oldPassword, access_id], (err, data) =>{
-    
-//     if(err){
-//       return res.send("Server Error!")
-//     } 
-//     return res
-//       .send("Password updated succesfully!");
-//   });
-// });
 
 router.post("/update-password", (req, res) => {
   const { newPassword, oldPassword, access_id } = req.body;
