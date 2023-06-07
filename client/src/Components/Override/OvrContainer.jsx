@@ -6,6 +6,7 @@ import TimePicker from 'react-time-picker';
 import './OvrContainer.css';
 import EditIcon from '@mui/icons-material/Edit';
 import jwt_decode from 'jwt-decode';
+import api from "../../api/api"
 
 function OvrContainer() {
   const [students, setStudents] = useState([]);
@@ -18,7 +19,7 @@ function OvrContainer() {
   const fetchStudent = async (id) => {
     setResultData(null);
     try {
-      const response = await axios.get(`http://localhost:8800/override/${id}`);
+      const response = await api.get(`/override/${id}`);
       if (response.data.length > 0) {
         setResultData(response.data[0]);
       }
@@ -72,7 +73,7 @@ function OvrContainer() {
 //   }, 2000); // Assuming 2 seconds for processing
 
 //   try {
-//       const result = await axios.post(`http://localhost:8800/enroll/new-student`, studentInfo);
+//       const result = await api.post(`/enroll/new-student`, studentInfo);
 //       if (result.status === 210){
 //           setTitleModal("Enrollment success");
 //           setBodyModal(result.data)

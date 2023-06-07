@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import api from "../../api/api"
 
 
 function Message() {
@@ -11,7 +12,7 @@ function Message() {
     const sendText = () => {
 
         console.log(text)
-        fetch(`http://localhost:8800/message?recipient=${text.recipient}&textMessage=${text.textMessage}`)
+        api.fetch(`/message?recipient=${text.recipient}&textMessage=${text.textMessage}`)
         .catch(err => console.error(err))
     }
 
