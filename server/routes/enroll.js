@@ -28,7 +28,7 @@ async function getAvailRooms () {
 }
 
 
-//API for setting up the grade level and section filters in the Database page
+//API endpoint for setting up the grade level and section filters in the Database page
 router.get("/available-rooms", async (request, response) => {
     // for future improvements, the school year here must be flexible and not hard-coded 2023-2024
     const query = "SELECT grade_level, section_name FROM `sections` WHERE school_year = '2023-2024'"
@@ -48,11 +48,11 @@ router.get("/available-rooms", async (request, response) => {
           gradeLevels[rawData[i][0]].push(rawData[i][1]);
         }
       }
-  
       response.json(gradeLevels)
     });
 });
 
+//API endpoint for providing the correct template in batch enroll
 router.get('/download/new-template', (req, res) => {
   const file = fs.readFileSync('./outgoingFiles/EnrollmentTemplate.csv');
   res.setHeader('Content-Type', 'application/csv');
@@ -61,9 +61,7 @@ router.get('/download/new-template', (req, res) => {
 });
   
 
-
-
-//API for adding a student into the database 
+//API endpoint for adding a student into the database 
 router.post("/new-student", (request, response)=>{
   // suggestion: add a mechanism where the server supplies some string when middle name is not given
 
@@ -90,7 +88,7 @@ router.post("/new-student", (request, response)=>{
   });
 });
 
-//API for adding students by batch
+//API endpoint for adding students by batch
 router.post("/batch/new-student", async (request, response) => {
   //checks if the user uploaded any file
   if (!request.files){ return response.status(400).send("No files were uploaded."); }
@@ -100,10 +98,8 @@ router.post("/batch/new-student", async (request, response) => {
   const extensionName = file['mimetype'];
   const allowedExtension = ['text/csv'];
 
-
   //checks if the user uploaded other file type aside from CSV
   if(!allowedExtension.includes(extensionName)){ return response.status(410).send("Invalid file type"); }
-
 
   //traverses the CSV file
   file['mv'](path, (err) => {
@@ -185,7 +181,7 @@ router.post("/batch/new-student", async (request, response) => {
   });
 });
 
-//API for student migration
+//API endpoint for student migration
 router.put("/batch/student-migration", (request, response) => {
   const query = `INSERT INTO students (id, grade_level, section_name) 
               VALUES ? 
