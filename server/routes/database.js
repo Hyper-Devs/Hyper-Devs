@@ -127,7 +127,20 @@ router.get("/student-filter", async (request, response) => {
   
 
 
+router.get("/student/:student_prim_info", (request, response) => {
+  const query = `SELECT contact_num FROM students WHERE rfid = ?`
+  const value = [request.params.student_prim_info]
 
+  db.query(query, value, (error, data) => {
+    if (error) { return response.json(error); }
+
+    if (data.length > 0){
+      return response.json(data[0]['contact_num'])
+    }
+    return response.json("No data found")
+
+  })
+})
 
 //API for retrieving student's information [with only one search filters - sec mode]
 router.get("/student-filter/student/:student_prim_info/:school_year", (request, response) => {

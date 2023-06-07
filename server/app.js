@@ -18,8 +18,9 @@ app.use('', routes);
 
 
 // Twilio API
-app.get('/message', (req, res) => {
-  const { recipient, status } = req.query
+app.get('/message/:recipient_num/:status', (req, res) => {
+  const recipient = req.params.recipient_num
+  const status = req.params.status
   var textMessage;
   
   const showdate = new Date();
