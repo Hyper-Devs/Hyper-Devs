@@ -2,13 +2,14 @@ import axios from 'axios';
 import { useState, useEffect } from "react";
 import DatePicker from 'react-datepicker'
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
+import PersonSearchIcon from '@mui/icons-material/PersonSearch';
 import "react-datepicker/dist/react-datepicker.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
-
+import Popover from '@mui/material/Popover';
 import "./Database-Modifier.css";
 import GlobalModal from '../Modal/globalmodal';
-import HowToModal from '../Modal/how-to-modal'
+// import HowToModal from '../Modal/how-to-modal'
 import DatabaseResult from "../../Components/Database/Database-Result";
 
 
@@ -30,9 +31,7 @@ function DatabaseModifier(props){
     const [bodyModal, setBodyModal] = useState('');
     const [showModal, setShowModal] = useState(false); // State to control the visibility of the modal
 
-    const [showHowToModal, setShowHowToModal] = useState(false); // State to control the visibility of the modal
-  
-
+    // const [showHowToModal, setShowHowToModal] = useState(false); // State to control the visibility of the modal
     const [rangeStart, setRangeStart] = useState(new Date)
     const defaultEndDate = new Date()
     const [rangeEnd, setRangeEnd] = useState(defaultEndDate)
@@ -215,7 +214,7 @@ function DatabaseModifier(props){
 
     props.setSearchResult(searchResult);
 
-    const handleOpenModal = () => {setShowHowToModal(true);};
+    // const handleOpenModal = () => {setShowHowToModal(true);};
     
     const handleChange = (event) => {setAccessType(event.target.value);};
 
@@ -225,7 +224,17 @@ function DatabaseModifier(props){
 
     const selectEndDate = (d) => { setRangeEnd(d) }
 
-
+    const [popoverAnchorEl, setPopoverAnchorEl] = useState(null);
+    const isPopoverOpen = Boolean(popoverAnchorEl);
+  
+    const handlePopoverOpen = (event) => {
+      setPopoverAnchorEl(event.currentTarget);
+    };
+  
+    const handlePopoverClose = () => {
+      setPopoverAnchorEl(null);
+    };
+    
 
     return(
         <div className="container-md p-3 ">
@@ -233,7 +242,7 @@ function DatabaseModifier(props){
                 <div class="nav nav-tabs border border-success-subtle" id="nav-tab" role="tablist">
                     <button class="nav-link active text-black" id="nav-student-tab" data-bs-toggle="tab" data-bs-target="#nav-student" type="button" role="tab" aria-controls="nav-student" aria-selected="true">Student Information</button>
                     <button class="nav-link text-black" id="nav-admin-tab" data-bs-toggle="tab" data-bs-target="#nav-admin" type="button" role="tab" aria-controls="nav-admin" aria-selected="false">Admin Information</button>
-                    <HelpOutlineIcon style={{position:'relative', marginTop: 7, color: 'white'}} type="button" onClick={handleOpenModal}></HelpOutlineIcon>
+                    {/* <HelpOutlineIcon style={{position:'relative', marginTop: 7, color: 'white'}} type="button" onClick={handleOpenModal}></HelpOutlineIcon> */}
                 </div>
             </nav>
             <div class="tab-content " id="nav-tabContent">
@@ -242,7 +251,7 @@ function DatabaseModifier(props){
                         <form name='student-search-form' onSubmit={handleSubmitStudent}>
                             <div className="row">
                                 <div class="input-group mb-1">
-                                    <span class="input-group-text  " id="basic-addonS1">#</span>
+                                    <span class="input-group-text  " id="basic-addonS1"><PersonSearchIcon/></span>
                                     <input 
                                         name='student-prim-info'
                                         type="text" 
@@ -252,7 +261,41 @@ function DatabaseModifier(props){
                                         aria-describedby="basic-addonS2" 
                                     >
                                     </input>
+                                    <span className="icon-wrapper">
+                                    <HelpOutlineIcon className="helpIcon" type="button" onClick={handlePopoverOpen} />
+                                    </span>
+
                                 </div>
+                                <Popover
+                                open={isPopoverOpen}
+                                anchorEl={popoverAnchorEl}
+                                onClose={handlePopoverClose}
+                                anchorOrigin={{
+                                vertical: 'bottom',
+                                // horizontal: 'center',
+                                
+                                }}
+                                transformOrigin={{
+                                // vertical: 'bottom',
+                                horizontal: 'left',
+                                }}
+                                classes={{
+                                    paper: 'custom-popover'
+                                  }}
+                            >
+                                {/* Content of the popover */}
+                                <div className='row ms-3 p-1' >
+                                    <div className="row p-3 border border-success rounded bg-success bg-opacity-25">
+                                        <h6 className='text-center fw-bold'>Database Navigation Help</h6>
+                                        <ul>
+                                            <li>(1) Search bar accepts ID and Student ID</li>
+                                            <li>(2) One attribute or dropdown should be modified when using search bar.</li>
+                                            <li>(3) Search multiple students using school year, grade level, and section (e.g., <i>2023-2024 7-Obedient</i>)</li>
+                                        </ul>
+                                    </div>
+                                
+                                </div>
+                            </Popover>
                                 <div className="col">
                                     <div class="input-group mb-1">
                                         <label class="input-group-text" for="inputGroupSelectS5">School Year</label>
@@ -353,7 +396,7 @@ function DatabaseModifier(props){
                         <form onSubmit={handleSubmitAdmin}>
                             <div className="row">
                                 <div class="input-group mb-1">
-                                    <span class="input-group-text" id="basic-addon1">#</span>
+                                    <span class="input-group-text" id="basic-addon1"><PersonSearchIcon/></span>
                                     <input 
                                         name="user-name"
                                         type="text" 
@@ -433,14 +476,14 @@ function DatabaseModifier(props){
                 onClose={handleCloseModal}
                 />
             )}
-            {showHowToModal && (
+            {/* {showHowToModal && (
                 <HowToModal 
                 showModal={showHowToModal}
                 title={'stuff'}
                 body={'stuff'}
                 onClose={handleCloseModal}
                 />
-            )}
+            )} */}
         </div>
     );
 }
