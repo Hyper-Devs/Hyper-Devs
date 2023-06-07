@@ -5,8 +5,8 @@ const twilio = require('twilio');
 const axios = require('axios');
 require("dotenv").config();
 
-const accountSID = process.env.twilioSID
-const authToken = process.env.authToken
+const accountSID = 'ACce43b4fdda36553a50eda2b9b2715277';
+const authToken = '998814625f7567851b4edf36bcb87dd3';
 
 const client = new twilio(accountSID, authToken);
 
