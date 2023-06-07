@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import EditIcon from '@mui/icons-material/Edit';
 import CircleIcon from '@mui/icons-material/Circle';
 import GlobalModal from '../Modal/globalmodal';
@@ -17,33 +17,19 @@ function DatabaseResult(props) {
 
     const [titleModal, setTitleModal] = useState('');
     const [bodyModal, setBodyModal] = useState('');
-    const [showModal, setShowModal] = useState(false);
+    const [showModalPrompt, setShowModalPrompt] = useState(false);
 
+    const [showModal, setShowModal] = useState(false);
     const [showEditModal, setShowEditModal] = useState(false);
 
-    if (!Array.isArray(searchResult)) {
-        return (
-            <div className="container-md mb-3">
-                <div className="container-md border p-3">
-                    <div className="row justify-content-end">
-                        <div className="col-4 align-self-end">
-                            <div class="input-group mb-1">
-                                <label class="input-group-text" for="inputGroupSelectAD1">Sort</label>
-                                <select class="form-select" id="inputGroupSelectAD2">
-                                    <option selected>Select</option>
-                                    <option value="ADBasicInformation">Alphabetically</option>
-                                    <option value="ADOverrideLogs">Recent Logs</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="row mb-5 align-content-center">
-                        <p></p>
-                    </div>
-                </div>
-            </div>
-        )
-    }
+    const [selectedSY, setSYFilter] = useState("2023-2024");            //use an api here in calling the latest school year
+    const [selectedGL, setGLFilter] = useState("Select");
+    //const [selectedSection, setSectionFilter] = useState("Select");
+
+    const [studentFilter, setStudentFilter] = useState("None");
+    const [gradeLevelFilter, setGradeLevelFilter] = useState([]);
+    const [sectionFilter, setSectionFilter] = useState([]);
+
 
     function displayAdminBasicInfo(data){
         return <div className="row mb-5 m-3">
@@ -94,8 +80,8 @@ function DatabaseResult(props) {
 
     function displayStudentInfo(data) {
         const handleEditClick = (student) => {
-          setSelectedStudent(student);
-          setShowEditModal(true)
+            setSelectedStudent(student);
+            setShowEditModal(true);
         };
         return <div className="row mb-6 m-3">
                 <div className="dbresult-header">
@@ -112,7 +98,7 @@ function DatabaseResult(props) {
                             <div id='profileIcon'><AccountCircleIcon fontSize="large"/></div>
                             <div id="displayName">{student.first_name} {student.middle_name} {student.last_name}</div>
                             <div id="displayEmail">{student.grade_level}-{student.section_name}</div>
-                            <div id="displayStatus"><CircleIcon color="success"/></div>
+                            <div id="displayStatus"><CircleIcon color={student.status == 1 ? "success" : "fail"}/></div>
                             <button id="action-icon" data-bs-toggle= "modal" data-bs-target="#editDBModal" onClick={() => handleEditClick(student)} ><EditIcon/></button>
                         </li>
                     ))}
@@ -137,7 +123,7 @@ function DatabaseResult(props) {
                                 <div id="displayName">{item.first_name} {item.last_name} </div>
                                 <div id="displayTimeIn">{item.time_in}</div>
                                 <div id="displayTimeOut">{item.time_out}</div>
-                                <div id="displayDate">{(item.date)}</div>
+                                <div id="displayDate">{item.date}</div>
                             </li>
                         ))}
                     </ul>
@@ -154,6 +140,9 @@ function DatabaseResult(props) {
         )
     }
 
+
+
+
     function handleEditStudent (event){
         event.preventDefault();
 
@@ -161,13 +150,31 @@ function DatabaseResult(props) {
         const formData = new FormData(form);
         const formJson = Object.fromEntries(formData.entries());
         formJson["student-id"] = selectedStudent['id']
-        
-        var fieldKeys = []
-        for (var key in formJson){ fieldKeys.push(key) }
-        setEditFieldKeys(fieldKeys)
 
-        setShowEditModal(true)
-        updateStudent(formJson)
+        const isEditValueValid = [
+            formJson["student-first_name"] !== '',
+            formJson["student-last_name"] !== '',
+            formJson["student-grade-level"] !== 'Select',
+            formJson["student-section"] !== 'Select',
+            formJson["parent_fn"] !== '',
+            formJson["parent_ln"] !== '',
+            formJson["contact-num"] !== '',
+            formJson["relationship"] !== '',
+        ];
+
+        if (isEditValueValid.every(element=>element==true)){
+            var fieldKeys = []
+            for (var key in formJson){ fieldKeys.push(key) }
+            setEditFieldKeys(fieldKeys)
+    
+            setShowEditModal(true)
+            updateStudent(formJson)
+        }
+        else {
+            setTitleModal("Request processed successfully");
+            setBodyModal("Input error. Try again")
+            setShowModalPrompt(true)
+        }
     }
 
     const updateStudent = async (newStudent) => {
@@ -177,16 +184,16 @@ function DatabaseResult(props) {
             if (response.status == 210){
                 setTitleModal("Request processed successfully");
                 setBodyModal('Student edit processed successfully. Reload the page to see the changes')
-                setShowModal(true)
+                setShowModalPrompt(true)
             } else {
                 setTitleModal("Request processed successfully");
                 setBodyModal("Something occurred. Refresh page")
-                setShowModal(true)
+                setShowModalPrompt(true)
             }
         } catch (error) {
             setTitleModal("Request processed unsuccessfully");
             setBodyModal(error)
-            setShowModal(true)
+            setShowModalPrompt(true)
         }
     }
     
@@ -195,25 +202,83 @@ function DatabaseResult(props) {
             document.forms['student-edit-form'][key].value = '';
         }
     }
+    const handleCloseModalPrompt = () => { setShowModalPrompt(false); };
 
     const handleCloseModal = () => {
-
-        // var i = 0, student = null;
-        // while (i < searchResult[0]['values'].length){
-        //     student = searchResult[0]['values'][i];
-        //     if(student['id'] == selectedStudent['id']){
-        //         setSelectedStudent(student)
-        //         break
-        //     }
-        //     i += 1
-        // }
-
         revertInputFields()
-        setShowModal(false);
         setSelectedStudent(null)
         setShowEditModal(false);
     };
 
+
+    // functions for setting up the search filters in the database page
+    const fetchStudentFilter = async () => {
+        try {
+            const response = await axios.get(`http://localhost:8800/database/student-filter`);
+            setStudentFilter(response.data);
+        } catch (err) {
+            setTitleModal("Refresh page!");
+            setBodyModal("An error occurred")
+            setShowModal(true)
+        }
+    }
+
+    function updateSelectedGL(event){
+        if (event.target.value !== 'Select'){
+            setGLFilter(event.target.value);
+            document.forms['student-edit-form']['section_name'].value = 'Select';
+        }
+    }
+
+    function updateSelectedSection(event){
+        if (event.target.value !== 'Select')
+            setSectionFilter(event.target.value);
+    }
+
+    function updateGLStudentFilter(){
+        //updates the grade level options
+        if (selectedSY !== 'Select'){
+            const gradeLevels = Object.keys(studentFilter[selectedSY]);
+            setGradeLevelFilter(gradeLevels.map((grade_level) => ({value: grade_level, label: grade_level})))
+        }
+    }
+
+    function updateSectionStudentFilter(){
+        //updates the sections options
+        if (selectedGL !== 'Select'){
+            const sections = studentFilter[selectedSY][selectedGL];
+            setSectionFilter(sections.map((section) => ({value: section, label: section})))
+        }
+    }
+
+
+
+
+    useEffect(() => { fetchStudentFilter(); }, []);
+    
+    if (!Array.isArray(searchResult)) {
+        return (
+            <div className="container-md mb-3">
+                <div className="container-md border p-3">
+                    <div className="row justify-content-end">
+                        <div className="col-4 align-self-end">
+                            <div class="input-group mb-1">
+                                <label class="input-group-text" for="inputGroupSelectAD1">Sort</label>
+                                <select class="form-select" id="inputGroupSelectAD2">
+                                    <option selected>Select</option>
+                                    <option value="ADBasicInformation">Alphabetically</option>
+                                    <option value="ADOverrideLogs">Recent Logs</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="row mb-5 align-content-center">
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+        )
+    }
 
     return (
         <div className="container-md mb-3">
@@ -265,6 +330,7 @@ function DatabaseResult(props) {
                                                             defaultValue={selectedStudent.first_name}
                                                             aria-label="StudentFN" 
                                                             aria-describedby="StudentFN"
+                                                            required
                                                         >
                                                         </input>
                                                     </div>
@@ -289,6 +355,7 @@ function DatabaseResult(props) {
                                                             defaultValue={selectedStudent.last_name}
                                                             aria-label="StudentLN" 
                                                             aria-describedby="StudentLN"
+                                                            required
                                                         >
                                                         </input>
                                                     </div>
@@ -301,40 +368,42 @@ function DatabaseResult(props) {
                                                     <div className="col"> <p class="text-center text-light fs-5">Grade & Section</p> </div>   
                                                 </div>
                                                 <div className="row gap-0 p-1">
-                                                    <div class="input-group input-group-large mb-1">
-                                                        <span class="input-group-text" id="selectedStudentStatus">Status:</span>
-                                                        <input 
-                                                            name='status'
-                                                            type="text" 
-                                                            class="form-control" 
-                                                            defaultValue="#"
-                                                            aria-label="StudentStatus" aria-describedby="StudentStatus"
+                                                    <div class="input-group mb-1">
+                                                        <label class="input-group-text " for="inputGroupSelectS1">Status</label>
+                                                        <select 
+                                                            name="status"
+                                                            class="form-select" 
+                                                            id="inputGroupSelectS1" 
                                                         >
-                                                        </input>
+                                                            <option selected value={selectedStudent.status == '1' ? "1" : "0"}>{selectedStudent.status == '1' ? "Active" : "Inactive"}</option>
+                                                            <option value={selectedStudent.status == '0' ? "1" : "0"}>{selectedStudent.status == '0' ? "Active" : "Inactive"}</option>
+                                                        </select>
                                                     </div>
                                                     <div class="input-group mb-1">
-                                                        <span class="input-group-text" id="selectedStudentGL">Grade Level:</span>
-                                                        <input 
-                                                            name='grade_level'
-                                                            type="text" 
-                                                            class="form-control" 
-                                                            defaultValue={selectedStudent.grade_level}
-                                                            aria-label="StudentGL" 
-                                                            aria-describedby="StudentGL"
+                                                        <label class="input-group-text " for="inputGroupSelectS2">Grade Level</label>
+                                                        <select 
+                                                            name="grade_level"
+                                                            class="form-select" 
+                                                            id="inputGroupSelectS2" 
+                                                            onClick={() => updateGLStudentFilter()}
+                                                            onChange={(e) => updateSelectedGL(e)}
                                                         >
-                                                        </input>
+                                                            <option selected >Select</option>
+                                                            {gradeLevelFilter.map(({ value, label }) => <option value={value} >{label}</option>)}
+                                                        </select>
                                                     </div>
                                                     <div class="input-group mb-1">
-                                                        <span class="input-group-text" id="selectedStudentSec">Section:</span>
-                                                        <input 
-                                                            name='section_name'
-                                                            type="text" 
-                                                            class="form-control" 
-                                                            defaultValue={selectedStudent.section_name}
-                                                            aria-label="StudentSec" 
-                                                            aria-describedby="StudentSec"
+                                                        <label class="input-group-text" for="inputGroupSelectS3">Section</label>
+                                                        <select 
+                                                            name="section_name"
+                                                            class="form-select" 
+                                                            id="inputGroupSelectS3"
+                                                            onClick={() => updateSectionStudentFilter()}
+                                                            // onChange={(e) => updateSelectedSection(e)}
                                                         >
-                                                        </input>
+                                                            <option selected >Select</option>
+                                                            {sectionFilter.map(({ value, label }) => <option value={value} >{label}</option>)}
+                                                        </select>
                                                     </div>
                                                 </div>
                                             </div>
@@ -354,8 +423,8 @@ function DatabaseResult(props) {
                                                             defaultValue={selectedStudent.parent_fn}
                                                             aria-label="StudentPFN" 
                                                             aria-describedby="StudentPFN"
-                                                        >
-                                                        </input>
+                                                            required
+                                                        ></input>
                                                     </div>
                                                     <div class="input-group mb-1">
                                                         <span class="input-group-text" id="selectedStudentPLN">Contact Name (Last Name):</span>
@@ -366,8 +435,8 @@ function DatabaseResult(props) {
                                                             defaultValue={selectedStudent.parent_ln}
                                                             aria-label="StudentPLN" 
                                                             aria-describedby="StudentPLN"
-                                                        >
-                                                        </input>
+                                                            required
+                                                        ></input>
                                                     </div>
                                                     <div class="input-group mb-1">
                                                         <span class="input-group-text" id="selectedStudentRel">Relationship:</span>
@@ -378,20 +447,20 @@ function DatabaseResult(props) {
                                                             defaultValue= {selectedStudent.relationship} 
                                                             aria-label="StudentRel" 
                                                             aria-describedby="StudentRel"
-                                                        >
-                                                        </input>
+                                                            required
+                                                        ></input>
                                                     </div>
                                                     <div class="input-group mb-1">
                                                         <span class="input-group-text" id="selectedStudentCN">Contact No.:</span>
                                                         <input 
-                                                            name='contact-num'
-                                                            type="text" 
+                                                            name='contact_num'
+                                                            type="number" 
                                                             class="form-control" 
                                                             defaultValue={selectedStudent.contact_num}
                                                             aria-label="StudentCN" 
                                                             aria-describedby="StudentCN"
-                                                        >
-                                                        </input>
+                                                            required
+                                                        ></input>
                                                     </div>
                                                 </div>
                                             </div>
@@ -402,12 +471,12 @@ function DatabaseResult(props) {
                                     <button type="button" onClick={handleCloseModal} class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                     <button type="submit" class="btn btn-success">Save changes</button>
                                 </div>
-                                {showModal && (
+                                {showModalPrompt && (
                                     <GlobalModal
-                                    showModal={showModal}
+                                    showModal={showModalPrompt}
                                     title={titleModal}
                                     body={bodyModal}
-                                    onClose={handleCloseModal}
+                                    onClose={handleCloseModalPrompt}
                                     />
                                 )}
                             </div>

@@ -60,8 +60,10 @@ function DatabaseModifier(props){
     }
 
     function updateSelectedGL(event){
-        if (event.target.value !== 'Select')
+        if (event.target.value !== 'Select'){
             setGLFilter(event.target.value);
+            document.forms['student-search-form']['student-section'].value = 'Select';
+        }
     }
 
     function updateSelectedSection(event){
@@ -137,7 +139,16 @@ function DatabaseModifier(props){
 
     const fetchAdminInfo = async (user_name, user_position, access_mode, date_start, date_end) => {
         try {
-            const result = await axios.get(`http://localhost:8800/database/admin/override-logs/${user_name}/${user_position}/${access_mode}/${date_start}/${date_end}`);
+            var result;
+            switch (access_mode){
+                case "BasicInformation":
+                    result = await axios.get(`http://localhost:8800/database/admin/admin-info/${user_name}/${user_position}`);
+                    break;
+                
+                case "Logs":
+                    result = await axios.get(`http://localhost:8800/database/admin/override-logs/${user_name}/${user_position}/${date_start}/${date_end}`);
+                    break
+            }
             setSearchResult(result.data)
         } catch (error){
             setTitleModal("Request processed unsuccessfully");
@@ -186,8 +197,7 @@ function DatabaseModifier(props){
             }
 
             if (result !== "Input error"){
-                if (result.data != null){
-                    setSearchResult(result.data) }
+                if (result.data != null){ setSearchResult(result.data) }
                 else{ setSearchResult([]) }
             }
             else {
@@ -200,7 +210,6 @@ function DatabaseModifier(props){
             setTitleModal("Request processed unsuccessfully");
             setBodyModal("An error occurred")
             setShowModal(true)
-            //console.log(error)
         }
     };
 
@@ -230,7 +239,7 @@ function DatabaseModifier(props){
             <div class="tab-content " id="nav-tabContent">
                 <div class="tab-pane fade show active" id="nav-student" role="tabpanel" aria-labelledby="nav-student-tab">
                     <div className="container-md ">
-                        <form onSubmit={handleSubmitStudent}>
+                        <form name='student-search-form' onSubmit={handleSubmitStudent}>
                             <div className="row">
                                 <div class="input-group mb-1">
                                     <span class="input-group-text  " id="basic-addonS1">#</span>
@@ -307,17 +316,19 @@ function DatabaseModifier(props){
                                     </div>
                                 </div>
                                 {accessType === "Attendance" && 
-                                    <div className="col">
-                                        <div class="input-group mb-1">
-                                            <DatePicker
-                                                    name="date-start"
+                                    <div className="col gap-1">
+                                        <div class="input-group">
+                                            <div className="col-4 border">
+                                                <DatePicker
+                                                    name="date-start "
                                                     selectsStart
                                                     selected={rangeStart}
                                                     startDate={rangeStart}
                                                     endDate={rangeEnd}
                                                     onChange={selectStartDate}
-                                                />
-                                            <DatePicker
+                                                /></div>
+                                            <div className="col">
+                                                <DatePicker
                                                 name="date-end"
                                                 selectsEnd
                                                 selected={rangeEnd}
@@ -325,6 +336,8 @@ function DatabaseModifier(props){
                                                 endDate={rangeEnd}
                                                 onChange={selectEndDate}
                                             />
+                                            </div>
+                                            
                                         </div>
                                     </div>
                                 }
