@@ -7,8 +7,10 @@ import { IoPersonCircleSharp } from 'react-icons/io5';
 import { FiLogOut } from 'react-icons/fi';
 import { FiKey } from 'react-icons/fi';
 import { FiSettings } from 'react-icons/fi';
+import { FiUpload } from 'react-icons/fi';
 import axios from 'axios';
 import jwt_decode from 'jwt-decode';
+import { Buffer } from 'buffer';
 
 function Header2() {
 
@@ -18,68 +20,14 @@ function Header2() {
   const [message, setmessage] = useState('')
   const [userData, setUserData] = useState({});
   const [token, setToken] = useState('');
+  const [selectedFile, setSelectedFile] = useState(null);;
+  const [base64Avatar, setbase64Avatar] = useState(null);
 
   const handleLogoutClick = () => {
-    // localStorage.removeItem("isLoggedin");
     localStorage.removeItem("accessToken");
+    setUserData({});
     window.location.replace("/");
   };
-
-
-  // useEffect(() => {
-  //   const user = localStorage.getItem("isLoggedin");
-  //   const userID = JSON.parse(user)
-  //   if (user) {
-  //     const id = userID[0].access_id
-  //     setaccess_id(id);
-
-  //     axios.get(`http://localhost:8800/database/get-user/${id}`)
-  //     .then((res) => {
-  //       setUserData(res.data);
-  //     })
-  //     .catch((err) => {
-  //       console.error(err);
-  //     });
-  //   }
-  // }, []);
-
-
-  // const onSubmit = async e =>{
-  //   e.preventDefault();
-  //   if (newPassword.length < 8){
-  //     setmessage("Password must at leastb be 8 characters long!")
-  //     return
-  //   }
-  //   const passwordRegex =/(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/;
-  //   if (!passwordRegex.test(newPassword)) {
-  //   setmessage("Password must contain at least one uppercase letter, one lowercase letter, and one digit.");
-  //   return
-  // }
-  //   const data = { newPassword, oldPassword, access_id };
-  //   fetch('http://localhost:8800/database/update-password',{
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json'
-  //     },
-  //     body: JSON.stringify(data)
-
-  //   }).then(res =>{
-  //     if(res.ok){
-  //       console.log("Password updated successfully!")
-  //       setmessage("Password updated succesfully!")
-  //     } else if (res.status === 401)  {
-  //       console.log("Old password does not match! Try again.")
-  //       setmessage("Old password does not match! Try again.")
-  //     } else {
-  //       console.log("Password update failed!")
-  //       setmessage("Password update failed!")
-  //     }
-
-  //   }).catch(err =>{
-  //     console.log("Error updating password! ")
-  //     setmessage("Internal Error occured. Refresh the page.")
-  //   });
-  // }
 
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
@@ -91,10 +39,19 @@ function Header2() {
       axios.get(`http://localhost:8800/database/get-user/${id}`, {
         headers: {
           'Authorization': `Bearer ${token}`
-        }
+        },
       })
       .then((res) => {
         setUserData(res.data);
+        if (res.data.avatar) {
+          // const buffer = Buffer.from(res.data.avatar)
+          // const base64Avatar = buffer.toString('base64')
+          // setbase64Avatar(base64Avatar);
+          console.log(res.data.avatar)
+          // console.log(buffer)
+          // console.log(base64Avatar)
+          // console.log(`data:image/jpeg;base64,${base64Avatar}`)
+        }
       })
       .catch((err) => {
         console.error(err);
@@ -139,7 +96,6 @@ function Header2() {
       setmessage("Internal Error occured. Refresh the page.")
     });
   }
-
 
   return (
     <div className="header2-container">
@@ -203,7 +159,8 @@ function Header2() {
                     <div className="row">
                         <div className="col text-center"></div>'
                         <div className="row-4">
-                            <img className = "mx-auto d-block" src="icons/Profile Icon.svg" alt="Profile Icon" srcSet="" />
+                            <img className = "mx-auto d-block" 
+                              src={ base64Avatar ? `data:image/jpg;base64,${base64Avatar}` : "icons/Profile Icon.svg"} alt="Profile Icon" />
                         </div>
                         <div className="row text-center"> <h3>{userData.name || "User"}</h3></div>
                         <div className="row text-center"> <h5>{userData.position || "Position"}</h5></div>
@@ -215,6 +172,20 @@ function Header2() {
                         <button className="btn btn-success" type="button" data-bs-toggle="collapse" data-bs-target="#ChangePassCollapse" aria-expanded="false" aria-controls="ChangePassCollapse">
                             Change Password
                         </button>
+
+                        {/* Profile Picture */}
+                        <button className="btn btn-primary btn-success mt-2 mb-3" type="button" aria-label="change-profile-picture" onClick={() => document.getElementById('profile-picture-input').click()}>
+                        <FiUpload className="FiSettings" />
+                        Change Profile Picture
+                        </button>
+                        <input
+                          type="file"
+                          id="profile-picture-input"
+                          style={{ display: "none" }}
+                          onChange={(e) => setSelectedFile(e.target.files[0])}
+                          // onClick={}
+                        />
+
                         <div className="collapse pt-1 p-0" id="ChangePassCollapse">
                             <div className="card card-body">
                             <div className="input-group mb-3">
