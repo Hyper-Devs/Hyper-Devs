@@ -9,11 +9,11 @@ function stringInputConditioner (string) {
     for (var i=1; i<string.length; i++){
       if (string[i].match(/[a-z]/i))
         string[i].toLowerCase;
-        newString = newString + string[i].toLowerCase();
+        newString = newString + string[i].toLowerCase();  
     }
     return {'name':newString};
   }
-  else { return {'id':string}}
+  else { return {'id':string} }
 };
 
 function outputConditioner (student_prim_infoo, results, mode) {
