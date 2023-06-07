@@ -122,7 +122,7 @@ function Login() {
 
 
                   {/* <a className={'forgotPassword'} href="#">Forgot Password?</a> */}
-                  <button onClick={() => navigate('/register')} type='button'>Register</button>
+                  <button onClick={() => navigate('/register')} type='button'>New User?</button>
                 </form>
               </div>
             </div>
