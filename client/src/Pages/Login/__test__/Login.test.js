@@ -2,10 +2,15 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import Login from '../Login';
 import Dashboard from '../../Dashboard/Dashboard';
+import { BrowserRouter } from 'react-router-dom';
 
 describe('login validation test', () => {
     test('renders login form', () => {
-        render(<Login />);
+        render(
+        <BrowserRouter>
+            <Login />        
+        </BrowserRouter>
+        );
         const idInput = screen.getByTestId('username-field');
         const passwordInput = screen.getByTestId('password-field');
         const submitButton = screen.getByText('Login');

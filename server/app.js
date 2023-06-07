@@ -3,9 +3,11 @@ const cors = require('cors');
 const routes = require('./routes/index.js');
 const twilio = require('twilio');
 const axios = require('axios');
+require("dotenv").config();
 
-const accountSID = 'ACce43b4fdda36553a50eda2b9b2715277';
-const authToken = '34d359e723bba9b4597a1ef3c81c146f';
+const accountSID = process.env.twilioSID
+const authToken = process.env.authToken
+
 const client = new twilio(accountSID, authToken);
 
 const app = express();
