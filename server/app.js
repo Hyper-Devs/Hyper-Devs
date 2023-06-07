@@ -5,7 +5,7 @@ const twilio = require('twilio');
 const axios = require('axios');
 
 const accountSID = 'ACce43b4fdda36553a50eda2b9b2715277';
-const authToken = '998814625f7567851b4edf36bcb87dd3';
+const authToken = '34d359e723bba9b4597a1ef3c81c146f';
 const client = new twilio(accountSID, authToken);
 
 const app = express();
@@ -16,8 +16,9 @@ app.use('', routes);
 
 
 // Twilio API
-app.get('/message', (req, res) => {
-  const { recipient, status } = req.query
+app.get('/message/:recipient_num/:status', (req, res) => {
+  const recipient = req.params.recipient_num
+  const status = req.params.status
   var textMessage;
   
   const showdate = new Date();
