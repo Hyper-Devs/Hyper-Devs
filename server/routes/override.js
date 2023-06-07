@@ -56,8 +56,15 @@ router.get("/:student_id", (request, response) => {
   else { query += 'rfid = ?'; value = searchVal['id']}
 
   db.query(query, [value], (error, data) => {
-    if (error) { return response.json(err); }
-
+    if (error) { return response.json(error); }
+    if (data.length > 0){
+      const refinedValues = data.map((element) => {
+        var date = new Date(element['date']);
+        element['date'] = (date.getMonth() + 1) + '/' + date.getDate() + '/' +  date.getFullYear();
+        return element
+      })
+      return response.json(refinedValues)
+    }
     return response.json(data);
   });
 });
