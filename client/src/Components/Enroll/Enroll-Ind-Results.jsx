@@ -48,9 +48,7 @@ function EnrollIndResult(){
         }
     };
 
-    useEffect(() => {
-        fetchAvailRooms();
-    }, []);
+    useEffect(() => { fetchAvailRooms(); }, []);
 
 
     // functions for handling the posting of the student information
