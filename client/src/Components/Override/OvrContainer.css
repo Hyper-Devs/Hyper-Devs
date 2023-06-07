@@ -97,7 +97,7 @@
     padding: 10px;
 }
 
-.ovr-container button {
+.search-button {
     position: relative;
     border-radius: 5px;
     width: 100%;
@@ -108,10 +108,11 @@
     color: white;
     cursor: pointer;
   }
+  
     
-.ovr-container button:hover {
+/* .ovr-container button:hover {
     background-color: #157347;
-} 
+}  */
 
 .ovr-container .search-field{
     width: 60%;
@@ -201,19 +202,31 @@
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 10px;
+    border-radius:10px;
+    
 }
 
 .student-table th, .student-table td {
-    border: 1px solid #ddd;
+    /* border: 1px solid #ddd; */
     padding: 8px;
     text-align: center;
+    
 }
 
-.student-table th {
-    background-color: #f2f2f2;
+.table th {
+    background-color: #198754;
+    color: #FFFFFF;
+    
 }
-table {
+/* table {
     border-collapse:separate;
     border:solid black 1px;
-    border-radius:6px;
+    border-radius:10px;
+    
+} */
+.ovrSelectDate{
+    width: 100px;
+}
+.ovrSelectTime{
+    width: 100%
 }
