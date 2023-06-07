@@ -316,17 +316,19 @@ function DatabaseModifier(props){
                                     </div>
                                 </div>
                                 {accessType === "Attendance" && 
-                                    <div className="col">
-                                        <div class="input-group mb-1">
-                                            <DatePicker
-                                                    name="date-start"
+                                    <div className="col gap-1">
+                                        <div class="input-group">
+                                            <div className="col-4 border">
+                                                <DatePicker
+                                                    name="date-start "
                                                     selectsStart
                                                     selected={rangeStart}
                                                     startDate={rangeStart}
                                                     endDate={rangeEnd}
                                                     onChange={selectStartDate}
-                                                />
-                                            <DatePicker
+                                                /></div>
+                                            <div className="col">
+                                                <DatePicker
                                                 name="date-end"
                                                 selectsEnd
                                                 selected={rangeEnd}
@@ -334,6 +336,8 @@ function DatabaseModifier(props){
                                                 endDate={rangeEnd}
                                                 onChange={selectEndDate}
                                             />
+                                            </div>
+                                            
                                         </div>
                                     </div>
                                 }
