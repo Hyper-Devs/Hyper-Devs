@@ -22,6 +22,7 @@ function Header2() {
   const [token, setToken] = useState('');
   const [selectedFile, setSelectedFile] = useState(null);;
   const [base64Avatar, setbase64Avatar] = useState(null);
+  const [formattedName, setformattedName] = useState('');
 
   const handleLogoutClick = () => {
     localStorage.removeItem("accessToken");
@@ -43,6 +44,11 @@ function Header2() {
       })
       .then((res) => {
         setUserData(res.data);
+        const nameArray = res.data.name.split(" ");
+        const lastName = nameArray[nameArray.length - 1];
+        const firstInitial = nameArray[0].charAt(0);
+        const formattedName = `${lastName}, ${firstInitial}.`;
+        setformattedName(formattedName);
         if (res.data.avatar) {
           // const buffer = Buffer.from(res.data.avatar)
           // const base64Avatar = buffer.toString('base64')
@@ -116,7 +122,7 @@ function Header2() {
           <li>
             <div className="profile-name" data-testid="profile-button">
               <IoPersonCircleSharp className="IoPersonCircleSharp" size={"22px"} />
-              {userData.name || "User"}
+              {formattedName || "User"}
             </div>
           </li>
           <li>
