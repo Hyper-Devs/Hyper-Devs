@@ -1,10 +1,11 @@
 const mysql = require('mysql');
+require("dotenv").config();
 
 const db = mysql.createConnection({
-    host: "gansprototype.clc26y9lpo9k.ap-southeast-1.rds.amazonaws.com",
-    user: "admin",
-    password: "password",
-    database: "gans_prototype",
+    host: process.env.DBHOST,
+    user: process.env.DBUSER,
+    password: process.env.DBPASSWORD,
+    database: process.env.DBNAME,
   });
 
 exports.databaseConnection = db;
