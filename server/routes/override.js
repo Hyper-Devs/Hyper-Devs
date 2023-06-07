@@ -9,11 +9,11 @@ function stringInputConditioner (string) {
     for (var i=1; i<string.length; i++){
       if (string[i].match(/[a-z]/i))
         string[i].toLowerCase;
-        newString = newString + string[i].toLowerCase();
+        newString = newString + string[i].toLowerCase();  
     }
     return {'name':newString};
   }
-  else { return {'id':string}}
+  else { return {'id':string} }
 };
 
 function outputConditioner (student_prim_infoo, results, mode) {
@@ -56,8 +56,15 @@ router.get("/:student_id", (request, response) => {
   else { query += 'rfid = ?'; value = searchVal['id']}
 
   db.query(query, [value], (error, data) => {
-    if (error) { return response.json(err); }
-
+    if (error) { return response.json(error); }
+    if (data.length > 0){
+      const refinedValues = data.map((element) => {
+        var date = new Date(element['date']);
+        element['date'] = (date.getMonth() + 1) + '/' + date.getDate() + '/' +  date.getFullYear();
+        return element
+      })
+      return response.json(refinedValues)
+    }
     return response.json(data);
   });
 });

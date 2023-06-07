@@ -7,6 +7,7 @@ import { FiUser } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 import GlobalModal from "../../Components/Modal/globalmodal";
 import axios from "axios";
+import api from "../../api/api"
 
 function Register() {
   const [register_id, setRegister_id] = useState("");
@@ -35,7 +36,7 @@ function Register() {
       register_position,
       register_role
     };
-    await axios.post("http://localhost:8800/register", user)
+    await api.post("/register", user)
       .then(res => {
         if (res.status === 201) {
             setTitleModal("User Registration.");

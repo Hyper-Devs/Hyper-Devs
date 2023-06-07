@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from 'axios';
 import GlobalModal from "../Modal/globalmodal";
+import api from "../../api/api"
 
 function BSNewSResults() {
   const [file, setFile] = useState(null);
@@ -40,7 +41,7 @@ function BSNewSResults() {
     }, 2000); // Assuming 2 seconds for processing
 
     try {
-      const result = await axios.post(`http://localhost:8800/enroll/batch/new-student`, batchFile, {
+      const result = await api.post(`/enroll/batch/new-student`, batchFile, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
@@ -82,8 +83,8 @@ function BSNewSResults() {
   };
 
   function downloadFile() {
-    axios({
-      url: 'http://localhost:8800/enroll/download/new-template',
+    api({
+      url: '/enroll/download/new-template',
       method: 'GET',
       responseType: 'blob',
     }).then(response => {

@@ -1,10 +1,10 @@
-import axios from 'axios';
+import axios from "axios";
 
-const api = axios.create({
-  baseURL: 'https://localhost:8800/',
-  headers: {
-    'Content-Type': 'application/json'
-  }
+const baseURL =
+  process.env.NODE_ENV === "production"
+    ? "/"
+    : "http://localhost:8800";
+
+export default axios.create({
+  baseURL,
 });
-
-export default api;
