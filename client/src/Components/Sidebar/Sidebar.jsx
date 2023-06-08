@@ -1,13 +1,46 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
 import './Sidebar.css';
 import { SidebarData } from "./SidebarData"
+import { Buffer } from 'buffer';
+import axios from 'axios';
+import jwt_decode from 'jwt-decode';
 
 function NewSidebar() {
+
+  const [access_id, setaccess_id] = useState('')
+  const [token, setToken] = useState('');
+  const [base64Avatar, setbase64Avatar] = useState(null);
+
+  useEffect(() => {
+    const token = localStorage.getItem("accessToken");
+    if (token) {
+      setToken(token);
+      const decodedToken = jwt_decode(token);
+      const id = decodedToken.AccessID;
+      setaccess_id(id);
+      axios.get(`http://localhost:8800/database/get-user/${id}`, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        },
+      })
+      .then((res) => {
+        if (res.data.avatar) {
+          const buffer = Buffer.from(res.data.avatar)
+          const base64Avatar = buffer.toString('base64')
+          setbase64Avatar(base64Avatar);
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+    }
+  }, []);
+
   return (
     <div className='newsidebar-container'>
       <div className='newsidebar-content'>
       <div className='newsidebar-header'>
-        <img src="icons/Profile Icon.svg" alt="Profile Icon" srcSet="" />
+        <img className='avatar' src={ base64Avatar ? `data:image/png;base64,${base64Avatar}` : "icons/Profile Icon.svg"} alt="Profile Icon" />
       </div>
       <ul className='sidebar-list'>
         {SidebarData.map((val, key) => {
