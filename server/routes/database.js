@@ -425,6 +425,9 @@ router.delete("/delete/:student_id", (req,res)=>{
 });
 
 
+// router.get('/get-school-year', async (request,response) => {
+//   const query = `SELECT * `
+// })
 
 // Get user name and role by access_id
 router.get('/get-user/:access_id', async (req, res) => {
@@ -457,7 +460,7 @@ router.get('/check-access-id/:access_id', async (req, res) => {
   const q = "SELECT COUNT(*) AS count FROM users WHERE access_id = ?";
   db.query(q, [access_id], (err, result) =>{
     if(err){
-      console.err(err.message);
+      console.error(err.message);
       res.status(500).send('Server error');
     } else {
       const count = result[0].count;
