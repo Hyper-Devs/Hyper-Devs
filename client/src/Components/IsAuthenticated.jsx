@@ -54,7 +54,14 @@ function IsAuthenticated ({children}){
             body={bodyModal}
             onClose={handleCloseModal}
         />
-        {isLoading && <p>Loading...</p>}
+        {isLoading && <p>
+          <div class="d-flex justify-content-center">
+            <div class="spinner-border" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </div>
+          
+          </p>}
         {!isLoading && accessIDExists && <>{children}</>}
         {!isLoading && !accessIDExists && (
           <>
