@@ -163,17 +163,22 @@ function OvrContainer() {
                     <h6 className='text-start fw-bold '>Student Log</h6>
                   </div>
                   <div className='row px-5'>
-                    <div className='col-4'>
-                      <p>Date:</p>
-                      <p>Time-in: </p>
-                      <p>Time-out: </p>
-                    </div>
-                    <div className='col'>
-                      <p>{selectedRow.date}</p>
-                      <p>{selectedRow.time_in}</p>
-                      <p>{selectedRow.time_out}</p>
-                    </div>
+                    {selectedRow && (
+                      <>
+                        <div className='col-4'>
+                          <p>Date:</p>
+                          <p>Time-in: </p>
+                          <p>Time-out: </p>
+                        </div>
+                        <div className='col'>
+                          <p>{selectedRow.date}</p>
+                          <p>{selectedRow.time_in}</p>
+                          <p>{selectedRow.time_out}</p>
+                        </div>
+                      </>
+                    )}
                   </div>
+
                   <div className='row px-5'>
                     <button
                       className='btn mt-3 mb-3 btn-secondary'
