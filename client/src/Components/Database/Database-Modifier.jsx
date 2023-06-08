@@ -363,7 +363,7 @@ function DatabaseModifier(props){
                                 {accessType === "Attendance" && 
                                     <div className="col">
                                         <div class="input-group">
-                                            <div className="col me-4 rounded bg-secondary bg-opacity-25 " align="center">
+                                            <div className="col me-4 rounded bg-light  " align="center">
                                                 <DatePicker
                                                     className='custom-datepicker'
                                                     name="date-start "
@@ -373,7 +373,7 @@ function DatabaseModifier(props){
                                                     endDate={rangeEnd}
                                                     onChange={selectStartDate}
                                                 /></div>
-                                            <div className="col rounded bg-secondary bg-opacity-25 " align="center" >
+                                            <div className="col rounded bg-light " align="center" >
                                             <div class="input-group">
                                                 <DatePicker
                                                     className='custom-datepicker'
@@ -392,7 +392,7 @@ function DatabaseModifier(props){
                                 }
                             </div>
                             <div className="row p-2">
-                                <button type="submit" class="btn btn-success">Search Database</button>
+                                <button type="submit" class="btn btn-success"> <SearchIcon /> Search Database </button>
                             </div>
                         </form>
                     </div>
@@ -428,7 +428,7 @@ function DatabaseModifier(props){
                                     </div>
                                 </div>
                             </div>
-                            <div className="row mb-3">
+                            <div className="row mb-2">
                                 <div className="col-4">
                                     <div class="input-group">
                                         <label class="input-group-text" for="inputGroupSelect11">Access Type</label>
@@ -447,7 +447,7 @@ function DatabaseModifier(props){
                                 {accessType === "Logs" &&
                                     <div className="col">
                                     <div class="input-group">
-                                        <div className="col me-4 rounded bg-secondary bg-opacity-25 " align="center">
+                                        <div className="col me-4 rounded bg-light " align="center">
                                             <DatePicker
                                                 className='custom-datepicker'
                                                 name="date-start "
@@ -457,7 +457,7 @@ function DatabaseModifier(props){
                                                 endDate={rangeEnd}
                                                 onChange={selectStartDate}
                                             /></div>
-                                        <div className="col rounded bg-secondary bg-opacity-25 " align="center" >
+                                        <div className="col rounded bg-light " align="center" >
                                         <div class="input-group">
                                             <DatePicker
                                                 className='custom-datepicker'
@@ -476,10 +476,9 @@ function DatabaseModifier(props){
                                     
                                 }   
                             </div>
-                            <div className="row px-4">
-                                < button type="submit" class="btn btn-success">Search Database <SearchIcon/>
-                                </button>
-                            </div>  
+                            <div className="row p-2">
+                                <button type="submit" class="btn btn-success"> <SearchIcon /> Search Database </button>
+                            </div>
                         </form>
                     </div>
                 </div>
