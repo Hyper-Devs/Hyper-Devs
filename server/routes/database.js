@@ -2,7 +2,9 @@ const express = require('express');
 const db = require('../database.js').databaseConnection;
 const router = express.Router();
 const multer = require('multer');
-const upload = multer({ dest: './uploads/' });
+// const upload = multer({ dest: './uploads/' });
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
 const fs = require('fs');
 
 
@@ -14,10 +16,13 @@ router.post('/upload/:access_id', upload.single('avatar'), (req, response) => {
    if (!req.file || !req.file.mimetype.startsWith('image/')) {
     return response.status(400).json({ message: 'Uploaded file must be an image' });
   } else {
-    let fileType = req.file.mimetype.split("/")[1];
+
+    // let fileType = req.file.mimetype.split("/")[1];
     // let newFilename = req.file.filename + "." + fileType;
-    let newFilename = req.file.filename;
-    console.log("newFilename: ", newFilename);
+    // let newFilename = req.file.filename;
+    // console.log("newFilename: ", newFilename);
+    let newImageData = req.file.buffer;
+    console.log("newImageData: ", newImageData);
   
     db.query('SELECT * FROM users WHERE access_id = ?', [access_id], (err, res) => {
       if(err){
@@ -31,7 +36,7 @@ router.post('/upload/:access_id', upload.single('avatar'), (req, response) => {
         //   console.log("Succesfully uploaded!")
         // })
         // store
-        db.query('UPDATE users SET avatar_url = ? WHERE access_id = ?', [newFilename, access_id], (err, data) => {
+        db.query('UPDATE users SET avatar = ? WHERE access_id = ?', [newImageData, access_id], (err, data) => {
           if (err){
             console.log(err);
             response.status(500).json({ message: 'Internal server error' });

@@ -20,9 +20,9 @@ function Header2() {
   const [message, setmessage] = useState('')
   const [userData, setUserData] = useState({});
   const [token, setToken] = useState('');
-  const [selectedFile, setSelectedFile] = useState(null);;
   const [base64Avatar, setbase64Avatar] = useState(null);
   const [formattedName, setformattedName] = useState('');
+  const [selectedFile, setSelectedFile] = useState('');
 
   const handleLogoutClick = () => {
     localStorage.removeItem("accessToken");
@@ -49,14 +49,11 @@ function Header2() {
         const firstInitial = nameArray[0].charAt(0);
         const formattedName = `${lastName}, ${firstInitial}.`;
         setformattedName(formattedName);
+
         if (res.data.avatar) {
-          // const buffer = Buffer.from(res.data.avatar)
-          // const base64Avatar = buffer.toString('base64')
-          // setbase64Avatar(base64Avatar);
-          console.log(res.data.avatar)
-          // console.log(buffer)
-          // console.log(base64Avatar)
-          // console.log(`data:image/jpeg;base64,${base64Avatar}`)
+          const buffer = Buffer.from(res.data.avatar)
+          const base64Avatar = buffer.toString('base64')
+          setbase64Avatar(base64Avatar);
         }
       })
       .catch((err) => {
@@ -102,6 +99,58 @@ function Header2() {
       setmessage("Internal Error occured. Refresh the page.")
     });
   }
+
+  // const handleProfilePictureUpload = async () => {
+  //   if (!selectedFile) {
+  //     return;
+  //   }
+  //   const reader = new FileReader();
+  //   reader.readAsArrayBuffer(selectedFile);
+  //   reader.onload = async () => {
+  //     const buffer = Buffer.from(reader.result)
+  //     const uint8Array = new Uint8Array(buffer);
+  //     try {
+  //       const response = await axios.post(`http://localhost:8800/upload/${access_id}`, {
+  //         avatar: uint8Array,
+  //       }, {
+  //         headers: {
+  //           'Content-Type': 'application/json',
+  //           'Authorization': `Bearer ${token}`
+  //         },
+  //       });
+  //       console.log(response.data);
+  //       setbase64Avatar(`data:${selectedFile.type};base64,${buffer.toString('base64')}`);
+  //       setSelectedFile(null);
+  //     } catch (error) {
+  //       console.error(error);
+  //     }
+  //   };
+  // };
+
+
+
+  const handleProfilePictureUpload = async () => {
+    if (!selectedFile) {
+      return;
+    }
+  
+    const formData = new FormData();
+    formData.append('avatar', selectedFile);
+    console.log("hey")
+    try {
+      const response = await axios.post(`http://localhost:8800/database/upload/${access_id}`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          'Authorization': `Bearer ${token}`
+        },
+      });
+      console.log(response.data);
+      setbase64Avatar(URL.createObjectURL(selectedFile));
+      setSelectedFile('');
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <div className="header2-container">
@@ -165,8 +214,8 @@ function Header2() {
                     <div className="row">
                         <div className="col text-center"></div>'
                         <div className="row-4">
-                            <img className = "mx-auto d-block" 
-                              src={ base64Avatar ? `data:image/jpg;base64,${base64Avatar}` : "icons/Profile Icon.svg"} alt="Profile Icon" />
+                            <img className = "mx-auto d-block avatar" 
+                              src={ base64Avatar ? `data:${selectedFile.type};base64,${base64Avatar}` : "icons/Profile Icon.svg"} alt="Profile Icon" />
                         </div>
                         <div className="row text-center"> <h3>{userData.name || "User"}</h3></div>
                         <div className="row text-center"> <h5>{userData.position || "Position"}</h5></div>
@@ -180,17 +229,27 @@ function Header2() {
                         </button>
 
                         {/* Profile Picture */}
-                        <button className="btn btn-primary btn-success mt-2 mb-3" type="button" aria-label="change-profile-picture" onClick={() => document.getElementById('profile-picture-input').click()}>
-                        <FiUpload className="FiSettings" />
-                        Change Profile Picture
+                        <button className="btn btn-success mt-2 mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#changePPCollapse" aria-expanded="false" aria-controls="changePPCollapse">
+                          <FiUpload className="FiSettings" />
+                          Change Profile Picture
                         </button>
-                        <input
+                          <div className="collapse" id="changePPCollapse">
+                            <div className="card card-body">
+                            <div className="mb-3">
+                              <label for="formFile" className="form-label"></label>
+                              <input className="form-control" type="file" id="formFile" onChange={(e) => setSelectedFile(e.target.files[0])} accept='.png, .jpg, .jpeg'/>
+                              <button className = "btn btn-success mt-2 mb-10 px-3 p-1" onClick={handleProfilePictureUpload}>Upload</button>
+                            </div>
+                          </div>
+                        </div>
+                        
+                        {/* <input
                           type="file"
                           id="profile-picture-input"
                           style={{ display: "none" }}
                           onChange={(e) => setSelectedFile(e.target.files[0])}
-                          // onClick={}
-                        />
+                          accept='.png, .jpg, .jpeg'
+                        /> */}
 
                         <div className="collapse pt-1 p-0" id="ChangePassCollapse">
                             <div className="card card-body">
