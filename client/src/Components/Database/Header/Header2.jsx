@@ -133,6 +133,12 @@ function Header2() {
     if (!selectedFile) {
       return;
     }
+
+      // check if selected file is an image
+    if (!selectedFile.type.startsWith('image/') || selectedFile.type === 'image/gif') {
+      setmessage('Uploaded file must be an image (.png, .jpg, .jpeg)');
+      return;
+    }
   
     const formData = new FormData();
     formData.append('avatar', selectedFile);
@@ -149,6 +155,7 @@ function Header2() {
       setmessage("Profile Updated Succesfully. Please refresh the page.")
       setSelectedFile('');
     } catch (error) {
+      setmessage("Profile Upload Failed. Please try again.")
       console.error(error);
     }
   };
