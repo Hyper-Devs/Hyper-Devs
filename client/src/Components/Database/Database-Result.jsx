@@ -99,7 +99,7 @@ function DatabaseResult(props) {
                             <div id='profileIcon'><AccountCircleIcon fontSize="large"/></div>
                             <div id="displayName">{student.first_name} {student.middle_name} {student.last_name}</div>
                             <div id="displayEmail">{student.grade_level}-{student.section_name}</div>
-                            <div id="displayStatus"><CircleIcon color={student.status == 1 ? "success" : "fail"}/></div>
+                            <div id="displayStatus"><CircleIcon color={student.status === 1 ? "success" : "fail"}/></div>
                             <button id="action-icon" data-bs-toggle= "modal" data-bs-target="#editDBModal" onClick={() => handleEditClick(student)} ><EditIcon/></button>
                         </li>
                     ))}
@@ -163,7 +163,7 @@ function DatabaseResult(props) {
             formJson["relationship"] !== '',
         ];
 
-        if (isEditValueValid.every(element=>element==true)){
+        if (isEditValueValid.every(element=>element===true)){
             var fieldKeys = []
             for (var key in formJson){ fieldKeys.push(key) }
             setEditFieldKeys(fieldKeys)
@@ -182,7 +182,7 @@ function DatabaseResult(props) {
         try {
             const response = await api.put(`/database/students/edit-student`, newStudent);
 
-            if (response.status == 210){
+            if (response.status === 210){
                 setTitleModal("Request processed successfully");
                 setBodyModal('Student edit processed successfully. Reload the page to see the changes')
                 setShowModalPrompt(true)
@@ -376,8 +376,8 @@ function DatabaseResult(props) {
                                                             class="form-select" 
                                                             id="inputGroupSelectS1" 
                                                         >
-                                                            <option selected value={selectedStudent.status == '1' ? "1" : "0"}>{selectedStudent.status == '1' ? "Active" : "Inactive"}</option>
-                                                            <option value={selectedStudent.status == '0' ? "1" : "0"}>{selectedStudent.status == '0' ? "Active" : "Inactive"}</option>
+                                                            <option selected value={selectedStudent.status === '1' ? "1" : "0"}>{selectedStudent.status === '1' ? "Active" : "Inactive"}</option>
+                                                            <option value={selectedStudent.status === '0' ? "1" : "0"}>{selectedStudent.status === '0' ? "Active" : "Inactive"}</option>
                                                         </select>
                                                     </div>
                                                     <div class="input-group mb-1">
