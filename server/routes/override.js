@@ -70,7 +70,7 @@ router.get("/:student_id", (request, response) => {
 });
 
 router.post("/logs", (request, response) => {
-  const query = "INSERT INTO override_logs (`Overrider_Name`, `Student_Name`, `Reason`, `Date`) VALUES (?)"
+  const query = "INSERT INTO override_logs (`id`, `student_name`, `student_id`, `overriding_reason`, `overrider_name`, `overriding_date`) VALUES (?)"
   const values = [
       request.body['overrider-name'],
       request.body['student-name'],

@@ -6,10 +6,11 @@
 
 
 const fs = require('fs');
-const axios = require('axios');
+const api = require('../api.js');
 const csv = require('csv-parser');
 const express = require('express');
 const fileUpload = require('express-fileupload');
+
 
 const db = require('../database.js').databaseConnection;
 const router = express.Router();
@@ -19,7 +20,7 @@ router.use(fileUpload());
 
 async function getAvailRooms () {
   try{
-    const result = await axios.get('http://localhost:8800/enroll/available-rooms');
+    const result = await api.get('/enroll/available-rooms');
     return result.data;
 
   } catch (error){

@@ -9,11 +9,15 @@ const enrollRoutes = require('./enroll.js');
 const overrideRoutes = require('./override.js');
 const loginRoutes = require('./login.js');
 const rfidRoutes = require('./rfid.js');
+const messagingRoutes = require('./messaging.js');
 
 
 const router = express.Router();
 
+
+
 router.use('/rfid', rfidRoutes);
+router.use('/messaging', messagingRoutes);
 router.use('/database', databaseRoutes);
 router.use('/enroll', enrollRoutes);
 router.use('/override', overrideRoutes);
