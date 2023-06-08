@@ -18,12 +18,14 @@ router.post('/upload/:access_id', upload.single('avatar'), (req, response) => {
     return response.status(400).json({ message: 'Uploaded file must be an image' });
   } else {
 
+    // store image filename
     // let fileType = req.file.mimetype.split("/")[1];
     // let newFilename = req.file.filename + "." + fileType;
     // let newFilename = req.file.filename;
-    // console.log("newFilename: ", newFilename);
+
+    // store image data
     let newImageData = req.file.buffer;
-    console.log("newImageData: ", newImageData);
+    // console.log("newImageData: ", newImageData);
   
     db.query('SELECT * FROM users WHERE access_id = ?', [access_id], (err, res) => {
       if(err){
@@ -32,10 +34,6 @@ router.post('/upload/:access_id', upload.single('avatar'), (req, response) => {
       } else if (res.length == 0) {
         res.status(404).json({ message: 'User not found' });
       } else {
-        //upload
-        // fs.rename(`./uploads/${req.file.filename}`, `./uploads/${newFilename}`, function(){
-        //   console.log("Succesfully uploaded!")
-        // })
         // store
         db.query('UPDATE users SET avatar = ? WHERE access_id = ?', [newImageData, access_id], (err, data) => {
           if (err){
