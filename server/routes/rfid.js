@@ -1,33 +1,31 @@
 const express = require('express');
-const db = require('../database.js').databaseConnection;
 const router = express.Router();
-const axios = require('axios');
+const api = require('../api.js');
 
 router.use(express.json())
 
 //api to accept rfid data sent from raspberry pi
-router.post('/rfid_data', async (req,res) => {
+router.post('/rfid_data', async (request,response) => {
     var number = null;
-    const rfidData = req.body.rfid_data;
+    const rfidData = request.body.rfid_data;
 
+    // retrieval of the contact number associated with the student
     try{
-        const result = await axios.get(`http://localhost:8800/database/student/${rfidData}`);
+        const result = await api.get(`/database/student/${rfidData}`);
         number = result.data;
-        console.log(number)
     } catch (error){
-        return res.json(error)
+        return response.json(error)
     }
 
+    // sending of the message to the retrieved contact number
     try {
-        const result = await axios.get(`http://localhost:8800/message/${number}/${2}`)
-        console.log(result.data)
-        return res.json(result.data)
+        const result = await api.get(`/messaging/message/${number}/${2}`)
+        return response.json(result.data)
     } catch (error) {
-        return res.json(error)
+        return response.json(error)
     }
-
-
 })
+
 
 router.get('rfid_data', (req,res) => {
     res.status(200).json({
@@ -36,6 +34,6 @@ router.get('rfid_data', (req,res) => {
             rfid_data: rfidData
         }
     })
-})
+});
 
 module.exports = router;
