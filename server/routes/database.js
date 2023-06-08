@@ -23,7 +23,7 @@ router.post('/upload/:access_id', upload.single('avatar'), (req, response) => {
     // let newFilename = req.file.filename;
     // console.log("newFilename: ", newFilename);
     let newImageData = req.file.buffer;
-    console.log("newImageData: ", newImageData);
+    // console.log("newImageData: ", newImageData);
   
     db.query('SELECT * FROM users WHERE access_id = ?', [access_id], (err, res) => {
       if(err){
