@@ -11,6 +11,8 @@ import { FiUpload } from 'react-icons/fi';
 import axios from 'axios';
 import jwt_decode from 'jwt-decode';
 import { Buffer } from 'buffer';
+import KeyIcon from '@mui/icons-material/Key';
+
 
 function Header2() {
 
@@ -133,6 +135,12 @@ function Header2() {
     if (!selectedFile) {
       return;
     }
+
+      // check if selected file is an image
+    if (!selectedFile.type.startsWith('image/') || selectedFile.type === 'image/gif') {
+      setmessage('Uploaded file must be an image (.png, .jpg, .jpeg)');
+      return;
+    }
   
     const formData = new FormData();
     formData.append('avatar', selectedFile);
@@ -149,6 +157,7 @@ function Header2() {
       setmessage("Profile Updated Succesfully. Please refresh the page.")
       setSelectedFile('');
     } catch (error) {
+      setmessage("Profile Upload Failed. Please try again.")
       console.error(error);
     }
   };
@@ -220,63 +229,78 @@ function Header2() {
                         </div>
                         <div className="row text-center"> <h3>{userData.name || "User"}</h3></div>
                         <div className="row text-center"> <h5>{userData.position || "Position"}</h5></div>
-                        <div className="row px-5"> 
-                            <div className="col-4 p-2 rounded-start bg-success text-center text-light">Access Type</div>
-                            <div className="col p-2 border rounded-end">{userData.role || "Role"}</div>
-                        </div>
-                        <div className="row px-5 pt-3">
-                        <button className="btn btn-success" type="button" data-bs-toggle="collapse" data-bs-target="#ChangePassCollapse" aria-expanded="false" aria-controls="ChangePassCollapse">
-                            Change Password
-                        </button>
-
-                        {/* Profile Picture */}
-                        <button className="btn btn-success mt-2 mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#changePPCollapse" aria-expanded="false" aria-controls="changePPCollapse">
-                          <FiUpload className="FiSettings" />
-                          Change Profile Picture
-                        </button>
-                          <div className="collapse" id="changePPCollapse">
-                            <div className="card card-body">
-                            <div className="mb-3">
-                              <label for="formFile" className="form-label"></label>
-                              <input className="form-control" type="file" id="formFile" onChange={(e) => setSelectedFile(e.target.files[0])} accept='.png, .jpg, .jpeg'/>
-                              <button className = "btn btn-success mt-2 mb-10 px-3 p-1" onClick={handleProfilePictureUpload} data-bs-toggle='modal' data-bs-target='#ChangePassModal'>Upload</button>
-                            </div>
-                          </div>
+                        
+                        <div className="row pt-1 ps-5"> 
+                            <div className="col-4 p-2 rounded-start bg-warning text-center ">Access Type</div>
+                            <div className="col p-2 me-4 border border-warning bg-warning bg-opacity-10 rounded-end text-center">{userData.role || "Role"}</div>
                         </div>
                         
-                        {/* <input
-                          type="file"
-                          id="profile-picture-input"
-                          style={{ display: "none" }}
-                          onChange={(e) => setSelectedFile(e.target.files[0])}
-                          accept='.png, .jpg, .jpeg'
-                        /> */}
+                        <div className="row pt-1 ps-5 ">
+                          <div className="row">
+                          <button className="btn btn-success mb-1" type="button" data-bs-toggle="collapse" data-bs-target="#ChangePassCollapse" aria-expanded="false" aria-controls="ChangePassCollapse">
+                          <div style={{ display: 'flex', alignItems: 'center' }}>
+                            <KeyIcon style={{ marginRight: '0.5rem', alignSelf: 'flex-start' }} />
+                            <span style={{ marginLeft: 'auto', marginRight: 'auto', textAlign: 'center' }}>Change Password</span>
+                          </div>
+                        </button>
 
-                        <div className="collapse pt-1 p-0" id="ChangePassCollapse">
-                            <div className="card card-body">
-                            <div className="input-group mb-3">
-                                <span className="input-group-text" id="old-pass">
-                                <FiKey className = "mx-auto d-block"/>
-                                </span>
-                                <input type="password" className="form-control" placeholder="Enter Current Password" aria-label="OldPass" aria-describedby="old-pass" 
-                                onChange={e => setoldPassword(e.target.value)}></input>
+                            <div className="collapse pt-1 p-0 mb-3" id="ChangePassCollapse">
+                              <div className="card card-body">
+                              <div className="input-group mb-3">
+                                  <span className="input-group-text" id="old-pass">
+                                  <FiKey className = "mx-auto d-block"/>
+                                  </span>
+                                  <input type="password" className="form-control" placeholder="Enter Current Password" aria-label="OldPass" aria-describedby="old-pass" 
+                                  onChange={e => setoldPassword(e.target.value)}></input>
+                              </div>
+                              <div className="input-group mb-3">
+                                  <span className="input-group-text" id="new-pass">
+                                  <FiKey className = "mx-auto d-block"/>
+                                  </span>
+                                  <input type="password" className="form-control" placeholder="Enter New Password" aria-label="NewPass" aria-describedby="new-pass" 
+                                  onChange={e => setnewPassword(e.target.value)}></input>
+                              </div>
+                              <button type="button" className="btn btn-success" data-bs-toggle="modal" data-bs-target="#ChangePassModal" onClick={onSubmit}>
+                              Save Changes
+                              </button>
+                              </div>
+                          </div>
+                          </div>
+
+                          {/* Profile Picture */}
+                          <div className="row">
+                            <button className="btn btn-success" type="button" data-bs-toggle="collapse" data-bs-target="#changePPCollapse" aria-expanded="false" aria-controls="changePPCollapse">
+                            <div style={{ display: 'flex', alignItems: 'center' }}>
+                              <FiUpload style={{ marginRight: '0.5rem', alignSelf: 'flex-start' }} />
+                              <span style={{ marginLeft: 'auto', marginRight: 'auto', textAlign: 'center' }}>Change Profile Picture</span>
                             </div>
-                            <div className="input-group mb-3">
-                                <span className="input-group-text" id="new-pass">
-                                <FiKey className = "mx-auto d-block"/>
-                                </span>
-                                <input type="password" className="form-control" placeholder="Enter New Password" aria-label="NewPass" aria-describedby="new-pass" 
-                                onChange={e => setnewPassword(e.target.value)}></input>
-                            </div>
-                            <button type="button" className="btn btn-success" data-bs-toggle="modal" data-bs-target="#ChangePassModal" onClick={onSubmit}>
-                            Save Changes
                             </button>
+                              <div className="collapse pt-1 p-0" id="changePPCollapse">
+                                <div className="card card-body">
+                                <div className="row px-3">
+                                  <label for="formFile" className="form-label"></label>
+                                  <input className="form-control" type="file" id="formFile" onChange={(e) => setSelectedFile(e.target.files[0])} accept='.png, .jpg, .jpeg'/>
+                                  <button className = "btn btn-success mt-2 mb-10 px-3 p-1" onClick={handleProfilePictureUpload} data-bs-toggle='modal' data-bs-target='#ChangePassModal'>Upload</button>
+                                </div>
+                              </div>
                             </div>
+                          </div>
+                          
+                          
+                          {/* <input
+                            type="file"
+                            id="profile-picture-input"
+                            style={{ display: "none" }}
+                            onChange={(e) => setSelectedFile(e.target.files[0])}
+                            accept='.png, .jpg, .jpeg'
+                          /> */}
+
+
                         </div>
-                        </div>
+
                     </div>
                 </div>
-                <div className="modal-footer">
+                <div className="modal-footer bg-danger bg-opacity-10">
                     <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
                 </div>
