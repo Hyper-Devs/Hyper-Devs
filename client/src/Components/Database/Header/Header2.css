@@ -46,11 +46,7 @@
     margin-top: 1%;
 }
 
-.FiSettings {
-    margin-right: 5%;
-    margin-left: -5%;
-    margin-top: -2%;
-}
+
 
 .FiLogOut {
     margin-right: 3%;
@@ -83,3 +79,4 @@
     border-radius: 50%;
     object-fit: cover; /* This ensures the image is centered and cropped to fit the dimensions */
   }
+  
