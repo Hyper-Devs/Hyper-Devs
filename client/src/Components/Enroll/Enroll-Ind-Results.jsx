@@ -4,6 +4,7 @@ import "./Enroll-Ind-Results.css"
 import GlobalModal from '../Modal/globalmodal';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
+import api from "../../api/api"
 
 
 function EnrollIndResult(){
@@ -26,7 +27,7 @@ function EnrollIndResult(){
     // functions for setting up the grade levels and sections options
     const fetchAvailRooms = async () => {
         try {
-            const response = await axios.get(`http://localhost:8800/enroll/available-rooms`);
+            const response = await api.get(`/enroll/available-rooms`);
             setAvailSections(response.data)
         } catch (err) {
             setTitleModal("Request processed unsuccessfully");
@@ -72,7 +73,7 @@ function EnrollIndResult(){
         }, 2000); // Assuming 2 seconds for processing
 
         try {
-            const result = await axios.post(`http://localhost:8800/enroll/new-student`, studentInfo);
+            const result = await api.post(`/enroll/new-student`, studentInfo);
             if (result.status === 210){
                 setTitleModal("Enrollment success");
                 setBodyModal(result.data)

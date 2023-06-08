@@ -12,6 +12,7 @@ import "./Database-Modifier.css";
 import GlobalModal from '../Modal/globalmodal';
 // import HowToModal from '../Modal/how-to-modal'
 import DatabaseResult from "../../Components/Database/Database-Result";
+import api from '../../api/api';
 
 
 
@@ -44,7 +45,7 @@ function DatabaseModifier(props){
     // functions for setting up the search filters in the database page
     const fetchStudentFilter = async () => {
         try {
-            const response = await axios.get(`http://localhost:8800/database/student-filter`);
+            const response = await api.get(`/database/student-filter`);
             setStudentFilter(response.data);
         } catch (err) {
             setTitleModal("Refresh page!");
@@ -142,11 +143,11 @@ function DatabaseModifier(props){
             var result;
             switch (access_mode){
                 case "BasicInformation":
-                    result = await axios.get(`http://localhost:8800/database/admin/admin-info/${user_name}/${user_position}`);
+                    result = await api.get(`/database/admin/admin-info/${user_name}/${user_position}`);
                     break;
                 
                 case "Logs":
-                    result = await axios.get(`http://localhost:8800/database/admin/override-logs/${user_name}/${user_position}/${date_start}/${date_end}`);
+                    result = await api.get(`/database/admin/override-logs/${user_name}/${user_position}/${date_start}/${date_end}`);
                     break
             }
             setSearchResult(result.data)
@@ -172,25 +173,25 @@ function DatabaseModifier(props){
             switch (JSON.stringify(searchValExist)){        
                 //calling different APIs for different search functions
                 case JSON.stringify([true, true, false, false, true, false, false]):
-                    result = await axios.get(`http://localhost:8800/database/student-filter/student/${searchVal["student-prim-info"]}/${searchVal["student-school-year"]}`);
+                    result = await api.get(`/database/student-filter/student/${searchVal["student-prim-info"]}/${searchVal["student-school-year"]}`);
                     break
                 case JSON.stringify([true, true, true, false, true, false, false]):
-                    result = await axios.get(`http://localhost:8800/database/student-filter/student/${searchVal["student-prim-info"]}/${searchVal["student-school-year"]}/${searchVal["student-grade-level"]}`);
+                    result = await api.get(`/database/student-filter/student/${searchVal["student-prim-info"]}/${searchVal["student-school-year"]}/${searchVal["student-grade-level"]}`);
                     break
                 case JSON.stringify([true, true, true, true, true, false, false]):
-                    result = await axios.get(`http://localhost:8800/database/student-filter/student/${searchVal["student-prim-info"]}/${searchVal["student-school-year"]}/${searchVal["student-grade-level"]}/${searchVal["student-section"]}`);
+                    result = await api.get(`/database/student-filter/student/${searchVal["student-prim-info"]}/${searchVal["student-school-year"]}/${searchVal["student-grade-level"]}/${searchVal["student-section"]}`);
                     break
                 case JSON.stringify([false, true, false, false, true, false, false]):
-                    result = await axios.get(`http://localhost:8800/database/students/batch/${searchVal['student-school-year']}`)
+                    result = await api.get(`/database/students/batch/${searchVal['student-school-year']}`)
                     break
                 case JSON.stringify([false, true, true, false, true, false, false]):
-                    result = await axios.get(`http://localhost:8800/database/students/batch/${searchVal['student-school-year']}/${searchVal['student-grade-level']}`)
+                    result = await api.get(`/database/students/batch/${searchVal['student-school-year']}/${searchVal['student-grade-level']}`)
                     break
                 case JSON.stringify([false, true, true, true, true, false, false]):
-                    result = await axios.get(`http://localhost:8800/database/students/batch/${searchVal['student-school-year']}/${searchVal['student-grade-level']}/${searchVal['student-section']}`)
+                    result = await api.get(`/database/students/batch/${searchVal['student-school-year']}/${searchVal['student-grade-level']}/${searchVal['student-section']}`)
                     break
                 case JSON.stringify([true, true, true, true, true, true, true]):
-                    result = await axios.get(`http://localhost:8800/database/student-filter/student/${searchVal["student-prim-info"]}/${searchVal["student-school-year"]}/${searchVal["student-grade-level"]}/${searchVal["student-section"]}/${searchVal["date-start"]}/${searchVal["date-end"]}`);
+                    result = await api.get(`/database/student-filter/student/${searchVal["student-prim-info"]}/${searchVal["student-school-year"]}/${searchVal["student-grade-level"]}/${searchVal["student-section"]}/${searchVal["date-start"]}/${searchVal["date-end"]}`);
                     break
                 default:
                     result = "Input error"

@@ -3,6 +3,7 @@ import { useState,useEffect } from "react";
 import GlobalModal from "../Modal/globalmodal";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
+import api from "../../api/api"
 
 function EnrollBNewSYResults(){
     const [selectedGL, setGLFilter] = useState("Select");
@@ -25,7 +26,7 @@ function EnrollBNewSYResults(){
     const fetchStudents = async (gradeLevel, section) => {
         try {
             //once again, fix this so the school year is not hard coded
-            const response = await axios.get(`http://localhost:8800/database/students/batch/${'2023-2024'}/${gradeLevel}/${section}`);
+            const response = await api.get(`/database/students/batch/${'2023-2024'}/${gradeLevel}/${section}`);
             if (response.status === 200){
                 var students = response.data[0]['values'].map((student) => ({id: "name1", sId: student.id, name: student.first_name+" "+student.last_name}))
                 setStudentVal(students);
@@ -40,7 +41,7 @@ function EnrollBNewSYResults(){
 
     const fetchAvailRooms = async () => {
         try {
-            const response = await axios.get(`http://localhost:8800/enroll/available-rooms`);
+            const response = await api.get(`/enroll/available-rooms`);
             setAvailSections(response.data)
         } catch (err) {
             console.log(err);
@@ -105,7 +106,7 @@ function EnrollBNewSYResults(){
 
     const updateStudents = async (inputObject) => {
         try {
-            const response = await axios.put(`http://localhost:8800/enroll/batch/student-migration`, inputObject);
+            const response = await api.put(`/enroll/batch/student-migration`, inputObject);
             if (response.status === 210){
                 setTitleModal("Migration success");
                 setBodyModal("The selected student/s have been successfully enrolled to the next level.");
