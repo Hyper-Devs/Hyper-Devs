@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import DatePicker from 'react-datepicker'
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import PersonSearchIcon from '@mui/icons-material/PersonSearch';
+import SearchIcon from '@mui/icons-material/Search';
 import "react-datepicker/dist/react-datepicker.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
@@ -239,13 +240,13 @@ function DatabaseModifier(props){
     return(
         <div className="container-md p-3 ">
             <nav>
-                <div class="nav nav-tabs border border-success-subtle" id="nav-tab" role="tablist">
+                <div class="nav nav-tabs border border-success border-bottom-0 " id="nav-tab" role="tablist">
                     <button class="nav-link active text-black" id="nav-student-tab" data-bs-toggle="tab" data-bs-target="#nav-student" type="button" role="tab" aria-controls="nav-student" aria-selected="true">Student Information</button>
                     <button class="nav-link text-black" id="nav-admin-tab" data-bs-toggle="tab" data-bs-target="#nav-admin" type="button" role="tab" aria-controls="nav-admin" aria-selected="false">Admin Information</button>
                     {/* <HelpOutlineIcon style={{position:'relative', marginTop: 7, color: 'white'}} type="button" onClick={handleOpenModal}></HelpOutlineIcon> */}
                 </div>
             </nav>
-            <div class="tab-content " id="nav-tabContent">
+            <div class="tab-content border border-success border-top-0 " id="nav-tabContent">
                 <div class="tab-pane fade show active" id="nav-student" role="tabpanel" aria-labelledby="nav-student-tab">
                     <div className="container-md ">
                         <form name='student-search-form' onSubmit={handleSubmitStudent}>
@@ -342,7 +343,7 @@ function DatabaseModifier(props){
                                     </div>
                                 </div>
                             </div>  
-                            <div className="row ">
+                            <div className="row gap-1 ">
                                 <div className="col-4">
                                     <div class="input-group mb-1">
                                         <label class="input-group-text" for="inputGroupSelectS7">Access Type</label>
@@ -359,10 +360,11 @@ function DatabaseModifier(props){
                                     </div>
                                 </div>
                                 {accessType === "Attendance" && 
-                                    <div className="col gap-1">
+                                    <div className="col">
                                         <div class="input-group">
-                                            <div className="col-4 border">
+                                            <div className="col me-4 rounded bg-secondary bg-opacity-25 " align="center">
                                                 <DatePicker
+                                                    className='custom-datepicker'
                                                     name="date-start "
                                                     selectsStart
                                                     selected={rangeStart}
@@ -370,15 +372,18 @@ function DatabaseModifier(props){
                                                     endDate={rangeEnd}
                                                     onChange={selectStartDate}
                                                 /></div>
-                                            <div className="col">
+                                            <div className="col rounded bg-secondary bg-opacity-25 " align="center" >
+                                            <div class="input-group">
                                                 <DatePicker
-                                                name="date-end"
-                                                selectsEnd
-                                                selected={rangeEnd}
-                                                startDate={rangeStart}
-                                                endDate={rangeEnd}
-                                                onChange={selectEndDate}
+                                                    className='custom-datepicker'
+                                                    name="date-end"
+                                                    selectsEnd
+                                                    selected={rangeEnd}
+                                                    startDate={rangeStart}
+                                                    endDate={rangeEnd}
+                                                    onChange={selectEndDate}
                                             />
+                                            </div>
                                             </div>
                                             
                                         </div>
@@ -423,7 +428,7 @@ function DatabaseModifier(props){
                                 </div>
                             </div>
                             <div className="row mb-3">
-                                <div className="col-4 px-4">
+                                <div className="col-4">
                                     <div class="input-group">
                                         <label class="input-group-text" for="inputGroupSelect11">Access Type</label>
                                         <select 
@@ -439,30 +444,40 @@ function DatabaseModifier(props){
                                     </div>
                                 </div>
                                 {accessType === "Logs" &&
-                                    <div className="col-8 px-4">
-                                        <div class="input-group ">
+                                    <div className="col">
+                                    <div class="input-group">
+                                        <div className="col me-4 rounded bg-secondary bg-opacity-25 " align="center">
                                             <DatePicker
-                                                name="date-start"
+                                                className='custom-datepicker'
+                                                name="date-start "
                                                 selectsStart
                                                 selected={rangeStart}
                                                 startDate={rangeStart}
                                                 endDate={rangeEnd}
                                                 onChange={selectStartDate}
-                                            />
+                                            /></div>
+                                        <div className="col rounded bg-secondary bg-opacity-25 " align="center" >
+                                        <div class="input-group">
                                             <DatePicker
+                                                className='custom-datepicker'
                                                 name="date-end"
                                                 selectsEnd
                                                 selected={rangeEnd}
                                                 startDate={rangeStart}
                                                 endDate={rangeEnd}
                                                 onChange={selectEndDate}
-                                            />
+                                        />
                                         </div>
+                                        </div>
+                                        
                                     </div>
+                                </div>
+                                    
                                 }   
                             </div>
                             <div className="row px-4">
-                                < button type="submit" class="btn btn-success">Search Database</button>
+                                < button type="submit" class="btn btn-success">Search Database <SearchIcon/>
+                                </button>
                             </div>  
                         </form>
                     </div>
