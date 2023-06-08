@@ -260,7 +260,7 @@ function DatabaseResult(props) {
     if (!Array.isArray(searchResult)) {
         return (
             <div className="container-md mb-3">
-                <div className="container-md border p-3">
+                <div className="container-md border border-success rounded p-3">
                     <div className="row justify-content-end">
                         <div className="col-4 align-self-end">
                             <div class="input-group mb-1">
