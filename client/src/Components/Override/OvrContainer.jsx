@@ -14,6 +14,8 @@ function OvrContainer() {
   const [resultData, setResultData] = useState(null);
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedTime, setSelectedTime] = useState(null);
+  const [attendanceLog, setAttendanceLog] = useState([]);
+  const [selectedRow, setSelectedRow] = useState(null); // New state variable
 
   const fetchStudent = async (id) => {
     setResultData(null);
@@ -21,11 +23,17 @@ function OvrContainer() {
       const response = await axios.get(`http://localhost:8800/override/${id}`);
       if (response.data.length > 0) {
         setResultData(response.data[0]);
+        setAttendanceLog(response.data); // Set the attendance log data
       }
     } catch (err) {
       console.log(err);
     }
   };
+  
+  const handleRowEdit = (row) => {
+    setSelectedRow(row);
+  };
+
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -60,36 +68,7 @@ function OvrContainer() {
     
     console.log(formJson) 
     
-    // addOverrideLog(formJson)
 };
-// const addOverrideLog = async (overrideLog) => {
-//   setIsLoading(true);
-
-//   // Simulating server processing time
-//   setTimeout(() => {
-//     setIsLoading(false);
-//     // Handle the server response here
-//   }, 2000); // Assuming 2 seconds for processing
-
-//   try {
-//       const result = await axios.post(`http://localhost:8800/enroll/new-student`, studentInfo);
-//       if (result.status === 210){
-//           setTitleModal("Enrollment success");
-//           setBodyModal(result.data)
-//           setShowModal(true)
-//       }
-//       else{
-//           setTitleModal("Enrollment unsuccessful");
-//           setBodyModal(result.data);
-//           setShowModal(true);
-//       }
-
-//   } catch (error){
-//       setTitleModal("Internal Error");
-//       setBodyModal("An error occured. Refresh the page");
-//       setShowModal(true);
-//   }
-// };
   return (
     <div className='ovr-container'>
       <div className='ovr-content'>
@@ -128,18 +107,21 @@ function OvrContainer() {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>{resultData.student_name}</td>
-                  <td>{resultData.time_in}</td>
-                  <td>{resultData.time_out}</td>
-                  <td>{resultData.date}</td>
-                  <td>
-                    <button id='action-icon' data-bs-toggle='modal' data-bs-target='#ovrModal'>
-                      <EditIcon />
-                    </button>
-                  </td>
-                </tr>
+                {attendanceLog.map((log) => (
+                  <tr key={log.id}>
+                    <td>{log.student_name}</td>
+                    <td>{log.time_in}</td>
+                    <td>{log.time_out}</td>
+                    <td>{log.date}</td>
+                    <td>
+                      <button id='action-icon' data-bs-toggle='modal' data-bs-target='#ovrModal' onClick={() => handleRowEdit(log)} >
+                        <EditIcon />
+                      </button>
+                    </td>
+                  </tr>
+                ))}
               </tbody>
+
             </table>
             </div>
             
@@ -187,9 +169,9 @@ function OvrContainer() {
                       <p>Time-out: </p>
                     </div>
                     <div className='col'>
-                      <p>{resultData.date}</p>
-                      <p>{resultData.time_in}</p>
-                      <p>{resultData.time_out}</p>
+                      <p>{selectedRow.date}</p>
+                      <p>{selectedRow.time_in}</p>
+                      <p>{selectedRow.time_out}</p>
                     </div>
                   </div>
                   <div className='row px-5'>
@@ -227,22 +209,6 @@ function OvrContainer() {
                           </button>
                         </div>
                         </form>
-
-                        {/* <div className='row mx-2 px-3 mb-1 py-1 bg-secondary bg-opacity-25 rounded'>
-                        <DatePicker
-                          selected={selectedDate}
-                          onChange={(date) => setSelectedDate(date)}
-                          className='ovrSelectDate' 
-                        />
-                      </div>
-                      <div className='row mx-2 px-3 mb-1 py-1 bg-secondary bg-opacity-25 rounded'>
-                        <TimePicker
-                          value={selectedTime}
-                          onChange={(time) => setSelectedTime(time)}
-                          className='ovrSelectTime' 
-                        />
-                      </div> */}
-
 
                       </div>
                     </div>

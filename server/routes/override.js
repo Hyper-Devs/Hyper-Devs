@@ -47,7 +47,7 @@ function outputConditioner (student_prim_infoo, results, mode) {
 };
 
 
-// api for displaying students using id
+// api for displaying attendace logs using id
 router.get("/:student_id", (request, response) => {
   var searchVal = stringInputConditioner(request.params.student_id);
   var query = "SELECT * FROM attendance_logs WHERE ", value = null;
@@ -62,7 +62,7 @@ router.get("/:student_id", (request, response) => {
         var date = new Date(element['date']);
         element['date'] = (date.getMonth() + 1) + '/' + date.getDate() + '/' +  date.getFullYear();
         return element
-      })
+      })  
       return response.json(refinedValues)
     }
     return response.json(data);
