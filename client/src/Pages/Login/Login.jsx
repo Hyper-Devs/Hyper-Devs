@@ -6,6 +6,7 @@ import { FiKey } from 'react-icons/fi'
 import { FiLogIn } from 'react-icons/fi'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom'
+import api from "../../api/api"
 
 function Login() {
 
@@ -27,7 +28,7 @@ function Login() {
   // const handleSubmit = async e => {
   //   e.preventDefault();
   //   const user = { login_id, login_password };
-  //   await axios.get('http://localhost:8800/', {
+  //   await api.get('/', {
   //     params: {
   //       login_id,
   //       login_password,
@@ -61,7 +62,7 @@ function Login() {
   const handleSubmit = async e => {
     e.preventDefault();
     const user = { login_id, login_password };
-    await axios.post('http://localhost:8800/login', user)
+    await api.post('/login', user)
       .then(res => {
         if (res.status === 200) {
           // Store the access token in local storage to allow login persistence

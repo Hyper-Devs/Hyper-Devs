@@ -8,6 +8,7 @@ const upload = multer({ storage: storage });
 const fs = require('fs');
 
 
+
 // Change profile picture for the user
 router.post('/upload/:access_id', upload.single('avatar'), (req, response) => {
   const { access_id } = req.params; 
@@ -49,9 +50,6 @@ router.post('/upload/:access_id', upload.single('avatar'), (req, response) => {
     })
   }
 })
-
-
-
 
 function stringInputConditioner (string) {
   if (string[0].match(/[a-z]/i)){
@@ -98,6 +96,10 @@ function outputConditioner (student_prim_infoo, results, mode) {
   else return null
 };
 
+
+
+
+
 //API for setting up the search filters in the Database page
 router.get("/student-filter", async (request, response) => {
     const query = "SELECT * FROM `sections`"
@@ -117,11 +119,13 @@ router.get("/student-filter", async (request, response) => {
       
         let currentObject = school_years[sectionOption[i][2]];
         let grade_level = sectionOption[i][1];
-        if (!(grade_level in currentObject))
+        if (!(grade_level in currentObject)){
           currentObject[grade_level] = [];
+        }
         
-        if (!(currentObject[grade_level].includes(sectionOption[i][0])))
+        if (!(currentObject[grade_level].includes(sectionOption[i][0]))){
           currentObject[grade_level].push(sectionOption[i][0])
+        }
         
         school_years[sectionOption[i][2]] = currentObject;
       }
@@ -131,10 +135,20 @@ router.get("/student-filter", async (request, response) => {
 });
   
 
+//API endpoint for retrieving contact number associated with a student
+router.get("/student/:student_prim_info", (request, response) => {
+  const query = `SELECT contact_num FROM students WHERE rfid = ?`
+  const value = [request.params.student_prim_info]
 
+  db.query(query, value, (error, data) => {
+    if (error) { return response.json(error); }
 
+    if (data.length > 0){ return response.json(data[0]['contact_num'])}
+    return response.json("No data found")
+  })
+});
 
-//API for retrieving student's information [with only one search filters - sec mode]
+//API endpoint for retrieving student's information [with only one search filters - second mode]
 router.get("/student-filter/student/:student_prim_info/:school_year", (request, response) => {
   const query = `SELECT students.id, students.first_name, students.middle_name, students.last_name, students.status, students.grade_level, students.section_name, sections.school_year, students.parent_fn, students.parent_mn, students.parent_ln, students.relationship, students.contact_num
               FROM students,sections
@@ -150,11 +164,11 @@ router.get("/student-filter/student/:student_prim_info/:school_year", (request, 
         const value = outputConditioner(request.params.student_prim_info, data, "student-info");
         return response.status(220).json([{mode: "student-basic-info", values: value}])
       }
-      else return response.json([])
+      else { return response.json([]) }
   });
 });
 
-//API for retrieving student's information [with only two search filters - third mode]
+//API endpoint for retrieving student's information [with only two search filters - third mode]
 router.get("/student-filter/student/:student_prim_info/:school_year/:grade_level", (request, response) => {
   const query = `SELECT students.id, students.first_name, students.middle_name, students.last_name, students.status, students.grade_level, students.section_name, sections.school_year, students.parent_fn, students.parent_mn, students.parent_ln, students.relationship, students.contact_num
               FROM students,sections
@@ -170,12 +184,11 @@ router.get("/student-filter/student/:student_prim_info/:school_year/:grade_level
         const value = outputConditioner(request.params.student_prim_info, data, "student-info")
         return response.json([{mode: "student-basic-info", values: value}])
       }
-      else
-        return response.json([])
+      else { return response.json([]) }
   });
 });
 
-//API for retrieving student's information [with all three search filters - default mode]
+//API endpoint for retrieving student's information [with all three search filters - default mode]
 router.get("/student-filter/student/:student_prim_info/:school_year/:grade_level/:section_name", (request, response) => {
   const query = `SELECT students.id, students.first_name, students.middle_name, students.last_name, students.status, students.grade_level, students.section_name, sections.school_year, students.parent_fn, students.parent_mn, students.parent_ln, students.relationship, students.contact_num
               FROM students,sections
@@ -191,12 +204,11 @@ router.get("/student-filter/student/:student_prim_info/:school_year/:grade_level
         const value = outputConditioner(request.params.student_prim_info, data, "student-info");
         return response.json([{mode: "student-basic-info", values: value}])
       }
-      else
-        return response.json([])
+      else { return response.json([]) }
   });
 });
 
-//API for retrieving all students in a school year
+//API endpoint for retrieving all students in a school year
 router.get("/students/batch/:school_year", (request, response) => {
   const query = `SELECT students.id, students.first_name, students.middle_name, students.last_name, students.status, students.grade_level, students.section_name, sections.school_year, students.parent_fn, students.parent_mn, students.parent_ln, students.relationship, students.contact_num
                   FROM students,sections
@@ -210,7 +222,7 @@ router.get("/students/batch/:school_year", (request, response) => {
   });
 });
 
-//API for retrieving all students in a grade level
+//API endpoint for retrieving all students in a grade level
 router.get("/students/batch/:school_year/:grade_level", (request, response) => {
   const query = `SELECT students.id, students.first_name, students.middle_name, students.last_name, students.status, students.grade_level, students.section_name, sections.school_year, students.parent_fn, students.parent_mn, students.parent_ln, students.relationship, students.contact_num
                   FROM students,sections
@@ -224,7 +236,7 @@ router.get("/students/batch/:school_year/:grade_level", (request, response) => {
   });
 });
 
-//API for retrieving all students in a section
+//API endpoint for retrieving all students in a section
 router.get("/students/batch/:school_year/:grade_level/:section", (request, response) => {
   const query = `SELECT students.id, students.first_name, students.middle_name, students.last_name, students.status, students.grade_level, students.section_name, sections.school_year, students.parent_fn, students.parent_mn, students.parent_ln, students.relationship, students.contact_num
                   FROM students,sections
@@ -238,7 +250,7 @@ router.get("/students/batch/:school_year/:grade_level/:section", (request, respo
   });
 });
 
-//API for retrieving a student's attendance logs - exclusive only to one student
+//API endpoint for retrieving a student's attendance logs - exclusive only to one student
 router.get("/student-filter/student/:student_prim_info/:school_year/:grade_level/:section_name/:date_start/:date_end", (request, response) => {
   const query = `SELECT students.id, students.first_name, students.last_name, attendance_logs.time_in, attendance_logs.time_out, attendance_logs.date
                   FROM students, sections, attendance_logs
@@ -290,19 +302,66 @@ router.get("/student-filter/student/:student_prim_info/:school_year/:grade_level
 });
 
 
+//API endpoint for updating a student's information from the database
+router.put("/students/edit-student", (request, response) => {
+  var query = "UPDATE students SET ";
+  var values = [];
 
-//API for retrieving users or their override logs
+  for (var key in request.body){
+    if (request.body[key] != "" && key != "student-id"){
+      query += key + "=" + '?' + ","
+      values.push(request.body[key]);
+    };
+  };
+  
+  if (query[query.length - 1] == ',') {query = query.substring(0, query.length - 1)}
+  query += "WHERE id = ?"
+  values.push(request.body['student-id'])
+
+  db.query(query, values, (error, data) => {
+    if (error) return response.send(error)
+    
+    if (data['affectedRows'] == 1){ return response.status(210).send("Student editing successful") }
+    else {return response.status(220).send("No changes saved")}
+  })
+});
+
+
+//API endpoint for retrieving admin/faculty basic information
+router.get("/admin/admin-info/:admin_name/:position/", (request, response) => {
+  const query = `SELECT name, position, (SELECT count(*) as override_logs FROM override_logs WHERE overrider_name = ?) as override_logs 
+                  FROM users 
+                  WHERE users.name = ? AND users.role = ?`;
+  const values = [request.params.admin_name, request.params.admin_name, request.params.position]
+  
+  db.query(query, values, (error, data) => {
+    if (error) { return response.json(error); }
+
+    var returnVal = null;
+    if (data.length > 0){
+      returnVal = [{
+        overrider_name : stringInputConditioner(request.params.admin_name),
+        overrider_position : request.params.position,
+        overrider_total_logs : data[0]['override_logs']
+      }]
+    }
+    return response.json([{mode: "override-basic-info", values: returnVal}])
+  })
+})
+
+//API endpoint for retrieving admin/faculty override logs
 router.get("/admin/override-logs/:admin_name/:position/:date_from/:date_to", (request, response) => {
-  const values = [request.params.admin_name, request.params.position]
   const query = `SELECT *
                   FROM users, override_logs
                   WHERE override_logs.overrider_name = ? AND users.position = ?`;
+  const values = [request.params.admin_name, request.params.position]
 
   db.query(query, values, (error, data) => {  
     if (error) { return response.json(error); }
+
     // the task here is to further refine the query result
-    var returnVal = null;
     // determines the set of dates (inclusive) given the date range
+    var returnVal = null;
     const startDate = new Date(request.params.date_from);
     const endDate = new Date(request.params.date_to);
     const dateRange = [];
@@ -322,6 +381,7 @@ router.get("/admin/override-logs/:admin_name/:position/:date_from/:date_to", (re
       for (var i=0; i<dateRange.length; i++){
         for (var j=0; j<data.length; j++){
           if (dateRange[i].toString() === data[j]['overriding_date'].toString()){
+            console.log(data[j]['overriding_date'])
             var date = new Date(data[j]['overriding_date']);
             data[j]['overriding_date'] = (date.getMonth() + 1) + '/' + date.getDate() + '/' +  date.getFullYear();
             returnVal.push(data[j])
@@ -334,28 +394,14 @@ router.get("/admin/override-logs/:admin_name/:position/:date_from/:date_to", (re
 });
 
 
-router.get("/admin/admin-info/:admin_name/:position/", (request, response) => {
-  const values = [request.params.admin_name, request.params.admin_name, request.params.position]
-  const query = `SELECT name, position, (SELECT count(*) as override_logs FROM override_logs WHERE overrider_name = ?) as override_logs FROM users WHERE users.name = ? AND users.role = ?`;
-
-  db.query(query, values, (error, data) => {
-    if (error) { return response.json(error); }
-
-    var returnVal = null;
-    if (data.length > 0){
-      returnVal = [{
-        overrider_name : stringInputConditioner(request.params.admin_name),
-        overrider_position : request.params.position,
-        overrider_total_logs : data[0]['override_logs']
-      }]
-    }
-    return response.json([{mode: "override-basic-info", values: returnVal}])
-  })
-})
 
 
 
-//API for updating a student's section and grade level from the database
+
+
+
+
+//API endpoint for updating a student's section and grade level from the database
 router.put("/update", (request, response) => {
   const query = "UPDATE students SET `grade_level`= ?, `section_name`= ? WHERE id = ?";
   const values = [
@@ -369,36 +415,6 @@ router.put("/update", (request, response) => {
       return response.json(data);
   });
 });
-
-//API for updating a student's information from the database
-router.put("/students/edit-student", (request, response) => {
-  var query = "UPDATE students SET ";
-  var values = [];
-  for (var key in request.body){
-    if (request.body[key] != "" && key != "student-id"){
-      query += key + "=" + '?' + ","
-      values.push(request.body[key]);
-    };
-  };
-  if (query[query.length - 1] == ',') {query = query.substring(0, query.length - 1)}
-  query += "WHERE id = ?"
-  values.push(request.body['student-id'])
-
-  db.query(query, values, (error, data) => {
-    if (error) return response.send(error)
-    
-    if (data['affectedRows'] == 1){
-      return response.status(210).send("Student editing successful")
-    }
-    return response.json(data)
-  })
-});
-
-
-
-
-
-
 
 //API for deleting a student from the database
 router.delete("/delete/:student_id", (req,res)=>{
@@ -487,12 +503,7 @@ router.delete("/delete/:user_id", (req,res)=>{ //route still needs to be changed
   });
 });
 
-
-
-
-
 //api for changing a users password 
-
 router.post("/update-password", (req, res) => {
   const { newPassword, oldPassword, access_id } = req.body;
   const selectQuery = "SELECT password FROM users WHERE access_id = ?";
@@ -519,6 +530,49 @@ router.post("/update-password", (req, res) => {
       return res.status(200).send("Password updated successfully!");
       });
     });
-  });
+});
+
+// Change profile picture for the user
+router.post('/upload/:access_id', upload.single('avatar'), (req, response) => {
+  const { access_id } = req.params; 
+
+   // Check if uploaded file is an image
+   if (!req.file || !req.file.mimetype.startsWith('image/')) {
+    return response.status(400).json({ message: 'Uploaded file must be an image' });
+  } else {
+    let fileType = req.file.mimetype.split("/")[1];
+    // let newFilename = req.file.filename + "." + fileType;
+    let newFilename = req.file.filename;
+    console.log("newFilename: ", newFilename);
+  
+    db.query('SELECT * FROM users WHERE access_id = ?', [access_id], (err, res) => {
+      if(err){
+        console.log(err);
+        res.status(500).json({ message: 'Internal server error' });
+      } else if (res.length == 0) {
+        res.status(404).json({ message: 'User not found' });
+      } else {
+        //upload
+        // fs.rename(`./uploads/${req.file.filename}`, `./uploads/${newFilename}`, function(){
+        //   console.log("Succesfully uploaded!")
+        // })
+        // store
+        db.query('UPDATE users SET avatar_url = ? WHERE access_id = ?', [newFilename, access_id], (err, data) => {
+          if (err){
+            console.log(err);
+            response.status(500).json({ message: 'Internal server error' });
+          } else {
+            console.log("Profile picture succesfully uploaded!")
+            return response.json(data)
+          }
+        })
+      }
+    })
+  }
+});
+
+
+
+
 
 module.exports = router;

@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import GlobalModal from '../Components/Modal/globalmodal';
 import axios from 'axios';
 import jwt_decode from 'jwt-decode';
+import api from "../api/api"
 
 
 function IsAuthenticated ({children}){
@@ -31,7 +32,7 @@ function IsAuthenticated ({children}){
     } else {
       const decodedToken = jwt_decode(token);
             const accessID = decodedToken.AccessID;
-            axios.get(`http://localhost:8800/database/check-access-id/${accessID}`)
+            api.get(`/database/check-access-id/${accessID}`)
                 .then(response => {
                     setAccessIDExists(response.data.exists);
                     setIsLoading(false);

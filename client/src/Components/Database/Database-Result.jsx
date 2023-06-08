@@ -7,6 +7,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import "./Database-Result.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
+import api from "../../api/api"
 
 
 
@@ -179,7 +180,7 @@ function DatabaseResult(props) {
 
     const updateStudent = async (newStudent) => {
         try {
-            const response = await axios.put(`http://localhost:8800/database/students/edit-student`, newStudent);
+            const response = await api.put(`/database/students/edit-student`, newStudent);
 
             if (response.status == 210){
                 setTitleModal("Request processed successfully");
@@ -214,7 +215,7 @@ function DatabaseResult(props) {
     // functions for setting up the search filters in the database page
     const fetchStudentFilter = async () => {
         try {
-            const response = await axios.get(`http://localhost:8800/database/student-filter`);
+            const response = await api.get(`/database/student-filter`);
             setStudentFilter(response.data);
         } catch (err) {
             setTitleModal("Refresh page!");
@@ -259,7 +260,7 @@ function DatabaseResult(props) {
     if (!Array.isArray(searchResult)) {
         return (
             <div className="container-md mb-3">
-                <div className="container-md border p-3">
+                <div className="container-md border border-success rounded p-3">
                     <div className="row justify-content-end">
                         <div className="col-4 align-self-end">
                             <div class="input-group mb-1">
