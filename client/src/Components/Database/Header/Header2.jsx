@@ -144,8 +144,9 @@ function Header2() {
           'Authorization': `Bearer ${token}`
         },
       });
-      console.log(response.data);
+      // console.log(response.data);
       setbase64Avatar(URL.createObjectURL(selectedFile));
+      setmessage("Profile Updated Succesfully. Please refresh the page.")
       setSelectedFile('');
     } catch (error) {
       console.error(error);
@@ -238,7 +239,7 @@ function Header2() {
                             <div className="mb-3">
                               <label for="formFile" className="form-label"></label>
                               <input className="form-control" type="file" id="formFile" onChange={(e) => setSelectedFile(e.target.files[0])} accept='.png, .jpg, .jpeg'/>
-                              <button className = "btn btn-success mt-2 mb-10 px-3 p-1" onClick={handleProfilePictureUpload}>Upload</button>
+                              <button className = "btn btn-success mt-2 mb-10 px-3 p-1" onClick={handleProfilePictureUpload} data-bs-toggle='modal' data-bs-target='#ChangePassModal'>Upload</button>
                             </div>
                           </div>
                         </div>
@@ -285,7 +286,7 @@ function Header2() {
             <div className="modal-dialog">
                 <div className="modal-content">
                 <div className="modal-header bg-success">
-                    <h1 className="modal-title fs-5 text-light " id="ChangePassModalLabel">Change Password</h1>
+                    <h1 className="modal-title fs-5 text-light " id="ChangePassModalLabel">Account Settings</h1>
                     <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div className="modal-body">
