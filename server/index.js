@@ -11,7 +11,10 @@ if (process.env.NODE_ENV === "production"){
 
 
 const port = process.env.PORT || 8800
+const IP = process
 
+
+// http://localhost:8000
 app.listen(port, () => {
   console.log(`Connected to backend using port ${port}.`);
 });
