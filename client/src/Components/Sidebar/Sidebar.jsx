@@ -4,6 +4,7 @@ import { SidebarData } from "./SidebarData"
 import { Buffer } from 'buffer';
 import axios from 'axios';
 import jwt_decode from 'jwt-decode';
+import api from "../../api/api"
 
 function NewSidebar() {
 
@@ -18,7 +19,7 @@ function NewSidebar() {
       const decodedToken = jwt_decode(token);
       const id = decodedToken.AccessID;
       setaccess_id(id);
-      axios.get(`http://localhost:8800/database/get-user/${id}`, {
+      api.get(`/database/get-user/${id}`, {
         headers: {
           'Authorization': `Bearer ${token}`
         },
