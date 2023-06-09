@@ -40,7 +40,7 @@ function Register() {
       .then(res => {
         if (res.status === 201) {
             setTitleModal("User Registration.");
-            setBodyModal("Sucessfuly registered user!")
+            setBodyModal("User Succesfully registered!")
             setShowModal(true)
         }
       })
