@@ -18,6 +18,7 @@ function NewSidebar() {
     if (token) {
       setToken(token);
       const decodedToken = jwt_decode(token);
+      setUserRole(decodedToken.role);
       const id = decodedToken.AccessID;
       setaccess_id(id);
       api.get(`/database/get-user/${id}`, {
@@ -31,7 +32,6 @@ function NewSidebar() {
           const base64Avatar = buffer.toString('base64')
           setbase64Avatar(base64Avatar);
         }
-        setUserRole(res.data.role)
       })
       .catch((err) => {
         console.error(err);
