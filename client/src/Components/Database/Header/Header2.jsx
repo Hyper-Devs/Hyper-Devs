@@ -13,6 +13,7 @@ import jwt_decode from 'jwt-decode';
 import { Buffer } from 'buffer';
 import KeyIcon from '@mui/icons-material/Key';
 
+import api from '../../../api/api';
 
 function Header2() {
 
@@ -39,7 +40,7 @@ function Header2() {
       const decodedToken = jwt_decode(token);
       const id = decodedToken.AccessID;
       setaccess_id(id);
-      axios.get(`http://localhost:8800/database/get-user/${id}`, {
+      api.get(`/database/get-user/${id}`, {
         headers: {
           'Authorization': `Bearer ${token}`
         },
@@ -76,7 +77,7 @@ function Header2() {
     return
     }
     const data = { newPassword, oldPassword, access_id };
-    fetch('http://localhost:8800/database/update-password',{
+    api.fetch('/database/update-password',{
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -112,7 +113,7 @@ function Header2() {
   //     const buffer = Buffer.from(reader.result)
   //     const uint8Array = new Uint8Array(buffer);
   //     try {
-  //       const response = await axios.post(`http://localhost:8800/upload/${access_id}`, {
+  //       const response = await api.post(`/upload/${access_id}`, {
   //         avatar: uint8Array,
   //       }, {
   //         headers: {
@@ -146,7 +147,7 @@ function Header2() {
     formData.append('avatar', selectedFile);
     console.log("hey")
     try {
-      const response = await axios.post(`http://localhost:8800/database/upload/${access_id}`, formData, {
+      const response = await api.post(`/database/upload/${access_id}`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           'Authorization': `Bearer ${token}`
