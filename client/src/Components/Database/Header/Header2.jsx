@@ -192,7 +192,8 @@ function Header2() {
               data-bs-toggle="modal"
               data-bs-target="#AccSettModal" 
             >
-              <FiSettings className="FiSettings" />
+              {/* New change ? */}
+              <FiSettings className="FiSettings" style={{marginLeft: "-4px", marginRight: "4px"}}/>
               Account Settings
             </button>
           </li>

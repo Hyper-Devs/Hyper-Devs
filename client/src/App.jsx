@@ -49,10 +49,6 @@ function App() {
             path="/database"
             element={<IsAuthenticated><Database/></IsAuthenticated>}
           />
-          <Route 
-            path="/profile"
-            element={<IsAuthenticated><Profile/></IsAuthenticated>}
-          />
         </Routes>
       </BrowserRouter>
     </div>
