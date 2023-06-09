@@ -1,26 +1,26 @@
-import axios from 'axios';
+import api from '../../api/api'
 import React, { useState } from 'react';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
-import TimePicker from 'react-time-picker';
-import './OvrContainer.css';
 import EditIcon from '@mui/icons-material/Edit';
 import jwt_decode from 'jwt-decode';
+import GlobalModal from '../Modal/globalmodal';
+import './OvrContainer.css';
+import 'react-datepicker/dist/react-datepicker.css'
+
 
 function OvrContainer() {
-  const [students, setStudents] = useState([]);
   const [isVisible, setIsVisible] = useState(false);
-  const currentUser = JSON.parse(localStorage.getItem('isLoggedin'))[0]['name'];
   const [resultData, setResultData] = useState(null);
-  const [selectedDate, setSelectedDate] = useState(null);
-  const [selectedTime, setSelectedTime] = useState(null);
   const [attendanceLog, setAttendanceLog] = useState([]);
   const [selectedRow, setSelectedRow] = useState(null); // New state variable
+
+  const [showModal, setShowModal] = useState(false);
+  const [titleModal, setTitleModal] = useState('');
+  const [bodyModal, setBodyModal] = useState('');
 
   const fetchStudent = async (id) => {
     setResultData(null);
     try {
-      const response = await axios.get(`http://localhost:8800/override/${id}`);
+      const response = await api.get(`/override/${id}`);
       if (response.data.length > 0) {
         setResultData(response.data[0]);
         setAttendanceLog(response.data); // Set the attendance log data
@@ -34,7 +34,6 @@ function OvrContainer() {
     setSelectedRow(row);
   };
 
-
   function handleSubmit(event) {
     event.preventDefault();
 
@@ -46,7 +45,7 @@ function OvrContainer() {
     setIsVisible(resultData !== null);
   }
 
-  function handleSubmitOverride(event) {
+  async function handleSubmitOverride(event) {
     event.preventDefault();
 
     const form = event.target;
@@ -60,15 +59,66 @@ function OvrContainer() {
     const decodedToken = jwt_decode(token);
     const userName = decodedToken.name;
 
-    formJson["id"]=resultData.id
+    formJson["student_log_num"]=resultData.student_log_num
     formJson["student_name"]=resultData.student_name
     formJson["student_id"]=resultData.rfid
     formJson["overrider_name"]=userName
     formJson["overriding_date"]=currentYear + "-" + currentMonth+ "-"+ currentDay   
     
-    console.log(formJson) 
-    
-};
+    await addOverrideLog(formJson)
+    await updateAttendanceLog(selectedRow)
+  };
+
+  const addOverrideLog = async (overrideLog) => {
+    try{
+      const result = await api.post(`/override/new-override-log`, overrideLog);
+      if (result.status === 210){
+        setTitleModal("Override success");
+        setBodyModal(result.data)
+        setShowModal(true)
+      }
+      else{
+          setTitleModal("Override unsuccessful");
+          setBodyModal(result.data);
+          setShowModal(true);
+      }
+    } catch (error) {
+      setTitleModal("Internal Error");
+      setBodyModal("An error occured. Refresh the page");
+      setShowModal(true);
+    }
+  };
+
+  const updateAttendanceLog = async (attendanceLog) => {
+    try {
+      const response = await api.put(`/override/update/attendance-log`, attendanceLog);
+      if (response.status === 210){
+        console.log("success!")
+          // setTitleModal("Atten success");
+          // setBodyModal("The selected student/s have been successfully enrolled to the next level.");
+          // setShowModal(true);
+      }
+      else{
+           console.log("error")
+          // setTitleModal("Error");
+          // setBodyModal("An error occured. Try again");
+          // setShowModal(true);
+      }
+    } catch (err) {
+        console.log(err)
+        // setTitleModal("Request processed unsuccessfully");
+        // setBodyModal("An error occurred")
+        // setShowModal(true)
+    }
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
+
+
+
+
   return (
     <div className='ovr-container'>
       <div className='ovr-content'>
@@ -163,17 +213,22 @@ function OvrContainer() {
                     <h6 className='text-start fw-bold '>Student Log</h6>
                   </div>
                   <div className='row px-5'>
-                    <div className='col-4'>
-                      <p>Date:</p>
-                      <p>Time-in: </p>
-                      <p>Time-out: </p>
-                    </div>
-                    <div className='col'>
-                      <p>{selectedRow.date}</p>
-                      <p>{selectedRow.time_in}</p>
-                      <p>{selectedRow.time_out}</p>
-                    </div>
+                    {selectedRow && (
+                      <>
+                        <div className='col-4'>
+                          <p>Date:</p>
+                          <p>Time-in: </p>
+                          <p>Time-out: </p>
+                        </div>
+                        <div className='col'>
+                          <p>{selectedRow.date}</p>
+                          <p>{selectedRow.time_in}</p>
+                          <p>{selectedRow.time_out}</p>
+                        </div>
+                      </>
+                    )}
                   </div>
+
                   <div className='row px-5'>
                     <button
                       className='btn mt-3 mb-3 btn-secondary'
@@ -219,13 +274,18 @@ function OvrContainer() {
                   <button type='button' className='btn btn-secondary' data-bs-dismiss='modal'>
                     Close
                   </button>
-                  {/* <button type='button' className='btn btn-secondary'>
-                    Save changes
-                  </button> */}
               </div>
             </div>
           </div>
         </div>
+      )}
+      {showModal && (
+        <GlobalModal
+          showModal={showModal}
+          title={titleModal}
+          body={bodyModal}
+          onClose={handleCloseModal}
+        />
       )}
     </div>
   );

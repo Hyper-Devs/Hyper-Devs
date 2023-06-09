@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import Clocks from '../Clocks'
 import './Box.css'
 import circle1 from '../../Assets/Ellipse 14.png'
@@ -12,6 +13,22 @@ function Box() {
     const currentMonth = currentDate.toLocaleString("default", { month: "long" });
     const currentYear = currentDate.getFullYear();
 
+    const [tipIndex, setTipIndex] = useState(0)
+    const tips = [
+      'Tips: You can change your profile picture in the account settings!',
+      'Tips: You can also change your password in the account settings!',
+      'Tips: Access a students information in the database page!',
+      'Tips: You can override a students access logs in the override page!',
+      'Tips: Enroll and edit a students information in the enrollment page!',
+    ]
+  
+    useEffect(() => {
+      const interval = setInterval(() => {
+        setTipIndex((tipIndex + 1) % tips.length)
+      }, 10000)
+      return () => clearInterval(interval)
+    }, [tipIndex, tips.length])
+
     return (
         <div className='LiveBox' data-testid="box-test">
             <div className='rectangle'>
@@ -25,19 +42,18 @@ function Box() {
                     <div className="clock-box">
                         <div className='clock'><Clocks/></div>
                         <div className='entrance-exit'>
-                            <div className='icon-boxes'>
+                            {/* <div className='icon-boxes'>
                                 <img src={circle1} alt='White Circle'/>
                                 <img src={circle2} alt='Green Circle'/>
-                            </div>
-                            <div className='icon-boxes'>
+                            </div> */}
+                            {/* <div className='icon-boxes'>
                                 <img src={bell} alt='Bell'/>
                                 <img src={bell} alt='Bell'/>
-                            </div>
+                            </div> */}
                            
                             
                             <div className='text'>
-                               <div className='text-control'> ENTRANCE </div>
-                               <div className='text-control'> EXIT </div>    
+                                <div className='text-control'>{tips[tipIndex]}</div>  
                             </div>
                     </div>
                     </div>

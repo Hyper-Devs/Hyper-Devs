@@ -18,12 +18,14 @@ router.post('/upload/:access_id', upload.single('avatar'), (req, response) => {
     return response.status(400).json({ message: 'Uploaded file must be an image' });
   } else {
 
+    // store image filename
     // let fileType = req.file.mimetype.split("/")[1];
     // let newFilename = req.file.filename + "." + fileType;
     // let newFilename = req.file.filename;
-    // console.log("newFilename: ", newFilename);
+
+    // store image data
     let newImageData = req.file.buffer;
-    console.log("newImageData: ", newImageData);
+    // console.log("newImageData: ", newImageData);
   
     db.query('SELECT * FROM users WHERE access_id = ?', [access_id], (err, res) => {
       if(err){
@@ -32,10 +34,6 @@ router.post('/upload/:access_id', upload.single('avatar'), (req, response) => {
       } else if (res.length == 0) {
         res.status(404).json({ message: 'User not found' });
       } else {
-        //upload
-        // fs.rename(`./uploads/${req.file.filename}`, `./uploads/${newFilename}`, function(){
-        //   console.log("Succesfully uploaded!")
-        // })
         // store
         db.query('UPDATE users SET avatar = ? WHERE access_id = ?', [newImageData, access_id], (err, data) => {
           if (err){
@@ -427,6 +425,9 @@ router.delete("/delete/:student_id", (req,res)=>{
 });
 
 
+// router.get('/get-school-year', async (request,response) => {
+//   const query = `SELECT * `
+// })
 
 // Get user name and role by access_id
 router.get('/get-user/:access_id', async (req, res) => {
@@ -459,7 +460,7 @@ router.get('/check-access-id/:access_id', async (req, res) => {
   const q = "SELECT COUNT(*) AS count FROM users WHERE access_id = ?";
   db.query(q, [access_id], (err, result) =>{
     if(err){
-      console.err(err.message);
+      console.error(err.message);
       res.status(500).send('Server error');
     } else {
       const count = result[0].count;
