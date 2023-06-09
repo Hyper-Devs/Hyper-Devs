@@ -13,41 +13,10 @@ function Login() {
   const [login_id, setLogin_id] = useState('')
   const [login_password, setLogin_password] = useState('')
   const [authStatus, setAuthStatus] = useState(false)
-  // const [user, setUser] = useState()
   const [isUserExist, setIsUserExist] = useState(false)
+  const [isUserTableEmpty, setIsUserTableEmpty] = useState(false)
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   const loggedInUser = localStorage.getItem("isLoggedin");
-  //   if (loggedInUser) {
-  //     const foundUser = JSON.parse(loggedInUser);
-  //     setUser(foundUser);
-  //   }
-  // }, []);
-
-  // const handleSubmit = async e => {
-  //   e.preventDefault();
-  //   const user = { login_id, login_password };
-  //   await api.get('/', {
-  //     params: {
-  //       login_id,
-  //       login_password,
-  //     }
-  //   }, user)
-  //     .then(res => {
-  //       // console.log(res);
-
-  //       if (res.status === 202) {
-  //         // setAuthStatus(true);
-  //         // Store current user session in the local storage to allow login persistence
-  //         setUser(res.data)
-  //         localStorage.setItem("isLoggedin", JSON.stringify(res.data));
-  //         // console.log(res.data)
-  //       }
-  //       else if (res.status === 201) { setAuthStatus(true) }
-  //     })
-  //     .catch(err => (err))
-  // }
 
   // Checks if there is a user session that is stored in the local storage that did not logout
   // If there is, set it as the current user
@@ -57,6 +26,16 @@ function Login() {
       axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;  
       setIsUserExist(true)
     }
+  }, []);
+
+  useEffect(() => {
+    api.get('/count')
+      .then(res => {
+        setIsUserTableEmpty(res.data.count === 0)
+      })
+      .catch(err => {
+        console.error('Failed to fetch user count', err.message);
+      });
   }, []);
 
   const handleSubmit = async e => {
@@ -121,9 +100,7 @@ function Login() {
                     <button type='submit'>Login</button>
                   </div>
 
-
-                  {/* <a className={'forgotPassword'} href="#">Forgot Password?</a> */}
-                  <button onClick={() => navigate('/register')} type='button'>New User?</button>
+                  {isUserTableEmpty && <button onClick={() => navigate('/register')} type='button'>New User?</button>}
                 </form>
               </div>
             </div>

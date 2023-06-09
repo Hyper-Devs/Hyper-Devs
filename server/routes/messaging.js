@@ -3,16 +3,16 @@ const router = express.Router();
 const twilio = require('twilio');
 require("dotenv").config();
 
-const accountSID = 'ACd398a12aee8cc1d0a1d0d7b9378c6e64';
-const authToken = '936e85bb79418b3725567a769659bba9';
+const accountSID = 'ACa9e2d984a106551571c0f573143b8343';
+const authToken = 'df6efb9af063cf831b6b116c1933ab4d';
 
 const client = new twilio(accountSID, authToken);
 
 // Twilio API
-router.get('/message/:recipient_num/:status', (req, res) => {
-    const recipient = req.params.recipient_num
-    const status = req.params.status
-    // const { recipient, status } = req.query;
+router.get('/message', (req, res) => {
+    // const recipient = req.params.recipient_num
+    // const status = req.params.status
+    const { recipient, status } = req.query;
     var textMessage;
     
     const showdate = new Date();
@@ -37,7 +37,7 @@ router.get('/message/:recipient_num/:status', (req, res) => {
     client.messages.create({
       body: textMessage,
       to: "+63"+recipient,
-      from: '+13613042304'
+      from: '+13614507265'
     }).then((message) => {
       console.log(message),
       res.write(message.body), 

@@ -21,7 +21,6 @@ function IsAuthenticated ({children}){
     };
 
     let navigate = useNavigate();
-    // const user = localStorage.getItem("isLoggedin");
     const token = localStorage.getItem("accessToken");
 
     useEffect(()=>{
@@ -65,7 +64,7 @@ function IsAuthenticated ({children}){
         {!isLoading && accessIDExists && <>{children}</>}
         {!isLoading && !accessIDExists && (
           <>
-            <p>You do not have access to this page.</p>
+            <p>Server Error. Refresh Page</p>
             <button onClick={() => navigate('/')}>Go to Login</button>
           </>
             )}
