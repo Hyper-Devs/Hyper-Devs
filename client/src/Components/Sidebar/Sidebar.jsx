@@ -11,6 +11,7 @@ function NewSidebar() {
   const [access_id, setaccess_id] = useState('')
   const [token, setToken] = useState('');
   const [base64Avatar, setbase64Avatar] = useState(null);
+  const [userRole, setUserRole] = useState('');
 
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
@@ -30,12 +31,21 @@ function NewSidebar() {
           const base64Avatar = buffer.toString('base64')
           setbase64Avatar(base64Avatar);
         }
+        setUserRole(res.data.role)
       })
       .catch((err) => {
         console.error(err);
       });
     }
   }, []);
+
+  const visibleSidebarData = SidebarData.filter(item => {
+    if (item.visible) {
+      return item.visible(userRole);
+    } else {
+      return true;
+    }
+  });
 
   return (
     <div className='newsidebar-container'>
@@ -44,7 +54,7 @@ function NewSidebar() {
         <img className='avatar' src={ base64Avatar ? `data:image/png;base64,${base64Avatar}` : "icons/Profile Icon.svg"} alt="Profile Icon" />
       </div>
       <ul className='sidebar-list'>
-        {SidebarData.map((val, key) => {
+        {visibleSidebarData.map((val, key) => {
           return (
             <li
               key={key}

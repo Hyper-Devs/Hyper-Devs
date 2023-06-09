@@ -4,7 +4,8 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import StorageIcon from '@mui/icons-material/Storage';
 import NotificationsOffIcon from '@mui/icons-material/NotificationsOff';
-import EmailIcon from '@mui/icons-material/Email';
+import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
+// import EmailIcon from '@mui/icons-material/Email';
 
 export const SidebarData = [
     {
@@ -31,5 +32,11 @@ export const SidebarData = [
         title: "Override",
         icon: <NotificationsOffIcon/>,
         link: "/override"
+    },
+    {
+        title: "Add User",
+        icon: <PersonAddAltIcon/>,
+        link: "/register",
+        visible: (userRole) => userRole === "Admin"
     },
 ];

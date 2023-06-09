@@ -9,6 +9,7 @@ import Profile from "./Pages/Profile/Profile";
 import Enroll from "./Pages/Enroll/Enroll";
 import Register from "./Pages/Register/Register"
 import IsAuthenticated from "./Components/IsAuthenticated";
+import IsAuthenticatedReg from "./Components/IsAuthenticatedReg"
 import IsAdmin from "./Components/IsAdmin";
 // import Sass from "./Pages/sass-doc/sass"
 
@@ -23,7 +24,7 @@ function App() {
           />
           <Route
             path='/register'
-            element={<Register/>}
+            element={<IsAuthenticatedReg><Register/></IsAuthenticatedReg>}
           />
           <Route
             path='/dashboard'

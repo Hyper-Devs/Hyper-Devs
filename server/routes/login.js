@@ -3,25 +3,16 @@ const db = require('../database.js').databaseConnection;
 const router = express.Router();
 const jwt = require('jsonwebtoken');
 
-// router.get("/", async (req, res) => {
-//     const { login_id, login_password } = req.query;
-//     const query = "SELECT * FROM `users` WHERE access_id = ? AND password = ?";
-//     var authStatus; //201 = fail, 202 = success
-//     db.query(query, [login_id, login_password], (err, data) => {
-//       if (err) {
-//         return res.json("Login Failed");
-//       }
-//       if(data.length == 1){
-//         authStatus = 202
-//       }
-//       else if (data.length == 0){
-//         authStatus = 201
-//       }
-//       return res
-//         .status(authStatus)
-//         .json(data);
-//     });
-//   });
+// Check if there is no users in the database
+router.get("/count", async (req, res) => {
+  const query = "SELECT COUNT(*) as count FROM `users`";
+  db.query(query, (err, data) => {
+    if (err) {
+      return res.status(500).json({ error: "Internal server error" });
+    }
+    return res.status(200).json({ count: data[0].count });
+  });
+});
 
 // Register user
 router.post("/register", async (req, res) => {
