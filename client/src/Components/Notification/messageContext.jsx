@@ -59,8 +59,30 @@ function MessageContext(props) {
     // });
 
   return (
-    <div className="notif-message-box">
-      <div className="notif-message-rectangle">
+    <div className="container-md">
+      <div className="row p-5 ">
+        <div className="row rounded rounded-top bg-success">
+          <h3 className='text-center text-light fw-bold py-2'>Message Content</h3> 
+        </div>
+        <div className="row rounded-bottom px-5 py-2 border">
+          <div class="row ms-0">
+            <label for="textContent" class="form-label">
+              <h5 className='text-success fw-bold '>Default Text Message:</h5>
+              </label>
+            <textarea defaultValue= "Good day, Mr./Mrs. []. This is to inform you that [student name][entered/exit] the school campus at [mm/dd/yyyy T 00:00:00]."
+            class="form-control mb-3" id="textContent" rows="3"></textarea>
+          </div>
+          <div class="row ms-0">
+            <label for="textAnnounceContent" class="form-label">
+            <h5 className='text-success fw-bold '>Announcement Text Message:</h5>
+            </label>
+            <textarea defaultValue= "To announce, on [mm/dd/yy T 00:00:00], the school is conducting a [(enter school event)]."
+            class="form-control mb-3" id="textAnnounceContent" rows="3"></textarea>
+          </div>
+          <button type="button" class="btn btn-success mb-3 ">Apply Changes to Text</button>
+        </div>
+      </div>
+      {/* <div className="notif-message-rectangle">
         <div className="notif-message-header">
         <p>Notification Message</p>
         </div>
@@ -77,7 +99,7 @@ function MessageContext(props) {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
       <div>
       <GlobalModal
         showModal={showModal}
