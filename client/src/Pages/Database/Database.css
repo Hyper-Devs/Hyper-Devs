@@ -44,3 +44,15 @@
   border-radius: 5px 5px 0px 0px;
   height: 100px;
 }
+.header-bg {
+  background-color: #8E1437;
+  border: 1px solid black;
+  border-radius: 10px 10px 0px 0px;
+  height: fit-content;
+  padding-top: 1%;
+}
+
+
+.help-icon {
+  color: white;
+}
