@@ -143,6 +143,7 @@
 .avatar {
     width: 70%;
     height: auto;
+    /* aspect-ratio: auto; */
     border-radius: 50%;
-    object-fit: cover; /* This ensures the image is centered and cropped to fit the dimensions */
+    object-fit: cover;
   }

@@ -121,10 +121,7 @@ function OvrContainer() {
 
   return (
     <div className='ovr-container'>
-      <div className='ovr-content'>
-        <div className='title-container'>
-          <p>Override Page</p>
-        </div>
+      <div className='container-md mt-3'>
         <div className='search-content-container'>
           <p>Excuse a student</p>
           <div className='search-content'>

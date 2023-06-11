@@ -40,7 +40,7 @@ function Register() {
       .then(res => {
         if (res.status === 201) {
             setTitleModal("User Registration.");
-            setBodyModal("Sucessfuly registered user!")
+            setBodyModal("User Succesfully registered!")
             setShowModal(true)
         }
       })
@@ -108,11 +108,13 @@ function Register() {
                     <div className="register-input-icons">
                       <FiUser size={"1.5rem"} color="#7A1315" />
                     </div>
-                    <input
+                    <select
                       name="register-role"
-                      type="text"
                       onChange={(e) => setRegister_role(e.target.value)}
-                    />
+                    >
+                      <option value="User">Faculty</option>
+                      <option value="Admin">Admin</option>
+                    </select>
                   </div>
 
                   <label>Password</label>
@@ -146,5 +148,4 @@ function Register() {
     </div>
   );
 }
-// Just me getting github achievements
 export default Register;

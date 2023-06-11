@@ -21,7 +21,6 @@ function IsAuthenticated ({children}){
     };
 
     let navigate = useNavigate();
-    // const user = localStorage.getItem("isLoggedin");
     const token = localStorage.getItem("accessToken");
 
     useEffect(()=>{
@@ -55,9 +54,9 @@ function IsAuthenticated ({children}){
             onClose={handleCloseModal}
         />
         {isLoading && <p>
-          <div class="d-flex justify-content-center">
-            <div class="spinner-border" role="status">
-              <span class="visually-hidden">Loading...</span>
+          <div className="d-flex justify-content-center">
+            <div className="spinner-border" role="status">
+              <span className="visually-hidden">Loading...</span>
             </div>
           </div>
           
@@ -65,7 +64,7 @@ function IsAuthenticated ({children}){
         {!isLoading && accessIDExists && <>{children}</>}
         {!isLoading && !accessIDExists && (
           <>
-            <p>You do not have access to this page.</p>
+            <p>Server Error. Refresh Page</p>
             <button onClick={() => navigate('/')}>Go to Login</button>
           </>
             )}
