@@ -42,13 +42,24 @@ function Register() {
             setTitleModal("User Registration.");
             setBodyModal("User Succesfully registered!")
             setShowModal(true)
+        } else if (res.status === 400){
+          setTitleModal("User Registration.");
+          setBodyModal("Access ID already exists!")
+          setShowModal(true)
         }
       })
       .catch(err => {
+        // console.log(err.response.status)
+        if(err.response.status === 400){
+          setTitleModal("User Registration.");
+          setBodyModal("Access ID already exists!")
+          setShowModal(true)
+        } else {
         setTitleModal("User Registration.");
         setBodyModal("Error occured while registering user!")
         setShowModal(true)
         console.error('Error occurred while registering user', err.message);
+        }
       });
   };
 
