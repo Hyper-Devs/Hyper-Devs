@@ -533,44 +533,44 @@ router.post("/update-password", (req, res) => {
     });
 });
 
-// Change profile picture for the user
-router.post('/upload/:access_id', upload.single('avatar'), (req, response) => {
-  const { access_id } = req.params; 
+// // Change profile picture for the user
+// router.post('/upload/:access_id', upload.single('avatar'), (req, response) => {
+//   const { access_id } = req.params; 
 
-   // Check if uploaded file is an image
-   if (!req.file || !req.file.mimetype.startsWith('image/')) {
-    return response.status(400).json({ message: 'Uploaded file must be an image' });
-  } else {
-    let fileType = req.file.mimetype.split("/")[1];
-    // let newFilename = req.file.filename + "." + fileType;
-    let newFilename = req.file.filename;
-    console.log("newFilename: ", newFilename);
+//    // Check if uploaded file is an image
+//    if (!req.file || !req.file.mimetype.startsWith('image/')) {
+//     return response.status(400).json({ message: 'Uploaded file must be an image' });
+//   } else {
+//     let fileType = req.file.mimetype.split("/")[1];
+//     // let newFilename = req.file.filename + "." + fileType;
+//     let newFilename = req.file.filename;
+//     console.log("newFilename: ", newFilename);
   
-    db.query('SELECT * FROM users WHERE access_id = ?', [access_id], (err, res) => {
-      if(err){
-        console.log(err);
-        res.status(500).json({ message: 'Internal server error' });
-      } else if (res.length == 0) {
-        res.status(404).json({ message: 'User not found' });
-      } else {
-        //upload
-        // fs.rename(`./uploads/${req.file.filename}`, `./uploads/${newFilename}`, function(){
-        //   console.log("Succesfully uploaded!")
-        // })
-        // store
-        db.query('UPDATE users SET avatar_url = ? WHERE access_id = ?', [newFilename, access_id], (err, data) => {
-          if (err){
-            console.log(err);
-            response.status(500).json({ message: 'Internal server error' });
-          } else {
-            console.log("Profile picture succesfully uploaded!")
-            return response.json(data)
-          }
-        })
-      }
-    })
-  }
-});
+//     db.query('SELECT * FROM users WHERE access_id = ?', [access_id], (err, res) => {
+//       if(err){
+//         console.log(err);
+//         res.status(500).json({ message: 'Internal server error' });
+//       } else if (res.length == 0) {
+//         res.status(404).json({ message: 'User not found' });
+//       } else {
+//         //upload
+//         // fs.rename(`./uploads/${req.file.filename}`, `./uploads/${newFilename}`, function(){
+//         //   console.log("Succesfully uploaded!")
+//         // })
+//         // store
+//         db.query('UPDATE users SET avatar_url = ? WHERE access_id = ?', [newFilename, access_id], (err, data) => {
+//           if (err){
+//             console.log(err);
+//             response.status(500).json({ message: 'Internal server error' });
+//           } else {
+//             console.log("Profile picture succesfully uploaded!")
+//             return response.json(data)
+//           }
+//         })
+//       }
+//     })
+//   }
+// });
 
 
 

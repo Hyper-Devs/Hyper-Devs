@@ -111,7 +111,7 @@ function Header2() {
   
     const formData = new FormData();
     formData.append('avatar', selectedFile);
-    console.log("hey")
+    // console.log("hey")
     try {
       const response = await api.post(`/database/upload/${access_id}`, formData, {
         headers: {
