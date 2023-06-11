@@ -65,72 +65,38 @@ function Header2() {
     }
   }, []);
 
-  const onSubmit = async e =>{
+  const onSubmit = async e => {
     e.preventDefault();
-    if (newPassword.length < 8){
-      setmessage("Password must at least be 8 characters long!")
-      return
+    if (newPassword.length < 8) {
+      setmessage("Password must be at least 8 characters long!");
+      return;
     }
-    const passwordRegex =/(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/;
+  
+    const passwordRegex = /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/;
     if (!passwordRegex.test(newPassword)) {
-    setmessage("Password must contain at least one uppercase letter, one lowercase letter, and one digit.");
-    return
+      setmessage("Password must contain at least one uppercase letter, one lowercase letter, and one digit.");
+      return;
     }
+  
     const data = { newPassword, oldPassword, access_id };
-    api.fetch('/database/update-password',{
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-      },
-      body: JSON.stringify(data)
-
-    }).then(res =>{
-      if(res.ok){
-        console.log("Password updated successfully!")
-        setmessage("Password updated succesfully!")
-      } else if (res.status === 401)  {
-        console.log("Old password does not match! Try again.")
-        setmessage("Old password does not match! Try again.")
+  
+    try {
+      const response = await api.post('/database/update-password', data, {
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+  
+      console.log("Password updated successfully!");
+      setmessage("Password updated successfully!");
+    } catch (error) {
+      if (error.response.status === 401) {
+        console.log("Old password is incorrect!");
+        setmessage("Old password is incorrect!");
       } else {
-        console.log("Password update failed!")
-        setmessage("Password update failed!")
+        console.log("Password update failed!");
+        setmessage("Password update failed!");
       }
-
-    }).catch(err =>{
-      console.log("Error updating password! ")
-      setmessage("Internal Error occured. Refresh the page.")
-    });
-  }
-
-  // const handleProfilePictureUpload = async () => {
-  //   if (!selectedFile) {
-  //     return;
-  //   }
-  //   const reader = new FileReader();
-  //   reader.readAsArrayBuffer(selectedFile);
-  //   reader.onload = async () => {
-  //     const buffer = Buffer.from(reader.result)
-  //     const uint8Array = new Uint8Array(buffer);
-  //     try {
-  //       const response = await api.post(`/upload/${access_id}`, {
-  //         avatar: uint8Array,
-  //       }, {
-  //         headers: {
-  //           'Content-Type': 'application/json',
-  //           'Authorization': `Bearer ${token}`
-  //         },
-  //       });
-  //       console.log(response.data);
-  //       setbase64Avatar(`data:${selectedFile.type};base64,${buffer.toString('base64')}`);
-  //       setSelectedFile(null);
-  //     } catch (error) {
-  //       console.error(error);
-  //     }
-  //   };
-  // };
-
-
+    }
+  };
 
   const handleProfilePictureUpload = async () => {
     if (!selectedFile) {
@@ -145,7 +111,7 @@ function Header2() {
   
     const formData = new FormData();
     formData.append('avatar', selectedFile);
-    console.log("hey")
+    // console.log("hey")
     try {
       const response = await api.post(`/database/upload/${access_id}`, formData, {
         headers: {

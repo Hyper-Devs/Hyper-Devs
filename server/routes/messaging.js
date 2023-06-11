@@ -4,7 +4,7 @@ const twilio = require('twilio');
 require("dotenv").config();
 
 const accountSID = 'ACa9e2d984a106551571c0f573143b8343';
-const authToken = 'df6efb9af063cf831b6b116c1933ab4d';
+const authToken = 'f6a5b76dfc306a27d48663fa57f288b6';
 
 
 const client = new twilio(accountSID, authToken);

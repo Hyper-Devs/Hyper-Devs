@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
 import "./messageContext.css";
 import GlobalModal from '../Modal/globalmodal';
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
@@ -6,37 +6,36 @@ import Popover from '@mui/material/Popover';
 
 
 function MessageContext(props) {
-  const titleModal = 'Notification Page'
-  const bodyModal = 'Message content has been succesfully updated!'
+  const titleModal = 'Notification Page';
+  const bodyModal = 'Message content has been successfully updated!';
   const [showModal, setShowModal] = useState(false); // State to control the visibility of the modal
 
-    const handleCloseModal = () => {
-      setShowModal(false);
-    };
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
 
-    const initialContent = localStorage.getItem('content') || 'Greetings! Mr./Ms. [Last Name], your child ["enter"/"exit"]\nthe school campus today [MM/DD/YYYY] at [00:00:00].\n\nAlso, [important school announcements can be added in this part of the message].\n\nThank you so much!\n\nThis is an auto-generated text message from [Name of School].';
-    const[content, setContent] = useState(initialContent);
-    
-    useEffect(() => {
-      // Save the current content to local storage
-      localStorage.setItem('content', content);
-    }, [content]);
+  const initialContent = localStorage.getItem('content') || 'Greetings! Mr./Ms. [Last Name], your child ["enter"/"exit"]\nthe school campus today [MM/DD/YYYY] at [00:00:00].\n\nAlso, [important school announcements can be added in this part of the message].\n\nThank you so much!\n\nThis is an auto-generated text message from [Name of School].';
+  const [content, setContent] = useState(initialContent);
 
-    const handleContentChange = (e) => {
-      setContent(e.target.value);
-    };
-  
+  useEffect(() => {
+    // Save the current content to local storage
+    localStorage.setItem('content', content);
+  }, [content]);
 
-    const handleClick = (buttonId, e) => {
-        e.preventDefault();
-        // Save the updated content to local storage
-        localStorage.setItem('content', content);
-        if (buttonId === 'update'){
-          setShowModal(true)
-        } else {
-          props.onButtonClick(buttonId);
-        }
-    };
+  const handleContentChange = (e) => {
+    setContent(e.target.value);
+  };
+
+  const handleClick = (buttonId, e) => {
+    e.preventDefault();
+    // Save the updated content to local storage
+    localStorage.setItem('content', content);
+    if (buttonId === 'update') {
+      setShowModal(true);
+    } else {
+      props.onButtonClick(buttonId);
+    }
+  };
 
     const [popoverAnchorEl, setPopoverAnchorEl] = useState(null);
     const isPopoverOpen = Boolean(popoverAnchorEl);
@@ -99,15 +98,16 @@ function MessageContext(props) {
               <button onClick={(e) => handleClick('update', e)}>Submit</button>
             </div>
           </div>
+          <button type="button" className="btn btn-success mb-3">Apply Changes to Text</button>
         </div>
       </div>
       <div>
-      <GlobalModal
-        showModal={showModal}
-        title={titleModal}
-        body={bodyModal}
-        onClose={handleCloseModal}
-      />
+        <GlobalModal
+          showModal={showModal}
+          title={titleModal}
+          body={bodyModal}
+          onClose={handleCloseModal}
+        />
       </div>
     </div>
   );

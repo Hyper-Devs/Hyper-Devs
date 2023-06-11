@@ -17,12 +17,25 @@ router.get("/count", async (req, res) => {
 // Register user
 router.post("/register", async (req, res) => {
   const { register_name, register_id, register_password, register_position, register_role } = req.body;
-  const query = "INSERT INTO `users` (name, position, access_id, password, role) VALUES (?, ?, ?, ?, ?)";
-  db.query(query, [register_name, register_position, register_id, register_password, register_role], (err, data) => {
+
+  // Check if access ID is already registered
+  const checkQuery = "SELECT * FROM `users` WHERE access_id = ?";
+  db.query(checkQuery, [register_id], (err, result) => {
     if (err) {
       return res.status(500).json({ error: "Internal server error" });
     }
-    return res.status(201).json("User successfully registered!");
+    if (result.length > 0) {
+      return res.status(400).json({ error: "Access ID is already registered" });
+    }
+
+    // If access ID is not registered, insert the new user into the database
+    const insertQuery = "INSERT INTO `users` (name, position, access_id, password, role) VALUES (?, ?, ?, ?, ?)";
+    db.query(insertQuery, [register_name, register_position, register_id, register_password, register_role], (err, data) => {
+      if (err) {
+        return res.status(500).json({ error: "Internal server error" });
+      }
+      return res.status(201).json("User successfully registered!");
+    });
   });
 });
 
@@ -35,7 +48,7 @@ router.post("/login", async (req, res) => {
       return res.status(500).json({ error: "Internal server error" });
     }
     if (data.length === 1) {
-      const accessToken = jwt.sign({ userId: data[0].id , name: data[0].name , AccessID: data[0].access_id , position: data[0].position, role: data[0].role}, 'key');
+      const accessToken = jwt.sign({ userId: data[0].id , name: data[0].name , AccessID: data[0].access_id , position: data[0].position, role: data[0].role}, 'key', { expiresIn: '1h' });
       return res.status(200).json({ accessToken });
     } else {
       return res.status(401).json({ error: "Invalid login credentials" });
@@ -53,7 +66,11 @@ router.get("/", async (req, res) => {
   }
   jwt.verify(token, 'key', (err, decoded) => {
     if (err) {
-      return res.status(403).json({ error: "Invalid access token" });
+      if(err.name === 'TokenExpiredError'){
+        return res.status(401).json({ error: 'Access token has expired!'})
+      } else {
+        return res.status(403).json({ error: "Invalid access token" });
+      }
     }
     const query = "SELECT * FROM `users` WHERE id = ?";
     db.query(query, [decoded.userId], (err, data) => {
