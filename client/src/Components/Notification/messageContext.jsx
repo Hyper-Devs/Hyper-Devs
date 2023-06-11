@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import "./messageContext.css";
-// import Footer from '../footer'
-// import {AiOutlineLeft} from 'react-icons/ai'
 import GlobalModal from '../Modal/globalmodal';
+import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
+import Popover from '@mui/material/Popover';
+
 
 function MessageContext(props) {
   const titleModal = 'Notification Page'
@@ -37,43 +38,65 @@ function MessageContext(props) {
         }
     };
 
-    // const recipient = '9761013401'; // example recipient phone number
-    // const messageContent = localStorage.getItem('content'); // retrieve content from localStorage
+    const [popoverAnchorEl, setPopoverAnchorEl] = useState(null);
+    const isPopoverOpen = Boolean(popoverAnchorEl);
+  
+    const handlePopoverOpen = (event) => {
+      setPopoverAnchorEl(event.currentTarget);
+    };
+  
+    const handlePopoverClose = () => {
+      setPopoverAnchorEl(null);
+    };
 
-    // fetch('/message', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   },
-    //   body: JSON.stringify({ recipient: recipient, content: messageContent })
-    // })
-    // .then(response => {
-    //   if (response.ok) {
-    //     console.log('Message sent successfully!');
-    //   } else {
-    //     console.error('Message failed to send:', response.statusText);
-    //   }
-    // })
-    // .catch(error => {
-    //   console.error('Error sending message:', error);
-    // });
 
   return (
     <div className="notif-message-box">
       <div className="notif-message-rectangle">
         <div className="notif-message-header">
-        <p>Notification Message</p>
+          <p>Notification Message</p>
+          <span className="icon-wrapper">
+            <HelpOutlineIcon className="helpIcon" type="button" onClick={handlePopoverOpen} />
+          </span>
         </div>
+        <Popover
+            open={isPopoverOpen}
+            anchorEl={popoverAnchorEl}
+            onClose={handlePopoverClose}
+            anchorOrigin={{
+            vertical: 'bottom',
+            // horizontal: 'center',
+            }}
+            transformOrigin={{
+            // vertical: 'bottom',
+            horizontal: 'left',
+            }}
+            classes={{
+                paper: 'custom-popover'
+            }}
+        >
+            {/* Content of the popover */}
+            <div className='row ms-3 p-1' >
+                <div className="row p-3 border border-success rounded bg-success bg-opacity-25">
+                    <h6 className='text-center fw-bold'>Notification Page Usage Help</h6>
+                    <ul>
+                        <li>(1) Modify the text inside the box and submit to change the notification message</li>
+                        <li>(2) Only announcements are allowed to be changed in the auto-generated message.</li>
+                    </ul>
+                </div>
+            
+            </div>
+        </Popover>
         <div className="notif-message-rectangle2">
           <div className="notif-message-rectangle3">
-                <p>Message Format</p>
+                <p>Announcements</p>
             <textarea
               className="notif-message-rectangle5"
               value={content}
               onChange={handleContentChange}
               />
             <div className="notif-update-button">
-              <button onClick={(e) => handleClick('update', e)}>Update</button>
+              <button onClick={(e) => handleClick('update', e)}>Submit</button>
             </div>
           </div>
         </div>

@@ -68,12 +68,13 @@ function outputConditioner (student_prim_infoo, results, mode) {
   var searchVal, returnVal = "Student not found", studentPrimVal;
   const student_prim_info = student_prim_infoo;
   var logs = []
-  if (/^\d+$/.test(student_prim_info)){ searchVal = 'id'; }   
+  if (/^\d+$/.test(student_prim_info)){ searchVal = 'rfid'; }   
   else{                                                      //student_prim_info parameter is a name
     searchVal = 'first_name'                
     studentPrimVal = student_prim_info.toLowerCase()                  
   }
 
+  console.log(results)
   for(let i=0; i<results.length; i++){
     var testCases = [];
 
@@ -133,15 +134,15 @@ router.get("/student-filter", async (request, response) => {
 });
   
 
-//API endpoint for retrieving contact number associated with a student
+//API endpoint for retrieving student using ID
 router.get("/student/:student_prim_info", (request, response) => {
-  const query = `SELECT contact_num FROM students WHERE rfid = ?`
+  const query = `SELECT * FROM students WHERE rfid = ?`
   const value = [request.params.student_prim_info]
 
   db.query(query, value, (error, data) => {
     if (error) { return response.json(error); }
 
-    if (data.length > 0){ return response.json(data[0]['contact_num'])}
+    if (data.length > 0){ return response.json(data[0])}
     return response.json("No data found")
   })
 });
@@ -250,7 +251,7 @@ router.get("/students/batch/:school_year/:grade_level/:section", (request, respo
 
 //API endpoint for retrieving a student's attendance logs - exclusive only to one student
 router.get("/student-filter/student/:student_prim_info/:school_year/:grade_level/:section_name/:date_start/:date_end", (request, response) => {
-  const query = `SELECT students.id, students.first_name, students.last_name, attendance_logs.time_in, attendance_logs.time_out, attendance_logs.date
+  const query = `SELECT students.rfid, students.first_name, students.last_name, attendance_logs.time_in, attendance_logs.time_out, attendance_logs.date, attendance_logs.student_log_id
                   FROM students, sections, attendance_logs
                   WHERE students.grade_level = sections.grade_level AND students.section_name = sections.section_name AND students.rfid = attendance_logs.rfid
                   AND sections.school_year = ? AND students.grade_level = ? AND students.section_name = ?`;
@@ -338,21 +339,21 @@ router.get("/admin/admin-info/:admin_name/:position/", (request, response) => {
     var returnVal = null;
     if (data.length > 0){
       returnVal = [{
-        overrider_name : stringInputConditioner(request.params.admin_name),
+        overrider_name : data[0]['name'],
         overrider_position : request.params.position,
         overrider_total_logs : data[0]['override_logs']
       }]
     }
-    return response.json([{mode: "override-basic-info", values: returnVal}])
+    return response.json([{mode: "user-basic-info", values: returnVal}])
   })
 })
 
 //API endpoint for retrieving admin/faculty override logs
-router.get("/admin/override-logs/:admin_name/:position/:date_from/:date_to", (request, response) => {
-  const query = `SELECT *
+router.get("/admin/override-logs/:admin_name/:role/:date_from/:date_to", (request, response) => {
+  const query = `SELECT overrider_name, role, student_name, overriding_reason, overriding_date
                   FROM users, override_logs
-                  WHERE override_logs.overrider_name = ? AND users.position = ?`;
-  const values = [request.params.admin_name, request.params.position]
+                  WHERE override_logs.overrider_name = users.name AND override_logs.overrider_name = ? AND users.role = ?`;
+  const values = [request.params.admin_name, request.params.role]
 
   db.query(query, values, (error, data) => {  
     if (error) { return response.json(error); }
@@ -379,7 +380,6 @@ router.get("/admin/override-logs/:admin_name/:position/:date_from/:date_to", (re
       for (var i=0; i<dateRange.length; i++){
         for (var j=0; j<data.length; j++){
           if (dateRange[i].toString() === data[j]['overriding_date'].toString()){
-            console.log(data[j]['overriding_date'])
             var date = new Date(data[j]['overriding_date']);
             data[j]['overriding_date'] = (date.getMonth() + 1) + '/' + date.getDate() + '/' +  date.getFullYear();
             returnVal.push(data[j])
@@ -387,7 +387,7 @@ router.get("/admin/override-logs/:admin_name/:position/:date_from/:date_to", (re
         }
       }
     }
-    return response.json([{mode: "override-logs", values: returnVal}])
+    return response.json([{mode: "user-override-logs", values: returnVal}])
   });
 });
 

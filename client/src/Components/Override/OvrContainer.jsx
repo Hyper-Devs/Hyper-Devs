@@ -1,5 +1,5 @@
 import api from '../../api/api'
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import EditIcon from '@mui/icons-material/Edit';
 import jwt_decode from 'jwt-decode';
 import GlobalModal from '../Modal/globalmodal';
@@ -25,6 +25,7 @@ function OvrContainer() {
         setResultData(response.data[0]);
         setAttendanceLog(response.data); // Set the attendance log data
       }
+      else { setResultData('empty'); }
     } catch (err) {
       console.log(err);
     }
@@ -42,7 +43,6 @@ function OvrContainer() {
 
     const formJson = Object.fromEntries(formData.entries());
     fetchStudent(formJson['input-field']);
-    setIsVisible(resultData !== null);
   }
 
   async function handleSubmitOverride(event) {
@@ -59,14 +59,14 @@ function OvrContainer() {
     const decodedToken = jwt_decode(token);
     const userName = decodedToken.name;
 
-    formJson["student_log_num"]=resultData.student_log_num
+    formJson["student_log_id"]=selectedRow.student_log_id
     formJson["student_name"]=resultData.student_name
     formJson["student_id"]=resultData.rfid
     formJson["overrider_name"]=userName
     formJson["overriding_date"]=currentYear + "-" + currentMonth+ "-"+ currentDay   
     
     await addOverrideLog(formJson)
-    await updateAttendanceLog(selectedRow)
+    await updateAttendanceLog({"rfid": selectedRow.rfid, "student_log_id": selectedRow.student_log_id})
   };
 
   const addOverrideLog = async (overrideLog) => {
@@ -117,6 +117,48 @@ function OvrContainer() {
   };
 
 
+  function displaySearchResults(){
+    return (
+      <div className='search-result'>
+        <h2 style={{ color: '#00573F', fontFamily: 'Cambria', fontWeight: 900 }}>
+          <b>STUDENT LOG INFORMATION</b>
+        </h2>
+        <div className="table-responsive">
+          <table className='table border border-success rounded'>
+            <thead className='table-success '>
+              <tr>
+                <th>Name</th>
+                <th>Time In</th>
+                <th>Time Out</th>
+                <th>Date</th>
+                <th>Edit</th>
+              </tr>
+            </thead>
+            <tbody>
+              {attendanceLog.map((log) => (
+                <tr key={log.id}>
+                  <td>{log.student_name}</td>
+                  <td>{log.time_in}</td>
+                  <td>{log.time_out}</td>
+                  <td>{log.date}</td>
+                  <td>
+                    <button id='action-icon' data-bs-toggle='modal' data-bs-target='#ovrModal' onClick={() => handleRowEdit(log)} >
+                      <EditIcon />
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    )
+  }
+
+  useEffect(() => {
+    setIsVisible(resultData !== null);
+  },[resultData])
+
 
 
   return (
@@ -140,43 +182,11 @@ function OvrContainer() {
             </form>
           </div>
         </div>
-        {resultData && isVisible && (
-          <div className='search-result'>
-            <h2 style={{ color: '#00573F', fontFamily: 'Cambria', fontWeight: 900 }}>
-              <b>STUDENT LOG INFORMATION</b>
-            </h2>
-            <div className="table-responsive">
-            <table className='table border border-success rounded'>
-              <thead className='table-success '>
-                <tr>
-                  <th>Name</th>
-                  <th>Time In</th>
-                  <th>Time Out</th>
-                  <th>Date</th>
-                  <th>Edit</th>
-                </tr>
-              </thead>
-              <tbody>
-                {attendanceLog.map((log) => (
-                  <tr key={log.id}>
-                    <td>{log.student_name}</td>
-                    <td>{log.time_in}</td>
-                    <td>{log.time_out}</td>
-                    <td>{log.date}</td>
-                    <td>
-                      <button id='action-icon' data-bs-toggle='modal' data-bs-target='#ovrModal' onClick={() => handleRowEdit(log)} >
-                        <EditIcon />
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-
-            </table>
-            </div>
-            
-          </div>
-        )}
+        {
+          (resultData == 'empty') ? <p>No data available</p> :
+          (resultData && isVisible) ? displaySearchResults() :
+          <p></p>
+        }
       </div>
       {resultData && isVisible && (
         <div className='modal fade' id='ovrModal' tabindex='-1' aria-labelledby='ovrModalLabel' aria-hidden='true'>
@@ -200,12 +210,10 @@ function OvrContainer() {
                   <div className='row px-5  '>
                     <div className='col-4'>
                       <p>Name:</p>
-                      <p>ID: </p>
                       <p>RFID: </p>
                     </div>
                     <div className='col mb-2'>
                       <p>{resultData.student_name}</p>
-                      <p>{resultData.id}</p>
                       <p>{resultData.rfid}</p>
                     </div>
                   </div>

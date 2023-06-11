@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { useState, useEffect } from "react";
 import DatePicker from 'react-datepicker'
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
@@ -10,8 +9,6 @@ import "bootstrap/dist/js/bootstrap.min.js";
 import Popover from '@mui/material/Popover';
 import "./Database-Modifier.css";
 import GlobalModal from '../Modal/globalmodal';
-// import HowToModal from '../Modal/how-to-modal'
-import DatabaseResult from "../../Components/Database/Database-Result";
 import api from '../../api/api';
 
 
@@ -135,19 +132,19 @@ function DatabaseModifier(props){
             date_start = formJson['date-start'].replaceAll('/', '-')
             date_end = formJson['date-end'].replaceAll('/', '-')
         }
-        fetchAdminInfo(formJson['user-name'], formJson['user-position'], formJson['access-type'], date_start, date_end)
+        fetchAdminInfo(formJson['user-name'], formJson['user-role'], formJson['access-type'], date_start, date_end)
     }
 
-    const fetchAdminInfo = async (user_name, user_position, access_mode, date_start, date_end) => {
+    const fetchAdminInfo = async (user_name, user_role, access_mode, date_start, date_end) => {
         try {
             var result;
             switch (access_mode){
                 case "BasicInformation":
-                    result = await api.get(`/database/admin/admin-info/${user_name}/${user_position}`);
+                    result = await api.get(`/database/admin/admin-info/${user_name}/${user_role}`);
                     break;
                 
                 case "Logs":
-                    result = await api.get(`/database/admin/override-logs/${user_name}/${user_position}/${date_start}/${date_end}`);
+                    result = await api.get(`/database/admin/override-logs/${user_name}/${user_role}/${date_start}/${date_end}`);
                     break
             }
             setSearchResult(result.data)
@@ -169,6 +166,7 @@ function DatabaseModifier(props){
                 Object.keys(searchVal).includes('date-start'),
                 Object.keys(searchVal).includes('date-end'),
             ];
+            
             var result;
             switch (JSON.stringify(searchValExist)){        
                 //calling different APIs for different search functions
@@ -269,35 +267,35 @@ function DatabaseModifier(props){
 
                                 </div>
                                 <Popover
-                                open={isPopoverOpen}
-                                anchorEl={popoverAnchorEl}
-                                onClose={handlePopoverClose}
-                                anchorOrigin={{
-                                vertical: 'bottom',
-                                // horizontal: 'center',
-                                
-                                }}
-                                transformOrigin={{
-                                // vertical: 'bottom',
-                                horizontal: 'left',
-                                }}
-                                classes={{
-                                    paper: 'custom-popover'
-                                  }}
-                            >
-                                {/* Content of the popover */}
-                                <div className='row ms-3 p-1' >
-                                    <div className="row p-3 border border-success rounded bg-success bg-opacity-25">
-                                        <h6 className='text-center fw-bold'>Database Navigation Help</h6>
-                                        <ul>
-                                            <li>(1) Search bar accepts ID and Student ID</li>
-                                            <li>(2) One attribute or dropdown should be modified when using search bar.</li>
-                                            <li>(3) Search multiple students using school year, grade level, and section (e.g., <i>2023-2024 7-Obedient</i>)</li>
-                                        </ul>
+                                    open={isPopoverOpen}
+                                    anchorEl={popoverAnchorEl}
+                                    onClose={handlePopoverClose}
+                                    anchorOrigin={{
+                                    vertical: 'bottom',
+                                    // horizontal: 'center',
+                                    
+                                    }}
+                                    transformOrigin={{
+                                    // vertical: 'bottom',
+                                    horizontal: 'left',
+                                    }}
+                                    classes={{
+                                        paper: 'custom-popover'
+                                    }}
+                                >
+                                    {/* Content of the popover */}
+                                    <div className='row ms-3 p-1' >
+                                        <div className="row p-3 border border-success rounded bg-success bg-opacity-25">
+                                            <h6 className='text-center fw-bold'>Database Navigation Help</h6>
+                                            <ul>
+                                                <li>(1) Search bar accepts ID and Student ID</li>
+                                                <li>(2) One attribute or dropdown should be modified when using search bar.</li>
+                                                <li>(3) Search multiple students using school year, grade level, and section (e.g., <i>2023-2024 7-Obedient</i>)</li>
+                                            </ul>
+                                        </div>
+                                    
                                     </div>
-                                
-                                </div>
-                            </Popover>
+                                </Popover>
                                 <div className="col">
                                     <div class="input-group mb-1">
                                         <label class="input-group-text" for="inputGroupSelectS5">School Year</label>
@@ -366,7 +364,7 @@ function DatabaseModifier(props){
                                             <div className="col me-4 rounded bg-light  " align="center">
                                                 <DatePicker
                                                     className='custom-datepicker'
-                                                    name="date-start "
+                                                    name="date-start"
                                                     selectsStart
                                                     selected={rangeStart}
                                                     startDate={rangeStart}
@@ -417,7 +415,7 @@ function DatabaseModifier(props){
                                     <div class="input-group mb-1">
                                         <label class="input-group-text" for="inputGroupSelectS9">Position</label>
                                         <select 
-                                            name="user-position"
+                                            name="user-role"
                                             class="form-select" 
                                             id="inputGroupSelectS10" 
                                             required
@@ -450,7 +448,7 @@ function DatabaseModifier(props){
                                         <div className="col me-4 rounded bg-light " align="center">
                                             <DatePicker
                                                 className='custom-datepicker'
-                                                name="date-start "
+                                                name="date-start"
                                                 selectsStart
                                                 selected={rangeStart}
                                                 startDate={rangeStart}
@@ -491,14 +489,6 @@ function DatabaseModifier(props){
                 onClose={handleCloseModal}
                 />
             )}
-            {/* {showHowToModal && (
-                <HowToModal 
-                showModal={showHowToModal}
-                title={'stuff'}
-                body={'stuff'}
-                onClose={handleCloseModal}
-                />
-            )} */}
         </div>
     );
 }
