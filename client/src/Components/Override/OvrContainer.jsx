@@ -20,10 +20,11 @@ function OvrContainer() {
   const fetchStudent = async (id) => {
     setResultData(null);
     try {
-      const response = await api.get(`/override/${id}`);
+      const response = await api.get(`/override/attendance-logs/${id}`);
       if (response.data.length > 0) {
         setResultData(response.data[0]);
         setAttendanceLog(response.data); // Set the attendance log data
+        console.log(response.data)
       }
       else { setResultData('empty'); }
     } catch (err) {

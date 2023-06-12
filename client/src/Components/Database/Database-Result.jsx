@@ -46,8 +46,8 @@ function DatabaseResult(props) {
                                 id={(item.id)%2 === 0 ? 'dbItems-even' : ''}>
                                 <div id='profileIcon'><AccountCircleIcon fontSize="large"/></div>
                                 <div id="displayName">{item.overrider_name}</div>
-                                <div id="displayEmail">{item.overrider_position}</div>
-                                <div id="displayStatus">{item.overrider_total_logs}</div>
+                                <div id="displayPosition">{item.overrider_position}</div>
+                                <div id="displayNumLogs">{item.overrider_total_logs}</div>
                             </li>
                         ))}
                     </ul>
@@ -99,7 +99,7 @@ function DatabaseResult(props) {
                             <div id='profileIcon'><AccountCircleIcon fontSize="large"/></div>
                             <div id="displayName">{student.first_name} {student.middle_name} {student.last_name}</div>
                             <div id="displayEmail">{student.grade_level}-{student.section_name}</div>
-                            <div id="displayStatus"><CircleIcon color={student.status === 1 ? "success" : "fail"}/></div>
+                            <div id="displayStatus"><CircleIcon color={student.status == '1' ? "success" : "fail"}/></div>
                             <button id="action-icon" data-bs-toggle= "modal" data-bs-target="#editDBModal" onClick={() => handleEditClick(student)} ><EditIcon/></button>
                         </li>
                     ))}
