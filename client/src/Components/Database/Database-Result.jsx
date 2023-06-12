@@ -32,108 +32,169 @@ function DatabaseResult(props) {
     const [sectionFilter, setSectionFilter] = useState([]);
 
 
-    function displayAdminBasicInfo(data){
-        return <div className="row mb-5 m-3">
-                    <div className="dbresult-header">
-                        <p className="dbheader-name">Name</p>
-                        <p className="dbheader-position">Position</p>
-                        <p className="dbheader-logs">Overriding Logs</p>
-                    </div>
-                    <ul className="dbResult-list"> 
-                        {data.map(item => (
-                            <li key={item.id} 
-                                className="dbItems"
-                                id={(item.id)%2 === 0 ? 'dbItems-even' : ''}>
-                                <div id='profileIcon'><AccountCircleIcon fontSize="large"/></div>
-                                <div id="displayName">{item.overrider_name}</div>
-                                <div id="displayPosition">{item.overrider_position}</div>
-                                <div id="displayNumLogs">{item.overrider_total_logs}</div>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-    }
+    function displayAdminBasicInfo(data) {
+        return (
+          <div className="row mb-5 m-3">
+            <div className="table-responsive">
+              <table className="table border border-success rounded text-center">
+                <thead className='table-header'>
+                  <tr>
+                    <th style={{ backgroundColor: "#00573F", color: "white" }}>#</th>
+                    <th style={{ backgroundColor: "#00573F", color: "white" }}>Name</th>
+                    <th style={{ backgroundColor: "#00573F", color: "white" }}>Position</th>
+                    <th style={{ backgroundColor: "#00573F", color: "white" }}>Overriding Logs</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {data.map((item) => (
+                    <tr key={item.id} >
+                    <td><AccountCircleIcon fontSize="large" /></td>
+                      <td>{item.overrider_name}</td>
+                      <td>{item.overrider_position}</td>
+                      <td>{item.overrider_total_logs}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        );
+      }
+      
 
-    function displayAdminLogs(data){
-        return <div className="row mb-5 m-3">
-                    <div className="dbresult-header">
-                        <p className="dbheader-name" style={{position: "relative", left: "10%"}}>Name</p>
-                        <p className="dbheader-position" style={{position: "relative", left: "25%"}}>Position</p>
-                        <p className="dbheader-logs" style={{position: "relative", left: "40%"}}>Student</p>
-                        <p className="dbheader-reason" style={{position: "relative", left: "55%"}}>Reason</p>
-                        <p className="dbheader-date" style={{position: "relative", left: "70%"}}>Date</p>
-                    </div>
-                    <ul className="dbResult-list"> 
-                        {data.map(item => (
-                            <li key={item.id} 
-                                className="dbItems"
-                                id={(item.id)%2 === 0 ? 'dbItems-even' : ''}>
-                                <div id="displayName" >{item.overrider_name}</div>
-                                <div id="displayPosition">{item.role}</div>
-                                <div id="displayStudent">{item.student_name}</div>
-                                <div id="displayStudent">{item.overriding_reason}</div>
-                                <div id="displayDate">{item.overriding_date}</div>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-    }
+    function displayAdminLogs(data) {
+        return (
+          <div className="row mb-5 m-3">
+            <div className="table-responsive">
+              <table className="table border border-success rounded table-hover text-center">
+                <thead className='table-header' >
+                  <tr>
+                    <th style={{ backgroundColor: "#00573F", color: "white" }}>Name</th>
+                    <th style={{ backgroundColor: "#00573F", color: "white" }}>Position</th>
+                    <th style={{ backgroundColor: "#00573F", color: "white" }}>Student</th>
+                    <th style={{ backgroundColor: "#00573F", color: "white" }}>Reason</th>
+                    <th style={{ backgroundColor: "#00573F", color: "white" }}>Date</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {data.map((item) => (
+                    <tr key={item.id}>
+                      <td>{item.overrider_name}</td>
+                      <td>{item.role}</td>
+                      <td>{item.student_name}</td>
+                      <td>{item.overriding_reason}</td>
+                      <td>{item.overriding_date}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        );
+      }
+      
+      
 
-    function displayStudentInfo(data) {
+      function displayStudentInfo(data) {
         const handleEditClick = (student) => {
-            setSelectedStudent(student);
-            setShowEditModal(true);
+          setSelectedStudent(student);
+          setShowEditModal(true);
         };
-        return <div className="row mb-6 m-3">
-                <div className="dbresult-header">
-                    <p className="dbheader-name">Name</p>
-                    <p className="dbheader-grade-section">Grade&Section</p>
-                    <p className="dbheader-status">Status</p>
-                    <p className="dbheader-actions">Actions</p>
-                </div>
-                <ul className="dbResult-list"> 
-                    {data.map(student => (
-                        <li key={student.id} 
-                            className="dbItems"
-                            id={(student.id)%2 === 0 ? 'dbItems-even' : ''}>
-                            <div id='profileIcon'><AccountCircleIcon fontSize="large"/></div>
-                            <div id="displayName">{student.first_name} {student.middle_name} {student.last_name}</div>
-                            <div id="displayEmail">{student.grade_level}-{student.section_name}</div>
-                            <div id="displayStatus"><CircleIcon color={student.status == '1' ? "success" : "fail"}/></div>
-                            <button id="action-icon" data-bs-toggle= "modal" data-bs-target="#editDBModal" onClick={() => handleEditClick(student)} ><EditIcon/></button>
-                        </li>
-                    ))}
-                </ul>
-            </div> 
-    }
-
-    function displayStudentLogs(data){
-        return <div className="row mb-7 m-3">
-                    <div className="dbresult-header">
-                        <p className="dbheader-name">Name</p>
-                        <p className="dbheader-time-in">Time-in</p>
-                        <p className="dbheader-time-out">Time-out</p>
-                        <p className="dbheader-date">Date</p>
-                    </div>
-                    <ul className="dbResult-list"> 
-                        {data.map(item => (
-                            <li key={item.id} 
-                                className="dbItems"
-                                id={(item.id)%2 === 0 ? 'dbItems-even' : ''}>
-                                <div id='profileIcon'><AccountCircleIcon fontSize="large"/></div>
-                                <div id="displayName">{item.first_name} {item.last_name} </div>
-                                <div id="displayTimeIn">{item.time_in}</div>
-                                <div id="displayTimeOut">{item.time_out}</div>
-                                <div id="displayDate">{item.date}</div>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-    }
+      
+        return (
+          <div className="row mb-6 m-3">
+            <div className="table-responsive">
+              <table className="table border border-success rounded text-center">
+                <thead className='table-header'>
+                  <tr>
+                    <th style={{ backgroundColor: "#00573F", color: "white" }}>#</th>
+                    <th style={{ backgroundColor: "#00573F", color: "white" }}>Name</th>
+                    <th style={{ backgroundColor: "#00573F", color: "white" }}>Grade&Section</th>
+                    <th style={{ backgroundColor: "#00573F", color: "white" }}>Status</th>
+                    <th style={{ backgroundColor: "#00573F", color: "white" }}>Actions</th>
+                  </tr>
+                </thead >
+                <tbody>
+                  {data.map((student) => (
+                    <tr
+                      key={student.id}
+                    >
+                      <td>
+                        <AccountCircleIcon fontSize="large" />
+                        
+                      </td>
+                      <td>{student.first_name}{" "}
+                        {student.middle_name && (
+                          <span className="displayMiddleName">
+                            {student.middle_name}
+                          </span>
+                        )}{" "}
+                        {student.last_name}</td>
+                      <td>
+                        {student.grade_level}-{student.section_name}
+                      </td>
+                      <td>
+                        <CircleIcon
+                          color={student.status === "1" ? "success" : "fail"}
+                        />
+                      </td>
+                      <td>
+                        <button
+                          id="action-iconStudent"
+                          data-bs-toggle="modal"
+                          data-bs-target="#editDBModal"
+                          onClick={() => handleEditClick(student)}
+                        >
+                          <EditIcon />
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        );
+      }
+      
+      function displayStudentLogs(data) {
+        return (
+          <div className="row mb-7 m-3">
+            <div className="table-responsive">
+              <table className="table border border-success rounded">
+                <thead className='table-header'>
+                  <tr>
+                <th style={{ backgroundColor: "#00573F", color: "white" }}>#</th>
+                <th style={{ backgroundColor: "#00573F", color: "white" }}>Name</th>
+                <th style={{ backgroundColor: "#00573F", color: "white" }}>Time-in</th>
+                <th style={{ backgroundColor: "#00573F", color: "white" }}>Time-out</th>
+                <th style={{ backgroundColor: "#00573F", color: "white" }}>Date</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {data.map((item) => (
+                    <tr key={item.id} className={item.id % 2 === 0 ? "dbItems-even" : ""}>
+                      <td>
+                        <AccountCircleIcon fontSize="large" />
+                        
+                      </td>
+                      <td style={{ backgroundColor: "#00573F", color: "white" }}>{item.first_name} {item.last_name}</td>
+                      <td style={{ backgroundColor: "#00573F", color: "white" }}>{item.time_in}</td>
+                      <td style={{ backgroundColor: "#00573F", color: "white" }}>{item.time_out}</td>
+                      <td style={{ backgroundColor: "#00573F", color: "white" }}>{item.date}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        );
+      }
+      
 
     function displayNoData(){
         return (
-            <div className="row mb-7 m-3">
+            <div className="row mb-7 m-3 s">
                 <div className="row mb-5 align-content-center">
                     <p>No data available</p>
                 </div>
@@ -261,7 +322,7 @@ function DatabaseResult(props) {
     if (!Array.isArray(searchResult)) {
         return (
             <div className="container-md mb-3">
-                <div className="container-md border border-success rounded p-3 bg-secondary bg-opacity-25">
+                <div className="container-md border border-success rounded p-3">
                     <div className="row justify-content-end">
                         <div className="col-4 align-self-end">
                             <div class="input-group mb-1">
@@ -284,7 +345,7 @@ function DatabaseResult(props) {
 
     return (
         <div className="container-md mb-3">
-            <div className="container-md border p-3 rounded">
+            <div className="container-md border border-success rounded p-3">
                 <div className="row justify-content-end">
                     <div className="col-4 align-self-end">
                         <div class="input-group mb-1">

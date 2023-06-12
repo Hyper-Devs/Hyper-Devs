@@ -209,7 +209,7 @@ router.get("/student-filter/student/:student_prim_info/:school_year/:grade_level
 
 //API endpoint for retrieving all students in a school year
 router.get("/students/batch/:school_year", (request, response) => {
-  const query = `SELECT students.id, students.first_name, students.middle_name, students.last_name, students.status, students.grade_level, students.section_name, sections.school_year, students.parent_fn, students.parent_mn, students.parent_ln, students.relationship, students.contact_num
+  const query = `SELECT students.rfid, students.first_name, students.middle_name, students.last_name, students.status, students.grade_level, students.section_name, sections.school_year, students.parent_fn, students.parent_mn, students.parent_ln, students.relationship, students.contact_num
                   FROM students,sections
                   WHERE students.grade_level = sections.grade_level AND students.section_name = sections.section_name 
                   AND sections.school_year = ?`;
@@ -223,7 +223,7 @@ router.get("/students/batch/:school_year", (request, response) => {
 
 //API endpoint for retrieving all students in a grade level
 router.get("/students/batch/:school_year/:grade_level", (request, response) => {
-  const query = `SELECT students.id, students.first_name, students.middle_name, students.last_name, students.status, students.grade_level, students.section_name, sections.school_year, students.parent_fn, students.parent_mn, students.parent_ln, students.relationship, students.contact_num
+  const query = `SELECT students.rfid, students.first_name, students.middle_name, students.last_name, students.status, students.grade_level, students.section_name, sections.school_year, students.parent_fn, students.parent_mn, students.parent_ln, students.relationship, students.contact_num
                   FROM students,sections
                   WHERE students.grade_level = sections.grade_level AND students.section_name = sections.section_name 
                   AND sections.school_year = ? AND students.grade_level = ?`;
@@ -237,7 +237,7 @@ router.get("/students/batch/:school_year/:grade_level", (request, response) => {
 
 //API endpoint for retrieving all students in a section
 router.get("/students/batch/:school_year/:grade_level/:section", (request, response) => {
-  const query = `SELECT students.id, students.first_name, students.middle_name, students.last_name, students.status, students.grade_level, students.section_name, sections.school_year, students.parent_fn, students.parent_mn, students.parent_ln, students.relationship, students.contact_num
+  const query = `SELECT students.rfid, students.first_name, students.middle_name, students.last_name, students.status, students.grade_level, students.section_name, sections.school_year, students.parent_fn, students.parent_mn, students.parent_ln, students.relationship, students.contact_num
                   FROM students,sections
                   WHERE students.grade_level = sections.grade_level AND students.section_name = sections.section_name 
                   AND sections.school_year = ? AND students.grade_level = ? AND students.section_name = ?`;
