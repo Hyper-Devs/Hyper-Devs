@@ -52,7 +52,7 @@ function outputConditioner (student_prim_infoo, results, mode) {
 
 
 //API ending for retrieving attendace logs using student id
-router.get("/:student_id", (request, response) => {
+router.get("/attendance-logs/:student_id", (request, response) => {
   var searchVal = stringInputConditioner(request.params.student_id);
   var query = "SELECT * FROM attendance_logs WHERE is_overriden = 0 AND ", value = null;
 
