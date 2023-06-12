@@ -65,16 +65,16 @@ function stringInputConditioner (string) {
 };
 
 function outputConditioner (student_prim_infoo, results, mode) {
-  var searchVal, returnVal = "Student not found", studentPrimVal;
-  const student_prim_info = student_prim_infoo;
   var logs = []
+  const student_prim_info = student_prim_infoo;
+  var searchVal, returnVal = "Student not found", studentPrimVal;
+
   if (/^\d+$/.test(student_prim_info)){ searchVal = 'rfid'; }   
   else{                                                      //student_prim_info parameter is a name
     searchVal = 'first_name'                
     studentPrimVal = student_prim_info.toLowerCase()                  
   }
 
-  console.log(results)
   for(let i=0; i<results.length; i++){
     var testCases = [];
 
@@ -149,7 +149,7 @@ router.get("/student/:student_prim_info", (request, response) => {
 
 //API endpoint for retrieving student's information [with only one search filters - second mode]
 router.get("/student-filter/student/:student_prim_info/:school_year", (request, response) => {
-  const query = `SELECT students.id, students.first_name, students.middle_name, students.last_name, students.status, students.grade_level, students.section_name, sections.school_year, students.parent_fn, students.parent_mn, students.parent_ln, students.relationship, students.contact_num
+  const query = `SELECT students.rfid, students.first_name, students.middle_name, students.last_name, students.status, students.grade_level, students.section_name, sections.school_year, students.parent_fn, students.parent_mn, students.parent_ln, students.relationship, students.contact_num
               FROM students,sections
               WHERE students.grade_level = sections.grade_level AND students.section_name = sections.section_name 
               AND sections.school_year = ?`;
@@ -157,7 +157,6 @@ router.get("/student-filter/student/:student_prim_info/:school_year", (request, 
 
   db.query(query, values, (error, data) => {
       if (error) { return response.json(error); }
-      
       //the task here is to further refine the query results by using the given ID or name
       if (data != [null]){
         const value = outputConditioner(request.params.student_prim_info, data, "student-info");
@@ -169,7 +168,7 @@ router.get("/student-filter/student/:student_prim_info/:school_year", (request, 
 
 //API endpoint for retrieving student's information [with only two search filters - third mode]
 router.get("/student-filter/student/:student_prim_info/:school_year/:grade_level", (request, response) => {
-  const query = `SELECT students.id, students.first_name, students.middle_name, students.last_name, students.status, students.grade_level, students.section_name, sections.school_year, students.parent_fn, students.parent_mn, students.parent_ln, students.relationship, students.contact_num
+  const query = `SELECT students.rfid, students.first_name, students.middle_name, students.last_name, students.status, students.grade_level, students.section_name, sections.school_year, students.parent_fn, students.parent_mn, students.parent_ln, students.relationship, students.contact_num
               FROM students,sections
               WHERE students.grade_level = sections.grade_level AND students.section_name = sections.section_name 
               AND sections.school_year = ? AND students.grade_level = ?`;
@@ -189,13 +188,14 @@ router.get("/student-filter/student/:student_prim_info/:school_year/:grade_level
 
 //API endpoint for retrieving student's information [with all three search filters - default mode]
 router.get("/student-filter/student/:student_prim_info/:school_year/:grade_level/:section_name", (request, response) => {
-  const query = `SELECT students.id, students.first_name, students.middle_name, students.last_name, students.status, students.grade_level, students.section_name, sections.school_year, students.parent_fn, students.parent_mn, students.parent_ln, students.relationship, students.contact_num
+  const query = `SELECT students.rfid, students.first_name, students.middle_name, students.last_name, students.status, students.grade_level, students.section_name, sections.school_year, students.parent_fn, students.parent_mn, students.parent_ln, students.relationship, students.contact_num
               FROM students,sections
               WHERE students.grade_level = sections.grade_level AND students.section_name = sections.section_name 
               AND sections.school_year = ? AND students.grade_level = ? AND students.section_name = ?`;
   const values = [request.params.school_year, request.params.grade_level, request.params.section_name];
 
   db.query(query, values, (error, data) => {
+    console.log(data)
       if (error) { return response.json(error); }
       
       //the task here is to further refine the query results by using the given ID or name
@@ -301,6 +301,11 @@ router.get("/student-filter/student/:student_prim_info/:school_year/:grade_level
 });
 
 
+
+
+
+
+
 //API endpoint for updating a student's information from the database
 router.put("/students/edit-student", (request, response) => {
   var query = "UPDATE students SET ";
@@ -327,20 +332,21 @@ router.put("/students/edit-student", (request, response) => {
 
 
 //API endpoint for retrieving admin/faculty basic information
-router.get("/admin/admin-info/:admin_name/:position/", (request, response) => {
-  const query = `SELECT name, position, (SELECT count(*) as override_logs FROM override_logs WHERE overrider_name = ?) as override_logs 
+router.get("/admin/admin-info/:admin_name/:role/", (request, response) => {
+  const query = `SELECT name, position, (SELECT count(*) as override_logs FROM override_logs WHERE overrider_name = ?) as override_logs
                   FROM users 
                   WHERE users.name = ? AND users.role = ?`;
-  const values = [request.params.admin_name, request.params.admin_name, request.params.position]
+  const values = [request.params.admin_name, request.params.admin_name, request.params.role]
   
   db.query(query, values, (error, data) => {
+    console.log(data)
     if (error) { return response.json(error); }
 
     var returnVal = null;
     if (data.length > 0){
       returnVal = [{
         overrider_name : data[0]['name'],
-        overrider_position : request.params.position,
+        overrider_position : data[0]['position'],
         overrider_total_logs : data[0]['override_logs']
       }]
     }

@@ -7,7 +7,8 @@ const device = awsIot.device({
   certPath: 'certificates/certificate.pem.crt',
   caPath: 'certificates/root-ca.pem',
   clientId: mqtt.clientId,
-  host: 'asnmr6t3dbms9-ats.iot.ap-southeast-1.amazonaws.com'
+  host: 'asnmr6t3dbms9-ats.iot.ap-southeast-1.amazonaws.com',
+  keepalive: 300
 });
 
 // Connect to AWS IoT Core
