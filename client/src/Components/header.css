@@ -9,6 +9,14 @@
     padding: 20px 15px;
 }
 
+.feature {
+    color: yellow;
+    font-weight: bold;
+    font-size: 1.2em;
+    padding: 0.2em 0.4em;
+    border-radius: 0.4em;
+    background-color: rgba(255, 255, 255, 0.2);
+  }
 
 .Header .Header-text {
     font-family: 'Cambria';

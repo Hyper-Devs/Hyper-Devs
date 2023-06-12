@@ -20,6 +20,10 @@ function Box() {
       'Tips: Access a students information in the database page!',
       'Tips: You can override a students access logs in the override page!',
       'Tips: Enroll and edit a students information in the enrollment page!',
+      'Tips: Remember to rehydrate!',
+      'Tips: You can search students by groups. You can search all students by school year, grade level, or even by sections.',
+      'Tips: You can search students using ID, Name, or First Name + Last Name',
+      'Tips: Search a students attendance logs using date ranges (eg. 2023/01/01 - 2023/12/2)'
     ]
   
     useEffect(() => {

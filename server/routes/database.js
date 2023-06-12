@@ -461,10 +461,10 @@ router.get('/get-user/:access_id', async (req, res) => {
 });
 
 // Check if access_id exists in the database
-router.get('/check-access-id/:access_id', async (req, res) => {
-  const { access_id } = req.params;
-  const q = "SELECT COUNT(*) AS count FROM users WHERE access_id = ?";
-  db.query(q, [access_id], (err, result) =>{
+router.get('/check-access-id/:access_id/:role', async (req, res) => {
+  const { access_id, role } = req.params;
+  const q = "SELECT COUNT(*) AS count FROM users WHERE access_id = ? AND role = ?";
+  db.query(q, [access_id, role], (err, result) =>{
     if(err){
       console.error(err.message);
       res.status(500).send('Server error');
