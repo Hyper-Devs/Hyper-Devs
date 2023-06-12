@@ -1,5 +1,5 @@
 // 210 Request processed successfully (i.e., changes are made in the database)
-// 229 No changes saved in the database
+// 220 No changes saved in the database
 
 
 const express = require('express');
@@ -54,13 +54,14 @@ function outputConditioner (student_prim_infoo, results, mode) {
 //API ending for retrieving attendace logs using student id
 router.get("/:student_id", (request, response) => {
   var searchVal = stringInputConditioner(request.params.student_id);
-  var query = "SELECT * FROM attendance_logs WHERE ", value = null;
+  var query = "SELECT * FROM attendance_logs WHERE is_overriden = 0 AND ", value = null;
 
   if (searchVal['name']){ query += 'student_name = ?';  value = searchVal['name']}
   else { query += 'rfid = ?'; value = searchVal['id']}
-
+  
   db.query(query, [value], (error, data) => {
     if (error) { return response.json(error); }
+
     if (data.length > 0){
       const refinedValues = data.map((element) => {
         var date = new Date(element['date']);
@@ -75,9 +76,9 @@ router.get("/:student_id", (request, response) => {
 
 //API ending for adding an override log
 router.post("/new-override-log", (request, response) => {
-  const query = "INSERT INTO override_logs (`student_log_num`, `student_name`, `student_id`, `overriding_reason`, `overrider_name`, `overriding_date`) VALUES (?)"
+  const query = "INSERT INTO override_logs (`student_log_id`, `student_name`, `student_id`, `overriding_reason`, `overrider_name`, `overriding_date`) VALUES (?)"
   const values = [
-      request.body['student_log_num'],
+      request.body['student_log_id'],
       request.body['student_name'],
       request.body['student_id'],
       request.body['override-reason'],
@@ -95,9 +96,9 @@ router.post("/new-override-log", (request, response) => {
  
 router.put("/update/attendance-log", (request, response) => {
   const query = `UPDATE attendance_logs
-                  SET isOverriden = 1
-                  WHERE student_log_num = ? AND rfid = ? AND student_name = ?`;
-  const values = [request.body['student_log_num'], request.body['rfid'], request.body['student_name']]
+                  SET is_overriden = 1
+                  WHERE student_log_id = ? AND rfid = ?`;
+  const values = [request.body['student_log_id'], request.body['rfid']]
 
   db.query(query, values, (error, data) => {
     if (error) { return response.json(error) }

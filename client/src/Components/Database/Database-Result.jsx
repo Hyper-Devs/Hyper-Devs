@@ -69,7 +69,7 @@ function DatabaseResult(props) {
                                 className="dbItems"
                                 id={(item.id)%2 === 0 ? 'dbItems-even' : ''}>
                                 <div id="displayName" >{item.overrider_name}</div>
-                                <div id="displayPosition">{item.position}</div>
+                                <div id="displayPosition">{item.role}</div>
                                 <div id="displayStudent">{item.student_name}</div>
                                 <div id="displayStudent">{item.overriding_reason}</div>
                                 <div id="displayDate">{item.overriding_date}</div>
@@ -153,15 +153,16 @@ function DatabaseResult(props) {
         formJson["student-id"] = selectedStudent['id']
 
         const isEditValueValid = [
-            formJson["student-first_name"] !== '',
-            formJson["student-last_name"] !== '',
-            formJson["student-grade-level"] !== 'Select',
-            formJson["student-section"] !== 'Select',
+            formJson["first_name"] !== '',
+            formJson["last_name"] !== '',
+            formJson["grade_level"] !== 'Select',
+            formJson["section_name"] !== 'Select',
             formJson["parent_fn"] !== '',
             formJson["parent_ln"] !== '',
             formJson["contact-num"] !== '',
             formJson["relationship"] !== '',
         ];
+
 
         if (isEditValueValid.every(element=>element===true)){
             var fieldKeys = []
@@ -300,8 +301,8 @@ function DatabaseResult(props) {
                     (searchResult[0]['values'] == null || searchResult[0]['values'].length <= 0) ? displayNoData() :
                     searchResult[0]['mode'] === 'student-basic-info' ? displayStudentInfo(searchResult[0]['values']) : 
                     searchResult[0]['mode'] === 'student-attendance-logs' ? displayStudentLogs(searchResult[0]['values']) :
-                    searchResult[0]['mode'] === 'override-basic-info' ? displayAdminBasicInfo(searchResult[0]['values']) :
-                    searchResult[0]['mode'] === 'override-logs' ? displayAdminLogs(searchResult[0]['values']) :
+                    searchResult[0]['mode'] === 'user-basic-info' ? displayAdminBasicInfo(searchResult[0]['values']) :
+                    searchResult[0]['mode'] === 'user-override-logs' ? displayAdminLogs(searchResult[0]['values']) :
                     <p>No data available</p>
                 }
             </div>
@@ -376,8 +377,8 @@ function DatabaseResult(props) {
                                                             class="form-select" 
                                                             id="inputGroupSelectS1" 
                                                         >
-                                                            <option selected value={selectedStudent.status === '1' ? "1" : "0"}>{selectedStudent.status === '1' ? "Active" : "Inactive"}</option>
-                                                            <option value={selectedStudent.status === '0' ? "1" : "0"}>{selectedStudent.status === '0' ? "Active" : "Inactive"}</option>
+                                                            <option selected value={selectedStudent.status}>{selectedStudent.status == '1' ? "Active" : "Inactive"}</option>
+                                                            <option value={!selectedStudent.status}>{!selectedStudent.status == '0' ? "Inactive" : "Active"}</option>
                                                         </select>
                                                     </div>
                                                     <div class="input-group mb-1">
@@ -439,22 +440,22 @@ function DatabaseResult(props) {
                                                             required
                                                         ></input>
                                                     </div>
-                                                    <div class="input-group mb-1">
+                                                    {/* <div class="input-group mb-1">
                                                         <span class="input-group-text" id="selectedStudentRel">Relationship:</span>
                                                         <input 
                                                             name='relationship'
                                                             type="text" 
                                                             class="form-control" 
-                                                            defaultValue= {selectedStudent.relationship} 
+                                                            defaultValue= {selectedStudent.parent_relationship} 
                                                             aria-label="StudentRel" 
                                                             aria-describedby="StudentRel"
                                                             required
                                                         ></input>
-                                                    </div>
+                                                    </div> */}
                                                     <div class="input-group mb-1">
                                                         <span class="input-group-text" id="selectedStudentCN">Contact No.:</span>
                                                         <input 
-                                                            name='contact_num'
+                                                            name='contact_number'
                                                             type="number" 
                                                             class="form-control" 
                                                             defaultValue={selectedStudent.contact_num}

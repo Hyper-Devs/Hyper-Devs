@@ -1,25 +1,26 @@
+const api = require('../api.js');
 const express = require('express');
 const router = express.Router();
-const api = require('../api.js');
 
 router.use(express.json())
 
 //api to accept rfid data sent from raspberry pi
-router.post('/rfid_data', async (request,response) => {
-    var number = null;
+router.post('/detected-rfid', async (request, response) => {
+    var studentInfo = null;
     const rfidData = request.body.rfid_data;
+    //the rfid_data must also be able to distinguish whether the attendance log is an entry or exit
 
-    // retrieval of the contact number associated with the student
+    // retrieval of the information of the student who tapped
     try{
         const result = await api.get(`/database/student/${rfidData}`);
-        number = result.data;
+        studentInfo = result.data;
     } catch (error){
         return response.json(error)
     }
 
-    // sending of the message to the retrieved contact number
+    //sending of the message to the retrieved contact number
     try {
-        const result = await api.get(`/messaging/message/${number}/${2}`)
+        const result = await api.post(`/messaging/twilio/message`, studentInfo)
         return response.json(result.data)
     } catch (error) {
         return response.json(error)

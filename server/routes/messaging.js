@@ -6,47 +6,43 @@ require("dotenv").config();
 const accountSID = 'ACa9e2d984a106551571c0f573143b8343';
 const authToken = 'f6a5b76dfc306a27d48663fa57f288b6';
 
+
 const client = new twilio(accountSID, authToken);
 
 // Twilio API
-router.get('/message', (req, res) => {
-    // const recipient = req.params.recipient_num
-    // const status = req.params.status
-    const { recipient, status } = req.query;
-    var textMessage;
+router.post('/twilio/message', (request, response) => {
+    const student = request.body
+    const recipient = student['contact_num']
+    const status = request.params.status || 1
+    const mode = status == 1 ? "entered" : "exited" 
     
     const showdate = new Date();
     var dt = showdate.getMonth()+'/'+showdate.getDate()+'/'+showdate.getFullYear();
     var time = showdate.getHours()+':'+showdate.getMinutes()+':'+showdate.getSeconds();
   
-    // const textMessage = `Greetings! Mr./Ms. Tan, your child entered the school campus today ${dt} at ${time}\nThank you so much!\nThis is an auto-generated text message from University of the Philippines High-School`;
-    const greeting = "Greetings! Mr./Ms. Tan,"
-    const signature = "This is an auto-generated text message from University of the Philippines High-School"
-  
-    if(status == 1){
-      textMessage = greeting + "your child entered\nthe school campus today " + dt + " at " + time + "\n" + " Thank you so much! \n " + signature; 
-    }
-    else if(status == 2){
-      textMessage = "\nGreetings! Mr./Ms. Tan, your child exited\nthe school campus today " + dt + " at " + time + "\n" + " Thank you so much! \n This is an auto-generated text message from University of the Philippines High-School"
-    }
-    else if(status == 3){
-      textMessage = "Student got permission to leave school at " + dt + ', ' + time
-    }
-  
+    const message = `Greetings! Mr./Ms. ${student['parent_ln']}! 
+                      Your student, ${student['first_name']} ${student['last_name']}, ${mode} the school campus today ${dt} at ${time}. 
+                      Thank you so much!
+                      
+                      This is an auto-generated text message from University of the Philippines High-School`
+
+    const otherMessage = "Student got permission to leave school at " + dt + ', ' + time;
+    
     // Send text message
     client.messages.create({
-      body: textMessage,
+      body: message,
       to: "+63"+recipient,
       from: '+13614507265'
     }).then((message) => {
       console.log(message),
-      res.write(message.body), 
-      res.write("\nMessage sent succesfully!"),
-      res.end()
+      response.write(message.body), 
+      response.write("Message sent succesfully!"),
+      response.end()
     })
     .catch(error => {
       console.log(error),
-      res.send("\nMessage failed to send!")});
+      response.send("Message failed to send!")
+    });
 });
   
 // Semaphor API
