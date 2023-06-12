@@ -390,7 +390,7 @@ function DatabaseModifier(props){
                                 }
                             </div>
                             <div className="row p-2">
-                                <button type="submit" class="btn btn-success"> <SearchIcon /> Search Database </button>
+                                <button type="submit" class="btn btn-success" style={{ backgroundColor: "#00573F", color: "white" }} > <SearchIcon /> Search Database </button>
                             </div>
                         </form>
                     </div>
@@ -475,7 +475,7 @@ function DatabaseModifier(props){
                                 }   
                             </div>
                             <div className="row p-2">
-                                <button type="submit" class="btn btn-success"> <SearchIcon /> Search Database </button>
+                                <button type="submit" class="btn btn-success" style={{ backgroundColor: "#00573F", color: "white" }}> <SearchIcon /> Search Database </button>
                             </div>
                         </form>
                     </div>
