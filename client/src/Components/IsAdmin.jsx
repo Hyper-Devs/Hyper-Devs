@@ -12,22 +12,32 @@ function IsAdmin ({children}){
 
     const handleCloseModal = () => {
       setShowModal(false);
-      navigate('/dashboard');
+      navigate('/');
     };
 
     let navigate = useNavigate();
 
     const token = localStorage.getItem("accessToken");
-    const decodedToken = jwt_decode(token);
-    console.log(token, decodedToken)
+    // console.log(token, decodedToken)
 
     useEffect(()=>{
-      if (token === null || decodedToken.role === null || decodedToken.role === undefined) {
-        navigate('/');
-    } else if (decodedToken.role !== 'Admin'){
-      setTitleModal("Access Denied.");
-      setBodyModal("You do not have access to this page! If required, please contact another user with higher authorization.")
-      setShowModal(true)
+      if(!token){
+        setTitleModal("Access Denied.");
+        setBodyModal("Please Login to access the page!")
+        setShowModal(true)
+      } else {
+
+        const decodedToken = jwt_decode(token);
+        if (token === null || decodedToken.role === null || decodedToken.role === undefined) {
+          setTitleModal("Access Denied.");
+          setBodyModal("Please Login to access the page!")
+          setShowModal(true)
+          navigate('/');
+      } else if (decodedToken.role !== 'Admin'){
+          setTitleModal("Access Denied.");
+          setBodyModal("You do not have access to this page! If required, please contact another user with higher authorization.")
+          setShowModal(true)
+      }
     }
     },[]) 
 
