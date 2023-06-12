@@ -14,7 +14,6 @@ function Header() {
                 <span className='feature'>Logs</span>, 
                 <span className='feature'>Notifies</span>, 
                 <span className='feature'>Alerts</span>, 
-                <span className='feature'>Overrides</span>,
                 <span className='feature'>Overrides</span>.
             </p>
         </div>
