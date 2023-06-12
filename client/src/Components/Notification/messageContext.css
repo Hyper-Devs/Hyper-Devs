@@ -103,3 +103,7 @@
   .notif-message-rectangle3 button:hover {
     background-color: #157347;
   }
+
+.helpIcon {
+  height: 40px;
+}
