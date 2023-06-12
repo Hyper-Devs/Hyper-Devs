@@ -209,7 +209,7 @@ router.get("/student-filter/student/:student_prim_info/:school_year/:grade_level
 
 //API endpoint for retrieving all students in a school year
 router.get("/students/batch/:school_year", (request, response) => {
-  const query = `SELECT students.id, students.first_name, students.middle_name, students.last_name, students.status, students.grade_level, students.section_name, sections.school_year, students.parent_fn, students.parent_mn, students.parent_ln, students.relationship, students.contact_num
+  const query = `SELECT students.rfid, students.first_name, students.middle_name, students.last_name, students.status, students.grade_level, students.section_name, sections.school_year, students.parent_fn, students.parent_mn, students.parent_ln, students.relationship, students.contact_num
                   FROM students,sections
                   WHERE students.grade_level = sections.grade_level AND students.section_name = sections.section_name 
                   AND sections.school_year = ?`;
@@ -223,7 +223,7 @@ router.get("/students/batch/:school_year", (request, response) => {
 
 //API endpoint for retrieving all students in a grade level
 router.get("/students/batch/:school_year/:grade_level", (request, response) => {
-  const query = `SELECT students.id, students.first_name, students.middle_name, students.last_name, students.status, students.grade_level, students.section_name, sections.school_year, students.parent_fn, students.parent_mn, students.parent_ln, students.relationship, students.contact_num
+  const query = `SELECT students.rfid, students.first_name, students.middle_name, students.last_name, students.status, students.grade_level, students.section_name, sections.school_year, students.parent_fn, students.parent_mn, students.parent_ln, students.relationship, students.contact_num
                   FROM students,sections
                   WHERE students.grade_level = sections.grade_level AND students.section_name = sections.section_name 
                   AND sections.school_year = ? AND students.grade_level = ?`;
@@ -237,7 +237,7 @@ router.get("/students/batch/:school_year/:grade_level", (request, response) => {
 
 //API endpoint for retrieving all students in a section
 router.get("/students/batch/:school_year/:grade_level/:section", (request, response) => {
-  const query = `SELECT students.id, students.first_name, students.middle_name, students.last_name, students.status, students.grade_level, students.section_name, sections.school_year, students.parent_fn, students.parent_mn, students.parent_ln, students.relationship, students.contact_num
+  const query = `SELECT students.rfid, students.first_name, students.middle_name, students.last_name, students.status, students.grade_level, students.section_name, sections.school_year, students.parent_fn, students.parent_mn, students.parent_ln, students.relationship, students.contact_num
                   FROM students,sections
                   WHERE students.grade_level = sections.grade_level AND students.section_name = sections.section_name 
                   AND sections.school_year = ? AND students.grade_level = ? AND students.section_name = ?`;
@@ -461,10 +461,10 @@ router.get('/get-user/:access_id', async (req, res) => {
 });
 
 // Check if access_id exists in the database
-router.get('/check-access-id/:access_id', async (req, res) => {
-  const { access_id } = req.params;
-  const q = "SELECT COUNT(*) AS count FROM users WHERE access_id = ?";
-  db.query(q, [access_id], (err, result) =>{
+router.get('/check-access-id/:access_id/:role', async (req, res) => {
+  const { access_id, role } = req.params;
+  const q = "SELECT COUNT(*) AS count FROM users WHERE access_id = ? AND role = ?";
+  db.query(q, [access_id, role], (err, result) =>{
     if(err){
       console.error(err.message);
       res.status(500).send('Server error');
@@ -577,6 +577,39 @@ router.post("/update-password", (req, res) => {
 //     })
 //   }
 // });
+
+
+router.post("/new-attendance-log", (request, response) => {
+  const query = `INSERT IGNORE INTO attendance_logs (rfid, time_in, time_out, date, is_overriden) VALUES (?)`;
+  const values = [
+    request.body['student-rfid'],
+    request.body['student-time-in'],
+    request.body['student-time-out'],
+    request.body['date'],
+    request.body['is_overriden']
+  ]
+
+  db.query(query, [values], (error, data) => {
+    if (error) { return response.json(error)}
+
+    if (data['affectedRows'] > 0) {return response.status(210).send("Student log recorded successfully")}
+    else {return response.status(220).send("No changes saved")}
+  })
+})
+
+// router.put("/update-attendance-log", (request, response) => {
+//   const query = `UPDATE attendance_logs
+//                   SET time_out = ? WHERE rfid = ?`;
+//   const values = [request.body['student-timeout'], request.body['student-rfid']]
+
+//   db.query(query, values, (error, data) => {
+//     if (error) { return response.json(error)}
+
+//     if (data['affectedRows'] > 0) {return response.status(210).send("Student log updated successfully")}
+//     else {return response.status(220).send("No changes saved")}
+//   })
+                    
+// })
 
 
 
