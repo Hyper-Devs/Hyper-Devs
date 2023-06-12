@@ -579,6 +579,39 @@ router.post("/update-password", (req, res) => {
 // });
 
 
+router.post("/new-attendance-log", (request, response) => {
+  const query = `INSERT IGNORE INTO attendance_logs (rfid, time_in, time_out, date, is_overriden) VALUES (?)`;
+  const values = [
+    request.body['student-rfid'],
+    request.body['student-time-in'],
+    request.body['student-time-out'],
+    request.body['date'],
+    request.body['is_overriden']
+  ]
+
+  db.query(query, [values], (error, data) => {
+    if (error) { return response.json(error)}
+
+    if (data['affectedRows'] > 0) {return response.status(210).send("Student log recorded successfully")}
+    else {return response.status(220).send("No changes saved")}
+  })
+})
+
+// router.put("/update-attendance-log", (request, response) => {
+//   const query = `UPDATE attendance_logs
+//                   SET time_out = ? WHERE rfid = ?`;
+//   const values = [request.body['student-timeout'], request.body['student-rfid']]
+
+//   db.query(query, values, (error, data) => {
+//     if (error) { return response.json(error)}
+
+//     if (data['affectedRows'] > 0) {return response.status(210).send("Student log updated successfully")}
+//     else {return response.status(220).send("No changes saved")}
+//   })
+                    
+// })
+
+
 
 
 

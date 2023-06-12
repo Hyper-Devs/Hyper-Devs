@@ -28,7 +28,7 @@ function EnrollBNewSYResults(){
             //once again, fix this so the school year is not hard coded
             const response = await api.get(`/database/students/batch/${'2023-2024'}/${gradeLevel}/${section}`);
             if (response.status === 200){
-                var students = response.data[0]['values'].map((student) => ({id: "name1", sId: student.id, name: student.first_name+" "+student.last_name}))
+                var students = response.data[0]['values'].map((student) => ({id: "name1", sId: student.rfid, name: student.first_name+" "+student.last_name}))
                 setStudentVal(students);
             }
         } catch (err) {
@@ -80,7 +80,6 @@ function EnrollBNewSYResults(){
 
     // functions for updating of the students' grade & section for a new AY
     function handleStudentUpdate(event) {
-        console.log(studentVal)
         event.preventDefault();
 
         const form = event.target;
@@ -107,6 +106,7 @@ function EnrollBNewSYResults(){
     const updateStudents = async (inputObject) => {
         try {
             const response = await api.put(`/enroll/batch/student-migration`, inputObject);
+            console.log(inputObject)
             if (response.status === 210){
                 setTitleModal("Migration success");
                 setBodyModal("The selected student/s have been successfully enrolled to the next level.");

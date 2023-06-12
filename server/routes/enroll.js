@@ -66,7 +66,7 @@ router.get('/download/new-template', (req, res) => {
 router.post("/new-student", (request, response)=>{
   // suggestion: add a mechanism where the server supplies some string when middle name is not given
 
-  const query = "INSERT IGNORE INTO students (`id`, `first_name`, `middle_name`, `last_name`, `grade_level`, `section_name`, `parent_fn`, `parent_mn`, `parent_ln`, `relationship`, `contact_num`) VALUES (?)"
+  const query = "INSERT IGNORE INTO students (`rfid`, `first_name`, `middle_name`, `last_name`, `grade_level`, `section_name`, `parent_fn`, `parent_mn`, `parent_ln`, `relationship`, `contact_num`, `status`) VALUES (?)"
   const values = [
       request.body['student-rfid'],
       request.body['student-first-name'],
@@ -79,6 +79,7 @@ router.post("/new-student", (request, response)=>{
       request.body['guardian-last-name'],
       request.body['guardian-relationship'],
       request.body['guardian-contact-number'],
+      request.body['student-status']
   ];
 
   db.query(query, [values], (err, data)=>{
@@ -125,13 +126,16 @@ router.post("/batch/new-student", async (request, response) => {
           'guardian-middle-name',
           'guardian-last-name',
           'guardian-relationship',
-          'guardian-contact-number'
+          'guardian-contact-number',
+          'student-status',
+          'is_overridden'
         ]
-
+        
         //checks if the user uploaded the correct CSV file template
         if (JSON.stringify(acceptedKeys) != JSON.stringify(keys)) { return response.status(420).send("Wrong file template!"); }
+        if (results.length < 1) { return response.status(420).send("No rows detected!"); }
 
-        db.query("SELECT id FROM `students`;", async (err, data)=>{
+        db.query("SELECT rfid FROM `students`;", async (err, data)=>{
           if (err) {return response.status(500).send("An error occurred. Refresh page")}
 
 
@@ -151,7 +155,7 @@ router.post("/batch/new-student", async (request, response) => {
           for (var i=0; i<results.length; i++){
             if (results.length > 999){ temp = results.slice(999) }
             
-            const query = "INSERT IGNORE INTO students (`id`, `first_name`, `middle_name`, `last_name`, `grade_level`, `section_name`, `parent_fn`, `parent_mn`, `parent_ln`, `relationship`, `contact_num`) VALUES ?"
+            const query = "INSERT IGNORE INTO students (`rfid`, `first_name`, `middle_name`, `last_name`, `grade_level`, `section_name`, `parent_fn`, `parent_mn`, `parent_ln`, `relationship`, `contact_num`, `status`, `is_overridden`) VALUES (?)"
             const values = temp.map(row => [
               row['student-rfid'],
               row['student-first-name'],
@@ -163,10 +167,12 @@ router.post("/batch/new-student", async (request, response) => {
               row['guardian-middle-name'],
               row['guardian-last-name'],
               row['guardian-relationship'],
-              row['guardian-contact-number']
+              row['guardian-contact-number'],
+              row['student-status'],
+              row['is_overridden']
             ]);
             
-            db.query(query, [values], (err, data)=>{
+            db.query(query, values, (err, data)=>{
               if (err) {return response.status(500).send("An error occurred. Refresh page")}
             });                                                                                             
 
@@ -175,7 +181,7 @@ router.post("/batch/new-student", async (request, response) => {
             temp = results;
           };
 
-          if (!newIds.every(val => existingIds.includes(val))) {return response.status(210).send("Batch enroll successful")}
+          if (!newIds.every(val => existingIds.includes(val)) && data['affectedRows'] > 0) {return response.status(210).send("Batch enroll successful")}
           else {return response.status(220).send("No changes made")} 
         }); 
       });
@@ -184,11 +190,11 @@ router.post("/batch/new-student", async (request, response) => {
 
 //API endpoint for student migration
 router.put("/batch/student-migration", (request, response) => {
-  const query = `INSERT INTO students (id, grade_level, section_name) 
-              VALUES ? 
-              ON DUPLICATE KEY UPDATE 
-                grade_level = VALUES(grade_level), 
-                section_name = VALUES(section_name);`;
+  const query = `INSERT INTO students (rfid, grade_level, section_name) 
+                  VALUES ? 
+                  ON DUPLICATE KEY UPDATE 
+                    grade_level = VALUES(grade_level), 
+                    section_name = VALUES(section_name);`;
 
   const newGL = request.body['new-student-grade-level'];
   const newS = request.body['new-student-section'];
