@@ -37,7 +37,7 @@ function Notification() {
                 </div>
               </div>
 
-              <div className="collapse bg-danger bg-opacity-25 border border-bottom-0 border-dark p-3" id="helpCollapseDB">
+              <div className="collapse bg-secondary bg-opacity-25 border border-bottom-0 border-dark p-3" id="helpCollapseDB">
                 <div className="card card-body border border-dark">
                   This page directs you to the message content. The contents below is the format that the system follows when sending to parents. The user can edit this for their benefit. Also, access to this page is limited to the admin only. 
                 </div>
