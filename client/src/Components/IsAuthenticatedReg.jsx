@@ -24,40 +24,40 @@ function IsAuthenticatedReg ({children}){
     const token = localStorage.getItem("accessToken");
 
     useEffect(()=>{
-      if (!token) {
-        setTitleModal("Unauthorized Access.");
-        setBodyModal("Please Login to access the page!")
-        setShowModal(true)
-      } else {
-        const decodedToken = jwt_decode(token);
-        const accessID = decodedToken.AccessID;
-        
-        api.get(`/database/check-access-id/${accessID}`)
-          .then(response => {
-              setAccessIDExists(response.data.exists);
-              setIsLoading(false);
-           })
-          .catch(error => {
-              console.error(error);
-              setIsLoading(false);
-          });
-      
-        api.get("/database/count")
-            .then(response => {
-                if (response.data.count === 0) {
-                setIsUserTableEmpty(true);
-                }
-            })
-            .catch(error => {
-                console.error(error);
-            });
+      api.get("/count")
+      .then(response => {
+          if (response.data.count === 0) {
+          setIsUserTableEmpty(true);
+          setAccessIDExists(true);
+          setIsLoading(false);
+          } else {
 
-        if (decodedToken.role === null || decodedToken.role === undefined || decodedToken.role !== 'Admin') {
-          setTitleModal("Access Denied.");
-          setBodyModal("You do not have access to this page! If required, please contact another user with higher authorization.")
-          setShowModal(true)
-        }
-    }
+            if (!token) {
+              setTitleModal("Unauthorized Access.");
+              setBodyModal("Please Login to access the page!")
+              setShowModal(true)
+            } else {
+              const decodedToken = jwt_decode(token);
+              const accessID = decodedToken.AccessID;
+              
+              api.get(`/database/check-access-id/${accessID}`)
+                .then(response => {
+                    setAccessIDExists(response.data.exists);
+                    setIsLoading(false);
+                 })
+                .catch(error => {
+                    console.error(error);
+                    setIsLoading(false);
+                });
+      
+              if (decodedToken.role === null || decodedToken.role === undefined || decodedToken.role !== 'Admin') {
+                setTitleModal("Access Denied.");
+                setBodyModal("You do not have access to this page! If required, please contact another user with higher authorization.")
+                setShowModal(true)
+              }
+          }
+          }
+      })
     },[token])
     
 
