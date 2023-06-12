@@ -1,6 +1,8 @@
 .avatar {
-    width: 70%;
-    height: 70%;
+    width: 20vw;
+    height: 20vw;
+    max-width: 150px;
+    max-height: 150px;
     border-radius: 50%;
     object-fit: cover;
     border: 4px solid goldenrod;

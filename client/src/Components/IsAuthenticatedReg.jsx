@@ -60,9 +60,12 @@ function IsAuthenticatedReg ({children}){
           }
       })
     },[token])
+
+    if (!isLoading && (!accessIDExists || !isUserTableEmpty)) {
+      navigate('/');
+      return null;
+    }
     
-
-
     return(
       <div>
         <GlobalModal
@@ -80,12 +83,6 @@ function IsAuthenticatedReg ({children}){
           
           </p>}
         {!isLoading && (accessIDExists || isUserTableEmpty) && <>{children}</>}
-        {!isLoading && (!accessIDExists || !isUserTableEmpty) && (
-          <>
-            <p>Server Error. Refresh Page</p>
-            <button onClick={() => navigate('/')}>Go to Login</button>
-          </>
-            )}
       </div>
     )
   }

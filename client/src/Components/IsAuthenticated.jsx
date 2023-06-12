@@ -44,6 +44,11 @@ function IsAuthenticated ({children}) {
     }
   }, [token]);
 
+  if (!isLoading && !accessIDExists) {
+    navigate('/');
+    return null;
+  }
+
   return (
     <div>
       <GlobalModal
@@ -67,12 +72,6 @@ function IsAuthenticated ({children}) {
         </div>
       )}
       {!isLoading && accessIDExists && <>{children}</>}
-      {!isLoading && !accessIDExists && (
-        <>
-          <p>Server Error. Refresh Page</p>
-          <button onClick={() => navigate('/')}>Go to Login</button>
-        </>
-      )}
     </div>
   );
 }
