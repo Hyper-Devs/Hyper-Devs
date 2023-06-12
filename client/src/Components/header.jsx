@@ -8,7 +8,15 @@ function Header() {
             <p className='Header-text'>
                 Gate Access Notification System
             </p>
-            <p className='description'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <p className='description'>
+                Gate Access Notification System is a web-based system designed to track the entry and exit of students from a school premises. With this system, school administrators can monitor the movement of students in and out of the school, ensuring their safety and security. It has the following features: 
+                <span className='feature'>Enroll</span>, 
+                <span className='feature'>Logs</span>, 
+                <span className='feature'>Notifies</span>, 
+                <span className='feature'>Alerts</span>, 
+                <span className='feature'>Overrides</span>,
+                <span className='feature'>Overrides</span>.
+            </p>
         </div>
     )
 }
