@@ -136,7 +136,7 @@ router.get("/student-filter", async (request, response) => {
 
 //API endpoint for retrieving student using ID
 router.get("/student/:student_prim_info", (request, response) => {
-  const query = `SELECT * FROM students WHERE rfid = ?`
+  const query = `SELECT * FROM students WHERE rfid = ? AND is_overridden = 0`
   const value = [request.params.student_prim_info]
 
   db.query(query, value, (error, data) => {

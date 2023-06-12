@@ -54,7 +54,7 @@ function outputConditioner (student_prim_infoo, results, mode) {
 //API ending for retrieving attendace logs using student id
 router.get("/attendance-logs/:student_id", (request, response) => {
   var searchVal = stringInputConditioner(request.params.student_id);
-  var query = "SELECT * FROM attendance_logs WHERE is_overriden = 0 AND ", value = null;
+  var query = "SELECT * FROM attendance_logs WHERE time_out = '00:00:00' AND is_overriden = 0 AND ", value = null;
 
   if (searchVal['name']){ query += 'student_name = ?';  value = searchVal['name']}
   else { query += 'rfid = ?'; value = searchVal['id']}
@@ -76,11 +76,9 @@ router.get("/attendance-logs/:student_id", (request, response) => {
 
 //API ending for adding an override log
 router.post("/new-override-log", (request, response) => {
-  const query = "INSERT INTO override_logs (`student_log_id`, `student_name`, `student_id`, `overriding_reason`, `overrider_name`, `overriding_date`) VALUES (?)"
+  const query = "INSERT INTO override_logs (`student_id`, `overriding_reason`, `overrider_name`, `overriding_date`) VALUES (?)"
   const values = [
-      request.body['student_log_id'],
-      request.body['student_name'],
-      request.body['student_id'],
+      request.body['student_rfid'],
       request.body['override-reason'],
       request.body['overrider_name'],
       request.body['overriding_date'],
@@ -95,10 +93,10 @@ router.post("/new-override-log", (request, response) => {
 });
  
 router.put("/update/attendance-log", (request, response) => {
-  const query = `UPDATE attendance_logs
-                  SET is_overriden = 1
-                  WHERE student_log_id = ? AND rfid = ?`;
-  const values = [request.body['student_log_id'], request.body['rfid']]
+  const query = `UPDATE students
+                  SET is_overridden = 1
+                  WHERE rfid = ?`;
+  const values = [request.body['rfid']]
 
   db.query(query, values, (error, data) => {
     if (error) { return response.json(error) }

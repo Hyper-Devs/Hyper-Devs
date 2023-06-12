@@ -20,11 +20,11 @@ function OvrContainer() {
   const fetchStudent = async (id) => {
     setResultData(null);
     try {
-      const response = await api.get(`/override/attendance-logs/${id}`);
-      if (response.data.length > 0) {
-        setResultData(response.data[0]);
+      const response = await api.get(`/database/student/${id}`);
+      console.log([response.data])
+      if ([response.data].length > 0 && response.data != "No data found") {
+        setResultData([response.data][0]);
         setAttendanceLog(response.data); // Set the attendance log data
-        console.log(response.data)
       }
       else { setResultData('empty'); }
     } catch (err) {
@@ -60,14 +60,13 @@ function OvrContainer() {
     const decodedToken = jwt_decode(token);
     const userName = decodedToken.name;
 
-    formJson["student_log_id"]=selectedRow.student_log_id
-    formJson["student_name"]=resultData.student_name
-    formJson["student_id"]=resultData.rfid
+    formJson["student_rfid"]=resultData.rfid
     formJson["overrider_name"]=userName
     formJson["overriding_date"]=currentYear + "-" + currentMonth+ "-"+ currentDay   
     
+    console.log(formJson)
     await addOverrideLog(formJson)
-    await updateAttendanceLog({"rfid": selectedRow.rfid, "student_log_id": selectedRow.student_log_id})
+    await updateAttendanceLog({"rfid": selectedRow.rfid})
   };
 
   const addOverrideLog = async (overrideLog) => {
@@ -128,17 +127,30 @@ function OvrContainer() {
           <table className='table border border-success rounded'>
             <thead className='table-success '>
               <tr>
+                <th>RFID #</th>
                 <th>Name</th>
-                <th>Time In</th>
-                <th>Time Out</th>
-                <th>Date</th>
+                <th>Grade Level</th>
+                <th>Section</th>
                 <th>Edit</th>
               </tr>
             </thead>
             <tbody>
-              {attendanceLog.map((log) => (
+              <tr key={resultData.rfid}>
+                <td>{resultData.rfid}</td>
+                <td>{resultData.first_name} {resultData.last_name}</td>
+                <td>{resultData.grade_level}</td>
+                <td>{resultData.section_name}</td>
+                {/* <td>{resultData.time_out}</td>
+                <td>{resultData.date}</td> */}
+                <td>
+                  <button id='action-icon' data-bs-toggle='modal' data-bs-target='#ovrModal' onClick={() => handleRowEdit(resultData)} >
+                    <EditIcon />
+                  </button>
+                </td>
+              </tr>
+              {/* {attendanceLog.map((log) => (
                 <tr key={log.id}>
-                  <td>{log.student_name}</td>
+                  <td>{log.rfid}</td>
                   <td>{log.time_in}</td>
                   <td>{log.time_out}</td>
                   <td>{log.date}</td>
@@ -148,7 +160,7 @@ function OvrContainer() {
                     </button>
                   </td>
                 </tr>
-              ))}
+              ))} */}
             </tbody>
           </table>
         </div>
@@ -157,6 +169,7 @@ function OvrContainer() {
   }
 
   useEffect(() => {
+    console.log(resultData)
     setIsVisible(resultData !== null);
   },[resultData])
 
@@ -207,18 +220,20 @@ function OvrContainer() {
                   </div>
                   <div className='row px-5  '>
                     <div className='col-4'>
-                      <p>Name:</p>
                       <p>RFID: </p>
+                      <p>Name: </p>
+                      <p>Grade & Section: </p>
                     </div>
                     <div className='col mb-2'>
-                      <p>{resultData.student_name}</p>
                       <p>{resultData.rfid}</p>
+                      <p>{resultData.first_name} {resultData.last_name}</p>
+                      <p>{resultData.grade_level} - {resultData.section_name}</p>
                     </div>
                   </div>
-                  <div className='row px-5'>
+                  {/* <div className='row px-5'>
                     <h6 className='text-start fw-bold '>Student Log</h6>
-                  </div>
-                  <div className='row px-5'>
+                  </div> */}
+                  {/* <div className='row px-5'>
                     {selectedRow && (
                       <>
                         <div className='col-4'>
@@ -233,7 +248,7 @@ function OvrContainer() {
                         </div>
                       </>
                     )}
-                  </div>
+                  </div> */}
 
                   <div className='row px-5'>
                     <button
@@ -244,7 +259,7 @@ function OvrContainer() {
                       aria-expanded='false'
                       aria-controls='ovrCollapse'
                     >
-                      <p className='fs-6'>Override Student Log</p>
+                      <p className='fs-6'>Override Student Attendance</p>
                     </button>
                     <div className='collapse' id='ovrCollapse'>
                       <div className='card card-body'>
