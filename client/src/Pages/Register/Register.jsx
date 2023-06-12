@@ -4,6 +4,7 @@ import Footer from "../../Components/footer";
 import { FiHash } from "react-icons/fi";
 import { FiKey } from "react-icons/fi";
 import { FiUser } from "react-icons/fi";
+import { FiArrowLeftCircle } from 'react-icons/fi';
 import { useNavigate } from "react-router-dom";
 import GlobalModal from "../../Components/Modal/globalmodal";
 import axios from "axios";
@@ -42,13 +43,24 @@ function Register() {
             setTitleModal("User Registration.");
             setBodyModal("User Succesfully registered!")
             setShowModal(true)
+        } else if (res.status === 400){
+          setTitleModal("User Registration.");
+          setBodyModal("Access ID already exists!")
+          setShowModal(true)
         }
       })
       .catch(err => {
+        // console.log(err.response.status)
+        if(err.response.status === 400){
+          setTitleModal("User Registration.");
+          setBodyModal("Access ID already exists!")
+          setShowModal(true)
+        } else {
         setTitleModal("User Registration.");
         setBodyModal("Error occured while registering user!")
         setShowModal(true)
         console.error('Error occurred while registering user', err.message);
+        }
       });
   };
 
@@ -56,15 +68,25 @@ function Register() {
     <div id="register-page">
       <div className="register-content">
         <div className="register-container">
-          <div className="title">
-            <h2>University of the Philippines Cebu High School</h2>
-            <h1>Gate Access Notification System</h1>
-          </div>
+        <div className="container">
+        <div className="row ps-5 pt-3 pe-5">
 
-          <div className="form-container">
-            <div className="register-bgi">
-              <div className="upcLogo"></div>
+        <div className="header-bg bg-warning ps-4 d-flex justify-content-between">
+                <div className="d-flex align-items-center">
+                  <h1 className="text-center fw-bold text-dark">Add User</h1>
+                </div>
+                <div className="d-flex pe-3 align-items-center">
+                  <a className="btn btn-dark" href="/dashboard"> 
+                  <FiArrowLeftCircle className="FiArrowLeftCircle" size={"1.5rem"}/>Back to Dashboard
+                  </a>
+                </div>
+              </div>
 
+        </div>
+        
+        <div className="row ps-5 pe-5">
+          <div className="register-form-container">
+            <div className="register-form-container2">
               <div className="registerForm">
                 <form className="register-field" onSubmit={handleSubmit}>
                   <label>ID Number</label>
@@ -141,6 +163,8 @@ function Register() {
                 onClose={handleCloseModal}
               />
             </div>
+          </div>
+          </div>
           </div>
         </div>
         <Footer />

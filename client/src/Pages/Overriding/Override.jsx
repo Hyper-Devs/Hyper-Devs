@@ -27,7 +27,7 @@ function Override() {
                 </div>
               </div>
 
-              <div className="collapse bg-danger bg-opacity-25 border border-bottom-0 border-dark p-3" id="helpCollapseDB">
+              <div className="collapse bg-secondary bg-opacity-25 border border-bottom-0 border-dark p-3" id="helpCollapseDB">
                 <div className="card card-body border border-dark">
                   Note that this system has an alert feature. Meaning that any unexpected RFID-taps or students tap-out before dismissal will alert the system. In instances that the admin allowed an exit, the user can override through this page by specifying the excused student and adding a reason that the admin deemed valid. 
                 </div>
