@@ -15,7 +15,7 @@ function Register() {
   const [register_password, setRegister_password] = useState("");
   const [register_name, setRegister_name] = useState("");
   const [register_position, setRegister_position] = useState("");
-  const [register_role, setRegister_role] = useState("");
+  const [register_role, setRegister_role] = useState("Faculty");
 
   const [titleModal, setTitleModal] = useState('');
   const [bodyModal, setBodyModal] = useState('');

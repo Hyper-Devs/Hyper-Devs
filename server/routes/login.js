@@ -2,6 +2,7 @@ const express = require('express');
 const db = require('../database.js').databaseConnection;
 const router = express.Router();
 const jwt = require('jsonwebtoken');
+require("dotenv").config();
 
 // Check if there is no users in the database
 router.get("/count", async (req, res) => {
@@ -10,6 +11,7 @@ router.get("/count", async (req, res) => {
     if (err) {
       return res.status(500).json({ error: "Internal server error" });
     }
+    // console.log(data[0].count)
     return res.status(200).json({ count: data[0].count });
   });
 });
@@ -48,7 +50,7 @@ router.post("/login", async (req, res) => {
       return res.status(500).json({ error: "Internal server error" });
     }
     if (data.length === 1) {
-      const accessToken = jwt.sign({ userId: data[0].id , name: data[0].name , AccessID: data[0].access_id , position: data[0].position, role: data[0].role}, 'key', { expiresIn: '1h' });
+      const accessToken = jwt.sign({ userId: data[0].id , name: data[0].name , AccessID: data[0].access_id , position: data[0].position, role: data[0].role}, process.env.JWT_SECRET_KEY, { expiresIn: '1h' });
       return res.status(200).json({ accessToken });
     } else {
       return res.status(401).json({ error: "Invalid login credentials" });
