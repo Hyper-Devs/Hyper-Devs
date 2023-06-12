@@ -31,7 +31,8 @@ function IsAuthenticated ({children}) {
     } else {
       const decodedToken = jwt_decode(token);
       const accessID = decodedToken.AccessID;
-      api.get(`/database/check-access-id/${accessID}`)
+      const role = decodedToken.role;
+      api.get(`/database/check-access-id/${accessID}/${role}`)
         .then(response => {
           setAccessIDExists(response.data.exists);
           setIsLoading(false);

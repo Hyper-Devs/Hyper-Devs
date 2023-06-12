@@ -192,7 +192,7 @@ function Header2() {
                     <div className="row">
                         <div className="col text-center"></div>'
                         <div className="row-4">
-                            <img className = "mx-auto d-block avatar" 
+                            <img className = "mx-auto d-block avatarAccount" 
                               src={ base64Avatar ? `data:${selectedFile.type};base64,${base64Avatar}` : "icons/Profile Icon.svg"} alt="Profile Icon" />
                         </div>
                         <div className="row text-center"> <h3>{userData.name || "User"}</h3></div>

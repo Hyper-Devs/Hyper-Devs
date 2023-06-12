@@ -97,7 +97,9 @@ function Register() {
                     <input
                       name="register-id"
                       type="text"
+                      pattern="[0-9]*"
                       onChange={(e) => setRegister_id(e.target.value)}
+                      title="Please enter a valid access ID (numbers only)"
                     />
                   </div>
 
@@ -109,7 +111,9 @@ function Register() {
                     <input
                       name="register-name"
                       type="text"
+                      pattern="[^\d]+"
                       onChange={(e) => setRegister_name(e.target.value)}
+                      title="Please enter a valid name (letters only)"
                     />
                   </div>
 
