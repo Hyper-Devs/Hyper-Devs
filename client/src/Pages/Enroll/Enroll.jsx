@@ -40,7 +40,7 @@ function Enroll(){
                     </div>
                 </div>
 
-                <div className="collapse bg-danger bg-opacity-25 border border-bottom-0 border-dark p-3" id="helpCollapseDB">
+                <div className="collapse bg-secondary bg-opacity-25 border border-bottom-0 border-dark p-3" id="helpCollapseDB">
                     <div className="card card-body border border-dark">
                     This page enrolls students into the system. There are options for varied enrollment types. Students can be enrolled individually, or by batch and even only updating the grade level and section for a new school year. More specified edits on exisiting information can be accessed through Database. 
                     </div>
