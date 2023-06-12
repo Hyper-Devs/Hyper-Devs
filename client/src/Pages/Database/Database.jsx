@@ -32,7 +32,7 @@ function Database() {
                 </div>
               </div>
 
-              <div className="collapse bg-danger bg-opacity-25 border border-bottom-0 border-dark p-3" id="helpCollapseDB">
+              <div className="collapse bg-secondary bg-opacity-25 border border-bottom-0 border-dark p-3" id="helpCollapseDB">
                 <div className="card card-body border border-dark">
                   This page displays information and logs of students and admins. Click the help button beside the input box below to access the navigation tutorial. 
                 </div>

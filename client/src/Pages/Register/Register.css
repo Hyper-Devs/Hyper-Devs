@@ -1,10 +1,4 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  #register-page {
+   #register-page {
     background-image: url(../../Assets/UP\ ADMIN\ red\ gray\ 1.png);
     background-repeat: no-repeat;
     background-size: cover;
@@ -19,71 +13,37 @@
     width: 100%;
     display: flex;
     flex-direction: column;
+    gap: 20px;
   }
   
   .register-container {
     position: relative;
     width: 100%;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
     flex: 1;
   }
   
-  .title {
+  .register-form-container {
     position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    color: white;
-    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  }
-  
-  .title h1 {
-    font-weight: 700;
-    font-size: 3.5rem;
-    line-height: 120px;
-  }
-  
-  .title h2 {
-    font-weight: 400;
-    font-size: 1.25rem;
-    line-height: 32px;
-    letter-spacing: 0.67rem;
-  }
-  
-  .form-container {
-    position: relative;
-    width: 35%;
-    height: 90%;
-    border-radius: 10px;
+    width: 100%;
+    height: 100%;
+    border-style: none solid solid solid;
+    border-color: black;
+    border-width: 1px;
     background-image: linear-gradient(#ffb81e, white);
   }
   
-  .register-bgi {
-    background-image: url(../../Assets/login-bgi.png);
-    position: relative;
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: bottom,center;
+  .register-form-container2 {
     height: 100%;
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    border-radius: 10px;
-  }
-  
-  .upcLogo {
-    position: relative;
-    background-image: url(../../Assets/upc_logo.png);
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: center;
-    width: 100%;
-    height: 200px;
-    margin: 20px 0 10px 0;
+    padding: 20px;
   }
   
   .registerForm {
@@ -148,7 +108,7 @@
     font-weight: 700;
     line-height: 31px;
     border-width: 1px;
-    border-radius: 0 9px 9px 0;
+    border-radius: 9px;
     cursor: pointer;
     font-family: "Cambria";
   }
@@ -156,45 +116,9 @@
   .register-button button:hover {
     background-color: #ffc954;
   }
-  
-  @media (max-width: 1300px) {
-  
-    .title h1 {
-      font-size: 3rem;
-      line-height: 100px;
-    }
-    
-    .title h2 {
-      font-size: 1.3rem;
-      line-height: 22px;
-      letter-spacing: 0.5rem;
-    }
-  
-  }
-  
-  @media (max-width: 1100px) {
-  
-    .title h1 {
-      font-size: 2.5rem;
-      line-height: 80px;
-    }
-    
-    .title h2 {
-      font-size: 1.1rem;
-      line-height: 20px;
-      letter-spacing: 0.4rem;
-    }
-  
-    .register-container {
-      flex-direction: column;
-    }
-  
-    .form-container {
-      width: 80%;
-    }
-  
-    .registerForm {
-      width: 70%;
-    }
-  
-  }
+
+  .FiArrowLeftCircle {
+    margin-right: 3%;
+    margin-left: -3%;
+    margin-top: -1%;
+}
