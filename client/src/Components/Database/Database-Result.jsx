@@ -178,10 +178,10 @@ function DatabaseResult(props) {
                         <AccountCircleIcon fontSize="large" />
                         
                       </td>
-                      <td style={{ backgroundColor: "#00573F", color: "white" }}>{item.first_name} {item.last_name}</td>
-                      <td style={{ backgroundColor: "#00573F", color: "white" }}>{item.time_in}</td>
-                      <td style={{ backgroundColor: "#00573F", color: "white" }}>{item.time_out}</td>
-                      <td style={{ backgroundColor: "#00573F", color: "white" }}>{item.date}</td>
+                      <td>{item.first_name} {item.last_name}</td>
+                      <td>{item.time_in}</td>
+                      <td >{item.time_out}</td>
+                      <td >{item.date}</td>
                     </tr>
                   ))}
                 </tbody>
