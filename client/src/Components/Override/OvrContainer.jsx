@@ -21,7 +21,6 @@ function OvrContainer() {
     setResultData(null);
     try {
       const response = await api.get(`/database/student/${id}`);
-      console.log([response.data])
       if ([response.data].length > 0 && response.data != "No data found") {
         setResultData([response.data][0]);
         setAttendanceLog(response.data); // Set the attendance log data

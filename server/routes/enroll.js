@@ -55,9 +55,9 @@ router.get("/available-rooms", async (request, response) => {
 
 //API endpoint for providing the correct template in batch enroll
 router.get('/download/new-template', (req, res) => {
-  const file = fs.readFileSync('./outgoingFiles/EnrollmentTemplate.csv');
+  const file = fs.readFileSync('./outgoingFiles/Enrollment_CSV_Template.csv');
   res.setHeader('Content-Type', 'application/csv');
-  res.setHeader('Content-Disposition', 'attachment; filename=EnrollmentTemplate.csv');
+  res.setHeader('Content-Disposition', 'attachment; filename=Enrollment_CSV_Template.csv');
   res.send(file);
 });
   
@@ -189,7 +189,7 @@ router.post("/batch/new-student", async (request, response) => {
 });
 
 //API endpoint for student migration
-router.put("/batch/student-migration", (request, response) => {
+router.put("/batch/student-migration", (request, response) => { 
   const query = `INSERT INTO students (rfid, grade_level, section_name) 
                   VALUES ? 
                   ON DUPLICATE KEY UPDATE 

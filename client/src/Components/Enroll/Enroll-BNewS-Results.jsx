@@ -92,7 +92,7 @@ function BSNewSResults() {
         const url = window.URL.createObjectURL(new Blob([response.data]));
         const link = document.createElement('a');
         link.href = url;
-        link.setAttribute('download', 'Enrollment CSV Template.csv');
+        link.setAttribute('download', 'Enrollment_CSV_Template.csv');
         document.body.appendChild(link);
         link.click();
         link.parentNode.removeChild(link);
@@ -122,8 +122,13 @@ function BSNewSResults() {
                     accept="application/csv,text/csv"
                   />
                   <button type="submit" disabled={isLoading} className="btn btn-success">Enroll</button>
+
                   
                 </div>
+                <div style={{display: "flex",  flexDirection: "row", justifyContent: "right"}}>
+                    <p style={{marginRight: "5px"}}><i>Wrong file template. Download template</i></p>
+                    <a href="#" onClick={downloadFile}>here</a>
+                  </div>
               </form>
             </div>
           </div>
