@@ -81,6 +81,8 @@ router.post("/new-student", (request, response)=>{
       1
   ];
 
+  console.log(values)
+
   db.query(query, [values], (err, data)=>{
     if (err) {return response.json(err)}
 
