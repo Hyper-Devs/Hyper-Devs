@@ -60,11 +60,6 @@ function IsAuthenticatedReg ({children}){
           }
       })
     },[token])
-
-    if (!isLoading && (!accessIDExists || !isUserTableEmpty)) {
-      navigate('/');
-      return null;
-    }
     
     return(
       <div>

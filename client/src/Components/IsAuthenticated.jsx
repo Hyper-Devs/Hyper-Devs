@@ -44,11 +44,6 @@ function IsAuthenticated ({children}) {
     }
   }, [token]);
 
-  if (!isLoading && !accessIDExists) {
-    navigate('/');
-    return null;
-  }
-
   return (
     <div>
       <GlobalModal
