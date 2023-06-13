@@ -71,7 +71,7 @@ function DatabaseResult(props) {
                   <tr>
                     <th style={{ backgroundColor: "#00573F", color: "white" }}>Name</th>
                     <th style={{ backgroundColor: "#00573F", color: "white" }}>Position</th>
-                    <th style={{ backgroundColor: "#00573F", color: "white" }}>Student</th>
+                    <th style={{ backgroundColor: "#00573F", color: "white" }}>Student #</th>
                     <th style={{ backgroundColor: "#00573F", color: "white" }}>Reason</th>
                     <th style={{ backgroundColor: "#00573F", color: "white" }}>Date</th>
                   </tr>
@@ -81,7 +81,7 @@ function DatabaseResult(props) {
                     <tr key={item.id}>
                       <td>{item.overrider_name}</td>
                       <td>{item.role}</td>
-                      <td>{item.student_name}</td>
+                      <td>{item.student_id}</td>
                       <td>{item.overriding_reason}</td>
                       <td>{item.overriding_date}</td>
                     </tr>

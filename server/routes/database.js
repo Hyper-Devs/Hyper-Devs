@@ -356,7 +356,7 @@ router.get("/admin/admin-info/:admin_name/:role/", (request, response) => {
 
 //API endpoint for retrieving admin/faculty override logs
 router.get("/admin/override-logs/:admin_name/:role/:date_from/:date_to", (request, response) => {
-  const query = `SELECT overrider_name, role, student_name, overriding_reason, overriding_date
+  const query = `SELECT overrider_name, role, student_id, overriding_reason, overriding_date
                   FROM users, override_logs
                   WHERE override_logs.overrider_name = users.name AND override_logs.overrider_name = ? AND users.role = ?`;
   const values = [request.params.admin_name, request.params.role]
