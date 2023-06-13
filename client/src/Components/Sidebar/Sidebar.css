@@ -23,10 +23,11 @@
 }
 
 .newsidebar-header{
-    height: 200px;
+    height: fit-content;
     width: 100%;
     display: grid;
     place-items: center;
+    padding: 20px;
 }
 
 .sidebar-list{
@@ -67,14 +68,21 @@
     color: #FFB81E;
 }
 
+@media (max-width: 1150px) {
+    
+    .newsidebar-header img{
+        width: 90%;
+    }
+}
+
 @media (max-width: 950px) {
     
     .newsidebar-header{
-        height:  150px;
+        height:  fit-content;
     }
 
     .newsidebar-header img{
-        width: 70%;
+        width: 90%;
     }
 
     .sidebar-list .items{
@@ -94,11 +102,11 @@
 @media (max-width: 850px) {
     
     .newsidebar-header{
-        height: 100px;
+        height: fit-content;
     }
 
     .newsidebar-header img{
-        width: 70%;
+        width: 90%;
     }
 
 }
@@ -114,11 +122,11 @@
 @media (max-width: 550px) {
     
     .newsidebar-header {
-        height: 80px;
+        height: fit-content;
     }
 
     .newsidebar-header img{
-        width: 70%;
+        width: 90%;
     }
 
     .sidebar-list .items{
@@ -130,7 +138,7 @@
 @media (max-width: 450px) {
 
     .newsidebar-header {
-        height: 60px;
+        height: fit-content;
     }
 
     .sidebar-list .items{
@@ -142,7 +150,7 @@
 @media (max-width: 350px) {
 
     .newsidebar-header {
-        height: 40px;
+        height: fit-content;
     }
 
     .sidebar-list .items{
