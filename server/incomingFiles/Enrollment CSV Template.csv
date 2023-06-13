@@ -1,2 +1,4 @@
-student-rfid,student-first-name,student-middle-name,student-last-name,student-grade-level,student-section,guardian-first-name,guardian-middle-name,guardian-last-name,guardian-relationship,guardian-contact-number,student-status,is_overridden
-31,Pietro,,Maximoff,7,Bartlett,Wanda,,Maximoff,Sibling,9123456,1,0
+student-rfid,student-first-name,student-middle-name,student-last-name,student-grade-level,student-section,guardian-first-name,guardian-middle-name,guardian-last-name,guardian-relationship,guardian-contact-number
+31,Pietro,,Maximoff,7,Bartlett,Wanda,,Maximoff,Sibling,9123456
+9987,Wanda,,Maximoff,7,Bartlett,Pietro,,Maximoff,Sibling,9123456
+202010046,James Peter,Ybanez,Bravo,12,Sison,Myra,Lacida,Daitol,Mother,9457611224

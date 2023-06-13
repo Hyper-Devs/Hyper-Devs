@@ -60,7 +60,6 @@ router.get('/download/new-template', (req, res) => {
   res.setHeader('Content-Disposition', 'attachment; filename=Enrollment_CSV_Template.csv');
   res.send(file);
 });
-  
 
 //API endpoint for adding a student into the database 
 router.post("/new-student", (request, response)=>{
@@ -79,7 +78,7 @@ router.post("/new-student", (request, response)=>{
       request.body['guardian-last-name'],
       request.body['guardian-relationship'],
       request.body['guardian-contact-number'],
-      request.body['student-status']
+      1
   ];
 
   db.query(query, [values], (err, data)=>{
@@ -126,9 +125,7 @@ router.post("/batch/new-student", async (request, response) => {
           'guardian-middle-name',
           'guardian-last-name',
           'guardian-relationship',
-          'guardian-contact-number',
-          'student-status',
-          'is_overridden'
+          'guardian-contact-number'
         ]
         
         //checks if the user uploaded the correct CSV file template
@@ -148,14 +145,13 @@ router.post("/batch/new-student", async (request, response) => {
             }
           }
 
-          const existingIds = data.map((item => ''+item.id));
+          const existingIds = data.map((item => ''+item.rfid));
           const newIds = newResults.map((item => item['student-rfid']));
           //limit of INSERT statement is 1000 - not tested for 1000 CSV values
           var temp = newResults;
           for (var i=0; i<results.length; i++){
             if (results.length > 999){ temp = results.slice(999) }
-            
-            const query = "INSERT IGNORE INTO students (`rfid`, `first_name`, `middle_name`, `last_name`, `grade_level`, `section_name`, `parent_fn`, `parent_mn`, `parent_ln`, `relationship`, `contact_num`, `status`, `is_overridden`) VALUES (?)"
+            const query = "INSERT IGNORE INTO students (`rfid`, `first_name`, `middle_name`, `last_name`, `grade_level`, `section_name`, `parent_fn`, `parent_mn`, `parent_ln`, `relationship`, `contact_num`, `status`) VALUES ?"
             const values = temp.map(row => [
               row['student-rfid'],
               row['student-first-name'],
@@ -168,12 +164,12 @@ router.post("/batch/new-student", async (request, response) => {
               row['guardian-last-name'],
               row['guardian-relationship'],
               row['guardian-contact-number'],
-              row['student-status'],
-              row['is_overridden']
+              1
             ]);
             
-            db.query(query, values, (err, data)=>{
+            db.query(query, [values], (err, data)=>{
               if (err) {return response.status(500).send("An error occurred. Refresh page")}
+              console.log(data['affectedRows'])
             });                                                                                             
 
             i += temp.length;
@@ -181,7 +177,7 @@ router.post("/batch/new-student", async (request, response) => {
             temp = results;
           };
 
-          if (!newIds.every(val => existingIds.includes(val)) && data['affectedRows'] > 0) {return response.status(210).send("Batch enroll successful")}
+          if (!newIds.every(val => existingIds.includes(val))) {return response.status(210).send("Batch enroll successful")}
           else {return response.status(220).send("No changes made")} 
         }); 
       });
